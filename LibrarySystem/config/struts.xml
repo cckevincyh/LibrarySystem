@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+   <!-- 配置文件改了以后不用重新启动 -->
+   <constant name="struts.devMode" value="true"/>
+  
+   <!-- 把struts的请求委托给spring管理,
+        作用:创建Action实例的过程由spring处理,其他的还是有struts2自己处理 -->
+   <constant name="struts.objectFactory" value="spring" />
+  
+ 	<include file="struts2/struts-admin-login.xml"></include>
+ 	<include file="struts2/struts-reader-login.xml"></include>
+ 	<include file="struts2/struts-admin-info.xml"></include>
+</struts>	

@@ -15,7 +15,10 @@
         <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
         <script src="${pageContext.request.contextPath}/jQuery/jquery-3.1.1.min.js"></script>
             <script src="${pageContext.request.contextPath}/js/bootstrap-dropdown.min.js"></script>
+                      
+              <script src="${pageContext.request.contextPath}/ajax-lib/ajaxutils.js"></script>
             <script src="${pageContext.request.contextPath}/js/adminUpdateInfo.js"></script>
+             <script src="${pageContext.request.contextPath}/js/adminUpdatePwd.js"></script>
        
 </head>
 
@@ -247,7 +250,7 @@
 							<div class="form-group">
 								<label for="firstname" class="col-sm-3 control-label">原密码</label>
 								<div class="col-sm-7">
-									<input type="password" class="form-control" id="oldpwd"  placeholder="请输入原密码">
+									<input type="password" class="form-control" id="oldPwd"  placeholder="请输入原密码">
 												
 								</div>
 							</div>	
@@ -255,7 +258,7 @@
 							<div class="form-group">
 								<label for="firstname" class="col-sm-3 control-label">新密码</label>
 								<div class="col-sm-7">
-									<input type="password" class="form-control" id="newpwd"  placeholder="请输入新密码">
+									<input type="password" class="form-control" id="newPwd"  placeholder="请输入新密码">
 												
 								</div>
 							</div>	
@@ -263,7 +266,7 @@
 							<div class="form-group">
 								<label for="firstname" class="col-sm-3 control-label">确认密码</label>
 								<div class="col-sm-7">
-									<input type="password" class="form-control" id="confirmpwd"  placeholder="请输入确认密码">
+									<input type="password" class="form-control" id="confirmPwd"  placeholder="请输入确认密码">
 												
 								</div>
 							</div>	
@@ -274,7 +277,7 @@
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 								</button>
-								<button type="button" class="btn btn-primary">
+								<button type="button" class="btn btn-primary" id="update_adminPwd">
 									修改
 								</button>
 							</div>

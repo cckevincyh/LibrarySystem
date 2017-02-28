@@ -17,7 +17,7 @@ public class ReaderServiceImpl implements ReaderService{
 
 
 	@Override
-	public Reader login(Reader reader) {
+	public Reader getReader(Reader reader) {
 		return readerDao.getReader(reader);
 	}
 	

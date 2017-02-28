@@ -4,5 +4,5 @@ import com.cc.library.domain.Reader;
 
 public interface ReaderService {
 
-	public Reader login(Reader reader);
+	public Reader getReader(Reader reader);
 }

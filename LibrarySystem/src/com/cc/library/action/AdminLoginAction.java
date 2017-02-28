@@ -7,9 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts2.ServletActionContext;
 
 import com.cc.library.domain.Admin;
-import com.cc.library.domain.Reader;
 import com.cc.library.service.AdminService;
-import com.cc.library.service.ReaderService;
+
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -47,7 +46,7 @@ public class AdminLoginAction extends ActionSupport {
 		Admin admin = new  Admin();
 		admin.setUsername(username);
 		admin.setPwd(pwd);
-		Admin newAdmin = adminService.login(admin);
+		Admin newAdmin = adminService.getAdmin(admin);
 		int login = 1;
 		if(newAdmin==null){
 			//用户名不存在

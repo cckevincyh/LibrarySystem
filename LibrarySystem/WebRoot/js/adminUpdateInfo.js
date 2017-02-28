@@ -8,7 +8,7 @@ $(function () {
 	
     $('#admin_updateInfo').click(function () {
 
-	var postdata = "name="+$.trim($("#name").val())+"&phone="+ $.trim($("#password").val());
+	var postdata = "name="+$.trim($("#name").val())+"&phone="+ $.trim($("#phone").val());
 	ajax(
     		  {
 			  	method:'POST',
@@ -16,9 +16,12 @@ $(function () {
 				params: postdata,
 	    		callback:function(data) {
 					if (data == 1) {
-	                    window.location.href = "admin/admin.jsp";
-						$("#updateinfo").modal("hide");//关闭模糊框
-						 showInfo("修改成功");			 
+						$("#updateinfo").modal("hide");//关闭模糊框		
+						showInfo("修改成功");	
+						$('#btn_info_close').click(function () {
+							window.location.href = "admin.jsp";  	
+						});
+	                    
 	                }else {
 						$("#updateinfo").modal("hide");//关闭模糊框
 	                    showInfo("修改失败");

@@ -51,7 +51,7 @@ public class ReaderLoginAction extends ActionSupport {
 		reader.setReaderId(readerId);
 		reader.setPwd(pwd);
 		int login = 1;
-		Reader newReader = readerService.login(reader);
+		Reader newReader = readerService.getReader(reader);
 		if(newReader==null){
 			//用户名不存在
 			login = -1;

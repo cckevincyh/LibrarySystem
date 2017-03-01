@@ -20,6 +20,13 @@ public class ReaderServiceImpl implements ReaderService{
 	public Reader getReader(Reader reader) {
 		return readerDao.getReader(reader);
 	}
+
+
+
+	@Override
+	public Reader updateReaderInfo(Reader reader) {
+		return readerDao.updateReaderInfo(reader);
+	}
 	
 	
 }

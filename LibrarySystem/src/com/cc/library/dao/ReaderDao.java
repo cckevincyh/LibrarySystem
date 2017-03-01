@@ -6,4 +6,6 @@ public interface ReaderDao {
 
 	
 	public Reader getReader(Reader reader);
+
+	public Reader updateReaderInfo(Reader reader);
 }

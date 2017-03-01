@@ -58,17 +58,20 @@ public class ReaderLoginAction extends ActionSupport {
 		}else if(!newReader.getPwd().equals(reader.getPwd())){
 			//密码不正确
 			login =  0;
-		}
-		HttpServletResponse response = ServletActionContext.getResponse();
-		 try {	
-			response.getWriter().print(login);
+		}else{
 			//存储入session
 			if(login==1){
 				ServletActionContext.getContext().getSession().put("reader", newReader);
 			}
-		} catch (IOException e) {
-			throw new RuntimeException(e.getMessage());
+			HttpServletResponse response = ServletActionContext.getResponse();
+			 try {	
+				response.getWriter().print(login);
+				
+			} catch (IOException e) {
+				throw new RuntimeException(e.getMessage());
+			}
 		}
+		
 			
 		return null;
 	}

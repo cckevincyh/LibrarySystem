@@ -20,6 +20,7 @@ public class TestReader extends BaseSpring{
 		
 		Reader reader = new Reader();
 		reader.setReaderId("123");
+		reader.setName("菜肉");
 		reader.setPwd("123");
 		reader.setType(1);
 		session.save(reader);

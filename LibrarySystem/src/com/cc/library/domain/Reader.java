@@ -13,7 +13,6 @@ public class Reader implements Serializable{
 
 	private String readerId;	//证件号码
 	private String name;	//真实名称
-	private Integer sex;	//性别(0为男生，1为女生)
 	private String phone;	//联系方式
 	private String pwd; 	//密码
 	private Integer type;	//读者类型(学生或者教师)
@@ -81,14 +80,7 @@ public class Reader implements Serializable{
 		this.readerId = readerId;
 	}
 
-	public Integer getSex() {
-		return sex;
-	}
 
-
-	public void setSex(Integer sex) {
-		this.sex = sex;
-	}
 
 
 	public String getPhone() {
@@ -137,14 +129,12 @@ public class Reader implements Serializable{
 
 
 
-	public Reader(String readerId, String name, Integer sex, String phone,
-			String pwd, Integer type, Integer maxNum,
-			Set<BorrowInfo> borrowInfos, Set<ForfeitInfo> forfeitInfos,
-			Integer state) {
+	public Reader(String readerId, String name, String phone, String pwd,
+			Integer type, Integer maxNum, Set<BorrowInfo> borrowInfos,
+			Set<ForfeitInfo> forfeitInfos, Integer state) {
 		super();
 		this.readerId = readerId;
 		this.name = name;
-		this.sex = sex;
 		this.phone = phone;
 		this.pwd = pwd;
 		this.type = type;
@@ -158,11 +148,14 @@ public class Reader implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Reader [readerId=" + readerId + ", name=" + name + ", sex="
-				+ sex + ", phone=" + phone + ", pwd=" + pwd + ", type=" + type
-				+ ", maxNum=" + maxNum + ", borrowInfos=" + borrowInfos
-				+ ", forfeitInfos=" + forfeitInfos + ", state=" + state + "]";
+		return "Reader [readerId=" + readerId + ", name=" + name + ", phone="
+				+ phone + ", pwd=" + pwd + ", type=" + type + ", maxNum="
+				+ maxNum + ", borrowInfos=" + borrowInfos + ", forfeitInfos="
+				+ forfeitInfos + ", state=" + state + "]";
 	}
+
+
+
 
 
 	

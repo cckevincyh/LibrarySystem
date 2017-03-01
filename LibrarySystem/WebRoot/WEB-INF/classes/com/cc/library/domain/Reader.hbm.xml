@@ -27,12 +27,7 @@
 		<property name="phone" type="java.lang.String" not-null="false">
 			<column name="phone"  />
 		</property>
-		
-		<property name="sex" type="java.lang.Integer" >
-			<column name="sex" default="0"/>
-		</property>
-		
-		
+			
 		<property name="state" type="java.lang.Integer">
 			<column name="state" default="1"/>
 		</property>

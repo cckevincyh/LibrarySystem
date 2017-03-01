@@ -16,4 +16,5 @@
  	<import resource="applicationContext-reader-login.xml"/>
  	<import resource="applicationContext-admin-login.xml"/>
  	<import resource="applicationContext-admin-info.xml"/>
+ 	<import resource="applicationContext-reader-info.xml"/>
  </beans>

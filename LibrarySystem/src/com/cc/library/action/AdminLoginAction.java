@@ -54,16 +54,17 @@ public class AdminLoginAction extends ActionSupport {
 		}else if(!newAdmin.getPwd().equals(admin.getPwd())){
 			//密码不正确
 			login = 0;
-		}
-		 HttpServletResponse response = ServletActionContext.getResponse();
-		 try {	
-			response.getWriter().print(login);
+		}else{
 			//存储入session
 			if(login==1){
 				ServletActionContext.getContext().getSession().put("admin", newAdmin);
 			}
-		} catch (IOException e) {
-			throw new RuntimeException(e.getMessage());
+			 HttpServletResponse response = ServletActionContext.getResponse();
+			 try {	
+				response.getWriter().print(login);		
+			} catch (IOException e) {
+				throw new RuntimeException(e.getMessage());
+			}
 		}
 		return null;
 	}

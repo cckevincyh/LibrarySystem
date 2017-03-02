@@ -1,5 +1,7 @@
 package com.cc.library.service;
 
+import java.util.List;
+
 import com.cc.library.domain.Admin;
 
 
@@ -18,5 +20,7 @@ public interface AdminService {
 	 * @return 修改后的对象
 	 */
 	public Admin updateAdminInfo(Admin admin);
+
+	public List<Admin> getAllAdmins();
 	
 }

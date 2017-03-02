@@ -34,10 +34,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="collapse navbar-collapse main-navbar-collapse">
-                        <a class="navbar-brand" href="#"><strong>欢迎使用图书馆管理系统</strong></a>
+                        <a class="navbar-brand" href="${pageContext.request.contextPath}/admin/admin.jsp"><strong>欢迎使用图书馆管理系统</strong></a>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
-                                <a href="#" role="button" class="dropdown-toggle" data-hover="dropdown"> <i class="glyphicon glyphicon-user"></i> 欢迎您， <s:property value="#session.admin.username"/> <i class="caret"></i></a>
+                                <a href="#" role="button" class="dropdown-toggle" data-hover="dropdown"> <i class="glyphicon glyphicon-user"></i> 欢迎您， <s:property value="#session.admin.name"/> <i class="caret"></i></a>
                             
                                  <ul class="dropdown-menu">
                                      <li><a href="#updateinfo" data-toggle="modal">个人资料</a></li>
@@ -83,7 +83,7 @@
                     </li>
              <s:if test="#session.admin.type==0"><!-- 对超级管理员和普通管理员进行权限区分 -->
                     <li>
-                        <a href="/library/admin/admin"><i class="glyphicon glyphicon-chevron-right"></i> 管理员管理</a>
+                        <a href="${pageContext.request.contextPath}/admin/adminManageAction_getAllAdmins.action"><i class="glyphicon glyphicon-chevron-right"></i> 管理员管理</a>
                     </li>
              </s:if>
                     <li>

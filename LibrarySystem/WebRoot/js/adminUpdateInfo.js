@@ -19,7 +19,7 @@ $(function () {
 						$("#updateinfo").modal("hide");//关闭模糊框		
 						showInfo("修改成功");	
 						$('#btn_info_close').click(function () {
-							window.location.href = "admin.jsp";  	
+							location.reload();  	//刷新当前页面
 						});
 	                    
 	                }else {

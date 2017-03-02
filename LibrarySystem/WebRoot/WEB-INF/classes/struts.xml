@@ -14,4 +14,5 @@
  	<include file="struts2/struts-reader-login.xml"></include>
  	<include file="struts2/struts-admin-info.xml"></include>
  	<include file="struts2/struts-reader-info.xml"></include>
+ 	<include file="struts2/struts-admin-manage.xml"></include>
 </struts>	

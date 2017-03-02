@@ -35,5 +35,13 @@ public class AdminDaoImpl extends HibernateDaoSupport implements AdminDao{
 		return newAdmin;
 	}
 
+
+	@Override
+	public List<Admin> getAllAdmins() {
+		String hql= "from Admin a where a.type=1 and a.state=1";
+		List<Admin> list = this.getHibernateTemplate().find(hql);
+		return list;
+	}
+
 	
 }

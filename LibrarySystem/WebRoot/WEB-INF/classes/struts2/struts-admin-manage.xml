@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+  <package name="adminManage" extends="struts-default" namespace="/admin">
+  	<action name="adminManageAction_*" method="{1}" class="adminManageAction">
+  		<result name="success" type="redirect">adminManage.jsp</result>
+  	</action>
+  </package>
+  
+
+  
+</struts>	

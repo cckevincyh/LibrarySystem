@@ -18,10 +18,7 @@ $(function () {
 					if (data == 1) {
 						$("#updateinfo").modal("hide");//关闭模糊框		
 						showInfo("修改成功");	
-						$('#btn_info_close').click(function () {
-							location.reload();  	//刷新当前页面
-						});
-	                    
+
 	                }else {
 						$("#updateinfo").modal("hide");//关闭模糊框
 	                    showInfo("修改失败");
@@ -34,6 +31,10 @@ $(function () {
 			
 		
 	});
+	
+		$('#modal_info').on('hide.bs.modal',function() {//提示模糊框隐藏时候触发
+       		 location.reload();  	//刷新当前页面
+    	});
 	
 	
 

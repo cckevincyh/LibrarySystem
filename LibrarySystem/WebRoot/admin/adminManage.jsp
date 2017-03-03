@@ -192,7 +192,7 @@
 										 <div class="form-group">
 											<label for="firstname" class="col-sm-3 control-label">用户名</label>
 												<div class="col-sm-7">
-													<input type="text" class="form-control" id="username"  placeholder="请输入管理员用户名">
+													<input type="text" class="form-control" id="addUsername"  placeholder="请输入管理员用户名">
 												
 												</div>
 										</div>
@@ -200,7 +200,7 @@
 										<div class="form-group">	
 											<label for="firstname" class="col-sm-3 control-label">密码</label>
 											<div class="col-sm-7">
-												<input type="password" class="form-control" id="password"  placeholder="请输入密码">
+												<input type="password" class="form-control" id="addPwd"  placeholder="请输入密码">
 
 											</div>
 										</div>
@@ -208,7 +208,7 @@
 										<div class="form-group">	
 											<label for="firstname" class="col-sm-3 control-label">真实姓名</label>
 												<div class="col-sm-7">
-													<input type="text" class="form-control" id="name"  placeholder="请输入管理员真实姓名">
+													<input type="text" class="form-control" id="addName"  placeholder="请输入管理员真实姓名">
 												
 												</div>
 										</div>
@@ -217,7 +217,7 @@
 										<div class="form-group">	
 											<label for="firstname" class="col-sm-3 control-label">联系电话</label>
 												<div class="col-sm-7">
-													<input type="text" class="form-control" id="phone"  placeholder="请输入管理员联系电话">
+													<input type="text" class="form-control" id="aaPhone"  placeholder="请输入管理员联系电话">
 												
 												</div>
 										</div>
@@ -261,11 +261,18 @@
 												
 										<!---------------------表单-------------------->
 											
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">用户名</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="updateUsername" readonly="readonly">
+												
+												</div>
+										</div>
 											
 										<div class="form-group">	
 											<label for="firstname" class="col-sm-3 control-label">真实姓名</label>
 												<div class="col-sm-7">
-													<input type="text" class="form-control" id="name1"  placeholder="请输入管理员真实姓名">
+													<input type="text" class="form-control" id="updateName"  placeholder="请输入管理员真实姓名">
 												
 												</div>
 										</div>
@@ -274,7 +281,7 @@
 										<div class="form-group">	
 											<label for="firstname" class="col-sm-3 control-label">联系电话</label>
 												<div class="col-sm-7">
-													<input type="text" class="form-control" id="phone1"  placeholder="请输入管理员联系电话">
+													<input type="text" class="form-control" id="updatePhone"  placeholder="请输入管理员联系电话">
 												
 												</div>
 										</div>
@@ -282,7 +289,7 @@
 										<div class="form-group">	
 											<label for="firstname" class="col-sm-3 control-label">密码</label>
 											<div class="col-sm-7">
-												<input type="password" class="form-control" id="password1"  placeholder="请输入密码">
+												<input type="password" class="form-control" id="updatePwd"  placeholder="请输入密码">
 
 											</div>
 										</div>
@@ -293,7 +300,7 @@
 												<div class="modal-footer">
 													<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 													</button>
-													<button type="button" class="btn btn-primary">
+													<button type="button" class="btn btn-primary" id="updateAdmin">
 														修改
 													</button>
 												</div>
@@ -400,6 +407,15 @@
 							<div class="modal-body">
 							 
 								<!--正文-->
+							<div class="form-group">
+								<label for="firstname" class="col-sm-3 control-label">用户名</label>
+								<div class="col-sm-7">
+									<input type="text" class="form-control" id="username"  readonly="readonly" value='<s:property value="#session.admin.username"/>'>
+												
+								</div>
+							</div>				
+								
+								
 							<div class="form-group">
 								<label for="firstname" class="col-sm-3 control-label">真实姓名</label>
 								<div class="col-sm-7">

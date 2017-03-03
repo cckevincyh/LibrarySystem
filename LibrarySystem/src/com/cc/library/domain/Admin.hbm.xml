@@ -17,7 +17,7 @@
 		</property>
 		
 		<property name="type" type="java.lang.Integer">
-			<column name="type" default="0"/>
+			<column name="type" default="1"/>
 		</property>
 		
 		<property name="phone" type="java.lang.String" not-null="false">

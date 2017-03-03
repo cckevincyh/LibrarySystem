@@ -316,6 +316,15 @@
 							 
 								<!--正文-->
 							<div class="form-group">
+								<label for="firstname" class="col-sm-3 control-label">用户名</label>
+								<div class="col-sm-7">
+									<input type="text" class="form-control" id="username"  readonly="readonly" value='<s:property value="#session.admin.username"/>'>
+												
+								</div>
+							</div>			
+								
+		
+							<div class="form-group">
 								<label for="firstname" class="col-sm-3 control-label">真实姓名</label>
 								<div class="col-sm-7">
 									<input type="text" class="form-control" id="name"  placeholder="请输入您的真实姓名" value='<s:property value="#session.admin.name"/>'>

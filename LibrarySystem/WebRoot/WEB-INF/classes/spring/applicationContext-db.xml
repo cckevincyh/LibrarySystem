@@ -26,6 +26,7 @@
  	<tx:advice id="tx" transaction-manager="transactionManager"><!--事务处理 -->
  		<tx:attributes>
  			<tx:method name="update*" read-only="false"/><!--事务方法 -->
+ 			<tx:method name="add*" read-only="false"/><!--事务方法 -->
  		</tx:attributes>
  	</tx:advice>
  	<aop:config>

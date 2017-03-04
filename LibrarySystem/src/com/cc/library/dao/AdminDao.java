@@ -6,9 +6,13 @@ import com.cc.library.domain.Admin;
 
 public interface AdminDao {
 
-	public Admin getAdmin(Admin admin);
+	public Admin getAdminByUserName(Admin admin);
 
 	public Admin updateAdminInfo(Admin admin);
 
 	public List<Admin> getAllAdmins();
+
+	public boolean addAdmin(Admin admin);
+
+	public Admin getAdminById(Admin admin);
 }

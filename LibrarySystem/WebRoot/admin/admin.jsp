@@ -81,7 +81,7 @@
                      <li>
                         <a href="/library/admin/return"><i class="glyphicon glyphicon-chevron-right"></i> 罚金管理</a>
                     </li>
-             <s:if test="#session.admin.type==0"><!-- 对超级管理员和普通管理员进行权限区分 -->
+             <s:if test="#session.admin.adminType==0"><!-- 对超级管理员和普通管理员进行权限区分 -->
                     <li>
                         <a href="${pageContext.request.contextPath}/admin/adminManageAction_getAllAdmins.action"><i class="glyphicon glyphicon-chevron-right"></i> 管理员管理</a>
                     </li>
@@ -318,7 +318,8 @@
 							<div class="form-group">
 								<label for="firstname" class="col-sm-3 control-label">用户名</label>
 								<div class="col-sm-7">
-									<input type="text" class="form-control" id="username"  readonly="readonly" value='<s:property value="#session.admin.username"/>'>
+									
+									<input type="text" class="form-control" id="username"  value='<s:property value="#session.admin.username"/>'>
 												
 								</div>
 							</div>			

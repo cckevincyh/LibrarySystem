@@ -8,7 +8,7 @@ $(function () {
 	
     $('#admin_updateInfo').click(function () {
 
-	var postdata = "name="+$.trim($("#name").val())+"&phone="+ $.trim($("#phone").val());
+	var postdata ="username="+$.trim($("#username").val())+"&name="+$.trim($("#name").val())+"&phone="+ $.trim($("#phone").val());
 	ajax(
     		  {
 			  	method:'POST',

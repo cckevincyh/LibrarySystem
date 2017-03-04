@@ -16,8 +16,8 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public Admin getAdmin(Admin admin) {
-		return adminDao.getAdmin(admin);
+	public Admin getAdminByUserName(Admin admin) {
+		return adminDao.getAdminByUserName(admin);
 	}
 
 	@Override
@@ -28,6 +28,16 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public List<Admin> getAllAdmins() {
 		return adminDao.getAllAdmins();
+	}
+
+	@Override
+	public boolean addAdmin(Admin admin) {
+		return adminDao.addAdmin(admin);
+	}
+
+	@Override
+	public Admin getAdminById(Admin admin) {
+		return adminDao.getAdminById(admin);
 	}
 	
 }

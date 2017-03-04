@@ -19,7 +19,7 @@ $(function () {
 	                    window.location.href = "admin/admin.jsp";
 	                } else if (data == -1) {
 	                    showInfo("账号不存在");
-	                } else if (data == 0) {
+	                } else if (data == -2) {
 	                    showInfo("密码错误");
 	                } else {
 	                    showInfo("登录失败，请重试");

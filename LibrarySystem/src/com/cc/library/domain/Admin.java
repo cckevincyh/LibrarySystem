@@ -8,10 +8,11 @@ import java.io.Serializable;
  *
  */
 public class Admin implements Serializable{
+	private Integer id;	//编号
 	private String username;	//用户名
 	private String name;	//管理员姓名
 	private String phone;	//联系方式
-	private Integer type;	//管理员类型(超级管理员，普通管理员，0超级管理员，1普通管理员)
+	private Integer adminType;	//管理员类型(超级管理员，普通管理员，0超级管理员，1普通管理员)
 	private String pwd;	//密码
 	
 	private Integer state;	//状态(删除或者未删除,1表示未删除,0表示删除)
@@ -40,12 +41,7 @@ public class Admin implements Serializable{
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public int getType() {
-		return type;
-	}
-	public void setType(Integer type) {
-		this.type = type;
-	}
+
 	public String getPwd() {
 		return pwd;
 	}
@@ -57,20 +53,36 @@ public class Admin implements Serializable{
 	public Admin() {
 	
 	}
-	public Admin(String username, String name, String phone, Integer type, String pwd) {
+	public Integer getAdminType() {
+		return adminType;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public void setAdminType(Integer adminType) {
+		this.adminType = adminType;
+	}
+	public Admin(String username, String name, String phone, Integer adminType,
+			String pwd, Integer state) {
 		super();
 		this.username = username;
 		this.name = name;
 		this.phone = phone;
-		this.type = type;
+		this.adminType = adminType;
 		this.pwd = pwd;
+		this.state = state;
 	}
 	@Override
 	public String toString() {
-		return "Admin [username=" + username + ", name=" + name + ", phone="
-				+ phone + ", type=" + type + ", pwd=" + pwd + ", state="
-				+ state + "]";
+		return "Admin [id=" + id + ", username=" + username + ", name=" + name
+				+ ", phone=" + phone + ", adminType=" + adminType + ", pwd="
+				+ pwd + ", state=" + state + "]";
 	}
+	
 	
 	
 	

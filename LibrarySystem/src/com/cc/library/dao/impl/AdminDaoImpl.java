@@ -10,7 +10,7 @@ import com.cc.library.domain.Admin;
 public class AdminDaoImpl extends HibernateDaoSupport implements AdminDao{
 
 	@Override
-	public Admin getAdmin(Admin admin) {
+	public Admin getAdminByUserName(Admin admin) {
 		String hql= "from Admin a where a.username=? and a.state=1";
 		List list = this.getHibernateTemplate().find(hql, admin.getUsername());
 		if(list!=null && list.size()>0){
@@ -29,7 +29,6 @@ public class AdminDaoImpl extends HibernateDaoSupport implements AdminDao{
 			newAdmin = (Admin) this.getHibernateTemplate().merge(admin);
 			this.getHibernateTemplate().flush();
 		}catch (Throwable e1) {
-			e1.printStackTrace();
 			throw new RuntimeException(e1.getMessage());
 		}
 		return newAdmin;
@@ -38,9 +37,40 @@ public class AdminDaoImpl extends HibernateDaoSupport implements AdminDao{
 
 	@Override
 	public List<Admin> getAllAdmins() {
-		String hql= "from Admin a where a.type=1 and a.state=1";
-		List<Admin> list = this.getHibernateTemplate().find(hql);
+		String hql= "from Admin a where a.adminType=1 and a.state=1";
+		List<Admin> list = null;
+		try{
+			list = this.getHibernateTemplate().find(hql);
+		}catch (Throwable e1) {
+			throw new RuntimeException(e1.getMessage());
+		}
 		return list;
+	}
+
+
+	@Override
+	public boolean addAdmin(Admin admin) {
+		boolean b = true;
+		try{
+			this.getHibernateTemplate().clear();
+			this.getHibernateTemplate().save(admin);
+			this.getHibernateTemplate().flush();
+		}catch (Throwable e1) {
+			b = false;
+			throw new RuntimeException(e1.getMessage());
+		}
+		return b;
+	}
+
+
+	@Override
+	public Admin getAdminById(Admin admin) {
+		String hql= "from Admin a where a.id=? and a.state=1";
+		List list = this.getHibernateTemplate().find(hql, admin.getId());
+		if(list!=null && list.size()>0){
+			return (Admin) list.get(0);
+		}
+		return null;
 	}
 
 	

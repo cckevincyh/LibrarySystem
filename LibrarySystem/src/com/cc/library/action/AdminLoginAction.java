@@ -46,25 +46,23 @@ public class AdminLoginAction extends ActionSupport {
 		Admin admin = new  Admin();
 		admin.setUsername(username);
 		admin.setPwd(pwd);
-		Admin newAdmin = adminService.getAdmin(admin);
+		Admin newAdmin = adminService.getAdminByUserName(admin);
 		int login = 1;
 		if(newAdmin==null){
 			//用户名不存在
 			login = -1;
 		}else if(!newAdmin.getPwd().equals(admin.getPwd())){
 			//密码不正确
-			login = 0;
+			login = -2;
 		}else{
 			//存储入session
-			if(login==1){
-				ServletActionContext.getContext().getSession().put("admin", newAdmin);
-			}
-			 HttpServletResponse response = ServletActionContext.getResponse();
-			 try {	
-				response.getWriter().print(login);		
-			} catch (IOException e) {
-				throw new RuntimeException(e.getMessage());
-			}
+			ServletActionContext.getContext().getSession().put("admin", newAdmin);
+		}
+		 HttpServletResponse response = ServletActionContext.getResponse();
+		 try {	
+			response.getWriter().print(login);		
+		} catch (IOException e) {
+			throw new RuntimeException(e.getMessage());
 		}
 		return null;
 	}

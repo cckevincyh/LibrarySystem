@@ -16,11 +16,15 @@ public class TestAdmin extends BaseSpring{
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
 		Admin admin = new Admin();
+		admin.setName("cairou");
 		admin.setUsername("admin");
 		admin.setPwd("admin");
-		admin.setType(1);
+		admin.setAdminType(0);
 		session.save(admin);
 		transaction.commit();
 		session.close();
 	}
+	
+	
+
 }

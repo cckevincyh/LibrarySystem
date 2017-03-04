@@ -18,7 +18,7 @@ public class AdminInfoAction extends ActionSupport{
 		this.adminService = adminService;
 	}
 	
-	
+	private String username;
 	private String name;
 	private String phone;
 	private String oldPwd;
@@ -28,6 +28,17 @@ public class AdminInfoAction extends ActionSupport{
 	
 	
 	
+
+
+
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+
+
+
 	public void setOldPwd(String oldPwd) {
 		this.oldPwd = oldPwd;
 	}
@@ -70,6 +81,7 @@ public class AdminInfoAction extends ActionSupport{
 	public String adminInfo(){
 		Map<String, Object> session = ServletActionContext.getContext().getSession();
 		Admin admin = (Admin) session.get("admin");
+		admin.setUsername(username);
 		admin.setName(name);
 		admin.setPhone(phone);
 		Admin newAdmin = adminService.updateAdminInfo(admin);

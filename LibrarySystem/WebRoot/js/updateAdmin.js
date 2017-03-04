@@ -8,7 +8,7 @@ $(function () {
 
     $('#updateAdmin').click(function () {
 
-	var postdata = "username="+$.trim($("#updateUsername").val())+"&name="+$.trim($("#updateName").val())+"&phone="+ $.trim($("#updatePhone").val())+"&pwd="+ $.trim($("#updatePwd").val());
+	var postdata = "id="+$.trim($("#updateId").val())+"&username="+$.trim($("#updateUsername").val())+"&name="+$.trim($("#updateName").val())+"&phone="+ $.trim($("#updatePhone").val())+"&pwd="+ $.trim($("#updatePwd").val());
 	ajax(
     		  {
 			  	method:'POST',
@@ -49,14 +49,15 @@ $(function () {
  * 获取需要修改用户信息
  * @param {Object} username 需要修改的用户名
  */
-function updateAdmin(username){
+function updateAdmin(id){
 	ajax(
     		  {
 			  	method:'POST',
 	    		url:'admin/adminManageAction_getAdmin.action',
-				params: "username=" + username,
+				params: "id=" + id,
 				type:"json",
 	    		callback:function(data) {
+					$("#updateId").val(data.id);
 					$("#updateUsername").val(data.username);
 					$("#updateName").val(data.name);
 					$("#updatePhone").val(data.pwd);

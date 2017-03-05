@@ -83,7 +83,7 @@
                     </li>
              <s:if test="#session.admin.adminType==0"><!-- 对超级管理员和普通管理员进行权限区分 -->
                     <li>
-                        <a href="${pageContext.request.contextPath}/admin/adminManageAction_getAllAdmins.action"><i class="glyphicon glyphicon-chevron-right"></i> 管理员管理</a>
+                        <a href="${pageContext.request.contextPath}/admin/adminManageAction_findAdminByPage.action"><i class="glyphicon glyphicon-chevron-right"></i> 管理员管理</a>
                     </li>
              </s:if>
                     <li>

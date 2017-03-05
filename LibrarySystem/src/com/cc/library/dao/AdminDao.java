@@ -3,6 +3,7 @@ package com.cc.library.dao;
 import java.util.List;
 
 import com.cc.library.domain.Admin;
+import com.cc.library.domain.PageBean;
 
 public interface AdminDao {
 
@@ -15,4 +16,6 @@ public interface AdminDao {
 	public boolean addAdmin(Admin admin);
 
 	public Admin getAdminById(Admin admin);
+
+	public PageBean<Admin> findAdminByPage(int pageCode, int pageSize);
 }

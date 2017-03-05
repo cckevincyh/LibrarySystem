@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
@@ -11,6 +12,7 @@ import net.sf.json.JSONObject;
 import org.apache.struts2.ServletActionContext;
 
 import com.cc.library.domain.Admin;
+import com.cc.library.domain.PageBean;
 import com.cc.library.service.AdminService;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -27,6 +29,15 @@ public class AdminManageAction extends ActionSupport{
 	private String name;
 	private String phone;
 	private String pwd;
+	
+	
+	private int pageCode;
+
+	
+	
+	public void setPageCode(int pageCode) {
+		this.pageCode = pageCode;
+	}
 
 	public void setId(int id) {
 		this.id = id;
@@ -48,16 +59,7 @@ public class AdminManageAction extends ActionSupport{
 		this.adminService = adminService;
 	}
 	
-	/**
-	 * 得到所有的普通管理员
-	 * @return
-	 */
-	public String getAllAdmins(){
-		List<Admin> admins = adminService.getAllAdmins();
-		ServletActionContext.getContext().getSession().put("admins", admins);
-		return "success";
-	}
-	
+
 	/**
 	 * 得到指定的普通管理员
 	 * @return
@@ -142,6 +144,26 @@ public class AdminManageAction extends ActionSupport{
 			throw new RuntimeException(e.getMessage());
 		}
 		return null;
+	}
+	
+	
+	/**
+	 * 根据页码查询管理员
+	 * @return
+	 */
+	public String findAdminByPage(){
+		//获取页面传递过来的当前页码数
+		if(pageCode==0){
+			pageCode = 1;
+		}
+		//给pageSize,每页的记录数赋值
+		int pageSize = 5;
+		//得到商品信息实体集合
+		PageBean<Admin> pb = adminService.findAdminByPage(pageCode,pageSize);
+		
+		//存入session域中
+		ServletActionContext.getContext().getSession().put("pb", pb);
+		return  "success";
 	}
 	
 	

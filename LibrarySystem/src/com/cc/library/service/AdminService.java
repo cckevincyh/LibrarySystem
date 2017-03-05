@@ -3,6 +3,7 @@ package com.cc.library.service;
 import java.util.List;
 
 import com.cc.library.domain.Admin;
+import com.cc.library.domain.PageBean;
 
 
 
@@ -36,5 +37,13 @@ public interface AdminService {
 	 * @return
 	 */
 	public Admin getAdminById(Admin admin);
+	
+	/**
+	 * 分页查询管理员
+	 * @param pageCode
+	 * @param pageSize
+	 * @return
+	 */
+	public PageBean<Admin> findAdminByPage(int pageCode, int pageSize);
 	
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.cc.library.dao.AdminDao;
 import com.cc.library.domain.Admin;
+import com.cc.library.domain.PageBean;
 import com.cc.library.service.AdminService;
 
 public class AdminServiceImpl implements AdminService{
@@ -38,6 +39,11 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public Admin getAdminById(Admin admin) {
 		return adminDao.getAdminById(admin);
+	}
+
+	@Override
+	public PageBean<Admin> findAdminByPage(int pageCode, int pageSize) {
+		return adminDao.findAdminByPage(pageCode,pageSize);
 	}
 	
 }

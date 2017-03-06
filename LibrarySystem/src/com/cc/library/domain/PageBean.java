@@ -15,7 +15,7 @@ public class PageBean<T> implements Serializable{
 	private int totalRecord;//总记录数
 	private int pageSize;//每页记录数
 	private List<T> beanList;// 当前页记录数
-	
+	private String url;	//url的条件
 	
 	public int getPageCode() {
 		return pageCode;
@@ -60,12 +60,23 @@ public class PageBean<T> implements Serializable{
 		this.beanList = beanList;
 	}
 
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
 	@Override
 	public String toString() {
 		return "PageBean [pageCode=" + pageCode + ", totaPage=" + totaPage
 				+ ", totalRecord=" + totalRecord + ", pageSize=" + pageSize
-				+ ", beanList=" + beanList + "]";
+				+ ", beanList=" + beanList + ", url=" + url + "]";
 	}
+
+	
+	
 	
 
 	

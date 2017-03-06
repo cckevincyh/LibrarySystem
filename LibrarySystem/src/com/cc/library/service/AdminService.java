@@ -45,5 +45,11 @@ public interface AdminService {
 	 * @return
 	 */
 	public PageBean<Admin> findAdminByPage(int pageCode, int pageSize);
+
+	/**
+	 * 条件查询管理员
+	 * @param admin
+	 */
+	public PageBean<Admin> queryAdmin(Admin admin,int pageCode,int pageSize);
 	
 }

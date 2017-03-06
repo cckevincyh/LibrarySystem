@@ -45,5 +45,10 @@ public class AdminServiceImpl implements AdminService{
 	public PageBean<Admin> findAdminByPage(int pageCode, int pageSize) {
 		return adminDao.findAdminByPage(pageCode,pageSize);
 	}
+
+	@Override
+	public PageBean<Admin> queryAdmin(Admin admin,int pageCode,int pageSize) {
+		return adminDao.queryAdmin(admin,pageCode,pageSize);
+	}
 	
 }

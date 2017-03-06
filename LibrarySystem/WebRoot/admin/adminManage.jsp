@@ -105,23 +105,23 @@
                                 <div class="text-muted bootstrap-admin-box-title">查询</div>
                             </div>
                             <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
-                                <form class="form-horizontal">
+                                <form class="form-horizontal" action="${pageContext.request.contextPath}/admin/adminManageAction_queryAdmin.action" method="post">
                                     <div class="col-lg-5 form-group">
-                                        <label class="col-lg-4 control-label" for="query_ano">管理员编号</label>
+                                        <label class="col-lg-4 control-label" for="query_ano">管理员用户名</label>
                                         <div class="col-lg-8">
-                                            <input class="form-control" id="query_ano" type="text" value="">
+                                            <input class="form-control" id="query_ano" type="text" id="adminUserName" name="adminUserName">
                                             <label class="control-label" for="query_ano" style="display: none;"></label>
                                         </div>
                                     </div>
                                     <div class="col-lg-5 form-group">
-                                        <label class="col-lg-4 control-label" for="query_aname">管理员名称</label>
+                                        <label class="col-lg-4 control-label" for="query_aname" >管理员名称</label>
                                         <div class="col-lg-8">
-                                            <input class="form-control" id="query_aname" type="text" value="">
+                                            <input class="form-control" id="query_aname" type="text" id="adminName" name="adminName">
                                             <label class="control-label" for="query_aname" style="display: none;"></label>
                                         </div>
                                     </div>
                                     <div class="col-lg-2 form-group">
-                                        <button type="button" class="btn btn-primary" id="btn_query" onclick="query()">查询</button>
+                                        <button type="submit" class="btn btn-primary" id="btn_query" onclick="query()">查询</button>
                                         <button type="button" class="btn btn-primary" id="btn_add" data-toggle="modal" data-target="#addModal">添加</button>          
                                     </div>
                                 </form>
@@ -144,7 +144,8 @@
                             
                             
                             <!---在此插入信息-->
-                            <s:iterator value="#session.pb.beanList" var="admins">
+                            <s:if test="#request.pb.beanList!=null">
+                            <s:iterator value="#request.pb.beanList" var="admins">
                              <tbody>
 	                         	   <td><s:property value="#admins.username"/></td>
 	                                <td><s:property value="#admins.name"/></td>
@@ -155,13 +156,23 @@
 	                                	<button type="button" class="btn btn-danger btn-xs">删除</button>
 	                                		
 	                               	</td>                                              
-                            </tbody>
+                          	  </tbody>
                             </s:iterator>
+                            </s:if>
+                            <s:else>
+                            	<tbody>
+	                         	   	<td>暂无数据</td>
+	                                <td>暂无数据</td>
+	                                <td>暂无数据</td>
+	                                <td>暂无数据</td>
+	                                <td>暂无数据</td>                                              
+                          	  </tbody>
+                            </s:else>
                             
                         </table>
                         
                         
-                    <s:if test="#session.pb!=null">
+                    <s:if test="#request.pb!=null">
 					                    
 					                    		   <%-- 定义页码列表的长度，5个长 --%>
 								   <c:choose>
@@ -195,8 +206,8 @@
                         <div class="pull-right"><!--右对齐--->
                            <ul class="pagination">
                            <li class="disabled"><a href="#">第<s:property value="#session.pb.pageCode"/>页/共<s:property value="#session.pb.totaPage"/>页</a></li>
-                           <li><a href="${pageContext.request.contextPath}/admin/adminManageAction_findAdminByPage.action?pageCode=1">首页</a></li>
-                           <li><a href="${pageContext.request.contextPath}/admin/adminManageAction_findAdminByPage.action?pageCode=${pb.pageCode-1 }">&laquo;</a></li><!-- 上一页 -->
+                           <li><a href="${pageContext.request.contextPath}/admin/adminManageAction_${pb.url }pageCode=1">首页</a></li>
+                           <li><a href="${pageContext.request.contextPath}/admin/adminManageAction_${pb.url }pageCode=${pb.pageCode-1 }">&laquo;</a></li><!-- 上一页 -->
                            <%-- 循环显示页码列表 --%>
 								<c:forEach begin="${begin }" end="${end }" var="i">
 								  <c:choose>
@@ -205,16 +216,16 @@
 								  			<li class="active"><a>${i }</a><li>							 
 								  	</c:when>
 								  	<c:otherwise>
-								  		<li><a href="${pageContext.request.contextPath}/admin/adminManageAction_findAdminByPage.action?pageCode=${i}">${i}</a></li>
+								  		<li><a href="${pageContext.request.contextPath}/admin/adminManageAction_${pb.url }pageCode=${i}">${i}</a></li>
 								  	</c:otherwise>
 								  </c:choose>
 								</c:forEach>
 				        	   <%--如果当前页数没到总页数，即没到最后一页,则需要显示下一页 --%>
 							  <c:if test="${pb.pageCode < pb.totaPage }">
-								  <li><a href="${pageContext.request.contextPath}/admin/adminManageAction_findAdminByPage.action?pageCode=${pb.pageCode+1}">&raquo;</a></li>
+								  <li><a href="${pageContext.request.contextPath}/admin/adminManageAction_${pb.url }pageCode=${pb.pageCode+1}">&raquo;</a></li>
 							</c:if>
 							<%--否则显示尾页 --%>
-							<li><a href="${pageContext.request.contextPath}/admin/adminManageAction_findAdminByPage.action?pageCode=${pb.totaPage}">尾页</a></li>
+							<li><a href="${pageContext.request.contextPath}/admin/adminManageAction_${pb.url }pageCode=${pb.totaPage}">尾页</a></li>
 							</ul>
                            </div>
                     </s:if>           

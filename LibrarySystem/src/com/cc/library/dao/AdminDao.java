@@ -18,4 +18,6 @@ public interface AdminDao {
 	public Admin getAdminById(Admin admin);
 
 	public PageBean<Admin> findAdminByPage(int pageCode, int pageSize);
+
+	public PageBean<Admin> queryAdmin(Admin admin,int pageCode, int pageSize);
 }

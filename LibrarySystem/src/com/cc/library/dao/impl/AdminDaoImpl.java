@@ -93,9 +93,9 @@ public class AdminDaoImpl extends HibernateDaoSupport implements AdminDao{
 		pb.setPageSize(pageSize);//设置页面记录数
 		List adminList = null;
 		try {
-			String sql = "SELECT count(*) FROM Admin";
+			String sql = "SELECT count(*) FROM Admin a where a.adminType=1 and a.state=1";
 			List list = this.getSession().createQuery(sql).list();
-			int totalRecord = Integer.parseInt(list.get(0).toString())-1; //得到总记录数
+			int totalRecord = Integer.parseInt(list.get(0).toString()); //得到总记录数
 			pb.setTotalRecord(totalRecord);	//设置总记录数
 			this.getSession().close();
 			
@@ -139,5 +139,50 @@ public class AdminDaoImpl extends HibernateDaoSupport implements AdminDao{
         });
          
     }
+
+
+    
+	@Override
+	public PageBean<Admin> queryAdmin(Admin admin,int pageCode, int pageSize) {
+		
+		PageBean<Admin> pb = new PageBean<Admin>();	//pageBean对象，用于分页
+		//根据传入的pageCode当前页码和pageSize页面记录数来设置pb对象
+		pb.setPageCode(pageCode);//设置当前页码
+		pb.setPageSize(pageSize);//设置页面记录数
+		
+		
+		StringBuilder sb = new StringBuilder();
+		StringBuilder sb_sql = new StringBuilder();
+		String sql = "SELECT count(*) FROM Admin a where a.adminType=1 and a.state=1";
+		String hql= "from Admin a where a.state=1 and a.adminType=1";
+		sb.append(hql);
+		sb_sql.append(sql);
+		if(!"".equals(admin.getUsername().trim())){
+			sb.append(" and a.username like '%" + admin.getUsername() +"%'");
+			sb_sql.append(" and a.username like '%" + admin.getUsername() +"%'");
+		}
+		if(!"".equals(admin.getName().trim())){
+			sb.append(" and a.name like '%" + admin.getName() +"%'");
+			sb_sql.append(" and a.name like '%" + admin.getName() +"%'");
+		}
+		try{
+			
+			List list = this.getSession().createQuery(sb_sql.toString()).list();
+			int totalRecord = Integer.parseInt(list.get(0).toString()); //得到总记录数
+			pb.setTotalRecord(totalRecord);	//设置总记录数
+			this.getSession().close();
+			
+			
+			List<Admin> adminList = doSplitPage(sb.toString(),pageCode,pageSize);
+			if(adminList!=null && adminList.size()>0){
+				pb.setBeanList(adminList);
+				return pb;
+			}
+		}catch (Throwable e1){
+			e1.printStackTrace();
+			throw new RuntimeException(e1.getMessage());
+		}
+		return null;
+	}
 	
 }

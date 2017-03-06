@@ -31,10 +31,23 @@ public class AdminManageAction extends ActionSupport{
 	private String pwd;
 	
 	
-	private int pageCode;
+	private int pageCode;//当前页数
 
 	
+	private String adminUserName;	//查询管理员用户名
+	private String adminName;//查询管理员姓名
 	
+	
+	
+	
+	public void setAdminUserName(String adminUserName) {
+		this.adminUserName = adminUserName;
+	}
+
+	public void setAdminName(String adminName) {
+		this.adminName = adminName;
+	}
+
 	public void setPageCode(int pageCode) {
 		this.pageCode = pageCode;
 	}
@@ -96,9 +109,8 @@ public class AdminManageAction extends ActionSupport{
 		int success = 0;
 		if(newAdmin!=null){
 			success = 1;
-			List<Admin> allAdmins = adminService.getAllAdmins();
-			//将所有的管理员重新存入session
-			ServletActionContext.getContext().getSession().put("admins", allAdmins);
+			PageBean<Admin> pb = adminService.findAdminByPage(1, 5);
+			ServletActionContext.getRequest().setAttribute("pb",pb);
 		}
 		try {
 			ServletActionContext.getResponse().getWriter().print(success);
@@ -130,11 +142,8 @@ public class AdminManageAction extends ActionSupport{
 				success = 0;
 			}else{
 				success = 1;
-				Map<String, Object> session = ServletActionContext.getContext().getSession();
-				//取出session中的管理员，添加新的
-				List list = (List) session.get("admins");
-				list.add(admin);
-				session.put("admins", list);
+				PageBean<Admin> pb = adminService.findAdminByPage(1, 5);
+				ServletActionContext.getRequest().setAttribute("pb",pb);
 			}
 		}
 		try {
@@ -158,13 +167,46 @@ public class AdminManageAction extends ActionSupport{
 		}
 		//给pageSize,每页的记录数赋值
 		int pageSize = 5;
-		//得到商品信息实体集合
-		PageBean<Admin> pb = adminService.findAdminByPage(pageCode,pageSize);
 		
+		PageBean<Admin> pb = adminService.findAdminByPage(pageCode,pageSize);
+		pb.setUrl("findAdminByPage.action?");
 		//存入session域中
-		ServletActionContext.getContext().getSession().put("pb", pb);
+		//ServletActionContext.getContext().getSession().put("pb", pb);
+		//存入request域中
+		ServletActionContext.getRequest().setAttribute("pb", pb);
 		return  "success";
 	}
 	
+	
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public String queryAdmin(){
+		//获取页面传递过来的当前页码数
+		if(pageCode==0){
+			pageCode = 1;
+		}
+		//给pageSize,每页的记录数赋值
+		int pageSize = 5;
+		PageBean<Admin> pb = null;
+		if("".equals(adminUserName.trim()) && "".equals(adminName.trim())){
+			pb = adminService.findAdminByPage(pageCode,pageSize);
+		}else{
+			Admin admin = new Admin();
+			admin.setUsername(adminUserName);
+			admin.setName(adminName);
+			pb = adminService.queryAdmin(admin,pageCode,pageSize);
+			
+		}
+		if(pb!=null){
+			pb.setUrl("queryAdmin.action?adminUserName="+adminUserName+"&adminName="+adminName+"&");
+		}
+		//存入session域中
+		//ServletActionContext.getContext().getSession().put("pb", pb);
+		ServletActionContext.getRequest().setAttribute("pb", pb);
+		return "success";
+	}
 	
 }

@@ -20,4 +20,6 @@ public interface AdminDao {
 	public PageBean<Admin> findAdminByPage(int pageCode, int pageSize);
 
 	public PageBean<Admin> queryAdmin(Admin admin,int pageCode, int pageSize);
+
+	public boolean deleteAdmin(Admin admin);
 }

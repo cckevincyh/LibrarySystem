@@ -23,6 +23,7 @@
              <script src="${pageContext.request.contextPath}/js/adminUpdatePwd.js"></script>
               <script src="${pageContext.request.contextPath}/js/updateAdmin.js"></script>
               <script src="${pageContext.request.contextPath}/js/addAdmin.js"></script>
+                <script src="${pageContext.request.contextPath}/js/deleteAdmin.js"></script>
        
 </head>
 
@@ -153,7 +154,7 @@
 	                                <td><s:property value="#admins.pwd"/></td>
 	                                <td>
 	                                	<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" onclick="updateAdmin(<s:property value="#admins.id"/>)">修改</button>
-	                                	<button type="button" class="btn btn-danger btn-xs">删除</button>
+	                                	<button type="button" class="btn btn-danger btn-xs" onclick="deleteAdmin(<s:property value="#admins.id"/>)">删除</button>
 	                                		
 	                               	</td>                                              
                           	  </tbody>
@@ -176,7 +177,7 @@
 					                    
 					                    		   <%-- 定义页码列表的长度，5个长 --%>
 								   <c:choose>
-									<%-- 第一条：如果总页数<=10，那么页码列表为1 ~ totaPage 从第一页到总页数--%>
+									<%-- 第一条：如果总页数<=5，那么页码列表为1 ~ totaPage 从第一页到总页数--%>
 									<%--如果总页数<=5的情况 --%>
 									  <c:when test="${pb.totaPage <= 5 }">
 									    <c:set var="begin" value="1"/>

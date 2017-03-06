@@ -184,5 +184,22 @@ public class AdminDaoImpl extends HibernateDaoSupport implements AdminDao{
 		}
 		return null;
 	}
+
+
+	@Override
+	public boolean deleteAdmin(Admin admin) {
+		boolean b = true;
+		try{
+			Admin deleteAdmin = getAdminById(admin);
+			this.getHibernateTemplate().clear();
+			this.getHibernateTemplate().delete(deleteAdmin);
+			this.getHibernateTemplate().flush();
+		}catch  (Throwable e1){
+			b = false;
+			e1.printStackTrace();
+			throw new RuntimeException(e1.getMessage());
+		}
+		return b;
+	}
 	
 }

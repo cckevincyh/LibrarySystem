@@ -27,6 +27,7 @@
  		<tx:attributes>
  			<tx:method name="update*" read-only="false"/><!--事务方法 -->
  			<tx:method name="add*" read-only="false"/><!--事务方法 -->
+ 			<tx:method name="delete*" read-only="false"/><!--事务方法 -->
  		</tx:attributes>
  	</tx:advice>
  	<aop:config>

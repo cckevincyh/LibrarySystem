@@ -51,5 +51,11 @@ public interface AdminService {
 	 * @param admin
 	 */
 	public PageBean<Admin> queryAdmin(Admin admin,int pageCode,int pageSize);
+
+	/**
+	 * 删除指定id的管理员
+	 * @param id
+	 */
+	public boolean deleteAdmin(Admin admin);
 	
 }

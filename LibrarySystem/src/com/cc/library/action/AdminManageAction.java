@@ -109,8 +109,7 @@ public class AdminManageAction extends ActionSupport{
 		int success = 0;
 		if(newAdmin!=null){
 			success = 1;
-			PageBean<Admin> pb = adminService.findAdminByPage(1, 5);
-			ServletActionContext.getRequest().setAttribute("pb",pb);
+			//由于是转发并且js页面刷新,所以无需重查
 		}
 		try {
 			ServletActionContext.getResponse().getWriter().print(success);
@@ -142,8 +141,7 @@ public class AdminManageAction extends ActionSupport{
 				success = 0;
 			}else{
 				success = 1;
-				PageBean<Admin> pb = adminService.findAdminByPage(1, 5);
-				ServletActionContext.getRequest().setAttribute("pb",pb);
+				//由于是转发并且js页面刷新,所以无需重查
 			}
 		}
 		try {
@@ -170,8 +168,6 @@ public class AdminManageAction extends ActionSupport{
 		
 		PageBean<Admin> pb = adminService.findAdminByPage(pageCode,pageSize);
 		pb.setUrl("findAdminByPage.action?");
-		//存入session域中
-		//ServletActionContext.getContext().getSession().put("pb", pb);
 		//存入request域中
 		ServletActionContext.getRequest().setAttribute("pb", pb);
 		return  "success";
@@ -203,10 +199,32 @@ public class AdminManageAction extends ActionSupport{
 		if(pb!=null){
 			pb.setUrl("queryAdmin.action?adminUserName="+adminUserName+"&adminName="+adminName+"&");
 		}
-		//存入session域中
-		//ServletActionContext.getContext().getSession().put("pb", pb);
+
 		ServletActionContext.getRequest().setAttribute("pb", pb);
 		return "success";
+	}
+	
+	/**
+	 * 删除指定管理员
+	 * @return
+	 */
+	public String deleteAdmin(){
+		Admin admin = new Admin();
+		admin.setId(id);
+		boolean deleteAdmin = adminService.deleteAdmin(admin);
+		int success = 0;
+		if(deleteAdmin){
+			success = 1;
+			//由于是转发并且js页面刷新,所以无需重查
+		}
+		try {
+			ServletActionContext.getResponse().getWriter().print(success);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException(e.getMessage());
+		}
+		
+		return null;
 	}
 	
 }

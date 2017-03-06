@@ -50,5 +50,11 @@ public class AdminServiceImpl implements AdminService{
 	public PageBean<Admin> queryAdmin(Admin admin,int pageCode,int pageSize) {
 		return adminDao.queryAdmin(admin,pageCode,pageSize);
 	}
+
+	@Override
+	public boolean deleteAdmin(Admin admin) {
+		return adminDao.deleteAdmin(admin);
+		
+	}
 	
 }

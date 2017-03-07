@@ -188,11 +188,13 @@ public class AdminDaoImpl extends HibernateDaoSupport implements AdminDao{
 
 	@Override
 	public boolean deleteAdmin(Admin admin) {
+		//把管理员的状态修改为0
 		boolean b = true;
 		try{
 			Admin deleteAdmin = getAdminById(admin);
+			deleteAdmin.setState(0);
 			this.getHibernateTemplate().clear();
-			this.getHibernateTemplate().delete(deleteAdmin);
+			this.getHibernateTemplate().update(deleteAdmin);
 			this.getHibernateTemplate().flush();
 		}catch  (Throwable e1){
 			b = false;

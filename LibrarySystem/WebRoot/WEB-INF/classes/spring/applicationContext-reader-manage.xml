@@ -10,13 +10,11 @@
            	http://www.springframework.org/schema/context/spring-context-2.5.xsd
            	http://www.springframework.org/schema/tx 
            	http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
-           	
-           	
- 	<import resource="applicationContext-db.xml"/>
- 	<import resource="applicationContext-reader-login.xml"/>
- 	<import resource="applicationContext-admin-login.xml"/>
- 	<import resource="applicationContext-admin-info.xml"/>
- 	<import resource="applicationContext-reader-info.xml"/>
- 	<import resource="applicationContext-admin-manage.xml"/>
- 	<import resource="applicationContext-reader-manage.xml"/>
+ 
+ 		
+ 	<bean id="readerManageAction" class="com.cc.library.action.ReaderManageAction" scope="prototype">
+ 		<property name="readerService">
+ 			<ref bean="readerService"/>
+ 		</property>
+ 	</bean>
  </beans>

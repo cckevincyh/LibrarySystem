@@ -31,6 +31,7 @@ public class ReaderDaoImpl extends HibernateDaoSupport implements ReaderDao{
 //		return newReader;
 	}
 
+	
 	@Override
 	public Reader updateReaderInfo(Reader reader) {
 		Reader newReader = null;
@@ -44,6 +45,23 @@ public class ReaderDaoImpl extends HibernateDaoSupport implements ReaderDao{
 			throw new RuntimeException(e1.getMessage());
 		}
 		return newReader;
+	}
+
+	
+	
+	@Override
+	public boolean addReader(Reader reader) {
+		boolean b = true;
+		try{
+			this.getHibernateTemplate().clear();
+			this.getHibernateTemplate().save(reader);
+			this.getHibernateTemplate().flush();
+		}catch (Throwable e1) {
+			b = false;
+			e1.printStackTrace();
+			throw new RuntimeException(e1.getMessage());
+		}
+		return b;
 	}
 
 }

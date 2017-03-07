@@ -160,6 +160,25 @@ public class Reader implements Serializable{
 
 
 
+	public Reader(String readerId, String name, String phone, String pwd,
+			Integer readerType, Integer maxNum) {
+		super();
+		this.readerId = readerId;
+		this.name = name;
+		this.phone = phone;
+		this.pwd = pwd;
+		this.readerType = readerType;
+		this.maxNum = maxNum;
+	}
+
+
+
+	
+
+
+	
+
+
 
 
 

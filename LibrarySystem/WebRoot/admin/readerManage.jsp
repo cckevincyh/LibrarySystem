@@ -21,9 +21,7 @@
             <script src="${pageContext.request.contextPath}/ajax-lib/ajaxutils.js"></script>
             <script src="${pageContext.request.contextPath}/js/adminUpdateInfo.js"></script>
              <script src="${pageContext.request.contextPath}/js/adminUpdatePwd.js"></script>
-              <script src="${pageContext.request.contextPath}/js/updateAdmin.js"></script>
-              <script src="${pageContext.request.contextPath}/js/addAdmin.js"></script>
-                <script src="${pageContext.request.contextPath}/js/deleteAdmin.js"></script>
+			<script src="${pageContext.request.contextPath}/js/addReader.js"></script>
        
 </head>
 
@@ -86,51 +84,86 @@
                         <a href="/library/admin/return"><i class="glyphicon glyphicon-chevron-right"></i> 罚金管理</a>
                     </li>
                <s:if test="#session.admin.adminType==0"><!-- 对超级管理员和普通管理员进行权限区分 -->
-                    <li class="active">
+                    <li>
                         <a href="${pageContext.request.contextPath}/admin/adminManageAction_findAdminByPage.action"><i class="glyphicon glyphicon-chevron-right"></i> 管理员管理</a>
                     </li>
                </s:if>
-                    <li>
+                    <li class="active">
                         <a href="/library/admin/student"><i class="glyphicon glyphicon-chevron-right"></i> 读者管理</a>
                     </li>
                    
                 </ul>
             </div>
 
-           <!-- content -->
-            <div class="col-md-10">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-default bootstrap-admin-no-table-panel">
-                            <div class="panel-heading">
-                                <div class="text-muted bootstrap-admin-box-title">查询</div>
-                            </div>
-                            <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
-                                <form class="form-horizontal" action="${pageContext.request.contextPath}/admin/adminManageAction_queryAdmin.action" method="post">
-                                    <div class="col-lg-5 form-group">
-                                        <label class="col-lg-4 control-label" for="query_ano">管理员用户名</label>
-                                        <div class="col-lg-8">
-                                            <input class="form-control" id="query_ano" type="text" id="adminUserName" name="adminUserName">
-                                            <label class="control-label" for="query_ano" style="display: none;"></label>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-5 form-group">
-                                        <label class="col-lg-4 control-label" for="query_aname" >管理员名称</label>
-                                        <div class="col-lg-8">
-                                            <input class="form-control" id="query_aname" type="text" id="adminName" name="adminName">
-                                            <label class="control-label" for="query_aname" style="display: none;"></label>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2 form-group">
-                                        <button type="submit" class="btn btn-primary" id="btn_query" onclick="query()">查询</button>
-                                        <button type="button" class="btn btn-primary" id="btn_add" data-toggle="modal" data-target="#addModal">添加</button>          
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
+		  <!-- content -->
+		            <div class="col-md-10">
+		                <div class="row">
+		                    <div class="col-lg-12">
+		                        <div class="panel panel-default bootstrap-admin-no-table-panel">
+		                            <div class="panel-heading">
+		                                <div class="text-muted bootstrap-admin-box-title">查询</div>
+		                            </div>
+		                            <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
+		                                <form class="form-horizontal">
+		                                    <div class="col-lg-5 form-group">
+		                                        <label class="col-lg-4 control-label" for="query_sno">证件号</label>
+		                                        <div class="col-lg-8">
+		                                            <input class="form-control" id="query_sno" type="text" value="">
+		                                            <label class="control-label" for="query_sno" style="display: none;"></label>
+		                                        </div>
+		                                    </div>
+		                                    <div class="col-lg-5 form-group">
+		                                        <label class="col-lg-4 control-label" for="query_sname">姓名</label>
+		                                        <div class="col-lg-8">
+		                                            <input class="form-control" id="query_sname" type="text" value="">
+		                                            <label class="control-label" for="query_sname" style="display: none;"></label>
+		                                        </div>
+		                                    </div>
+		                                    
+		
+		                                  
+		                                   
+		                                   
+		                                   <div class="col-lg-5 form-group">
+		                                        <label class="col-lg-4 control-label" for="query_bno11">用户类型</label>
+		                                          <div class="col-lg-8">
+		                                        <select class="form-control" id="detail_tid1">
+		                                            <option value="">请选择</option>
+		                                            
+		                                                <option value="24">
+		                                            	        学生
+		                                                </option>
+		                                            
+		                                                <option value="25">
+		                                               	     教师
+		                                                </option>
+		                                            
+		                                               
+		                                            
+		                                        </select>
+		                                        
+		                                    </div>
+										</div>
+		                                    
+		                                     <div class="col-lg-1 form-group"></div>
+		                                    
+		                                    <div class="col-lg-2 form-group">
+		                                        <button type="button" class="btn btn-primary" id="btn_query" onclick="query()">查询</button>
+		                                        
+		                                    </div>
+		                                    
+										  <div class="col-lg-2 form-group">
+											 <button type="button" class="btn btn-primary"   data-toggle="modal" data-target="#addModal">添加新读者</button>
+										 </div>
+		                               
+		                               
+		                                </form>
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+						               
+			<div class="row">
                     <div class="col-lg-12">
                         <table id="data_list" class="table table-hover table-bordered" cellspacing="0" width="100%">
                             <thead>
@@ -146,15 +179,15 @@
                             
                             <!---在此插入信息-->
                             <s:if test="#request.pb.beanList!=null">
-                            <s:iterator value="#request.pb.beanList" var="admins">
+                            <s:iterator value="#request.pb.beanList" var="readers">
                              <tbody>
-	                         	   <td><s:property value="#admins.username"/></td>
-	                                <td><s:property value="#admins.name"/></td>
-	                                <td><s:property value="#admins.phone"/></td>
-	                                <td><s:property value="#admins.pwd"/></td>
+	                         	   <td><s:property value="#readers.username"/></td>
+	                                <td><s:property value="#readers.name"/></td>
+	                                <td><s:property value="#readers.phone"/></td>
+	                                <td><s:property value="#readers.pwd"/></td>
 	                                <td>
-	                                	<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" onclick="updateAdmin(<s:property value="#admins.id"/>)">修改</button>
-	                                	<button type="button" class="btn btn-danger btn-xs" onclick="deleteAdmin(<s:property value="#admins.id"/>)">删除</button>
+	                                	<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" onclick="updateAdmin(<s:property value="#reader.id"/>)">修改</button>
+	                                	<button type="button" class="btn btn-danger btn-xs" onclick="deleteAdmin(<s:property value="#readers.id"/>)">删除</button>
 	                                		
 	                               	</td>                                              
                           	  </tbody>
@@ -207,8 +240,8 @@
                         <div class="pull-right"><!--右对齐--->
                            <ul class="pagination">
                            <li class="disabled"><a href="#">第<s:property value="#request.pb.pageCode"/>页/共<s:property value="#request.pb.totaPage"/>页</a></li>
-                           <li><a href="${pageContext.request.contextPath}/admin/adminManageAction_${pb.url }pageCode=1">首页</a></li>
-                           <li><a href="${pageContext.request.contextPath}/admin/adminManageAction_${pb.url }pageCode=${pb.pageCode-1 }">&laquo;</a></li><!-- 上一页 -->
+                           <li><a href="${pageContext.request.contextPath}/admin/readerManageAction_${pb.url }pageCode=1">首页</a></li>
+                           <li><a href="${pageContext.request.contextPath}/admin/readerManageAction_${pb.url }pageCode=${pb.pageCode-1 }">&laquo;</a></li><!-- 上一页 -->
                            <%-- 循环显示页码列表 --%>
 								<c:forEach begin="${begin }" end="${end }" var="i">
 								  <c:choose>
@@ -217,27 +250,33 @@
 								  			<li class="active"><a>${i }</a><li>							 
 								  	</c:when>
 								  	<c:otherwise>
-								  		<li><a href="${pageContext.request.contextPath}/admin/adminManageAction_${pb.url }pageCode=${i}">${i}</a></li>
+								  		<li><a href="${pageContext.request.contextPath}/admin/readerManageAction_${pb.url }pageCode=${i}">${i}</a></li>
 								  	</c:otherwise>
 								  </c:choose>
 								</c:forEach>
 				        	   <%--如果当前页数没到总页数，即没到最后一页,则需要显示下一页 --%>
 							  <c:if test="${pb.pageCode < pb.totaPage }">
-								  <li><a href="${pageContext.request.contextPath}/admin/adminManageAction_${pb.url }pageCode=${pb.pageCode+1}">&raquo;</a></li>
+								  <li><a href="${pageContext.request.contextPath}/admin/readerManageAction_${pb.url }pageCode=${pb.pageCode+1}">&raquo;</a></li>
 							</c:if>
 							<%--否则显示尾页 --%>
-							<li><a href="${pageContext.request.contextPath}/admin/adminManageAction_${pb.url }pageCode=${pb.totaPage}">尾页</a></li>
+							<li><a href="${pageContext.request.contextPath}/admin/readerManageAction_${pb.url }pageCode=${pb.totaPage}">尾页</a></li>
 							</ul>
                            </div>
                     </s:if>           
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
+
     
     
-    
+
+
+		            </div>
+	
+                
+                
+                
+                
+  
     
     
     
@@ -257,16 +296,16 @@
 														&times;
 													</button>
 													<h4 class="modal-title" id="myModalLabel">
-														添加新管理员
+														添加新读者
 													</h4>
 												</div>
 												<div class="modal-body">
 												
 										<!---------------------表单-------------------->
 										 <div class="form-group">
-											<label for="firstname" class="col-sm-3 control-label">用户名</label>
+											<label for="firstname" class="col-sm-3 control-label">读者编号</label>
 												<div class="col-sm-7">
-													<input type="text" class="form-control" id="addUsername"  placeholder="请输入管理员用户名">
+													<input type="text" class="form-control" id="addReaderId"  placeholder="请输入读者编号">
 												
 												</div>
 										</div>
@@ -289,18 +328,50 @@
 										
 										
 										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">最大可借书本数目</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="addNum"  placeholder="请输入最大可借书本数目">
+												
+												</div>
+										</div>
+										
+										
+										<div class="form-group">	
 											<label for="firstname" class="col-sm-3 control-label">联系电话</label>
 												<div class="col-sm-7">
 													<input type="text" class="form-control" id="addPhone"  placeholder="请输入管理员联系电话">
 												
 												</div>
 										</div>
+										
+										
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">读者类型</label>
+												<div class="col-sm-7">
+													  <select class="form-control" id="addreaderType">
+		                                            <option value="-1">请选择</option>
+		                                            
+		                                                <option value="0">
+		                                            	        学生
+		                                                </option>
+		                                            
+		                                                <option value="1">
+		                                               	     教师
+		                                                </option>
+		                                            
+		                                               
+		                                            
+		                                        </select>
+												
+												</div>
+										</div>
+										
 										<!---------------------表单-------------------->
 									</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 													</button>
-													<button type="button" class="btn btn-primary" id="addAdmin">
+													<button type="button" class="btn btn-primary" id="addReader">
 														添加
 													</button>
 												</div>

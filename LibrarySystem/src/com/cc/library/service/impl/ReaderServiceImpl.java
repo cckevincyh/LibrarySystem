@@ -27,6 +27,13 @@ public class ReaderServiceImpl implements ReaderService{
 	public Reader updateReaderInfo(Reader reader) {
 		return readerDao.updateReaderInfo(reader);
 	}
+
+
+
+	@Override
+	public boolean addReader(Reader reader) {
+		return readerDao.addReader(reader);
+	}
 	
 	
 }

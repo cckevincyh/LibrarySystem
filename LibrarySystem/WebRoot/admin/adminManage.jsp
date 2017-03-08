@@ -91,7 +91,7 @@
                     </li>
                </s:if>
                     <li>
-                        <a href="/library/admin/student"><i class="glyphicon glyphicon-chevron-right"></i> 读者管理</a>
+                        <a href="${pageContext.request.contextPath}/admin/readerManageAction_findReaderByPage.action"><i class="glyphicon glyphicon-chevron-right"></i> 读者管理</a>
                     </li>
                    
                 </ul>

@@ -33,7 +33,9 @@
 		</property>
 		
 		
-		<set name="borrowInfos" cascade="all">
+		<!-- failed to lazily initialize a collection of role: com.cc.library.domain.Reader.borrowInfos,  no session or session was closed -->
+		<!-- 解决方案改动 lazy="false" -->
+		<set name="borrowInfos" cascade="all" lazy="false">
 			<key>
 				<column name="borrowId" ></column>
 			</key>
@@ -42,7 +44,7 @@
 		</set>
 		
 		
-		<set name="forfeitInfos" cascade="all">
+		<set name="forfeitInfos" cascade="all" lazy="false">
 			<key>
 				<column name="forfeitId" ></column>
 			</key>

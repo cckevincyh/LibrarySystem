@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.apache.struts2.ServletActionContext;
 
+import com.cc.library.domain.PageBean;
 import com.cc.library.domain.Reader;
 import com.cc.library.service.AdminService;
 import com.cc.library.service.ReaderService;
@@ -31,12 +32,24 @@ public class ReaderManageAction extends ActionSupport{
 	private String pwd;
 	private Integer readerType;
 	private Integer maxNum;
+	private int pageCode;
 	
 	
 	
 	
 	
 	
+	
+	
+	public void setPageCode(int pageCode) {
+		this.pageCode = pageCode;
+	}
+
+
+
+
+
+
 	public void setMaxNum(Integer maxNum) {
 		this.maxNum = maxNum;
 	}
@@ -117,5 +130,20 @@ public class ReaderManageAction extends ActionSupport{
 		
 	}
 	
+	
+	
+	public String findReaderByPage(){
+		//获取页面传递过来的当前页码数
+		if(pageCode==0){
+			pageCode = 1;
+		}
+		//给pageSize,每页的记录数赋值
+		int pageSize = 5;
+		PageBean<Reader> pb = readerService.findReaderByPage(pageCode,pageSize);
+		pb.setUrl("findReaderByPage.action?");
+		//存入request域中
+		ServletActionContext.getRequest().setAttribute("pb", pb);
+		return  "success";
+	}
 
 }

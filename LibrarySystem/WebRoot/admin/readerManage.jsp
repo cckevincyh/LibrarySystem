@@ -89,7 +89,7 @@
                     </li>
                </s:if>
                     <li class="active">
-                        <a href="/library/admin/student"><i class="glyphicon glyphicon-chevron-right"></i> 读者管理</a>
+                        <a href="${pageContext.request.contextPath}/admin/readerManageAction_findReaderByPage.action"><i class="glyphicon glyphicon-chevron-right"></i> 读者管理</a>
                     </li>
                    
                 </ul>
@@ -168,10 +168,11 @@
                         <table id="data_list" class="table table-hover table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
-                                <th>管理员用户名</th>
-                                <th>管理员姓名</th>
+                                <th>读者编证件号</th>
+                                <th>读者姓名</th>
                                 <th>联系号码</th>
                                 <th>密码</th>
+                                <th>读者类型</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -181,10 +182,11 @@
                             <s:if test="#request.pb.beanList!=null">
                             <s:iterator value="#request.pb.beanList" var="readers">
                              <tbody>
-	                         	   <td><s:property value="#readers.username"/></td>
+	                         	   <td><s:property value="#readers.readerId"/></td>
 	                                <td><s:property value="#readers.name"/></td>
 	                                <td><s:property value="#readers.phone"/></td>
 	                                <td><s:property value="#readers.pwd"/></td>
+	                                <td><s:property value="#readers.readerType"/></td>
 	                                <td>
 	                                	<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" onclick="updateAdmin(<s:property value="#reader.id"/>)">修改</button>
 	                                	<button type="button" class="btn btn-danger btn-xs" onclick="deleteAdmin(<s:property value="#readers.id"/>)">删除</button>
@@ -199,7 +201,8 @@
 	                                <td>暂无数据</td>
 	                                <td>暂无数据</td>
 	                                <td>暂无数据</td>
-	                                <td>暂无数据</td>                                              
+	                                <td>暂无数据</td>   
+	                                <td>暂无数据</td>                                           
                           	  </tbody>
                             </s:else>
                             

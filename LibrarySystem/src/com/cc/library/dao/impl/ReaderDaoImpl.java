@@ -129,6 +129,17 @@ public class ReaderDaoImpl extends HibernateDaoSupport implements ReaderDao{
 		}
 		return null;
 	}
+
+
+	@Override
+	public Reader getReaderById(Reader reader) {
+		String hql= "from Reader r where r.readerId=? and r.state=1";
+		List list = this.getHibernateTemplate().find(hql, reader.getReaderId());
+		if(list!=null && list.size()>0){
+			return (Reader) list.get(0);
+		}
+		return null;
+	}
 	
 
 }

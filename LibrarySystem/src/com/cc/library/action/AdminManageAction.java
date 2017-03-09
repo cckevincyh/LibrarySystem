@@ -78,7 +78,6 @@ public class AdminManageAction extends ActionSupport{
 	 * @return
 	 */
 	public String getAdmin(){
-		System.out.println(id);
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("application/json;charset=utf-8");
 		Admin admin = new Admin();

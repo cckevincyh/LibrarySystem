@@ -22,6 +22,8 @@
             <script src="${pageContext.request.contextPath}/js/adminUpdateInfo.js"></script>
              <script src="${pageContext.request.contextPath}/js/adminUpdatePwd.js"></script>
 			<script src="${pageContext.request.contextPath}/js/addReader.js"></script>
+			
+			<script src="${pageContext.request.contextPath}/js/updateReader.js"></script>
        
 </head>
 
@@ -125,7 +127,7 @@
 		                                   
 		                                   
 		                                   <div class="col-lg-5 form-group">
-		                                        <label class="col-lg-4 control-label" for="query_bno11">用户类型</label>
+		                                        <label class="col-lg-4 control-label" for="query_bno11">读者类型</label>
 		                                          <div class="col-lg-8">
 		                                        <select class="form-control" id="detail_tid1">
 		                                            <option value="">请选择</option>
@@ -186,10 +188,17 @@
 	                                <td><s:property value="#readers.name"/></td>
 	                                <td><s:property value="#readers.phone"/></td>
 	                                <td><s:property value="#readers.pwd"/></td>
-	                                <td><s:property value="#readers.readerType"/></td>
 	                                <td>
-	                                	<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" onclick="updateAdmin(<s:property value="#reader.id"/>)">修改</button>
-	                                	<button type="button" class="btn btn-danger btn-xs" onclick="deleteAdmin(<s:property value="#readers.id"/>)">删除</button>
+										<s:if test="#readers.readerType==0">
+											学生
+										</s:if>
+										<s:if test="#readers.readerType==1">
+											老师
+										</s:if>
+									</td>
+	                                <td>
+	                                	<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" onclick="updateReader(<s:property value="#readers.readerId"/>)">修改</button>
+	                                	<button type="button" class="btn btn-danger btn-xs" onclick="deleteReader(<s:property value="#readers.readerId"/>)">删除</button>
 	                                		
 	                               	</td>                                              
                           	  </tbody>
@@ -313,13 +322,7 @@
 												</div>
 										</div>
 											
-										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">密码</label>
-											<div class="col-sm-7">
-												<input type="password" class="form-control" id="addPwd"  placeholder="请输入密码">
-
-											</div>
-										</div>
+					
 											
 										<div class="form-group">	
 											<label for="firstname" class="col-sm-3 control-label">真实姓名</label>
@@ -327,6 +330,14 @@
 													<input type="text" class="form-control" id="addName"  placeholder="请输入管理员真实姓名">
 												
 												</div>
+										</div>
+										
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">密码</label>
+											<div class="col-sm-7">
+												<input type="password" class="form-control" id="addPwd"  placeholder="请输入密码">
+
+											</div>
 										</div>
 										
 										
@@ -402,7 +413,7 @@
 														&times;
 													</button>
 													<h4 class="modal-title" id="updateModalLabel">
-														修改管理员信息
+														修改读者信息
 													</h4>
 												</div>
 												<div class="modal-body">
@@ -410,10 +421,9 @@
 										<!---------------------表单-------------------->
 											
 										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">用户名</label>
+											<label for="firstname" class="col-sm-3 control-label">读者编号</label>
 												<div class="col-sm-7">
-													<input type="hidden" id="updateId">
-													<input type="text" class="form-control" id="updateUsername">
+													<input type="text" class="form-control" id="updateReaderID" readonly="readonly">
 												
 												</div>
 										</div>
@@ -436,6 +446,15 @@
 										</div>
 										
 										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">最大可借书本数目</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="updateNum"  placeholder="请输入最大可借书本数目">
+												
+												</div>
+										</div>
+										
+										
+										<div class="form-group">	
 											<label for="firstname" class="col-sm-3 control-label">密码</label>
 											<div class="col-sm-7">
 												<input type="password" class="form-control" id="updatePwd"  placeholder="请输入密码">
@@ -443,13 +462,35 @@
 											</div>
 										</div>
 										
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">读者类型</label>
+												<div class="col-sm-7">
+													  <select class="form-control" id="updateReaderType">
+		                                            <option value="-1">请选择</option>
+		                                            
+		                                                <option value="0">
+		                                            	        学生
+		                                                </option>
+		                                            
+		                                                <option value="1">
+		                                               	     教师
+		                                                </option>
+		                                            
+		                                               
+		                                            
+		                                        </select>
+												
+												</div>
+										</div>
+										
+										
 										<!---------------------表单-------------------->
 															
 										</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 													</button>
-													<button type="button" class="btn btn-primary" id="updateAdmin">
+													<button type="button" class="btn btn-primary" id="updateReader">
 														修改
 													</button>
 												</div>

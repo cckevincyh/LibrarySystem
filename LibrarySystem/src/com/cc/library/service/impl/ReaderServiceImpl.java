@@ -42,6 +42,13 @@ public class ReaderServiceImpl implements ReaderService{
 	public PageBean<Reader> findReaderByPage(int pageCode, int pageSize) {
 		return readerDao.findReaderByPage(pageCode,pageSize);
 	}
+
+
+
+	@Override
+	public Reader getReaderById(Reader reader) {
+		return readerDao.getReaderById(reader);
+	}
 	
 	
 }

@@ -2,11 +2,14 @@ package com.cc.library.action;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONObject;
+
 import org.apache.struts2.ServletActionContext;
 
 import com.cc.library.domain.PageBean;
 import com.cc.library.domain.Reader;
-import com.cc.library.service.AdminService;
 import com.cc.library.service.ReaderService;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -131,7 +134,10 @@ public class ReaderManageAction extends ActionSupport{
 	}
 	
 	
-	
+	/**
+	 * 根据页码查询读者
+	 * @return
+	 */
 	public String findReaderByPage(){
 		//获取页面传递过来的当前页码数
 		if(pageCode==0){
@@ -144,6 +150,58 @@ public class ReaderManageAction extends ActionSupport{
 		//存入request域中
 		ServletActionContext.getRequest().setAttribute("pb", pb);
 		return  "success";
+	}
+	
+	
+	
+	
+	/**
+	 * 得到指定的普通管理员
+	 * @return
+	 */
+	public String getReader(){
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("application/json;charset=utf-8");
+		Reader reader = new Reader();
+		reader.setReaderId(readerId);
+		Reader newReader = readerService.getReaderById(reader);
+		JSONObject jsonObject = JSONObject.fromObject(newReader);
+		try {
+			response.getWriter().print(jsonObject);
+		} catch (IOException e) {
+			throw new RuntimeException(e.getMessage());
+		}
+		return null;
+	}
+	
+	
+	
+	/**
+	 * 修改指定管理员
+	 * @return
+	 */
+	public String updateReader(){
+		Reader reader = new Reader();
+		reader.setReaderId(readerId);
+		Reader updateReader = readerService.getReaderById(reader);//查出需要修改的读者对象;
+		updateReader.setName(name);
+		updateReader.setPhone(phone);
+		updateReader.setPwd(pwd);
+		updateReader.setMaxNum(maxNum);
+		updateReader.setReaderType(readerType);
+		Reader newReader = readerService.updateReaderInfo(updateReader);
+		int success = 0;
+		if(newReader!=null){
+			success = 1;
+			//由于是转发并且js页面刷新,所以无需重查
+		}
+		try {
+			ServletActionContext.getResponse().getWriter().print(success);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException(e.getMessage());
+		}
+		return null;
 	}
 
 }

@@ -13,4 +13,6 @@ public interface ReaderDao {
 	public boolean addReader(Reader reader);
 
 	public PageBean<Reader> findReaderByPage(int pageCode, int pageSize);
+
+	public Reader getReaderById(Reader reader);
 }

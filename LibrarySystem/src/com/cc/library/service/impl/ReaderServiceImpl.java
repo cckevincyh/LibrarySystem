@@ -49,6 +49,13 @@ public class ReaderServiceImpl implements ReaderService{
 	public Reader getReaderById(Reader reader) {
 		return readerDao.getReaderById(reader);
 	}
+
+
+
+	@Override
+	public boolean deleteReader(Reader reader) {
+		return readerDao.deleteReader(reader);
+	}
 	
 	
 }

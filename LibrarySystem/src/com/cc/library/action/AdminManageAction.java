@@ -166,7 +166,9 @@ public class AdminManageAction extends ActionSupport{
 		int pageSize = 5;
 		
 		PageBean<Admin> pb = adminService.findAdminByPage(pageCode,pageSize);
-		pb.setUrl("findAdminByPage.action?");
+		if(pb!=null){
+			pb.setUrl("findAdminByPage.action?");
+		}
 		//存入request域中
 		ServletActionContext.getRequest().setAttribute("pb", pb);
 		return  "success";

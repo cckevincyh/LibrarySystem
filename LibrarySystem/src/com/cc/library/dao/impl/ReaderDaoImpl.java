@@ -140,6 +140,25 @@ public class ReaderDaoImpl extends HibernateDaoSupport implements ReaderDao{
 		}
 		return null;
 	}
+
+
+	@Override
+	public boolean deleteReader(Reader reader) {
+		//把读者的状态修改为0
+		boolean b = true;
+		try{
+			Reader deleteReader = getReaderById(reader);
+			deleteReader.setState(0);
+			this.getHibernateTemplate().clear();
+			this.getHibernateTemplate().update(deleteReader);
+			this.getHibernateTemplate().flush();
+		}catch  (Throwable e1){
+			b = false;
+			e1.printStackTrace();
+			throw new RuntimeException(e1.getMessage());
+		}
+		return b;
+	}
 	
 
 }

@@ -15,4 +15,6 @@ public interface ReaderDao {
 	public PageBean<Reader> findReaderByPage(int pageCode, int pageSize);
 
 	public Reader getReaderById(Reader reader);
+
+	public boolean deleteReader(Reader reader);
 }

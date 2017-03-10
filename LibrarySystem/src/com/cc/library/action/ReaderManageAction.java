@@ -146,7 +146,9 @@ public class ReaderManageAction extends ActionSupport{
 		//给pageSize,每页的记录数赋值
 		int pageSize = 5;
 		PageBean<Reader> pb = readerService.findReaderByPage(pageCode,pageSize);
-		pb.setUrl("findReaderByPage.action?");
+		if(pb!=null){
+			pb.setUrl("findReaderByPage.action?");
+		}
 		//存入request域中
 		ServletActionContext.getRequest().setAttribute("pb", pb);
 		return  "success";
@@ -156,7 +158,7 @@ public class ReaderManageAction extends ActionSupport{
 	
 	
 	/**
-	 * 得到指定的普通管理员
+	 * 得到指定的读者
 	 * @return
 	 */
 	public String getReader(){
@@ -177,7 +179,7 @@ public class ReaderManageAction extends ActionSupport{
 	
 	
 	/**
-	 * 修改指定管理员
+	 * 修改指定读者
 	 * @return
 	 */
 	public String updateReader(){
@@ -201,6 +203,30 @@ public class ReaderManageAction extends ActionSupport{
 			// TODO Auto-generated catch block
 			throw new RuntimeException(e.getMessage());
 		}
+		return null;
+	}
+	
+	
+	/**
+	 * 删除指定管理员
+	 * @return
+	 */
+	public String deleteReader(){
+		Reader reader = new Reader();
+		reader.setReaderId(readerId);
+		boolean deleteReader = readerService.deleteReader(reader);
+		int success = 0;
+		if(deleteReader){
+			success = 1;
+			//由于是转发并且js页面刷新,所以无需重查
+		}
+		try {
+			ServletActionContext.getResponse().getWriter().print(success);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException(e.getMessage());
+		}
+		
 		return null;
 	}
 

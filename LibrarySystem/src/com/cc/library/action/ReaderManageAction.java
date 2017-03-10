@@ -229,5 +229,31 @@ public class ReaderManageAction extends ActionSupport{
 		
 		return null;
 	}
+	
+	
+	
+	public String queryReader(){
+		//获取页面传递过来的当前页码数
+		if(pageCode==0){
+			pageCode = 1;
+		}
+		//给pageSize,每页的记录数赋值
+		int pageSize = 5;
+		PageBean<Reader> pb = null;
+		if("".equals(readerId.trim()) && "".equals(name.trim()) && readerType==-1){
+			pb = readerService.findReaderByPage(pageCode,pageSize);
+		}else{
+			Reader reader = new Reader();
+			reader.setReaderId(readerId);
+			reader.setReaderType(readerType);
+			reader.setName(name);
+			pb = readerService.queryReader(reader,pageCode,pageSize);
+		}
+		if(pb!=null){
+			pb.setUrl("queryReader.action?readerId="+readerId+"&name="+name+"&readerType="+readerType+"&");
+		}
+		ServletActionContext.getRequest().setAttribute("pb", pb);
+		return "success";
+	}
 
 }

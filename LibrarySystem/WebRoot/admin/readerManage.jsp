@@ -106,18 +106,18 @@
 		                                <div class="text-muted bootstrap-admin-box-title">查询</div>
 		                            </div>
 		                            <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
-		                                <form class="form-horizontal">
+		                                <form class="form-horizontal" action="${pageContext.request.contextPath}/admin/readerManageAction_queryReader.action" method="post">
 		                                    <div class="col-lg-5 form-group">
 		                                        <label class="col-lg-4 control-label" for="query_sno">证件号</label>
 		                                        <div class="col-lg-8">
-		                                            <input class="form-control" id="query_sno" type="text" value="">
+		                                            <input class="form-control" id="readerId" type="text" value="" name="readerId">
 		                                            <label class="control-label" for="query_sno" style="display: none;"></label>
 		                                        </div>
 		                                    </div>
 		                                    <div class="col-lg-5 form-group">
 		                                        <label class="col-lg-4 control-label" for="query_sname">姓名</label>
 		                                        <div class="col-lg-8">
-		                                            <input class="form-control" id="query_sname" type="text" value="">
+		                                            <input class="form-control" id="name" name="name"  type="text" value="">
 		                                            <label class="control-label" for="query_sname" style="display: none;"></label>
 		                                        </div>
 		                                    </div>
@@ -129,14 +129,14 @@
 		                                   <div class="col-lg-5 form-group">
 		                                        <label class="col-lg-4 control-label" for="query_bno11">读者类型</label>
 		                                          <div class="col-lg-8">
-		                                        <select class="form-control" id="detail_tid1">
-		                                            <option value="">请选择</option>
+		                                        <select class="form-control" id="readerType" name="readerType">
+		                                            <option value="-1">请选择</option>
 		                                            
-		                                                <option value="24">
+		                                                <option value="0">
 		                                            	        学生
 		                                                </option>
 		                                            
-		                                                <option value="25">
+		                                                <option value="1">
 		                                               	     教师
 		                                                </option>
 		                                            
@@ -150,7 +150,7 @@
 		                                     <div class="col-lg-1 form-group"></div>
 		                                    
 		                                    <div class="col-lg-2 form-group">
-		                                        <button type="button" class="btn btn-primary" id="btn_query" onclick="query()">查询</button>
+		                                        <button type="submit" class="btn btn-primary" id="btn_query" onclick="query()">查询</button>
 		                                        
 		                                    </div>
 		                                    

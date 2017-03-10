@@ -56,6 +56,13 @@ public class ReaderServiceImpl implements ReaderService{
 	public boolean deleteReader(Reader reader) {
 		return readerDao.deleteReader(reader);
 	}
+
+
+
+	@Override
+	public PageBean<Reader> queryReader(Reader reader,int pageCode, int pageSize) {
+		return readerDao.queryReader(reader,pageCode,pageSize);
+	}
 	
 	
 }

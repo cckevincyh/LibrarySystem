@@ -68,7 +68,7 @@
                         <a href="/library/admin/book"><i class="glyphicon glyphicon-chevron-right"></i> 图书管理</a>
                     </li>
                     <li class="active">
-                        <a href="/library/admin/bookType"><i class="glyphicon glyphicon-chevron-right"></i> 图书分类管理</a>
+                        <a href="${pageContext.request.contextPath}/admin/bookTypeManageAction_findBookTypeByPage.action"><i class="glyphicon glyphicon-chevron-right"></i> 图书分类管理</a>
                     </li>
                     <li >
                         <a href="/library/admin/borrow"><i class="glyphicon glyphicon-chevron-right"></i> 图书借阅</a>
@@ -127,8 +127,6 @@
                             <thead>
                             <tr>
                                 <th>图书分类名称</th>
-                                <th>可借天数</th>
-                                <th>每日罚金</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -136,14 +134,12 @@
                             
                             <!---在此插入信息-->
                             <s:if test="#request.pb.beanList!=null">
-                            <s:iterator value="#request.pb.beanList" var="bookTypes">
+                            <s:iterator value="#request.pb.beanList" var="bookType">
                              <tbody>
-	                         	   <td><s:property value="#bookTypes.typeName"/></td>
-	                                <td><s:property value="#bookTypes.bday"/></td>
-	                                <td><s:property value="#bookTypes.penalty"/></td>
+	                         	   <td><s:property value="#bookType.typeName"/></td>
 	                                <td>
-	                                	<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" onclick="updateAdmin(<s:property value="#bookTypes.typeId"/>)">修改</button>
-	                                	<button type="button" class="btn btn-danger btn-xs" onclick="deleteAdmin(<s:property value="#bookTypes.typeId"/>)">删除</button>
+	                                	<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" onclick="updateBookType(<s:property value="#bookType.typeId"/>)">修改</button>
+	                                	<button type="button" class="btn btn-danger btn-xs" onclick="deleteBookType(<s:property value="#bookType.typeId"/>)">删除</button>
 	                                		
 	                               	</td>                                              
                           	  </tbody>
@@ -152,9 +148,7 @@
                             <s:else>
                             	<tbody>
 	                         	   	<td>暂无数据</td>
-	                                <td>暂无数据</td>
-	                                <td>暂无数据</td>
-	                                <td>暂无数据</td>                                              
+	                                <td>暂无数据</td>                                           
                           	  </tbody>
                             </s:else>
                             
@@ -259,30 +253,6 @@
 												</div>
 										</div>
 											
-										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">密码</label>
-											<div class="col-sm-7">
-												<input type="password" class="form-control" id="addPwd"  placeholder="请输入密码">
-
-											</div>
-										</div>
-											
-										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">真实姓名</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control" id="addName"  placeholder="请输入管理员真实姓名">
-												
-												</div>
-										</div>
-										
-										
-										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">联系电话</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control" id="addPhone"  placeholder="请输入管理员联系电话">
-												
-												</div>
-										</div>
 										<!---------------------表单-------------------->
 									</div>
 												<div class="modal-footer">
@@ -316,7 +286,7 @@
 														&times;
 													</button>
 													<h4 class="modal-title" id="updateModalLabel">
-														修改管理员信息
+														修改图书分类信息
 													</h4>
 												</div>
 												<div class="modal-body">
@@ -326,36 +296,13 @@
 										<div class="form-group">	
 											<label for="firstname" class="col-sm-3 control-label">用户名</label>
 												<div class="col-sm-7">
-													<input type="hidden" id="updateId">
-													<input type="text" class="form-control" id="updateUsername">
+													<input type="hidden" id="updateBookTypeId">
+													<input type="text" class="form-control" id="updateBookTypeName" placeholder="请输入图书分类名称">
 												
 												</div>
 										</div>
 											
-										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">真实姓名</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control" id="updateName"  placeholder="请输入管理员真实姓名">
-												
-												</div>
-										</div>
-										
-										
-										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">联系电话</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control" id="updatePhone"  placeholder="请输入管理员联系电话">
-												
-												</div>
-										</div>
-										
-										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">密码</label>
-											<div class="col-sm-7">
-												<input type="password" class="form-control" id="updatePwd"  placeholder="请输入密码">
 
-											</div>
-										</div>
 										
 										<!---------------------表单-------------------->
 															
@@ -363,7 +310,7 @@
 												<div class="modal-footer">
 													<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 													</button>
-													<button type="button" class="btn btn-primary" id="updateAdmin">
+													<button type="button" class="btn btn-primary" id="updateBookType">
 														修改
 													</button>
 												</div>

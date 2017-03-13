@@ -8,7 +8,7 @@ $(function () {
 
     $('#addReader').click(function () {
 
-	var postdata = "readerId="+$.trim($("#addReaderId").val())+"&name="+$.trim($("#addName").val())+"&phone="+ $.trim($("#addPhone").val())+"&pwd="+ $.trim($("#addPwd").val())+"&readerType="+ $.trim($("#addreaderType").val())+"&maxNum="+ $.trim($("#addNum").val());
+	var postdata = "readerId="+$.trim($("#addReaderId").val())+"&name="+$.trim($("#addName").val())+"&phone="+ $.trim($("#addPhone").val())+"&pwd="+ $.trim($("#addPwd").val())+"&readerType="+ $.trim($("#addreaderType").val());
 	ajax(
     		  {
 			  	method:'POST',

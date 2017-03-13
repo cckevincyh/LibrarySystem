@@ -194,10 +194,10 @@
 	                                <td><s:property value="#reader.phone"/></td>
 	                                <td><s:property value="#reader.pwd"/></td>
 	                                <td>
-										<s:if test="#reader.readerType==0">
+										<s:if test="#reader.readerType.readerTypeId==0">
 											学生
 										</s:if>
-										<s:if test="#reader.readerType==1">
+										<s:if test="#reader.readerType.readerTypeId==1">
 											老师
 										</s:if>
 									</td>
@@ -345,16 +345,7 @@
 											</div>
 										</div>
 										
-										
-										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">最大可借书本数目</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control" id="addNum"  placeholder="请输入最大可借书本数目">
-												
-												</div>
-										</div>
-										
-										
+																	
 										<div class="form-group">	
 											<label for="firstname" class="col-sm-3 control-label">联系电话</label>
 												<div class="col-sm-7">
@@ -450,13 +441,6 @@
 												</div>
 										</div>
 										
-										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">最大可借书本数目</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control" id="updateNum"  placeholder="请输入最大可借书本数目">
-												
-												</div>
-										</div>
 										
 										
 										<div class="form-group">	

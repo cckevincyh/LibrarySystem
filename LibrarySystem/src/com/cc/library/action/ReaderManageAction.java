@@ -10,6 +10,7 @@ import org.apache.struts2.ServletActionContext;
 
 import com.cc.library.domain.PageBean;
 import com.cc.library.domain.Reader;
+import com.cc.library.domain.ReaderType;
 import com.cc.library.service.ReaderService;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -34,7 +35,6 @@ public class ReaderManageAction extends ActionSupport{
 	private String phone;
 	private String pwd;
 	private Integer readerType;
-	private Integer maxNum;
 	private int pageCode;
 	
 	
@@ -47,17 +47,6 @@ public class ReaderManageAction extends ActionSupport{
 	public void setPageCode(int pageCode) {
 		this.pageCode = pageCode;
 	}
-
-
-
-
-
-
-	public void setMaxNum(Integer maxNum) {
-		this.maxNum = maxNum;
-	}
-
-
 
 
 
@@ -112,23 +101,28 @@ public class ReaderManageAction extends ActionSupport{
 	 * @return
 	 */
 	public String addReader(){
-//		Reader reader = new Reader(readerId, name, phone, pwd, readerType, maxNum);
-//		Reader oldReader = readerService.getReader(reader);//检查是否已经存在该id
-//		int success = 0;
-//		if(oldReader!=null){
-//			success = -1;//已存在该id
-//		}else{
-//			boolean b = readerService.addReader(reader);
-//			if(b){
-//				success = 1;
-//			}
-//		}
-//		try {
-//			ServletActionContext.getResponse().getWriter().print(success);
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			throw new RuntimeException(e.getMessage());
-//		}
+		Reader reader = new Reader(readerId, name, phone, pwd);
+		
+		Reader oldReader = readerService.getReader(reader);//检查是否已经存在该id
+		int success = 0;
+		if(oldReader!=null){
+			success = -1;//已存在该id
+		}else{
+			ReaderType type = new ReaderType();
+			type.setReaderTypeId(readerType);
+			reader.setReaderType(type);
+			
+			boolean b = readerService.addReader(reader);
+			if(b){
+				success = 1;
+			}
+		}
+		try {
+			ServletActionContext.getResponse().getWriter().print(success);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException(e.getMessage());
+		}
 		return null;
 		
 	}
@@ -189,8 +183,9 @@ public class ReaderManageAction extends ActionSupport{
 		updateReader.setName(name);
 		updateReader.setPhone(phone);
 		updateReader.setPwd(pwd);
-	//	updateReader.setMaxNum(maxNum);
-	//	updateReader.setReaderType(readerType);
+		ReaderType type = new ReaderType();
+		type.setReaderTypeId(readerType);
+		updateReader.setReaderType(type);
 		Reader newReader = readerService.updateReaderInfo(updateReader);
 		int success = 0;
 		if(newReader!=null){

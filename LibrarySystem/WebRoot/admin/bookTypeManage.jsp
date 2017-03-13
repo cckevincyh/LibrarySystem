@@ -21,7 +21,8 @@
             <script src="${pageContext.request.contextPath}/ajax-lib/ajaxutils.js"></script>
             <script src="${pageContext.request.contextPath}/js/adminUpdateInfo.js"></script>
              <script src="${pageContext.request.contextPath}/js/adminUpdatePwd.js"></script>
-
+	
+			<script src="${pageContext.request.contextPath}/js/addBookType.js"></script>
        
 </head>
 
@@ -105,6 +106,8 @@
                             </div>
                             <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
                                 <form class="form-horizontal" action="${pageContext.request.contextPath}/admin/adminManageAction_queryAdmin.action" method="post">
+                                  
+                                  
                                     <div class="col-lg-5 form-group">
                                         <label class="col-lg-4 control-label" for="query_ano">图书分类名称</label>
                                         <div class="col-lg-8">
@@ -114,7 +117,10 @@
                                     </div>
                                     <div class="col-lg-2 form-group">
                                         <button type="submit" class="btn btn-primary" id="btn_query" onclick="query()">查询</button>
-                                        <button type="button" class="btn btn-primary" id="btn_add" data-toggle="modal" data-target="#addModal">添加</button>          
+                                               
+                                    </div>
+                                     <div class="col-lg-2 form-group">
+                                    		<button type="button" class="btn btn-primary" id="btn_add" data-toggle="modal" data-target="#addModal">添加</button>   
                                     </div>
                                 </form>
                             </div>
@@ -258,7 +264,7 @@
 												<div class="modal-footer">
 													<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 													</button>
-													<button type="button" class="btn btn-primary" id="addAdmin">
+													<button type="button" class="btn btn-primary" id="addBookType">
 														添加
 													</button>
 												</div>

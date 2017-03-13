@@ -1,18 +1,18 @@
 
 /**
- * ajax提交添加读者的信息
- * @param {Object} '#addReader'
+ * ajax提交添加图书分类的信息
+ * @param {Object} '#addBookType'
  */
 $(function () {
 	
 
-    $('#addReader').click(function () {
+    $('#addBookType').click(function () {
 
-	var postdata = "readerId="+$.trim($("#addReaderId").val())+"&name="+$.trim($("#addName").val())+"&phone="+ $.trim($("#addPhone").val())+"&pwd="+ $.trim($("#addPwd").val())+"&readerType="+ $.trim($("#addreaderType").val());
+	var postdata = "typeName="+$.trim($("#addBookTypeName").val());
 	ajax(
     		  {
 			  	method:'POST',
-	    		url:'admin/readerManageAction_addReader.action',
+	    		url:'admin/bookTypeManageAction_addBookType.action',
 				params: postdata,
 	    		callback:function(data) {
 					if (data == 1) {
@@ -21,7 +21,7 @@ $(function () {
 
 	                }else if (data == -1) {
 						$("#addModal").modal("hide");//关闭模糊框		
-						showInfo("该读者已存在");	
+						showInfo("该图书分类存在");	
 					}else {
 						$("#addModal").modal("hide");//关闭模糊框
 						showInfo("添加失败");

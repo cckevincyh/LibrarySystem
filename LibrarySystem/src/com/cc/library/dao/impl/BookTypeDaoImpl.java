@@ -10,6 +10,7 @@ import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.cc.library.dao.BookTypeDao;
+import com.cc.library.domain.Admin;
 import com.cc.library.domain.BookType;
 import com.cc.library.domain.PageBean;
 
@@ -69,6 +70,33 @@ public class BookTypeDaoImpl extends HibernateDaoSupport implements BookTypeDao{
 			return pb;
 		}
 		return null;
+	}
+
+
+	@Override
+	public BookType getBookTypeByName(BookType bookType) {
+		String hql= "from BookType b where b.typeName=?";
+		List list = this.getHibernateTemplate().find(hql, bookType.getTypeName());
+		if(list!=null && list.size()>0){
+			return (BookType) list.get(0);
+		}
+		return null;
+	}
+
+
+	@Override
+	public boolean addBookType(BookType bookType) {
+		boolean b = true;
+		try{
+			this.getHibernateTemplate().clear();
+			this.getHibernateTemplate().save(bookType);
+			this.getHibernateTemplate().flush();
+		}catch (Throwable e1) {
+			b = false;
+			e1.printStackTrace();
+			throw new RuntimeException(e1.getMessage());
+		}
+		return b;
 	}
 
 }

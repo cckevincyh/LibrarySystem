@@ -1,5 +1,7 @@
 package com.cc.library.action;
 
+import java.io.IOException;
+
 import org.apache.struts2.ServletActionContext;
 
 import com.cc.library.domain.BookType;
@@ -16,12 +18,23 @@ public class BookTypeManageAction extends ActionSupport{
 	}
 	
 	private int pageCode;
+	private String typeName;
 	
 	
 	
 	
 	
 	
+	
+	public void setTypeName(String typeName) {
+		this.typeName = typeName;
+	}
+
+
+
+
+
+
 	public void setPageCode(int pageCode) {
 		this.pageCode = pageCode;
 	}
@@ -47,5 +60,33 @@ public class BookTypeManageAction extends ActionSupport{
 		ServletActionContext.getRequest().setAttribute("pb", pb);
 		return  "success";
 	
+	}
+	
+	
+	
+	
+	public String addBookType(){
+		BookType bookType = new BookType();
+		bookType.setTypeName(typeName);
+		BookType bookType2 = bookTypeService.getBookTypeByName(bookType);
+		int success = 0;
+		if(bookType2!=null){
+			success = -1;//已经存在该图书分类
+		}else{
+			boolean b = bookTypeService.addBookType(bookType);
+			if(!b){
+				success = 0;
+			}else{
+				success = 1;
+				//由于是转发并且js页面刷新,所以无需重查
+			}
+		}
+		try {
+			ServletActionContext.getResponse().getWriter().print(success);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException(e.getMessage());
+		}
+		return null;
 	}
 }

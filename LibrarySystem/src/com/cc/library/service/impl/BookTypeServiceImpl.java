@@ -17,6 +17,16 @@ public class BookTypeServiceImpl implements BookTypeService{
 	public PageBean<BookType> findBookTypeByPage(int pageCode, int pageSize) {
 		return bookTypeDao.findBookTypeByPage(pageCode,pageSize);
 	}
+
+	@Override
+	public BookType getBookTypeByName(BookType bookType) {
+		return bookTypeDao.getBookTypeByName(bookType);
+	}
+
+	@Override
+	public boolean addBookType(BookType bookType) {
+		return bookTypeDao.addBookType(bookType);
+	}
 	
 	
 }

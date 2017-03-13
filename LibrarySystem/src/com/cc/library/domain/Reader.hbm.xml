@@ -16,13 +16,6 @@
 			<column name="name" />
 		</property>
 		
-		<property name="maxNum" type="java.lang.Integer" length="3">
-			<column name="maxNum" default="5"/>
-		</property>
-		
-		<property name="readerType" type="java.lang.Integer" not-null="false" length="2">
-			<column name="readerType" />
-		</property>
 		
 		<property name="phone" type="java.lang.String" not-null="false" length="11">
 			<column name="phone"  />
@@ -51,6 +44,11 @@
 			
 			<one-to-many class="com.cc.library.domain.ForfeitInfo"/>
 		</set>
+		
+		
+		<many-to-one name="readerType" class="com.cc.library.domain.ReaderType">
+			<column name="readerTypeId"></column>
+		</many-to-one>
 		
 	</class>
 </hibernate-mapping>

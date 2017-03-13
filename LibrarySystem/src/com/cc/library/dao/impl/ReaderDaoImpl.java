@@ -184,27 +184,27 @@ public class ReaderDaoImpl extends HibernateDaoSupport implements ReaderDao{
 			sb.append(" and r.name like '%" + reader.getName() +"%'");
 			sb_sql.append(" and r.name like '%" + reader.getName() +"%'");
 		}
-		if(reader.getReaderType()!=-1){
-			sb.append(" and r.readerType="+reader.getReaderType());
-			sb_sql.append(" and r.readerType="+reader.getReaderType());
-		}
-		try{
-			
-			List list = this.getSession().createQuery(sb_sql.toString()).list();
-			int totalRecord = Integer.parseInt(list.get(0).toString()); //得到总记录数
-			pb.setTotalRecord(totalRecord);	//设置总记录数
-			this.getSession().close();
-			
-			
-			List<Reader> adminList = doSplitPage(sb.toString(),pageCode,pageSize);
-			if(adminList!=null && adminList.size()>0){
-				pb.setBeanList(adminList);
-				return pb;
-			}
-		}catch (Throwable e1){
-			e1.printStackTrace();
-			throw new RuntimeException(e1.getMessage());
-		}
+//		if(reader.getReaderType()!=-1){
+//			sb.append(" and r.readerType="+reader.getReaderType());
+//			sb_sql.append(" and r.readerType="+reader.getReaderType());
+//		}
+//		try{
+//			
+//			List list = this.getSession().createQuery(sb_sql.toString()).list();
+//			int totalRecord = Integer.parseInt(list.get(0).toString()); //得到总记录数
+//			pb.setTotalRecord(totalRecord);	//设置总记录数
+//			this.getSession().close();
+//			
+//			
+//			List<Reader> adminList = doSplitPage(sb.toString(),pageCode,pageSize);
+//			if(adminList!=null && adminList.size()>0){
+//				pb.setBeanList(adminList);
+//				return pb;
+//			}
+//		}catch (Throwable e1){
+//			e1.printStackTrace();
+//			throw new RuntimeException(e1.getMessage());
+//		}
 		return null;
 	}
 	

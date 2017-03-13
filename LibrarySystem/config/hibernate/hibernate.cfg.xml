@@ -18,7 +18,7 @@
 		password
 	-->
 	<property name="connection.password">123</property>
-<!--  <property name="hbm2ddl.auto">validate</property>-->
+	<property name="hbm2ddl.auto">update</property>
 	<property name="show_sql">true</property>
 
 	<mapping resource="com/cc/library/domain/Admin.hbm.xml" />
@@ -27,5 +27,6 @@
 	<mapping resource="com/cc/library/domain/BorrowInfo.hbm.xml" />
 	<mapping resource="com/cc/library/domain/ForfeitInfo.hbm.xml" />
 	<mapping resource="com/cc/library/domain/Reader.hbm.xml" />
+	<mapping resource="com/cc/library/domain/ReaderType.hbm.xml" />
 </session-factory>
 </hibernate-configuration>

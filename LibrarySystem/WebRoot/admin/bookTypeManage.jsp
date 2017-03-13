@@ -21,10 +21,8 @@
             <script src="${pageContext.request.contextPath}/ajax-lib/ajaxutils.js"></script>
             <script src="${pageContext.request.contextPath}/js/adminUpdateInfo.js"></script>
              <script src="${pageContext.request.contextPath}/js/adminUpdatePwd.js"></script>
-			<script src="${pageContext.request.contextPath}/js/addReader.js"></script>
-			
-			<script src="${pageContext.request.contextPath}/js/updateReader.js"></script>
-      	 <script src="${pageContext.request.contextPath}/js/deleteReader.js"></script>
+
+       
 </head>
 
 
@@ -69,7 +67,7 @@
                     <li>
                         <a href="/library/admin/book"><i class="glyphicon glyphicon-chevron-right"></i> 图书管理</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="/library/admin/bookType"><i class="glyphicon glyphicon-chevron-right"></i> 图书分类管理</a>
                     </li>
                     <li >
@@ -90,96 +88,47 @@
                         <a href="${pageContext.request.contextPath}/admin/adminManageAction_findAdminByPage.action"><i class="glyphicon glyphicon-chevron-right"></i> 管理员管理</a>
                     </li>
                </s:if>
-                    <li class="active">
-                        <a href="${pageContext.request.contextPath}/admin/readerManageAction_findReaderByPage.action"><i class="glyphicon glyphicon-chevron-right"></i> 读者管理</a>
-                    </li>
-                    
-                    
                     <li>
-                        <a href="${pageContext.request.contextPath}/admin/readerTypeManageAction_getAllReaderType.action"><i class="glyphicon glyphicon-chevron-right"></i> 读者分类设置</a>
+                        <a href="${pageContext.request.contextPath}/admin/readerManageAction_findReaderByPage.action"><i class="glyphicon glyphicon-chevron-right"></i> 读者管理</a>
                     </li>
                    
                 </ul>
             </div>
 
-		  <!-- content -->
-		            <div class="col-md-10">
-		                <div class="row">
-		                    <div class="col-lg-12">
-		                        <div class="panel panel-default bootstrap-admin-no-table-panel">
-		                            <div class="panel-heading">
-		                                <div class="text-muted bootstrap-admin-box-title">查询</div>
-		                            </div>
-		                            <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
-		                                <form class="form-horizontal" action="${pageContext.request.contextPath}/admin/readerManageAction_queryReader.action" method="post">
-		                                    <div class="col-lg-5 form-group">
-		                                        <label class="col-lg-4 control-label" for="query_sno">证件号</label>
-		                                        <div class="col-lg-8">
-		                                            <input class="form-control" id="readerId" type="text" value="" name="readerId">
-		                                            <label class="control-label" for="query_sno" style="display: none;"></label>
-		                                        </div>
-		                                    </div>
-		                                    <div class="col-lg-5 form-group">
-		                                        <label class="col-lg-4 control-label" for="query_sname">姓名</label>
-		                                        <div class="col-lg-8">
-		                                            <input class="form-control" id="name" name="name"  type="text" value="">
-		                                            <label class="control-label" for="query_sname" style="display: none;"></label>
-		                                        </div>
-		                                    </div>
-		                                    
-		
-		                                  
-		                                   
-		                                   
-		                                   <div class="col-lg-5 form-group">
-		                                        <label class="col-lg-4 control-label" for="query_bno11">读者类型</label>
-		                                          <div class="col-lg-8">
-		                                        <select class="form-control" id="readerType" name="readerType">
-		                                            <option value="-1">请选择</option>
-		                                            
-		                                                <option value="0">
-		                                            	        学生
-		                                                </option>
-		                                            
-		                                                <option value="1">
-		                                               	     教师
-		                                                </option>
-		                                            
-		                                               
-		                                            
-		                                        </select>
-		                                        
-		                                    </div>
-										</div>
-		                                    
-		                                     <div class="col-lg-1 form-group"></div>
-		                                    
-		                                    <div class="col-lg-2 form-group">
-		                                        <button type="submit" class="btn btn-primary" id="btn_query" onclick="query()">查询</button>
-		                                        
-		                                    </div>
-		                                    
-										  <div class="col-lg-2 form-group">
-											 <button type="button" class="btn btn-primary"   data-toggle="modal" data-target="#addModal">添加新读者</button>
-										 </div>
-		                               
-		                               
-		                                </form>
-		                            </div>
-		                        </div>
-		                    </div>
-		                </div>
-						               
-			<div class="row">
+           <!-- content -->
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default bootstrap-admin-no-table-panel">
+                            <div class="panel-heading">
+                                <div class="text-muted bootstrap-admin-box-title">查询</div>
+                            </div>
+                            <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
+                                <form class="form-horizontal" action="${pageContext.request.contextPath}/admin/adminManageAction_queryAdmin.action" method="post">
+                                    <div class="col-lg-5 form-group">
+                                        <label class="col-lg-4 control-label" for="query_ano">图书分类名称</label>
+                                        <div class="col-lg-8">
+                                            <input class="form-control" id="query_ano" type="text" id="adminUserName" name="adminUserName">
+                                            <label class="control-label" for="query_ano" style="display: none;"></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 form-group">
+                                        <button type="submit" class="btn btn-primary" id="btn_query" onclick="query()">查询</button>
+                                        <button type="button" class="btn btn-primary" id="btn_add" data-toggle="modal" data-target="#addModal">添加</button>          
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-lg-12">
                         <table id="data_list" class="table table-hover table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
-                                <th>读者编证件号</th>
-                                <th>读者姓名</th>
-                                <th>联系号码</th>
-                                <th>密码</th>
-                                <th>读者类型</th>
+                                <th>图书分类名称</th>
+                                <th>可借天数</th>
+                                <th>每日罚金</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -187,23 +136,14 @@
                             
                             <!---在此插入信息-->
                             <s:if test="#request.pb.beanList!=null">
-                            <s:iterator value="#request.pb.beanList" var="reader">
+                            <s:iterator value="#request.pb.beanList" var="bookTypes">
                              <tbody>
-	                         	   <td><s:property value="#reader.readerId"/></td>
-	                                <td><s:property value="#reader.name"/></td>
-	                                <td><s:property value="#reader.phone"/></td>
-	                                <td><s:property value="#reader.pwd"/></td>
+	                         	   <td><s:property value="#bookTypes.typeName"/></td>
+	                                <td><s:property value="#bookTypes.bday"/></td>
+	                                <td><s:property value="#bookTypes.penalty"/></td>
 	                                <td>
-										<s:if test="#reader.readerType==0">
-											学生
-										</s:if>
-										<s:if test="#reader.readerType==1">
-											老师
-										</s:if>
-									</td>
-	                                <td>
-	                                	<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" onclick="updateReader(<s:property value="#reader.readerId"/>)">修改</button>
-	                                	<button type="button" class="btn btn-danger btn-xs" onclick="deleteReader(<s:property value="#reader.readerId"/>)">删除</button>
+	                                	<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" onclick="updateAdmin(<s:property value="#bookTypes.typeId"/>)">修改</button>
+	                                	<button type="button" class="btn btn-danger btn-xs" onclick="deleteAdmin(<s:property value="#bookTypes.typeId"/>)">删除</button>
 	                                		
 	                               	</td>                                              
                           	  </tbody>
@@ -214,9 +154,7 @@
 	                         	   	<td>暂无数据</td>
 	                                <td>暂无数据</td>
 	                                <td>暂无数据</td>
-	                                <td>暂无数据</td>
-	                                <td>暂无数据</td>   
-	                                <td>暂无数据</td>                                           
+	                                <td>暂无数据</td>                                              
                           	  </tbody>
                             </s:else>
                             
@@ -257,8 +195,8 @@
                         <div class="pull-right"><!--右对齐--->
                            <ul class="pagination">
                            <li class="disabled"><a href="#">第<s:property value="#request.pb.pageCode"/>页/共<s:property value="#request.pb.totaPage"/>页</a></li>
-                           <li><a href="${pageContext.request.contextPath}/admin/readerManageAction_${pb.url }pageCode=1">首页</a></li>
-                           <li><a href="${pageContext.request.contextPath}/admin/readerManageAction_${pb.url }pageCode=${pb.pageCode-1 }">&laquo;</a></li><!-- 上一页 -->
+                           <li><a href="${pageContext.request.contextPath}/admin/bookTypeManageAction_${pb.url }pageCode=1">首页</a></li>
+                           <li><a href="${pageContext.request.contextPath}/admin/bookTypeManageAction_${pb.url }pageCode=${pb.pageCode-1 }">&laquo;</a></li><!-- 上一页 -->
                            <%-- 循环显示页码列表 --%>
 								<c:forEach begin="${begin }" end="${end }" var="i">
 								  <c:choose>
@@ -267,33 +205,27 @@
 								  			<li class="active"><a>${i }</a><li>							 
 								  	</c:when>
 								  	<c:otherwise>
-								  		<li><a href="${pageContext.request.contextPath}/admin/readerManageAction_${pb.url }pageCode=${i}">${i}</a></li>
+								  		<li><a href="${pageContext.request.contextPath}/admin/bookTypeManageAction_${pb.url }pageCode=${i}">${i}</a></li>
 								  	</c:otherwise>
 								  </c:choose>
 								</c:forEach>
 				        	   <%--如果当前页数没到总页数，即没到最后一页,则需要显示下一页 --%>
 							  <c:if test="${pb.pageCode < pb.totaPage }">
-								  <li><a href="${pageContext.request.contextPath}/admin/readerManageAction_${pb.url }pageCode=${pb.pageCode+1}">&raquo;</a></li>
+								  <li><a href="${pageContext.request.contextPath}/admin/bookTypeManageAction_${pb.url }pageCode=${pb.pageCode+1}">&raquo;</a></li>
 							</c:if>
 							<%--否则显示尾页 --%>
-							<li><a href="${pageContext.request.contextPath}/admin/readerManageAction_${pb.url }pageCode=${pb.totaPage}">尾页</a></li>
+							<li><a href="${pageContext.request.contextPath}/admin/bookTypeManageAction_${pb.url }pageCode=${pb.totaPage}">尾页</a></li>
 							</ul>
                            </div>
                     </s:if>           
                     </div>
                 </div>
-
+            </div>
+        </div>
+    </div>
     
     
-
-
-		            </div>
-	
-                
-                
-                
-                
-  
+    
     
     
     
@@ -313,30 +245,20 @@
 														&times;
 													</button>
 													<h4 class="modal-title" id="myModalLabel">
-														添加新读者
+														添加图书分类
 													</h4>
 												</div>
 												<div class="modal-body">
 												
 										<!---------------------表单-------------------->
 										 <div class="form-group">
-											<label for="firstname" class="col-sm-3 control-label">读者编号</label>
+											<label for="firstname" class="col-sm-3 control-label">图书分类名称</label>
 												<div class="col-sm-7">
-													<input type="text" class="form-control" id="addReaderId"  placeholder="请输入读者编号">
+													<input type="text" class="form-control" id="addBookTypeName"  placeholder="请输入图书分类名称">
 												
 												</div>
 										</div>
 											
-					
-											
-										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">真实姓名</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control" id="addName"  placeholder="请输入管理员真实姓名">
-												
-												</div>
-										</div>
-										
 										<div class="form-group">	
 											<label for="firstname" class="col-sm-3 control-label">密码</label>
 											<div class="col-sm-7">
@@ -344,12 +266,11 @@
 
 											</div>
 										</div>
-										
-										
+											
 										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">最大可借书本数目</label>
+											<label for="firstname" class="col-sm-3 control-label">真实姓名</label>
 												<div class="col-sm-7">
-													<input type="text" class="form-control" id="addNum"  placeholder="请输入最大可借书本数目">
+													<input type="text" class="form-control" id="addName"  placeholder="请输入管理员真实姓名">
 												
 												</div>
 										</div>
@@ -362,35 +283,12 @@
 												
 												</div>
 										</div>
-										
-										
-										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">读者类型</label>
-												<div class="col-sm-7">
-													  <select class="form-control" id="addreaderType">
-		                                            <option value="-1">请选择</option>
-		                                            
-		                                                <option value="0">
-		                                            	        学生
-		                                                </option>
-		                                            
-		                                                <option value="1">
-		                                               	     教师
-		                                                </option>
-		                                            
-		                                               
-		                                            
-		                                        </select>
-												
-												</div>
-										</div>
-										
 										<!---------------------表单-------------------->
 									</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 													</button>
-													<button type="button" class="btn btn-primary" id="addReader">
+													<button type="button" class="btn btn-primary" id="addAdmin">
 														添加
 													</button>
 												</div>
@@ -418,7 +316,7 @@
 														&times;
 													</button>
 													<h4 class="modal-title" id="updateModalLabel">
-														修改读者信息
+														修改管理员信息
 													</h4>
 												</div>
 												<div class="modal-body">
@@ -426,9 +324,10 @@
 										<!---------------------表单-------------------->
 											
 										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">读者编号</label>
+											<label for="firstname" class="col-sm-3 control-label">用户名</label>
 												<div class="col-sm-7">
-													<input type="text" class="form-control" id="updateReaderID" readonly="readonly">
+													<input type="hidden" id="updateId">
+													<input type="text" class="form-control" id="updateUsername">
 												
 												</div>
 										</div>
@@ -451,15 +350,6 @@
 										</div>
 										
 										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">最大可借书本数目</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control" id="updateNum"  placeholder="请输入最大可借书本数目">
-												
-												</div>
-										</div>
-										
-										
-										<div class="form-group">	
 											<label for="firstname" class="col-sm-3 control-label">密码</label>
 											<div class="col-sm-7">
 												<input type="password" class="form-control" id="updatePwd"  placeholder="请输入密码">
@@ -467,35 +357,13 @@
 											</div>
 										</div>
 										
-										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">读者类型</label>
-												<div class="col-sm-7">
-													  <select class="form-control" id="updateReaderType">
-		                                            <option value="-1">请选择</option>
-		                                            
-		                                                <option value="0">
-		                                            	        学生
-		                                                </option>
-		                                            
-		                                                <option value="1">
-		                                               	     教师
-		                                                </option>
-		                                            
-		                                               
-		                                            
-		                                        </select>
-												
-												</div>
-										</div>
-										
-										
 										<!---------------------表单-------------------->
 															
 										</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 													</button>
-													<button type="button" class="btn btn-primary" id="updateReader">
+													<button type="button" class="btn btn-primary" id="updateAdmin">
 														修改
 													</button>
 												</div>

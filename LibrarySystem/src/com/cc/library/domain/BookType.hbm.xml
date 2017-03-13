@@ -11,16 +11,7 @@
 		<property name="typeName" type="java.lang.String" length="20">
 			<column name="typeName" />
 		</property>
-		
-		<property name="penalty" type="java.lang.Double">
-			<column name="penalty" />
-		</property>
-		
-		<property name="bday" type="java.lang.Integer" length="3">
-			<column name="bday" />
-		</property>
-		
-		
+				
 		<set name="books" cascade="all">
 			<key>
 				<column name="bookId"></column>

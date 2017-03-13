@@ -19,4 +19,5 @@
  	<import resource="applicationContext-reader-info.xml"/>
  	<import resource="applicationContext-admin-manage.xml"/>
  	<import resource="applicationContext-reader-manage.xml"/>
+ 	<import resource="applicationContext-readerType-manage.xml"/>
  </beans>

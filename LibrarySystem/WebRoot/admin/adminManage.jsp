@@ -146,15 +146,15 @@
                             
                             <!---在此插入信息-->
                             <s:if test="#request.pb.beanList!=null">
-                            <s:iterator value="#request.pb.beanList" var="admins">
+                            <s:iterator value="#request.pb.beanList" var="admin">
                              <tbody>
-	                         	   <td><s:property value="#admins.username"/></td>
-	                                <td><s:property value="#admins.name"/></td>
-	                                <td><s:property value="#admins.phone"/></td>
-	                                <td><s:property value="#admins.pwd"/></td>
+	                         	   <td><s:property value="#admin.username"/></td>
+	                                <td><s:property value="#admin.name"/></td>
+	                                <td><s:property value="#admin.phone"/></td>
+	                                <td><s:property value="#admin.pwd"/></td>
 	                                <td>
-	                                	<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" onclick="updateAdmin(<s:property value="#admins.id"/>)">修改</button>
-	                                	<button type="button" class="btn btn-danger btn-xs" onclick="deleteAdmin(<s:property value="#admins.id"/>)">删除</button>
+	                                	<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" onclick="updateAdmin(<s:property value="#admin.id"/>)">修改</button>
+	                                	<button type="button" class="btn btn-danger btn-xs" onclick="deleteAdmin(<s:property value="#admin.id"/>)">删除</button>
 	                                		
 	                               	</td>                                              
                           	  </tbody>

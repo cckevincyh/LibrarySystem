@@ -112,23 +112,23 @@ public class ReaderManageAction extends ActionSupport{
 	 * @return
 	 */
 	public String addReader(){
-		Reader reader = new Reader(readerId, name, phone, pwd, readerType, maxNum);
-		Reader oldReader = readerService.getReader(reader);//检查是否已经存在该id
-		int success = 0;
-		if(oldReader!=null){
-			success = -1;//已存在该id
-		}else{
-			boolean b = readerService.addReader(reader);
-			if(b){
-				success = 1;
-			}
-		}
-		try {
-			ServletActionContext.getResponse().getWriter().print(success);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			throw new RuntimeException(e.getMessage());
-		}
+//		Reader reader = new Reader(readerId, name, phone, pwd, readerType, maxNum);
+//		Reader oldReader = readerService.getReader(reader);//检查是否已经存在该id
+//		int success = 0;
+//		if(oldReader!=null){
+//			success = -1;//已存在该id
+//		}else{
+//			boolean b = readerService.addReader(reader);
+//			if(b){
+//				success = 1;
+//			}
+//		}
+//		try {
+//			ServletActionContext.getResponse().getWriter().print(success);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			throw new RuntimeException(e.getMessage());
+//		}
 		return null;
 		
 	}
@@ -189,8 +189,8 @@ public class ReaderManageAction extends ActionSupport{
 		updateReader.setName(name);
 		updateReader.setPhone(phone);
 		updateReader.setPwd(pwd);
-		updateReader.setMaxNum(maxNum);
-		updateReader.setReaderType(readerType);
+	//	updateReader.setMaxNum(maxNum);
+	//	updateReader.setReaderType(readerType);
 		Reader newReader = readerService.updateReaderInfo(updateReader);
 		int success = 0;
 		if(newReader!=null){
@@ -245,7 +245,7 @@ public class ReaderManageAction extends ActionSupport{
 		}else{
 			Reader reader = new Reader();
 			reader.setReaderId(readerId);
-			reader.setReaderType(readerType);
+	//		reader.setReaderType(readerType);
 			reader.setName(name);
 			pb = readerService.queryReader(reader,pageCode,pageSize);
 		}

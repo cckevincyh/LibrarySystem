@@ -15,8 +15,7 @@ public class Reader implements Serializable{
 	private String name;	//真实名称
 	private String phone;	//联系方式
 	private String pwd; 	//密码
-	private Integer readerType;	//读者类型(学生或者教师)
-	private Integer maxNum;	//最大借书量
+	private ReaderType readerType;	//读者类型(学生或者教师)
 	
 	
 	private Set<BorrowInfo> borrowInfos;	//该读者的借阅信息
@@ -104,79 +103,36 @@ public class Reader implements Serializable{
 
 
 
-
-	public Integer getMaxNum() {
-		return maxNum;
-	}
-
-
-	public void setMaxNum(Integer maxNum) {
-		this.maxNum = maxNum;
-	}
-
-
 	public Reader() {
 		
 	}
 
 
 
-	public Integer getReaderType() {
+	public ReaderType getReaderType() {
 		return readerType;
 	}
 
 
 
-	public void setReaderType(Integer readerType) {
+	public void setReaderType(ReaderType readerType) {
 		this.readerType = readerType;
 	}
 
 
 
 	public Reader(String readerId, String name, String phone, String pwd,
-			Integer readerType, Integer maxNum, Set<BorrowInfo> borrowInfos,
-			Set<ForfeitInfo> forfeitInfos, Integer state) {
+			ReaderType readerType) {
 		super();
 		this.readerId = readerId;
 		this.name = name;
 		this.phone = phone;
 		this.pwd = pwd;
 		this.readerType = readerType;
-		this.maxNum = maxNum;
-		this.borrowInfos = borrowInfos;
-		this.forfeitInfos = forfeitInfos;
-		this.state = state;
 	}
 
 
 
-	@Override
-	public String toString() {
-		return "Reader [readerId=" + readerId + ", name=" + name + ", phone="
-				+ phone + ", pwd=" + pwd + ", readerType=" + readerType
-				+ ", maxNum=" + maxNum + ", borrowInfos=" + borrowInfos
-				+ ", forfeitInfos=" + forfeitInfos + ", state=" + state + "]";
-	}
-
-
-
-	public Reader(String readerId, String name, String phone, String pwd,
-			Integer readerType, Integer maxNum) {
-		super();
-		this.readerId = readerId;
-		this.name = name;
-		this.phone = phone;
-		this.pwd = pwd;
-		this.readerType = readerType;
-		this.maxNum = maxNum;
-	}
-
-
-
-	
-
-
-	
 
 
 

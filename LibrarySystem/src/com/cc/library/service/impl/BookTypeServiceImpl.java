@@ -27,6 +27,17 @@ public class BookTypeServiceImpl implements BookTypeService{
 	public boolean addBookType(BookType bookType) {
 		return bookTypeDao.addBookType(bookType);
 	}
+
+	@Override
+	public BookType getBookTypeById(BookType bookType) {
+		return bookTypeDao.getBookTypeById(bookType);
+	}
+
+	@Override
+	public BookType updateBookTypeInfo(BookType bookType) {
+		// TODO Auto-generated method stub
+		return bookTypeDao.updateBookTypeInfo(bookType);
+	}
 	
 	
 }

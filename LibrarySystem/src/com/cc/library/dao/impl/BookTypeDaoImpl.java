@@ -10,7 +10,6 @@ import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.cc.library.dao.BookTypeDao;
-import com.cc.library.domain.Admin;
 import com.cc.library.domain.BookType;
 import com.cc.library.domain.PageBean;
 
@@ -97,6 +96,33 @@ public class BookTypeDaoImpl extends HibernateDaoSupport implements BookTypeDao{
 			throw new RuntimeException(e1.getMessage());
 		}
 		return b;
+	}
+
+
+	@Override
+	public BookType getBookTypeById(BookType bookType) {
+		String hql= "from BookType b where b.typeId=? ";
+		List list = this.getHibernateTemplate().find(hql, bookType.getTypeId());
+		if(list!=null && list.size()>0){
+			return (BookType) list.get(0);
+		}
+		return null;
+	}
+
+
+	@Override
+	public BookType updateBookTypeInfo(BookType bookType) {
+		BookType newBookType = null;
+		try{
+			this.getHibernateTemplate().clear();
+			//将传入的detached(分离的)状态的对象的属性复制到持久化对象中，并返回该持久化对象
+			newBookType = (BookType) this.getHibernateTemplate().merge(bookType);
+			this.getHibernateTemplate().flush();
+		}catch (Throwable e1) {
+			e1.printStackTrace();
+			throw new RuntimeException(e1.getMessage());
+		}
+		return newBookType;
 	}
 
 }

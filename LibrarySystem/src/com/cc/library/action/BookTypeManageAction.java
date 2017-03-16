@@ -2,6 +2,10 @@ package com.cc.library.action;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONObject;
+
 import org.apache.struts2.ServletActionContext;
 
 import com.cc.library.domain.BookType;
@@ -19,6 +23,7 @@ public class BookTypeManageAction extends ActionSupport{
 	
 	private int pageCode;
 	private String typeName;
+	private Integer id;
 	
 	
 	
@@ -26,6 +31,16 @@ public class BookTypeManageAction extends ActionSupport{
 	
 	
 	
+	
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+
+
+
+
+
 	public void setTypeName(String typeName) {
 		this.typeName = typeName;
 	}
@@ -80,6 +95,44 @@ public class BookTypeManageAction extends ActionSupport{
 				success = 1;
 				//由于是转发并且js页面刷新,所以无需重查
 			}
+		}
+		try {
+			ServletActionContext.getResponse().getWriter().print(success);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException(e.getMessage());
+		}
+		return null;
+	}
+	
+	
+	public String getBookType(){
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("application/json;charset=utf-8");
+		BookType bookType = new BookType();
+		bookType.setTypeId(id);
+		BookType newType = bookTypeService.getBookTypeById(bookType);
+		JSONObject jsonObject = JSONObject.fromObject(newType);
+		try {
+			response.getWriter().print(jsonObject);
+		} catch (IOException e) {
+			throw new RuntimeException(e.getMessage());
+		}
+		return null;
+	}
+	
+	
+	
+	
+	public String updateBookType(){
+		BookType bookType = new BookType();
+		bookType.setTypeId(id);
+		bookType.setTypeName(typeName);
+		BookType newBookType = bookTypeService.updateBookTypeInfo(bookType);
+		int success = 0;
+		if(newBookType!=null){
+			success = 1;
+			//由于是转发并且js页面刷新,所以无需重查
 		}
 		try {
 			ServletActionContext.getResponse().getWriter().print(success);

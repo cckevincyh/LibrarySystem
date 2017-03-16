@@ -11,4 +11,8 @@ public interface BookTypeService {
 
 	public boolean addBookType(BookType bookType);
 
+	public BookType getBookTypeById(BookType bookType);
+
+	public BookType updateBookTypeInfo(BookType bookType);
+
 }

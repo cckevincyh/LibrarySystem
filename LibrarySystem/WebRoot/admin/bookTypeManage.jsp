@@ -23,6 +23,7 @@
              <script src="${pageContext.request.contextPath}/js/adminUpdatePwd.js"></script>
 	
 			<script src="${pageContext.request.contextPath}/js/addBookType.js"></script>
+			<script src="${pageContext.request.contextPath}/js/updateBookType.js"></script>
        
 </head>
 
@@ -300,7 +301,7 @@
 										<!---------------------表单-------------------->
 											
 										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">用户名</label>
+											<label for="firstname" class="col-sm-3 control-label">图书分类名称</label>
 												<div class="col-sm-7">
 													<input type="hidden" id="updateBookTypeId">
 													<input type="text" class="form-control" id="updateBookTypeName" placeholder="请输入图书分类名称">

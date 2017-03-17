@@ -15,4 +15,6 @@ public interface BookTypeService {
 
 	public BookType updateBookTypeInfo(BookType bookType);
 
+	public boolean deleteBookType(BookType bookType);
+
 }

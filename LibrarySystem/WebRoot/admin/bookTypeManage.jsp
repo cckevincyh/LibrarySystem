@@ -24,6 +24,7 @@
 	
 			<script src="${pageContext.request.contextPath}/js/addBookType.js"></script>
 			<script src="${pageContext.request.contextPath}/js/updateBookType.js"></script>
+    	   <script src="${pageContext.request.contextPath}/js/deleteBookType.js"></script>
        
 </head>
 

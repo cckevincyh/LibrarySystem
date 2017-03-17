@@ -142,4 +142,24 @@ public class BookTypeManageAction extends ActionSupport{
 		}
 		return null;
 	}
+	
+	
+	public String deleteBookType(){
+		BookType bookType = new BookType();
+		bookType.setTypeId(id);
+		boolean deleteAdmin = bookTypeService.deleteBookType(bookType);
+		int success = 0;
+		if(deleteAdmin){
+			success = 1;
+			//由于是转发并且js页面刷新,所以无需重查
+		}
+		try {
+			ServletActionContext.getResponse().getWriter().print(success);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException(e.getMessage());
+		}
+		
+		return null;
+	}
 }

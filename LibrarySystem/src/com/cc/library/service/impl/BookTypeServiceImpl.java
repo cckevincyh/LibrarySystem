@@ -38,6 +38,12 @@ public class BookTypeServiceImpl implements BookTypeService{
 		// TODO Auto-generated method stub
 		return bookTypeDao.updateBookTypeInfo(bookType);
 	}
+
+	@Override
+	public boolean deleteBookType(BookType bookType) {
+		// TODO Auto-generated method stub
+		return bookTypeDao.deleteBookType(bookType);
+	}
 	
 	
 }

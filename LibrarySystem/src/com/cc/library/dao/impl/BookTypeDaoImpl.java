@@ -125,4 +125,20 @@ public class BookTypeDaoImpl extends HibernateDaoSupport implements BookTypeDao{
 		return newBookType;
 	}
 
+
+	@Override
+	public boolean deleteBookType(BookType bookType) {
+		boolean b = true;
+		try{
+			this.getHibernateTemplate().clear();
+			this.getHibernateTemplate().delete(bookType);
+			this.getHibernateTemplate().flush();
+		}catch (Throwable e1) {
+			b = false;
+			e1.printStackTrace();
+			throw new RuntimeException(e1.getMessage());
+		}
+		return b;
+	}
+
 }

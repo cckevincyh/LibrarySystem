@@ -107,13 +107,13 @@
                                 <div class="text-muted bootstrap-admin-box-title">查询</div>
                             </div>
                             <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
-                                <form class="form-horizontal" action="${pageContext.request.contextPath}/admin/adminManageAction_queryAdmin.action" method="post">
+                                <form class="form-horizontal" action="${pageContext.request.contextPath}/admin/bookTypeManageAction_queryBookType.action" method="post">
                                   
                                   
                                     <div class="col-lg-5 form-group">
                                         <label class="col-lg-4 control-label" for="query_ano">图书分类名称</label>
                                         <div class="col-lg-8">
-                                            <input class="form-control" id="query_ano" type="text" id="adminUserName" name="adminUserName">
+                                            <input class="form-control" id="query_ano" type="text" id="typeName" name="typeName">
                                             <label class="control-label" for="query_ano" style="display: none;"></label>
                                         </div>
                                     </div>

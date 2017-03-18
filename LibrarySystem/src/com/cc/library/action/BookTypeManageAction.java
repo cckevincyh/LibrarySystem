@@ -1,6 +1,8 @@
 package com.cc.library.action;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -161,5 +163,29 @@ public class BookTypeManageAction extends ActionSupport{
 		}
 		
 		return null;
+	}
+	
+	
+	public String queryBookType(){
+		//获取页面传递过来的当前页码数
+		if(pageCode==0){
+			pageCode = 1;
+		}
+		//给pageSize,每页的记录数赋值
+		int pageSize = 5;
+		PageBean<BookType> pb = null;
+		if("".equals(typeName.trim())){
+			pb = bookTypeService.findBookTypeByPage(pageCode, pageSize);
+		}else{
+			BookType bookType = new BookType();
+			bookType.setTypeName(typeName);
+			pb = bookTypeService.queryBookType(bookType,pageCode,pageSize);
+		}
+		if(pb!=null){
+			pb.setUrl("queryBookType.action?typeName="+typeName+"&");
+		}
+
+		ServletActionContext.getRequest().setAttribute("pb", pb);
+		return "success";
 	}
 }

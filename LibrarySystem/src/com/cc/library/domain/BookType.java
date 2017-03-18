@@ -45,8 +45,14 @@ public class BookType implements Serializable{
 		this.typeName = typeName;
 		this.books = books;
 	}
+	@Override
+	public String toString() {
+		return "BookType [typeId=" + typeId + ", typeName=" + typeName
+				+ ", books=" + books + "]";
+	}
 
 
+	
 	
 	
 	

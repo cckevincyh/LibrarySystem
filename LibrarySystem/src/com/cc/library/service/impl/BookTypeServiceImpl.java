@@ -44,6 +44,13 @@ public class BookTypeServiceImpl implements BookTypeService{
 		// TODO Auto-generated method stub
 		return bookTypeDao.deleteBookType(bookType);
 	}
+
+	@Override
+	public PageBean<BookType> queryBookType(BookType bookType, int pageCode,
+			int pageSize) {
+		// TODO Auto-generated method stub
+		return bookTypeDao.queryBookType(bookType,pageCode,pageSize);
+	}
 	
 	
 }

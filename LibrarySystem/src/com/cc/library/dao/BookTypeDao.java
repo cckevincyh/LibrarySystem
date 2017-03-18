@@ -17,4 +17,7 @@ public interface BookTypeDao {
 
 	public boolean deleteBookType(BookType bookType);
 
+	public PageBean<BookType> queryBookType(BookType bookType, int pageCode,
+			int pageSize);
+
 }

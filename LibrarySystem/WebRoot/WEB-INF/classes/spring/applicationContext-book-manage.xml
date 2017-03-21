@@ -10,16 +10,24 @@
            	http://www.springframework.org/schema/context/spring-context-2.5.xsd
            	http://www.springframework.org/schema/tx 
            	http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
-           	
-           	
- 	<import resource="applicationContext-db.xml"/>
- 	<import resource="applicationContext-reader-login.xml"/>
- 	<import resource="applicationContext-admin-login.xml"/>
- 	<import resource="applicationContext-admin-info.xml"/>
- 	<import resource="applicationContext-reader-info.xml"/>
- 	<import resource="applicationContext-admin-manage.xml"/>
- 	<import resource="applicationContext-reader-manage.xml"/>
- 	<import resource="applicationContext-readerType-manage.xml"/>
- 	<import resource="applicationContext-bookType-manage.xml"/>
- 	<import resource="applicationContext-book-manage.xml"/>
+ 
+ 
+ <bean id="bookDao" class="com.cc.library.dao.impl.BookDaoImpl">
+ 		<property name="sessionFactory">
+ 			<ref bean="sessionFactory"/>
+ 		</property>
+ 	</bean>
+ 	
+ 	<bean id="bookService" class="com.cc.library.service.impl.BookServiceImpl">
+ 		<property name="bookDao">
+ 			<ref bean="bookDao"/>
+ 		</property>
+ 	</bean>
+ 
+ 		
+ 	<bean id="bookManageAction" class="com.cc.library.action.BookManageAction" scope="prototype">
+ 		<property name="bookService">
+ 			<ref bean="bookService"/>
+ 		</property>
+ 	</bean>
  </beans>

@@ -12,7 +12,7 @@
 			<column name="typeName" />
 		</property>
 				
-		<set name="books" cascade="all" lazy="false">
+		<set name="books" lazy="false">
 			<key>
 				<column name="bookId"></column>
 			</key>

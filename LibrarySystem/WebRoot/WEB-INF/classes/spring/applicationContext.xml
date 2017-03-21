@@ -21,4 +21,5 @@
  	<import resource="applicationContext-reader-manage.xml"/>
  	<import resource="applicationContext-readerType-manage.xml"/>
  	<import resource="applicationContext-bookType-manage.xml"/>
+ 	<import resource="applicationContext-book-manage.xml"/>
  </beans>

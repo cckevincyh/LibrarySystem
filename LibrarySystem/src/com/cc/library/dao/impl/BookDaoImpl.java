@@ -10,6 +10,7 @@ import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.cc.library.dao.BookDao;
+import com.cc.library.domain.Book;
 import com.cc.library.domain.BookType;
 import com.cc.library.domain.PageBean;
 
@@ -63,7 +64,6 @@ public class BookDaoImpl extends HibernateDaoSupport implements BookDao{
 			int totalRecord = Integer.parseInt(list.get(0).toString()); //得到总记录数
 			pb.setTotalRecord(totalRecord);	//设置总记录数
 			this.getSession().close();
-			
 			//不支持limit分页
 			String hql= "from Book";
 			//分页查询
@@ -78,5 +78,38 @@ public class BookDaoImpl extends HibernateDaoSupport implements BookDao{
 		}
 		return null;
 	}
+
+
+
+	@Override
+	public boolean addBook(Book book) {
+		boolean b = true;
+		try{
+			this.getHibernateTemplate().clear();
+			this.getHibernateTemplate().save(book);
+			this.getHibernateTemplate().flush();
+		}catch (Throwable e1) {
+			b = false;
+			e1.printStackTrace();
+			throw new RuntimeException(e1.getMessage());
+		}
+		return b;
+	}
+
+
+
+	@Override
+	public BookType getBookType(BookType bookType) {
+		String hql= "from BookType b where b.typeId=? ";
+		List list = this.getHibernateTemplate().find(hql, bookType.getTypeId());
+		System.out.println(list);
+		if(list!=null && list.size()>0){
+			return (BookType) list.get(0);
+		}
+		return null;
+	}
+
+
+
 
 }

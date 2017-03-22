@@ -107,6 +107,28 @@ public class Book implements Serializable{
 	public Book() {
 		
 	}
+	public Book(BookType bookType, String bookName, String autho, String press,
+			Date putdate, Integer num, Integer currentNum, Double price,
+			String description) {
+		super();
+		this.bookType = bookType;
+		this.bookName = bookName;
+		this.autho = autho;
+		this.press = press;
+		this.putdate = putdate;
+		this.num = num;
+		this.currentNum = currentNum;
+		this.price = price;
+		this.description = description;
+	}
+	@Override
+	public String toString() {
+		return "Book [bookId=" + bookId + ", bookType=" + bookType
+				+ ", bookName=" + bookName + ", autho=" + autho + ", press="
+				+ press + ", putdate=" + putdate + ", num=" + num
+				+ ", currentNum=" + currentNum + ", price=" + price
+				+ ", description=" + description + ", state=" + state + "]";
+	}
 
 	
 	

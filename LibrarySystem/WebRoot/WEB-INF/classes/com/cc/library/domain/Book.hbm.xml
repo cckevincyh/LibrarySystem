@@ -48,7 +48,7 @@
 		
 		
 		
-		<many-to-one name="bookType" class="com.cc.library.domain.BookType" cascade="all" lazy="false">
+		<many-to-one name="bookType" class="com.cc.library.domain.BookType" cascade="all" lazy="false" >
 			<column name="typeId"></column>
 		</many-to-one>
 		

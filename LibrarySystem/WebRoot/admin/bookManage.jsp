@@ -24,8 +24,10 @@
 
                 
                 
-                
        <script src="${pageContext.request.contextPath}/js/getAllBookTypes.js"></script>
+       			 <script src="${pageContext.request.contextPath}/js/addBook.js"></script>
+                
+                
 </head>
 
 
@@ -166,7 +168,7 @@
                                     </div>
                                     <div class="col-lg-2 form-group">
 
-                                        <button type="button" class="btn btn-primary" id="btn_query" onclick="query()">添加新图书</button>
+                                        <button type="button" class="btn btn-primary" id="btn_add" data-toggle="modal" data-target="#addModal">添加新图书</button>
                                     </div>
                                 </form>
                             </div>
@@ -209,6 +211,7 @@
 	                                    <td><s:property value="#books.currentNum"/></td>
 	                                    <td><s:property value="#books.price"/></td>
 	                                <td>
+	                                <button type="button" class="btn btn-info btn-xs">查看</button>
 	                                	<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" onclick="updateAdmin(<s:property value="#books.id"/>)">修改</button>
 	                                	<button type="button" class="btn btn-danger btn-xs" onclick="deleteAdmin(<s:property value="#books.id"/>)">删除</button>
 	                                		
@@ -318,50 +321,79 @@
 														&times;
 													</button>
 													<h4 class="modal-title" id="myModalLabel">
-														添加新管理员
+														添加新图书
 													</h4>
 												</div>
 												<div class="modal-body">
 												
 										<!---------------------表单-------------------->
 										 <div class="form-group">
-											<label for="firstname" class="col-sm-3 control-label">用户名</label>
+											<label for="firstname" class="col-sm-3 control-label">图书名称</label>
 												<div class="col-sm-7">
-													<input type="text" class="form-control" id="addUsername"  placeholder="请输入管理员用户名">
+													<input type="text" class="form-control" id="addBookName"  placeholder="请输入图书名称">
 												
 												</div>
 										</div>
 											
 										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">密码</label>
+											<label for="firstname" class="col-sm-3 control-label">图书类型</label>
 											<div class="col-sm-7">
-												<input type="password" class="form-control" id="addPwd"  placeholder="请输入密码">
+												 <select class="form-control" id="addBookType">
+                                           				 <option value="-1">请选择</option>                                         
+                                      			  </select>
 
 											</div>
 										</div>
 											
 										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">真实姓名</label>
+											<label for="firstname" class="col-sm-3 control-label">作者名称</label>
 												<div class="col-sm-7">
-													<input type="text" class="form-control" id="addName"  placeholder="请输入管理员真实姓名">
+													<input type="text" class="form-control" id="addAutho"  placeholder="请输入作者名称">
 												
 												</div>
 										</div>
 										
 										
 										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">联系电话</label>
+											<label for="firstname" class="col-sm-3 control-label">出版社</label>
 												<div class="col-sm-7">
-													<input type="text" class="form-control" id="addPhone"  placeholder="请输入管理员联系电话">
+													<input type="text" class="form-control" id="addPress"  placeholder="请输入出版社">
 												
 												</div>
 										</div>
+										
+										
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">总数量</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="addNum"  placeholder="请输入图书总数量">
+												
+												</div>
+										</div>
+										
+										
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">价格</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="addPrice"  placeholder="请输入图书价格">
+												
+												</div>
+										</div>
+										
+										
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">简介</label>
+												<div class="col-sm-7">
+												<textarea class="form-control" rows="3" id="addDescription" placeholder="请输入图书简介"></textarea>
+												</div>
+										</div>
+										
 										<!---------------------表单-------------------->
 									</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 													</button>
-													<button type="button" class="btn btn-primary" id="addAdmin">
+													<button type="button" class="btn btn-primary" id="addBook">
 														添加
 													</button>
 												</div>

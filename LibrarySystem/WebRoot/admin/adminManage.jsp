@@ -153,6 +153,7 @@
 	                                <td><s:property value="#admin.phone"/></td>
 	                                <td><s:property value="#admin.pwd"/></td>
 	                                <td>
+	                                   <button type="button" class="btn btn-info btn-xs">查看</button>
 	                                	<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" onclick="updateAdmin(<s:property value="#admin.id"/>)">修改</button>
 	                                	<button type="button" class="btn btn-danger btn-xs" onclick="deleteAdmin(<s:property value="#admin.id"/>)">删除</button>
 	                                		

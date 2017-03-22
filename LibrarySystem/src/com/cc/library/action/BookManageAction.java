@@ -43,7 +43,7 @@ public class BookManageAction extends ActionSupport{
 	private Integer num;	//总数量
 	private Double price;	//价格
 	private String description;	//简介
-	
+	private int bookId;//图书编号
 	
 
 
@@ -80,6 +80,13 @@ public class BookManageAction extends ActionSupport{
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	
+
+
+	public void setBookId(int bookId) {
+		this.bookId = bookId;
 	}
 
 
@@ -137,5 +144,57 @@ public class BookManageAction extends ActionSupport{
 		}
 		return null;
 	}
+	
+	
+	
+	public String getBook(){
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("application/json;charset=utf-8");
+		Book book = new Book();
+		book.setBookId(bookId);
+		Book newBook = bookService.getBookById(book);
+		JSONObject jsonObject = JSONObject.fromObject(newBook);
+		try {
+			response.getWriter().print(jsonObject);
+		} catch (IOException e) {
+			throw new RuntimeException(e.getMessage());
+		}
+		return null;
+	}
 
+	
+	
+	
+	
+	public String updateBook(){
+		Book book = new Book();
+		book.setBookId(bookId);
+		System.out.println(bookId);
+		Book updateBook = bookService.getBookById(book);
+		System.out.println(updateBook);
+		updateBook.setBookName(bookName);
+		updateBook.setAutho(autho);
+		BookType type = new BookType();
+		type.setTypeId(bookTypeId);
+		BookType bookType = bookService.getBookType(type);//得到图书类型
+		updateBook.setBookType(bookType);//设置图书类型
+		updateBook.setDescription(description);
+		updateBook.setPress(press);
+		updateBook.setPrice(price);
+		System.out.println("updateBook"+updateBook);
+		Book newBook = bookService.updateBookInfo(updateBook);
+		System.out.println(newBook);
+		int success = 0;
+		if(newBook!=null){
+			success = 1;
+			//由于是转发并且js页面刷新,所以无需重查
+		}
+		try {
+			ServletActionContext.getResponse().getWriter().print(success);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException(e.getMessage());
+		}
+		return null;
+	}
 }

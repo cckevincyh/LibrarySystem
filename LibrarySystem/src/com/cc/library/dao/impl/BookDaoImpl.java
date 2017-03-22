@@ -59,13 +59,13 @@ public class BookDaoImpl extends HibernateDaoSupport implements BookDao{
 		pb.setPageSize(pageSize);//设置页面记录数
 		List bookList = null;
 		try {
-			String sql = "SELECT count(*) FROM Book";
+			String sql = "SELECT count(*) FROM Book b where b.state=1";
 			List list = this.getSession().createQuery(sql).list();
 			int totalRecord = Integer.parseInt(list.get(0).toString()); //得到总记录数
 			pb.setTotalRecord(totalRecord);	//设置总记录数
 			this.getSession().close();
 			//不支持limit分页
-			String hql= "from Book";
+			String hql= "from Book b where b.state=1";
 			//分页查询
 			bookList = doSplitPage(hql,pageCode,pageSize);
 		}catch (Throwable e1) {
@@ -107,6 +107,35 @@ public class BookDaoImpl extends HibernateDaoSupport implements BookDao{
 			return (BookType) list.get(0);
 		}
 		return null;
+	}
+
+
+
+	@Override
+	public Book getBookById(Book book) {
+		String hql= "from Book b where b.bookId=? and b.state=1";
+		List list = this.getHibernateTemplate().find(hql, book.getBookId());
+		if(list!=null && list.size()>0){
+			return (Book) list.get(0);
+		}
+		return null;
+	}
+
+
+
+	@Override
+	public Book updateBookInfo(Book updateBook) {
+		Book newBook = null;
+		try{
+			this.getHibernateTemplate().clear();
+			//将传入的detached(分离的)状态的对象的属性复制到持久化对象中，并返回该持久化对象
+			newBook = (Book) this.getHibernateTemplate().merge(updateBook);
+			this.getHibernateTemplate().flush();
+		}catch (Throwable e1) {
+			e1.printStackTrace();
+			throw new RuntimeException(e1.getMessage());
+		}
+		return newBook;
 	}
 
 

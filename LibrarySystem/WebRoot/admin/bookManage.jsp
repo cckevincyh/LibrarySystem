@@ -27,7 +27,7 @@
        <script src="${pageContext.request.contextPath}/js/getAllBookTypes.js"></script>
        			 <script src="${pageContext.request.contextPath}/js/addBook.js"></script>
                 
-                
+                 <script src="${pageContext.request.contextPath}/js/updateBook.js"></script>
 </head>
 
 
@@ -206,15 +206,15 @@
 	                                <td><s:property value="#books.bookName"/></td>
 	                                <td><s:property value="#books.autho"/></td>
 	                                 <td><s:property value="#books.press"/></td>
-	                                  <td><s:property value="#books.putdate"/></td>
+	                                  <td><s:date name="#books.putdate" format="yyyy-MM-dd" /></td>
 	                                    <td><s:property value="#books.num"/></td>
 	                                    <td><s:property value="#books.currentNum"/></td>
 	                                    <td><s:property value="#books.price"/></td>
 	                                <td>
 	                                <button type="button" class="btn btn-info btn-xs">查看</button>
-	                                	<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" onclick="updateAdmin(<s:property value="#books.id"/>)">修改</button>
-	                                	<button type="button" class="btn btn-danger btn-xs" onclick="deleteAdmin(<s:property value="#books.id"/>)">删除</button>
-	                                		
+	                                	<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" id="btn_update" onclick="updateBook(<s:property value="#books.bookId"/>)">修改</button>
+	                                	<button type="button" class="btn btn-danger btn-xs" onclick="deleteBook(<s:property value="#books.bookId"/>)">删除</button>
+	                                	<button type="button" class="btn btn-success btn-xs" onclick="addBookNum(<s:property value="#books.bookId"/>)">新增</button>
 	                               	</td>                                              
                           	  </tbody>
                             </s:iterator>
@@ -421,45 +421,66 @@
 														&times;
 													</button>
 													<h4 class="modal-title" id="updateModalLabel">
-														修改管理员信息
+														修改图书信息
 													</h4>
 												</div>
 												<div class="modal-body">
 												
 										<!---------------------表单-------------------->
 											
-										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">用户名</label>
+										 <div class="form-group">
+											<label for="firstname" class="col-sm-3 control-label">图书名称</label>
 												<div class="col-sm-7">
-													<input type="hidden" id="updateId">
-													<input type="text" class="form-control" id="updateUsername">
+												<input type="hidden" id="updateBookId">
+													<input type="text" class="form-control" id="updateBookName"  placeholder="请输入图书名称">
 												
 												</div>
 										</div>
 											
 										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">真实姓名</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control" id="updateName"  placeholder="请输入管理员真实姓名">
-												
-												</div>
-										</div>
-										
-										
-										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">联系电话</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control" id="updatePhone"  placeholder="请输入管理员联系电话">
-												
-												</div>
-										</div>
-										
-										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">密码</label>
+											<label for="firstname" class="col-sm-3 control-label">图书类型</label>
 											<div class="col-sm-7">
-												<input type="password" class="form-control" id="updatePwd"  placeholder="请输入密码">
+												 <select class="form-control" id="updateBookType">
+                                           				 <option value="-1">请选择</option>                                         
+                                      			  </select>
 
 											</div>
+										</div>
+											
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">作者名称</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="updateAutho"  placeholder="请输入作者名称">
+												
+												</div>
+										</div>
+										
+										
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">出版社</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="updatePress"  placeholder="请输入出版社">
+												
+												</div>
+										</div>
+										
+										
+										
+										
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">价格</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="updatePrice"  placeholder="请输入图书价格">
+												
+												</div>
+										</div>
+										
+										
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">简介</label>
+												<div class="col-sm-7">
+												<textarea class="form-control" rows="3" id="updateDescription" placeholder="请输入图书简介"></textarea>
+												</div>
 										</div>
 										
 										<!---------------------表单-------------------->
@@ -468,7 +489,7 @@
 												<div class="modal-footer">
 													<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 													</button>
-													<button type="button" class="btn btn-primary" id="updateAdmin">
+													<button type="button" class="btn btn-primary" id="updateBook">
 														修改
 													</button>
 												</div>

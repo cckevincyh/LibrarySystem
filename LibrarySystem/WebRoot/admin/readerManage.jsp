@@ -202,7 +202,6 @@
 										</s:if>
 									</td>
 	                                <td>
-	                                   <button type="button" class="btn btn-info btn-xs">查看</button>
 	                                	<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" onclick="updateReader(<s:property value="#reader.readerId"/>)">修改</button>
 	                                	<button type="button" class="btn btn-danger btn-xs" onclick="deleteReader(<s:property value="#reader.readerId"/>)">删除</button>
 	                                		

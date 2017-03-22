@@ -16,5 +16,9 @@ public interface BookService {
 
 	public BookType getBookType(BookType bookType);
 
+	public Book getBookById(Book book);
+
+	public Book updateBookInfo(Book updateBook);
+
 
 }

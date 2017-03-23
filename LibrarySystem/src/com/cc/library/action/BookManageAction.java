@@ -112,7 +112,6 @@ public class BookManageAction extends ActionSupport{
 		
 		
 		String json = JSONArray.fromObject(allBookTypes,jsonConfig).toString();//List------->JSONArray,配置过滤
-		System.out.println(json);
 		try {
 			response.getWriter().print(json);
 		} catch (IOException e) {
@@ -170,7 +169,20 @@ public class BookManageAction extends ActionSupport{
 		Book book = new Book();
 		book.setBookId(bookId);
 		Book newBook = bookService.getBookById(book);
-		JSONObject jsonObject = JSONObject.fromObject(newBook);
+		
+		JsonConfig jsonConfig = new JsonConfig();
+		jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
+		    public boolean apply(Object obj, String name, Object value) {
+			if(obj instanceof Set||name.equals("books")){	//不过滤book里面的bookType，等到转化bookType的时候，过滤掉其中的set的book集合，解除死循环
+				return true;
+			}else{
+				return false;
+			}
+		   }
+		});
+		
+		
+		JSONObject jsonObject = JSONObject.fromObject(newBook,jsonConfig);
 		try {
 			response.getWriter().print(jsonObject);
 		} catch (IOException e) {

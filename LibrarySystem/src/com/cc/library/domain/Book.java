@@ -123,15 +123,11 @@ public class Book implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "Book [bookId=" + bookId + ", bookType=" + bookType
-				+ ", bookName=" + bookName + ", autho=" + autho + ", press="
-				+ press + ", putdate=" + putdate + ", num=" + num
-				+ ", currentNum=" + currentNum + ", price=" + price
-				+ ", description=" + description + ", state=" + state + "]";
+		return "Book [bookId=" + bookId + ", bookName=" + bookName + ", autho="
+				+ autho + ", press=" + press + ", putdate=" + putdate
+				+ ", num=" + num + ", currentNum=" + currentNum + ", price="
+				+ price + ", description=" + description + ", state=" + state
+				+ "]";
 	}
 
-	
-	
-	
-	
 }

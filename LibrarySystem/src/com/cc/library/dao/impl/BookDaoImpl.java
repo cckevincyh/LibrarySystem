@@ -52,8 +52,8 @@ public class BookDaoImpl extends HibernateDaoSupport implements BookDao{
 	
 	
 	@Override
-	public PageBean<BookType> findBookByPage(int pageCode, int pageSize) {
-		PageBean<BookType> pb = new PageBean<BookType>();	//pageBean对象，用于分页
+	public PageBean<Book> findBookByPage(int pageCode, int pageSize) {
+		PageBean<Book> pb = new PageBean<Book>();	//pageBean对象，用于分页
 		//根据传入的pageCode当前页码和pageSize页面记录数来设置pb对象
 		pb.setPageCode(pageCode);//设置当前页码
 		pb.setPageSize(pageSize);//设置页面记录数

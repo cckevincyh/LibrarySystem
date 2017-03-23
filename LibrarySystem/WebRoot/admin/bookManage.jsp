@@ -116,7 +116,7 @@
                                 <div class="text-muted bootstrap-admin-box-title">查询</div>
                             </div>
                             <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
-                                <form class="form-horizontal">
+                                <form class="form-horizontal" action="${pageContext.request.contextPath}/admin/bookManageAction_queryBook.action" method="post">
                                     <div class="col-lg-5 form-group">
                                         <label class="col-lg-4 control-label" for="query_bno">图书编号</label>
                                         <div class="col-lg-8">
@@ -128,7 +128,7 @@
                                      <div class="col-lg-5 form-group">
                                         <label class="col-lg-4 control-label" for="query_bno1">图书分类</label>
                                           <div class="col-lg-8">
-                                        <select class="form-control" id="bookType">
+                                        <select class="form-control" id="bookTypeId">
                                             <option value="-1">请选择</option>                                         
                                         </select>
                                         
@@ -164,7 +164,7 @@
                                   
                                     <div class="col-lg-3 form-group">
 
-                                        <button type="button" class="btn btn-primary" id="btn_query" onclick="query()">查询</button>
+                                        <button type="submit" class="btn btn-primary" id="btn_query" onclick="query()">查询</button>
                                     </div>
                                     <div class="col-lg-2 form-group">
 

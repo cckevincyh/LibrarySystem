@@ -12,8 +12,9 @@ public class BookType implements Serializable{
 
 	private Integer typeId; //图书类型编号
 	private String typeName;	//图书类型名称
-	private Set<Book> books;	//该类书的集合
 	
+	
+	private Set<Book> books;	//该类书的集合
 	
 	
 	public Set<Book> getBooks() {
@@ -47,12 +48,9 @@ public class BookType implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "BookType [typeId=" + typeId + ", typeName=" + typeName
-				+ ", books=" + books + "]";
+		return "BookType [typeId=" + typeId + ", typeName=" + typeName + "]";
 	}
 
-
-	
 	
 	
 	

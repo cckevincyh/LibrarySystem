@@ -11,7 +11,7 @@ window.onload = new function(){
 						var textNode = document.createTextNode(data[index].typeName);//创建文本节点
 						op.appendChild(textNode);//把文本子节点添加到op元素中，指定其显示值
 						
-						document.getElementById("bookType").appendChild(op);
+						document.getElementById("bookTypeId").appendChild(op);
 					}
 				}
 		   }

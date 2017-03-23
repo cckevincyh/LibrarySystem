@@ -3,11 +3,14 @@ package com.cc.library.action;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
+import net.sf.json.util.PropertyFilter;
 
 import org.apache.struts2.ServletActionContext;
 
@@ -94,7 +97,22 @@ public class BookManageAction extends ActionSupport{
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("application/json;charset=utf-8");
 		List<BookType> allBookTypes = bookService.getAllBookTypes();
-		String json = JSONArray.fromObject(allBookTypes).toString();//List------->JSONArray
+		
+		JsonConfig jsonConfig = new JsonConfig();
+
+		jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
+		    public boolean apply(Object obj, String name, Object value) {
+			if(obj instanceof Set||name.equals("books")){//过滤掉集合
+				return true;
+			}else{
+				return false;
+			}
+		   }
+		});
+		
+		
+		String json = JSONArray.fromObject(allBookTypes,jsonConfig).toString();//List------->JSONArray,配置过滤
+		System.out.println(json);
 		try {
 			response.getWriter().print(json);
 		} catch (IOException e) {
@@ -112,7 +130,7 @@ public class BookManageAction extends ActionSupport{
 		//给pageSize,每页的记录数赋值
 		int pageSize = 5;
 		
-		PageBean<BookType> pb = bookService.findBookByPage(pageCode,pageSize);
+		PageBean<Book> pb = bookService.findBookByPage(pageCode,pageSize);
 		if(pb!=null){
 			pb.setUrl("findBookByPage.action?");
 		}
@@ -126,7 +144,6 @@ public class BookManageAction extends ActionSupport{
 		BookType bookType = new BookType();
 		bookType.setTypeId(bookTypeId);
 		BookType newBookType = bookService.getBookType(bookType);
-		System.out.println(newBookType);
 		Date putdate = new Date(System.currentTimeMillis());
 		Book book = new Book(newBookType, bookName, autho, press, putdate, num, num, price, description);
 		boolean b = bookService.addBook(book);
@@ -197,4 +214,33 @@ public class BookManageAction extends ActionSupport{
 		}
 		return null;
 	}
+	
+	
+	
+	
+	
+	
+//	public String queryBook(){
+//		//获取页面传递过来的当前页码数
+//		if(pageCode==0){
+//			pageCode = 1;
+//		}
+//		//给pageSize,每页的记录数赋值
+//		int pageSize = 5;
+//		PageBean<Book> pb = null;
+//		if(bookId==0 && "".equals(bookName.trim()) && bookTypeId==-1 && "".equals(press.trim()) && "".equals(autho.trim())){
+//			pb = bookService.findBookByPage(pageCode,pageSize);
+//		}else{
+//			Reader reader = new Reader();
+//			reader.setReaderId(readerId);
+//	//		reader.setReaderType(readerType);
+//			reader.setName(name);
+//			pb = readerService.queryReader(reader,pageCode,pageSize);
+//		}
+//		if(pb!=null){
+//			pb.setUrl("queryBook.action?readerId="+readerId+"&name="+name+"&readerType="+readerType+"&");
+//		}
+//		ServletActionContext.getRequest().setAttribute("pb", pb);
+//		return "success";
+//	}
 }

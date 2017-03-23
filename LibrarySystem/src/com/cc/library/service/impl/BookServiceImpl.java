@@ -23,7 +23,7 @@ public class BookServiceImpl implements BookService{
 	}
 
 	@Override
-	public PageBean<BookType> findBookByPage(int pageCode, int pageSize) {
+	public PageBean<Book> findBookByPage(int pageCode, int pageSize) {
 		// TODO Auto-generated method stub
 		return bookDao.findBookByPage(pageCode,pageSize);
 	}

@@ -10,7 +10,7 @@ public interface BookService {
 
 	public List<BookType> getAllBookTypes();
 
-	public PageBean<BookType> findBookByPage(int pageCode, int pageSize);
+	public PageBean<Book> findBookByPage(int pageCode, int pageSize);
 
 	public boolean addBook(Book book);
 

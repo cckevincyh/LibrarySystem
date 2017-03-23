@@ -232,27 +232,32 @@ public class BookManageAction extends ActionSupport{
 	
 	
 	
-//	public String queryBook(){
-//		//获取页面传递过来的当前页码数
-//		if(pageCode==0){
-//			pageCode = 1;
-//		}
-//		//给pageSize,每页的记录数赋值
-//		int pageSize = 5;
-//		PageBean<Book> pb = null;
-//		if(bookId==0 && "".equals(bookName.trim()) && bookTypeId==-1 && "".equals(press.trim()) && "".equals(autho.trim())){
-//			pb = bookService.findBookByPage(pageCode,pageSize);
-//		}else{
-//			Reader reader = new Reader();
-//			reader.setReaderId(readerId);
-//	//		reader.setReaderType(readerType);
-//			reader.setName(name);
-//			pb = readerService.queryReader(reader,pageCode,pageSize);
-//		}
-//		if(pb!=null){
-//			pb.setUrl("queryBook.action?readerId="+readerId+"&name="+name+"&readerType="+readerType+"&");
-//		}
-//		ServletActionContext.getRequest().setAttribute("pb", pb);
-//		return "success";
-//	}
+	public String queryBook(){
+		//获取页面传递过来的当前页码数
+		if(pageCode==0){
+			pageCode = 1;
+		}
+		//给pageSize,每页的记录数赋值
+		int pageSize = 5;
+		PageBean<Book> pb = null;
+		System.out.println(bookId);
+		System.out.println(bookName);
+		System.out.println(bookTypeId);
+		System.out.println(press);
+		System.out.println(autho);
+		if(bookId==0 && "".equals(bookName.trim()) && bookTypeId==-1 && "".equals(press.trim()) && "".equals(autho.trim())){
+			pb = bookService.findBookByPage(pageCode,pageSize);
+		}else{
+			BookType bookType = new BookType();
+			bookType.setTypeId(bookTypeId);
+			Book book = new Book(bookId, bookType, bookName, autho, press);
+
+			pb = bookService.queryBook(book,pageCode,pageSize);
+		}
+		if(pb!=null){
+			pb.setUrl("queryBook.action?bookId="+bookId+"&bookName="+bookName+"&bookTypeId="+bookTypeId+"&press="+press+"&autho="+autho+"&");
+		}
+		ServletActionContext.getRequest().setAttribute("pb", pb);
+		return "success";
+	}
 }

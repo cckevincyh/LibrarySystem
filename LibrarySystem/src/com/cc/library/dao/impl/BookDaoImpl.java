@@ -140,5 +140,61 @@ public class BookDaoImpl extends HibernateDaoSupport implements BookDao{
 
 
 
+	@Override
+	public PageBean<Book> queryBook(Book book, int pageCode, int pageSize) {
+		PageBean<Book> pb = new PageBean<Book>();	//pageBean对象，用于分页
+		//根据传入的pageCode当前页码和pageSize页面记录数来设置pb对象
+		pb.setPageCode(pageCode);//设置当前页码
+		pb.setPageSize(pageSize);//设置页面记录数
+		
+		
+		StringBuilder sb = new StringBuilder();
+		StringBuilder sb_sql = new StringBuilder();
+		String sql = "SELECT count(*) FROM Book b where b.state=1";
+		String hql= "from Book b where b.state=1";
+		sb.append(hql);
+		sb_sql.append(sql);
+		if(book.getBookId()!=0){
+			sb.append(" and b.bookId like '%" + book.getBookId() +"%'");
+			sb_sql.append(" and b.bookId like '%" + book.getBookId() +"%'");
+		}
+		if(!"".equals(book.getBookName().trim())){
+			sb.append(" and b.bookName like '%" +book.getBookName() +"%'");
+			sb_sql.append(" and b.bookName like '%" + book.getBookName() +"%'");
+		}
+		if(!"".equals(book.getPress())){
+			sb.append(" and b.press like '%" +book.getPress() +"%'");
+			sb_sql.append(" and b.press like '%" + book.getPress() +"%'");
+		}
+		if(!"".equals(book.getAutho().trim())){
+			sb.append(" and b.autho like '%" +book.getAutho() +"%'");
+			sb_sql.append(" and b.autho like '%" + book.getAutho() +"%'");
+		}
+		if(book.getBookType().getTypeId()!=-1){
+			sb.append(" and b.bookType="+book.getBookType().getTypeId());
+			sb_sql.append(" and b.bookType="+book.getBookType().getTypeId());
+		}
+		try{
+			
+			List list = this.getSession().createQuery(sb_sql.toString()).list();
+			int totalRecord = Integer.parseInt(list.get(0).toString()); //得到总记录数
+			pb.setTotalRecord(totalRecord);	//设置总记录数
+			this.getSession().close();
+			
+			
+			List<Book> bookList = doSplitPage(sb.toString(),pageCode,pageSize);
+			if(bookList!=null && bookList.size()>0){
+				pb.setBeanList(bookList);
+				return pb;
+			}
+		}catch (Throwable e1){
+			e1.printStackTrace();
+			throw new RuntimeException(e1.getMessage());
+		}
+		return null;
+	}
+
+
+
 
 }

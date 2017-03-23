@@ -163,7 +163,6 @@ public class ReaderDaoImpl extends HibernateDaoSupport implements ReaderDao{
 
 	@Override
 	public PageBean<Reader> queryReader(Reader reader,int pageCode, int pageSize) {
-		System.out.println(reader);
 		PageBean<Reader> pb = new PageBean<Reader>();	//pageBean对象，用于分页
 		//根据传入的pageCode当前页码和pageSize页面记录数来设置pb对象
 		pb.setPageCode(pageCode);//设置当前页码
@@ -184,27 +183,27 @@ public class ReaderDaoImpl extends HibernateDaoSupport implements ReaderDao{
 			sb.append(" and r.name like '%" + reader.getName() +"%'");
 			sb_sql.append(" and r.name like '%" + reader.getName() +"%'");
 		}
-//		if(reader.getReaderType()!=-1){
-//			sb.append(" and r.readerType="+reader.getReaderType());
-//			sb_sql.append(" and r.readerType="+reader.getReaderType());
-//		}
-//		try{
-//			
-//			List list = this.getSession().createQuery(sb_sql.toString()).list();
-//			int totalRecord = Integer.parseInt(list.get(0).toString()); //得到总记录数
-//			pb.setTotalRecord(totalRecord);	//设置总记录数
-//			this.getSession().close();
-//			
-//			
-//			List<Reader> adminList = doSplitPage(sb.toString(),pageCode,pageSize);
-//			if(adminList!=null && adminList.size()>0){
-//				pb.setBeanList(adminList);
-//				return pb;
-//			}
-//		}catch (Throwable e1){
-//			e1.printStackTrace();
-//			throw new RuntimeException(e1.getMessage());
-//		}
+		if(reader.getReaderType().getReaderTypeId()!=-1){
+			sb.append(" and r.readerType="+reader.getReaderType().getReaderTypeId());
+			sb_sql.append(" and r.readerType="+reader.getReaderType().getReaderTypeId());
+		}
+		try{
+			
+			List list = this.getSession().createQuery(sb_sql.toString()).list();
+			int totalRecord = Integer.parseInt(list.get(0).toString()); //得到总记录数
+			pb.setTotalRecord(totalRecord);	//设置总记录数
+			this.getSession().close();
+			
+			
+			List<Reader> adminList = doSplitPage(sb.toString(),pageCode,pageSize);
+			if(adminList!=null && adminList.size()>0){
+				pb.setBeanList(adminList);
+				return pb;
+			}
+		}catch (Throwable e1){
+			e1.printStackTrace();
+			throw new RuntimeException(e1.getMessage());
+		}
 		return null;
 	}
 	

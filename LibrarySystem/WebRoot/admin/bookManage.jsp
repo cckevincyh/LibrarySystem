@@ -120,7 +120,7 @@
                                     <div class="col-lg-5 form-group">
                                         <label class="col-lg-4 control-label" for="query_bno">图书编号</label>
                                         <div class="col-lg-8">
-                                            <input class="form-control" id="bookId" type="text" value="">
+                                            <input class="form-control" id="bookId" name="bookId" type="text" value="">
                                             <label class="control-label" for="query_bno" style="display: none;"></label>
                                         </div>
                                     </div>
@@ -128,7 +128,7 @@
                                      <div class="col-lg-5 form-group">
                                         <label class="col-lg-4 control-label" for="query_bno1">图书分类</label>
                                           <div class="col-lg-8">
-                                        <select class="form-control" id="bookTypeId">
+                                        <select class="form-control" id="bookTypeId" name="bookTypeId">
                                             <option value="-1">请选择</option>                                         
                                         </select>
                                         
@@ -138,7 +138,7 @@
                                     <div class="col-lg-5 form-group">
                                         <label class="col-lg-4 control-label" for="query_bname">图书名称</label>
                                         <div class="col-lg-8">
-                                            <input class="form-control" id="bookName" type="text" value="">
+                                            <input class="form-control" id="bookName" name="bookName" type="text" value="">
                                             <label class="control-label" for="query_bname" style="display: none;"></label>
                                         </div>
                                     </div>
@@ -146,7 +146,7 @@
                                   <div class="col-lg-5 form-group">
                                         <label class="col-lg-4 control-label" for="query_bname2">作者名称</label>
                                         <div class="col-lg-8">
-                                            <input class="form-control" id="autho" type="text" value="">
+                                            <input class="form-control" id="autho" name="autho" type="text" value="">
                                             <label class="control-label" for="query_bname2" style="display: none;"></label>
                                         </div>
                                     </div>
@@ -154,7 +154,7 @@
                                      <div class="col-lg-5 form-group">
                                         <label class="col-lg-4 control-label" for="query_bname3">出版社名称</label>
                                         <div class="col-lg-8">
-                                            <input class="form-control" id="press" type="text" value="">
+                                            <input class="form-control" id="press" name="press" type="text" value="">
                                             <label class="control-label" for="query_bname2" style="display: none;"></label>
                                         </div>
                                     </div>

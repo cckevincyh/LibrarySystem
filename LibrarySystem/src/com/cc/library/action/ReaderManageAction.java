@@ -240,7 +240,9 @@ public class ReaderManageAction extends ActionSupport{
 		}else{
 			Reader reader = new Reader();
 			reader.setReaderId(readerId);
-	//		reader.setReaderType(readerType);
+			ReaderType type = new ReaderType();
+			type.setReaderTypeId(readerType);
+			reader.setReaderType(type);
 			reader.setName(name);
 			pb = readerService.queryReader(reader,pageCode,pageSize);
 		}

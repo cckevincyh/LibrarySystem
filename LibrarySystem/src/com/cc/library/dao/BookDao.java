@@ -20,5 +20,7 @@ public interface BookDao {
 
 	public Book updateBookInfo(Book updateBook);
 
+	public PageBean<Book> queryBook(Book book, int pageCode, int pageSize);
+
 
 }

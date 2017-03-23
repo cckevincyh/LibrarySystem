@@ -129,5 +129,17 @@ public class Book implements Serializable{
 				+ price + ", description=" + description + ", state=" + state
 				+ "]";
 	}
+	public Book(Integer bookId, BookType bookType, String bookName,
+			String autho, String press) {
+		super();
+		this.bookId = bookId;
+		this.bookType = bookType;
+		this.bookName = bookName;
+		this.autho = autho;
+		this.press = press;
+	}
 
+	
+	
+	
 }

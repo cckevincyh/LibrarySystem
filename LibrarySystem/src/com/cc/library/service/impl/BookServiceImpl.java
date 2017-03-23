@@ -52,5 +52,11 @@ public class BookServiceImpl implements BookService{
 		return bookDao.updateBookInfo(updateBook);
 	}
 
+	@Override
+	public PageBean<Book> queryBook(Book book, int pageCode, int pageSize) {
+		// TODO Auto-generated method stub
+		return bookDao.queryBook(book,pageCode,pageSize);
+	}
+
 
 }

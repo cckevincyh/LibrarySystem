@@ -198,7 +198,7 @@
 											学生
 										</s:if>
 										<s:if test="#reader.readerType.readerTypeId==1">
-											老师
+											教师
 										</s:if>
 									</td>
 	                                <td>

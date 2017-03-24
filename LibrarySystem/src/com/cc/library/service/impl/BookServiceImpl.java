@@ -58,5 +58,11 @@ public class BookServiceImpl implements BookService{
 		return bookDao.queryBook(book,pageCode,pageSize);
 	}
 
+	@Override
+	public boolean deleteBook(Book book) {
+		// TODO Auto-generated method stub
+		return bookDao.deleteBook(book);
+	}
+
 
 }

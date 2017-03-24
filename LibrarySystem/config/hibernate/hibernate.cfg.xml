@@ -18,7 +18,9 @@
 		password
 	-->
 	<property name="connection.password">123</property>
-	<property name="hbm2ddl.auto">update</property>
+	<!--
+	  <property name="hbm2ddl.auto">update</property>
+	  -->
 	<property name="show_sql">true</property>
 
 	<mapping resource="com/cc/library/domain/Admin.hbm.xml" />

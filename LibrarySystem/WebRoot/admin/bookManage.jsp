@@ -28,6 +28,8 @@
        			 <script src="${pageContext.request.contextPath}/js/addBook.js"></script>
                 
                  <script src="${pageContext.request.contextPath}/js/updateBook.js"></script>
+                  <script src="${pageContext.request.contextPath}/js/deleteBook.js"></script>
+                   <script src="${pageContext.request.contextPath}/js/getBookInfo.js"></script>
 </head>
 
 
@@ -199,22 +201,22 @@
                             
                             <!---在此插入信息-->
                             <s:if test="#request.pb.beanList!=null">
-                            <s:iterator value="#request.pb.beanList" var="books">
+                            <s:iterator value="#request.pb.beanList" var="book">
                              <tbody>
-	                         	   <td><s:property value="#books.bookId"/></td>
-	                                <td><s:property value="#books.bookType.typeName"/></td>
-	                                <td><s:property value="#books.bookName"/></td>
-	                                <td><s:property value="#books.autho"/></td>
-	                                 <td><s:property value="#books.press"/></td>
-	                                  <td><s:date name="#books.putdate" format="yyyy-MM-dd" /></td>
-	                                    <td><s:property value="#books.num"/></td>
-	                                    <td><s:property value="#books.currentNum"/></td>
-	                                    <td><s:property value="#books.price"/></td>
+	                         	   <td><s:property value="#book.bookId"/></td>
+	                                <td><s:property value="#book.bookType.typeName"/></td>
+	                                <td><s:property value="#book.bookName"/></td>
+	                                <td><s:property value="#book.autho"/></td>
+	                                 <td><s:property value="#book.press"/></td>
+	                                  <td><s:date name="#book.putdate" format="yyyy-MM-dd" /></td>
+	                                    <td><s:property value="#book.num"/></td>
+	                                    <td><s:property value="#book.currentNum"/></td>
+	                                    <td><s:property value="#book.price"/></td>
 	                                <td>
-	                                <button type="button" class="btn btn-info btn-xs">查看</button>
-	                                	<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" id="btn_update" onclick="updateBook(<s:property value="#books.bookId"/>)">修改</button>
-	                                	<button type="button" class="btn btn-danger btn-xs" onclick="deleteBook(<s:property value="#books.bookId"/>)">删除</button>
-	                                	<button type="button" class="btn btn-success btn-xs" onclick="addBookNum(<s:property value="#books.bookId"/>)">新增</button>
+	                                <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#findModal" onclick="getBookInfo(<s:property value="#book.bookId"/>)" >查看</button>
+	                                	<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" id="btn_update" onclick="updateBook(<s:property value="#book.bookId"/>)">修改</button>
+	                                	<button type="button" class="btn btn-danger btn-xs" onclick="deleteBook(<s:property value="#book.bookId"/>)">删除</button>
+	                                	<button type="button" class="btn btn-success btn-xs" onclick="addBookNum(<s:property value="#book.bookId"/>)">新增</button>
 	                               	</td>                                              
                           	  </tbody>
                             </s:iterator>
@@ -299,6 +301,119 @@
             </div>
         </div>
     </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!--------------------------------------查看的模糊框------------------------>  
+                                 <form class="form-horizontal">   <!--保证样式水平不混乱-->   
+                                        <!-- 模态框（Modal） -->
+									<div class="modal fade" id="findModal" tabindex="-1" role="dialog" aria-labelledby="findModalLabel" aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+														&times;
+													</button>
+													<h4 class="modal-title" id="findModalLabel">
+														查看图书信息
+													</h4>
+												</div>
+												<div class="modal-body">
+												
+										<!---------------------表单-------------------->
+										<div class="form-group">
+											<label for="firstname" class="col-sm-3 control-label">图书编号</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="findBookId" readonly="readonly">
+												
+												</div>
+										</div>
+										 <div class="form-group">
+											<label for="firstname" class="col-sm-3 control-label">图书名称</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="findBookName"  readonly="readonly">
+												
+												</div>
+										</div>
+											
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">图书类型</label>
+											<div class="col-sm-7">
+												<input type="text" class="form-control" id="findBookType"  readonly="readonly">
+												
+											</div>
+										</div>
+											
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">作者名称</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="findAutho"  readonly="readonly">
+												
+												</div>
+										</div>
+										
+										
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">出版社</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="findPress"  readonly="readonly">
+												
+												</div>
+										</div>
+										
+										
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">总数量</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="findNum"  readonly="readonly">
+												
+												</div>
+										</div>
+										
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">当前数量</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="findCurrentNum"  readonly="readonly">
+												
+												</div>
+										</div>
+										
+										
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">价格</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="findPrice"  readonly="readonly">
+												
+												</div>
+										</div>
+										
+										
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">简介</label>
+												<div class="col-sm-7">
+												<textarea class="form-control" rows="3" id="findDescription" readonly="readonly"></textarea>
+												</div>
+										</div>
+										
+										<!---------------------表单-------------------->
+									</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+													</button>
+												</div>
+											</div><!-- /.modal-content -->
+										</div><!-- /.modal -->
+									</div>
+
+                                 </form>	
+ 								<!--------------------------------------查看的模糊框------------------------>  
+    
     
     
     

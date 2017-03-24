@@ -143,8 +143,10 @@ public class BookManageAction extends ActionSupport{
 		BookType bookType = new BookType();
 		bookType.setTypeId(bookTypeId);
 		BookType newBookType = bookService.getBookType(bookType);
+		System.out.println(newBookType);
 		Date putdate = new Date(System.currentTimeMillis());
 		Book book = new Book(newBookType, bookName, autho, press, putdate, num, num, price, description);
+		System.out.println(book);
 		boolean b = bookService.addBook(book);
 		int success = 0;
 		if(b){
@@ -210,9 +212,7 @@ public class BookManageAction extends ActionSupport{
 		updateBook.setDescription(description);
 		updateBook.setPress(press);
 		updateBook.setPrice(price);
-		System.out.println("updateBook"+updateBook);
 		Book newBook = bookService.updateBookInfo(updateBook);
-		System.out.println(newBook);
 		int success = 0;
 		if(newBook!=null){
 			success = 1;
@@ -240,11 +240,7 @@ public class BookManageAction extends ActionSupport{
 		//给pageSize,每页的记录数赋值
 		int pageSize = 5;
 		PageBean<Book> pb = null;
-		System.out.println(bookId);
-		System.out.println(bookName);
-		System.out.println(bookTypeId);
-		System.out.println(press);
-		System.out.println(autho);
+
 		if(bookId==0 && "".equals(bookName.trim()) && bookTypeId==-1 && "".equals(press.trim()) && "".equals(autho.trim())){
 			pb = bookService.findBookByPage(pageCode,pageSize);
 		}else{
@@ -260,4 +256,29 @@ public class BookManageAction extends ActionSupport{
 		ServletActionContext.getRequest().setAttribute("pb", pb);
 		return "success";
 	}
+	
+	
+	
+	
+	public String deleteBook(){
+		Book book = new Book();
+		book.setBookId(bookId);
+		boolean deleteBook = bookService.deleteBook(book);
+		int success = 0;
+		if(deleteBook){
+			success = 1;
+			//由于是转发并且js页面刷新,所以无需重查
+		}
+		try {
+			ServletActionContext.getResponse().getWriter().print(success);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException(e.getMessage());
+		}
+		
+		return null;
+	}
+	
+	
+	
 }

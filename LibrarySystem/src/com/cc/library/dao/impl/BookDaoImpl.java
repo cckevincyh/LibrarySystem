@@ -102,7 +102,6 @@ public class BookDaoImpl extends HibernateDaoSupport implements BookDao{
 	public BookType getBookType(BookType bookType) {
 		String hql= "from BookType b where b.typeId=? ";
 		List list = this.getHibernateTemplate().find(hql, bookType.getTypeId());
-		System.out.println(list);
 		if(list!=null && list.size()>0){
 			return (BookType) list.get(0);
 		}
@@ -192,6 +191,25 @@ public class BookDaoImpl extends HibernateDaoSupport implements BookDao{
 			throw new RuntimeException(e1.getMessage());
 		}
 		return null;
+	}
+
+
+
+	@Override
+	public boolean deleteBook(Book book) {
+		boolean b = true;
+		try{
+			Book deleteBook = getBookById(book);
+			deleteBook.setState(0);
+			this.getHibernateTemplate().clear();
+			this.getHibernateTemplate().update(deleteBook);
+			this.getHibernateTemplate().flush();
+		}catch  (Throwable e1){
+			b = false;
+			e1.printStackTrace();
+			throw new RuntimeException(e1.getMessage());
+		}
+		return b;
 	}
 
 

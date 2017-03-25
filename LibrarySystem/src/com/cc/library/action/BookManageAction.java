@@ -143,7 +143,6 @@ public class BookManageAction extends ActionSupport{
 		BookType bookType = new BookType();
 		bookType.setTypeId(bookTypeId);
 		BookType newBookType = bookService.getBookType(bookType);
-		System.out.println(newBookType);
 		Date putdate = new Date(System.currentTimeMillis());
 		Book book = new Book(newBookType, bookName, autho, press, putdate, num, num, price, description);
 		System.out.println(book);
@@ -200,11 +199,10 @@ public class BookManageAction extends ActionSupport{
 	public String updateBook(){
 		Book book = new Book();
 		book.setBookId(bookId);
-		System.out.println(bookId);
 		Book updateBook = bookService.getBookById(book);
-		System.out.println(updateBook);
 		updateBook.setBookName(bookName);
 		updateBook.setAutho(autho);
+		
 		BookType type = new BookType();
 		type.setTypeId(bookTypeId);
 		BookType bookType = bookService.getBookType(type);//得到图书类型
@@ -279,6 +277,28 @@ public class BookManageAction extends ActionSupport{
 		return null;
 	}
 	
+	
+	
+	public String addBookNum(){
+		Book book = new Book();
+		book.setBookId(bookId);
+		Book updateBook = bookService.getBookById(book);
+		updateBook.setNum(updateBook.getNum()+num);
+		updateBook.setCurrentNum((updateBook.getCurrentNum()+num));
+		Book newBook = bookService.updateBookInfo(updateBook);
+		int success = 0;
+		if(newBook!=null){
+			success = 1;
+			//由于是转发并且js页面刷新,所以无需重查
+		}
+		try {
+			ServletActionContext.getResponse().getWriter().print(success);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException(e.getMessage());
+		}
+		return null;
+	}
 	
 	
 }

@@ -30,6 +30,7 @@
                  <script src="${pageContext.request.contextPath}/js/updateBook.js"></script>
                   <script src="${pageContext.request.contextPath}/js/deleteBook.js"></script>
                    <script src="${pageContext.request.contextPath}/js/getBookInfo.js"></script>
+                   <script src="${pageContext.request.contextPath}/js/addBookNum.js"></script>
 </head>
 
 
@@ -216,7 +217,7 @@
 	                                <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#findModal" onclick="getBookInfo(<s:property value="#book.bookId"/>)" >查看</button>
 	                                	<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" id="btn_update" onclick="updateBook(<s:property value="#book.bookId"/>)">修改</button>
 	                                	<button type="button" class="btn btn-danger btn-xs" onclick="deleteBook(<s:property value="#book.bookId"/>)">删除</button>
-	                                	<button type="button" class="btn btn-success btn-xs" onclick="addBookNum(<s:property value="#book.bookId"/>)">新增</button>
+	                                	<button type="button" class="btn btn-success btn-xs" onclick="addBookNum(<s:property value="#book.bookId"/>)"  data-toggle="modal" data-target="#addNumModal">新增</button>
 	                               	</td>                                              
                           	  </tbody>
                             </s:iterator>
@@ -413,6 +414,65 @@
 
                                  </form>	
  								<!--------------------------------------查看的模糊框------------------------>  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+     <!--------------------------------------增加图书数量的模糊框------------------------>  
+                                 <form class="form-horizontal">   <!--保证样式水平不混乱-->   
+                                        <!-- 模态框（Modal） -->
+									<div class="modal fade" id="addNumModal" tabindex="-1" role="dialog" aria-labelledby="addNumModalLabel" aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+														&times;
+													</button>
+													<h4 class="modal-title" id="addNumModalLabel">
+														新增图书数量
+													</h4>
+												</div>
+												<div class="modal-body">
+												
+										<!---------------------表单-------------------->
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">图书编号</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="addBookNumId" readonly="readonly">
+												
+												</div>
+										</div>
+
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">新增数量</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="addBookNum" placeholder="请输入新增的图书数量">
+												
+												</div>
+										</div>
+										
+										<!---------------------表单-------------------->
+									</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+													</button>
+													<button type="button" class="btn btn-primary" id="add_BookNum">
+														新增
+													</button>
+												</div>
+											</div><!-- /.modal-content -->
+										</div><!-- /.modal -->
+									</div>
+
+                                 </form>	
+ 								<!--------------------------------------增加图书数量的模糊框------------------------>  
     
     
     

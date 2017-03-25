@@ -16,10 +16,7 @@ $(function () {
 						$("#addModal").modal("hide");//关闭模糊框		
 						showInfo("添加成功");	
 
-	                }else if (data == -1) {
-						$("#addModal").modal("hide");//关闭模糊框		
-						showInfo("该管理员已存在");	
-					}else {
+	                }else {
 						$("#addModal").modal("hide");//关闭模糊框
 						showInfo("添加失败");
 					}

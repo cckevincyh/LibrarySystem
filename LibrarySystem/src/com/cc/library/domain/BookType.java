@@ -15,8 +15,18 @@ public class BookType implements Serializable{
 	
 	
 	private Set<Book> books;	//该类书的集合
+	private Integer state;
 	
 	
+	
+	
+	
+	public Integer getState() {
+		return state;
+	}
+	public void setState(Integer state) {
+		this.state = state;
+	}
 	public Set<Book> getBooks() {
 		return books;
 	}
@@ -48,9 +58,9 @@ public class BookType implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "BookType [typeId=" + typeId + ", typeName=" + typeName + "]";
+		return "BookType [typeId=" + typeId + ", typeName=" + typeName
+				+ ", books=" + books + ", state=" + state + "]";
 	}
-
 	
 	
 	

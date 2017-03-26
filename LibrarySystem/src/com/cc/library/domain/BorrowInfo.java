@@ -2,6 +2,7 @@ package com.cc.library.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * 借阅信息类
@@ -17,8 +18,8 @@ public class BorrowInfo implements Serializable{
 	private Date backDate;	//归还日期
 	private Integer overdueDay ;	//逾期天数
 	private Date endDate;	//截止日期
-	
-	
+	private Integer state; //状态 (归还或者未归还)
+
 	public Integer getBorrowId() {
 		return borrowId;
 	}
@@ -75,6 +76,21 @@ public class BorrowInfo implements Serializable{
 	public BorrowInfo() {
 		
 	}
+	@Override
+	public String toString() {
+		return "BorrowInfo [borrowId=" + borrowId + ", borrowDate="
+				+ borrowDate + ", backDate=" + backDate + ", overdueDay="
+				+ overdueDay + ", endDate=" + endDate + "]";
+	}
+
+	public Integer getState() {
+		return state;
+	}
+	public void setState(Integer state) {
+		this.state = state;
+	}
+	
+	
 	
 	
 	

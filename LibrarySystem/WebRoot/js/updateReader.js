@@ -44,11 +44,6 @@ $(function () {
 
 
 
-
-/**
- * 获取需要修改用户信息
- * @param {Object} username 需要修改的用户名
- */
 function updateReader(id){
 	ajax(
     		  {
@@ -62,7 +57,8 @@ function updateReader(id){
 					$("#updateNum").val(data.maxNum);
 					$("#updatePhone").val(data.phone);
 					$("#updatePwd").val(data.pwd);
-					$("#updateReaderType").val(data.readerType);
+					$("#updateReaderType").val(data.readerType.readerTypeId);
+
 				}
 			}
 			   

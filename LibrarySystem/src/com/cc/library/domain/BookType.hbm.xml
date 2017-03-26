@@ -11,10 +11,14 @@
 		<property name="typeName" type="java.lang.String" length="20">
 			<column name="typeName" />
 		</property>
+		
+		<property name="state" type="java.lang.Integer" length="2">
+			<column name="state" default="1"/>
+		</property>
 				
-		<set name="books" lazy="false" >
+		<set name="books" lazy="false" cascade="all" >
 			<key>
-				<column name="bookId"></column>
+				<column name="typeId"></column>
 			</key>
 			<one-to-many class="com.cc.library.domain.Book"/>
 		</set>

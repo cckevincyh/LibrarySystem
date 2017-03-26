@@ -25,12 +25,20 @@
 			<column name="state" default="1"/>
 		</property>
 		
+		<property name="borrowNum" type="java.lang.Integer" length="2">
+			<column name="borrowNum" default="0"/>
+		</property>
+		
+		<property name="unpaid" type="java.lang.Integer" length="2">
+			<column name="unpaid" default="0"/>
+		</property>
+		
 		
 		<!-- failed to lazily initialize a collection of role: com.cc.library.domain.Reader.borrowInfos,  no session or session was closed -->
 		<!-- 解决方案改动 lazy="false" -->
 		<set name="borrowInfos" cascade="all" lazy="false">
 			<key>
-				<column name="borrowId" ></column>
+				<column name="readerId" ></column>
 			</key>
 			
 			<one-to-many class="com.cc.library.domain.BorrowInfo"/>
@@ -39,14 +47,14 @@
 		
 		<set name="forfeitInfos" cascade="all" lazy="false">
 			<key>
-				<column name="forfeitId" ></column>
+				<column name="readerId" ></column>
 			</key>
 			
 			<one-to-many class="com.cc.library.domain.ForfeitInfo"/>
 		</set>
 		
 		
-		<many-to-one name="readerType" class="com.cc.library.domain.ReaderType">
+		<many-to-one name="readerType" class="com.cc.library.domain.ReaderType" lazy="false" cascade="all">
 			<column name="readerTypeId"></column>
 		</many-to-one>
 		

@@ -3,15 +3,19 @@ package com.cc.library.action;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
+import net.sf.json.util.PropertyFilter;
 
 import org.apache.struts2.ServletActionContext;
 
 import com.cc.library.domain.BookType;
 import com.cc.library.domain.PageBean;
+import com.cc.library.service.BookService;
 import com.cc.library.service.BookTypeService;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -114,7 +118,21 @@ public class BookTypeManageAction extends ActionSupport{
 		BookType bookType = new BookType();
 		bookType.setTypeId(id);
 		BookType newType = bookTypeService.getBookTypeById(bookType);
-		JSONObject jsonObject = JSONObject.fromObject(newType);
+		
+		JsonConfig jsonConfig = new JsonConfig();
+
+		jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
+		    public boolean apply(Object obj, String name, Object value) {
+			if(obj instanceof Set||name.equals("books")){//过滤掉集合
+				return true;
+			}else{
+				return false;
+			}
+		   }
+		});
+		
+		
+		JSONObject jsonObject = JSONObject.fromObject(newType,jsonConfig);
 		try {
 			response.getWriter().print(jsonObject);
 		} catch (IOException e) {
@@ -129,8 +147,9 @@ public class BookTypeManageAction extends ActionSupport{
 	public String updateBookType(){
 		BookType bookType = new BookType();
 		bookType.setTypeId(id);
-		bookType.setTypeName(typeName);
-		BookType newBookType = bookTypeService.updateBookTypeInfo(bookType);
+		BookType updateBookType = bookTypeService.getBookTypeById(bookType);
+		updateBookType.setTypeName(typeName);
+		BookType newBookType = bookTypeService.updateBookTypeInfo(updateBookType);
 		int success = 0;
 		if(newBookType!=null){
 			success = 1;
@@ -149,9 +168,9 @@ public class BookTypeManageAction extends ActionSupport{
 	public String deleteBookType(){
 		BookType bookType = new BookType();
 		bookType.setTypeId(id);
-		boolean deleteAdmin = bookTypeService.deleteBookType(bookType);
+		boolean deleteType = bookTypeService.deleteBookType(bookType);
 		int success = 0;
-		if(deleteAdmin){
+		if(deleteType){
 			success = 1;
 			//由于是转发并且js页面刷新,所以无需重查
 		}

@@ -18,11 +18,11 @@ $(function () {
 				params: postdata,
 	    		callback:function(data) {
 					if (data == 1) {
-						$("#addModal").modal("hide");//关闭模糊框		
+						$("#addNumModal").modal("hide");//关闭模糊框		
 						showInfo("新增成功");	
 
 	                }else {
-						$("#addModal").modal("hide");//关闭模糊框
+						$("#addNumModal").modal("hide");//关闭模糊框
 						showInfo("新增失败");
 					}
 								

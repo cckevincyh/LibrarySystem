@@ -19,4 +19,5 @@
  	<include file="struts2/struts-readerType-manage.xml"></include>
  	<include file="struts2/struts-bookType-manage.xml"></include>
  	<include file="struts2/struts-book-manage.xml"></include>
+ 	<include file="struts2/struts-borrow-manage.xml"></include>
 </struts>	

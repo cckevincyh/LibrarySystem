@@ -18,7 +18,7 @@ public class BookDaoImpl extends HibernateDaoSupport implements BookDao{
 
 	@Override
 	public List<BookType> getAllBookTypes() {
-		String hql= "from BookType";
+		String hql= "from BookType b where b.state=1";
 		List list = this.getHibernateTemplate().find(hql);
 		return list;
 	}
@@ -100,7 +100,7 @@ public class BookDaoImpl extends HibernateDaoSupport implements BookDao{
 
 	@Override
 	public BookType getBookType(BookType bookType) {
-		String hql= "from BookType b where b.typeId=? ";
+		String hql= "from BookType b where b.typeId=? and b.state=1";
 		List list = this.getHibernateTemplate().find(hql, bookType.getTypeId());
 		if(list!=null && list.size()>0){
 			return (BookType) list.get(0);

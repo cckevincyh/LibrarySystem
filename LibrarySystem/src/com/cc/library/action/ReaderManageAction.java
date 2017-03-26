@@ -1,10 +1,13 @@
 package com.cc.library.action;
 
 import java.io.IOException;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
+import net.sf.json.util.PropertyFilter;
 
 import org.apache.struts2.ServletActionContext;
 
@@ -161,7 +164,20 @@ public class ReaderManageAction extends ActionSupport{
 		Reader reader = new Reader();
 		reader.setReaderId(readerId);
 		Reader newReader = readerService.getReaderById(reader);
-		JSONObject jsonObject = JSONObject.fromObject(newReader);
+		JsonConfig jsonConfig = new JsonConfig();
+
+		jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
+		    public boolean apply(Object obj, String name, Object value) {
+			if(obj instanceof Set||name.equals("borrowInfos") || name.equals("forfeitInfos")){//过滤掉集合
+				return true;
+			}else{
+				return false;
+			}
+		   }
+		});
+		
+		
+		JSONObject jsonObject = JSONObject.fromObject(newReader,jsonConfig);
 		try {
 			response.getWriter().print(jsonObject);
 		} catch (IOException e) {

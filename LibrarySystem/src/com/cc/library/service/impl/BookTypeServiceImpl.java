@@ -1,6 +1,9 @@
 package com.cc.library.service.impl;
 
+import java.util.Set;
+
 import com.cc.library.dao.BookTypeDao;
+import com.cc.library.domain.Book;
 import com.cc.library.domain.BookType;
 import com.cc.library.domain.PageBean;
 import com.cc.library.service.BookTypeService;
@@ -41,8 +44,16 @@ public class BookTypeServiceImpl implements BookTypeService{
 
 	@Override
 	public boolean deleteBookType(BookType bookType) {
-		// TODO Auto-generated method stub
-		return bookTypeDao.deleteBookType(bookType);
+		BookType deleteBookType = getBookTypeById(bookType);
+		Set<Book> books = deleteBookType.getBooks();
+		System.out.println(books.size());
+		for(Book book : books){
+			Book updateBook = bookTypeDao.getBookById(book);
+			if(updateBook!=null){
+				updateBook.setState(0);
+			}
+		}
+		return bookTypeDao.deleteBookType(deleteBookType);
 	}
 
 	@Override

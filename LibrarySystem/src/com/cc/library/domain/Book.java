@@ -2,6 +2,7 @@ package com.cc.library.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * 图书信息类
@@ -20,9 +21,7 @@ public class Book implements Serializable{
 	private Double price;	//价格
 	private String description;	//简介
 	private Integer state = 1;	//状态(删除或者未删除,1表示未删除,0表示删除)
-	
-	
-	
+
 	public Integer getState() {
 		return state;
 	}

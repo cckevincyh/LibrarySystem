@@ -18,12 +18,12 @@
 		
 		
 		
-		<many-to-one name="admin" class="com.cc.library.domain.Admin">
-			<column name="id"></column>
+		<many-to-one name="info" class="com.cc.library.domain.BorrowInfo" cascade="all" lazy="false">
+			<column name="borrowId"></column>
 		</many-to-one>
 		
 		
-		<many-to-one name="reader" class="com.cc.library.domain.Reader">
+		<many-to-one name="reader" class="com.cc.library.domain.Reader" cascade="all" lazy="false">
 			<column name="readerId"></column>
 		</many-to-one>
 		

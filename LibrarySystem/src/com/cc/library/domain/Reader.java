@@ -24,6 +24,9 @@ public class Reader implements Serializable{
 	private Integer state;	//状态(删除或者未删除,1表示未删除,0表示删除)
 	
 	
+	private int borrowNum;//已借数量
+	private int unpaid;//	是否有未缴纳罚款(0:没有未缴纳的罚款，1:有未缴纳的罚款)
+	
 	
 	public Integer getState() {
 		return state;
@@ -139,6 +142,30 @@ public class Reader implements Serializable{
 		this.name = name;
 		this.phone = phone;
 		this.pwd = pwd;
+	}
+
+
+
+	public int getBorrowNum() {
+		return borrowNum;
+	}
+
+
+
+	public void setBorrowNum(int borrowNum) {
+		this.borrowNum = borrowNum;
+	}
+
+
+
+	public int getUnpaid() {
+		return unpaid;
+	}
+
+
+
+	public void setUnpaid(int unpaid) {
+		this.unpaid = unpaid;
 	}
 
 

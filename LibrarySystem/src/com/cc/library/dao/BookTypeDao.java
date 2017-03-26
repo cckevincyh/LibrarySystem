@@ -1,5 +1,6 @@
 package com.cc.library.dao;
 
+import com.cc.library.domain.Book;
 import com.cc.library.domain.BookType;
 import com.cc.library.domain.PageBean;
 
@@ -20,4 +21,5 @@ public interface BookTypeDao {
 	public PageBean<BookType> queryBookType(BookType bookType, int pageCode,
 			int pageSize);
 
+	public Book getBookById(Book book);
 }

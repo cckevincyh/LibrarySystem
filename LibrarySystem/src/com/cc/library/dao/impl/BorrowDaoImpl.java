@@ -61,10 +61,6 @@ public class BorrowDaoImpl extends HibernateDaoSupport implements BorrowDao{
 			String hql= "from BorrowInfo";
 			//分页查询
 			borrowInfoList = doSplitPage(hql,pageCode,pageSize);
-			
-			System.out.println(borrowInfoList);
-			BorrowInfo b = (BorrowInfo) borrowInfoList.get(0);
-			System.out.println(b.getBook().getBookName());
 		}catch (Throwable e1) {
 			e1.printStackTrace();
 			throw new RuntimeException(e1.getMessage());

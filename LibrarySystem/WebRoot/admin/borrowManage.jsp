@@ -134,32 +134,31 @@
                         <table id="data_list" class="table table-hover table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
+                            	 <th>借阅编号</th>
                                 <th>图书编号</th>
 	                            <th>图书名称</th>
-	                            <th>类型</th>
-	                            <th>分类</th>
 	                            <th>证件号</th>
 	                            <th>读者</th>
 	                            <th>借阅日期</th>
 	                            <th>截止还书日期</th>
-	                            <th>归还日期</th>
-	                            <th>超期天数</th>
-	                            <th>操作员</th>
+	                            <th>操作</th>
                             </tr>
                             </thead>
                             
                             
                             <!---在此插入信息-->
                             <s:if test="#request.pb.beanList!=null">
-                            <s:iterator value="#request.pb.beanList" var="admin">
+                            <s:iterator value="#request.pb.beanList" var="borrow">
                              <tbody>
-	                         	   <td><s:property value="#admin.username"/></td>
-	                                <td><s:property value="#admin.name"/></td>
-	                                <td><s:property value="#admin.phone"/></td>
-	                                <td><s:property value="#admin.pwd"/></td>
-	                                <td>
-	                                	<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" onclick="updateAdmin(<s:property value="#admin.id"/>)">修改</button>
-	                                	<button type="button" class="btn btn-danger btn-xs" onclick="deleteAdmin(<s:property value="#admin.id"/>)">删除</button>
+	                         	   <td><s:property value="#borrow.borrowId"/></td>
+	                                <td><s:property value="#borrow.book.bookId"/></td>
+	                                <td><s:property value="#borrow.book.bookName"/></td>
+	                                <td><s:property value="#borrow.reader.readerId"/></td>
+	                                <td><s:property value="#borrow.reader.name"/></td>
+	                                <td><s:date name="#borrow.borrowDate" format="yyyy-MM-dd" /></td>
+	                                <td><s:date name="#borrow.endDate" format="yyyy-MM-dd" /></td>
+	                                <td>         
+	                                	<button type="button" class="btn btn-info btn-xs" onclick="getBorrowInfoById(<s:property value="#borrow.id"/>)">查看</button>
 	                                		
 	                               	</td>                                              
                           	  </tbody>
@@ -168,10 +167,13 @@
                             <s:else>
                             	<tbody>
 	                         	   	<td>暂无数据</td>
+	                         	   	<td>暂无数据</td>
 	                                <td>暂无数据</td>
 	                                <td>暂无数据</td>
 	                                <td>暂无数据</td>
-	                                <td>暂无数据</td>                                              
+	                                <td>暂无数据</td> 
+	                                <td>暂无数据</td>  
+	                                <td>暂无数据</td>                                               
                           	  </tbody>
                             </s:else>
                             

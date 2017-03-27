@@ -33,6 +33,10 @@
 			<column name="readerId"></column>
 		</many-to-one>
 		
+		<many-to-one name="book" class="com.cc.library.domain.Book" cascade="all" lazy="false" >
+			<column name="bookId"></column>
+		</many-to-one>
+		
 
 		
 	</class>

@@ -27,11 +27,7 @@
 			<column name="phone" />
 		</property>
 		
-		
-		<property name="state" type="java.lang.Integer" length="2">
-			<column name="state" default="1"/>
-		</property>
-		
+
 		<property name="adminType" type="java.lang.Integer" length="2">
 			<column name="adminType" default="1"/>
 		</property>

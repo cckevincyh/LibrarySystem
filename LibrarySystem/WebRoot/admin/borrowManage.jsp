@@ -21,7 +21,8 @@
             <script src="${pageContext.request.contextPath}/ajax-lib/ajaxutils.js"></script>
             <script src="${pageContext.request.contextPath}/js/adminUpdateInfo.js"></script>
              <script src="${pageContext.request.contextPath}/js/adminUpdatePwd.js"></script>
-
+             
+ 			<script src="${pageContext.request.contextPath}/js/getBorrowInfo.js"></script>
        
 </head>
 
@@ -104,24 +105,24 @@
                             <div class="text-muted bootstrap-admin-box-title">借书</div>
                         </div>
                         <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
-                            <form class="form-horizontal">
+                            <form class="form-horizontal" action="${pageContext.request.contextPath}/admin/borrowManageAction_borrowBook.action" method="post">
                                 <div class="row">
                                     <div class="col-lg-5 form-group">
                                         <label class="col-lg-4 control-label" for="borrow_sno"><label class="text-danger">*&nbsp;</label>证件号</label>
                                         <div class="col-lg-8">
-                                            <input class="form-control" id="borrow_sno" type="text" value="">
+                                            <input class="form-control" id="borrowReaderId" name="borrowReaderId" type="text" value="">
                                             <label class="control-label" for="borrow_sno" style="display: none"></label>
                                         </div>
                                     </div>
                                     <div class="col-lg-5 form-group">
                                         <label class="col-lg-4 control-label" for="borrow_bno"><label class="text-danger">*&nbsp;</label>图书编号</label>
                                         <div class="col-lg-8">
-                                            <input class="form-control" id="borrow_bno" type="text" value="">
+                                            <input class="form-control" id="borrowBookId" name="borrowBookId" type="text" value="">
                                             <label class="control-label" for="borrow_bno" style="display: none"></label>
                                         </div>
                                     </div>
                                     <div class="col-lg-2 form-group">
-                                        <button type="button" class="btn btn-primary" id="btn_borrow" onclick="borrowBook()">借书</button>
+                                        <button type="submit" class="btn btn-primary" id="btn_borrow" onclick="borrowBook()">借书</button>
                                     </div>
                                 </div>
                             </form>
@@ -137,8 +138,8 @@
                             	 <th>借阅编号</th>
                                 <th>图书编号</th>
 	                            <th>图书名称</th>
-	                            <th>证件号</th>
-	                            <th>读者</th>
+	                            <th>读者证件号</th>
+	                            <th>读者名称</th>
 	                            <th>借阅日期</th>
 	                            <th>截止还书日期</th>
 	                            <th>操作</th>
@@ -158,7 +159,7 @@
 	                                <td><s:date name="#borrow.borrowDate" format="yyyy-MM-dd" /></td>
 	                                <td><s:date name="#borrow.endDate" format="yyyy-MM-dd" /></td>
 	                                <td>         
-	                                	<button type="button" class="btn btn-info btn-xs" onclick="getBorrowInfoById(<s:property value="#borrow.id"/>)">查看</button>
+	                                	<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#findBorrowModal" onclick="getBorrowInfoById(<s:property value="#borrow.borrowId"/>)">查看</button>
 	                                		
 	                               	</td>                                              
                           	  </tbody>
@@ -253,10 +254,10 @@
     
     
     
-     <!--------------------------------------添加的模糊框------------------------>  
+     <!--------------------------------------查看的模糊框------------------------>  
                                  <form class="form-horizontal">   <!--保证样式水平不混乱-->   
                                         <!-- 模态框（Modal） -->
-									<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+									<div class="modal fade" id="findBorrowModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 										<div class="modal-dialog">
 											<div class="modal-content">
 												<div class="modal-header">
@@ -264,51 +265,79 @@
 														&times;
 													</button>
 													<h4 class="modal-title" id="myModalLabel">
-														添加新管理员
+														查看借阅信息
 													</h4>
 												</div>
 												<div class="modal-body">
 												
 										<!---------------------表单-------------------->
 										 <div class="form-group">
-											<label for="firstname" class="col-sm-3 control-label">用户名</label>
+											<label for="firstname" class="col-sm-3 control-label">借阅编号</label>
 												<div class="col-sm-7">
-													<input type="text" class="form-control" id="addUsername"  placeholder="请输入管理员用户名">
+													<input type="text" class="form-control" id="borrowId"  readonly="readonly">
 												
 												</div>
 										</div>
 											
 										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">密码</label>
+											<label for="firstname" class="col-sm-3 control-label">借阅书籍编号</label>
 											<div class="col-sm-7">
-												<input type="password" class="form-control" id="addPwd"  placeholder="请输入密码">
+												<input type="text" class="form-control" id="bookId"  readonly="readonly">
 
 											</div>
 										</div>
 											
 										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">真实姓名</label>
+											<label for="firstname" class="col-sm-3 control-label">借阅书籍名称</label>
 												<div class="col-sm-7">
-													<input type="text" class="form-control" id="addName"  placeholder="请输入管理员真实姓名">
+													<input type="text" class="form-control" id="bookName"  readonly="readonly">
 												
 												</div>
 										</div>
-										
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">借阅书籍类型</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="bookType"  readonly="readonly">
+												
+												</div>
+										</div>
 										
 										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">联系电话</label>
+											<label for="firstname" class="col-sm-3 control-label">读者证件号</label>
 												<div class="col-sm-7">
-													<input type="text" class="form-control" id="addPhone"  placeholder="请输入管理员联系电话">
-												
+													<input type="text" class="form-control" id="readerId"  readonly="readonly">
+										
 												</div>
 										</div>
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">读者名称</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="readerName"  readonly="readonly">
+										
+												</div>
+										</div>
+										
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">读者类型</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="readerType"  readonly="readonly">
+										
+												</div>
+										</div>
+										
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">归还状态</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="state"  readonly="readonly">
+										
+												</div>
+										</div>
+										
+										
 										<!---------------------表单-------------------->
 									</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-default" data-dismiss="modal">关闭
-													</button>
-													<button type="button" class="btn btn-primary" id="addAdmin">
-														添加
 													</button>
 												</div>
 											</div><!-- /.modal-content -->
@@ -320,84 +349,7 @@
  
  
  
- 
-     
-                                     <!-- 修改模态框（Modal） -->
-                                     <!-------------------------------------------------------------->  
-                                
-                                        <!-- 修改模态框（Modal） -->
-                               <form class="form-horizontal">   <!--保证样式水平不混乱-->   
-									<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
-										<div class="modal-dialog">
-											<div class="modal-content">
-												<div class="modal-header">
-													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-														&times;
-													</button>
-													<h4 class="modal-title" id="updateModalLabel">
-														修改管理员信息
-													</h4>
-												</div>
-												<div class="modal-body">
-												
-										<!---------------------表单-------------------->
-											
-										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">用户名</label>
-												<div class="col-sm-7">
-													<input type="hidden" id="updateId">
-													<input type="text" class="form-control" id="updateUsername">
-												
-												</div>
-										</div>
-											
-										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">真实姓名</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control" id="updateName"  placeholder="请输入管理员真实姓名">
-												
-												</div>
-										</div>
-										
-										
-										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">联系电话</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control" id="updatePhone"  placeholder="请输入管理员联系电话">
-												
-												</div>
-										</div>
-										
-										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">密码</label>
-											<div class="col-sm-7">
-												<input type="password" class="form-control" id="updatePwd"  placeholder="请输入密码">
 
-											</div>
-										</div>
-										
-										<!---------------------表单-------------------->
-															
-										</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-default" data-dismiss="modal">关闭
-													</button>
-													<button type="button" class="btn btn-primary" id="updateAdmin">
-														修改
-													</button>
-												</div>
-											</div><!-- /.modal-content -->
-										</div><!-- /.modal -->
-									</div>
-	
-                                 </form>
-                                   <!-------------------------------------------------------------->
- 
-    
-    
-    
-    
- 
  
  
  

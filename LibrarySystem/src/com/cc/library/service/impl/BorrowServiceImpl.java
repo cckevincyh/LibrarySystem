@@ -18,6 +18,18 @@ public class BorrowServiceImpl implements BorrowService{
 		// TODO Auto-generated method stub
 		return borrowDao.findBorrowInfoByPage(pageCode,pageSize);
 	}
+
+	@Override
+	public BorrowInfo getBorrowInfoById(BorrowInfo info) {
+		// TODO Auto-generated method stub
+		return borrowDao.getBorrowInfoById(info);
+	}
+
+	@Override
+	public boolean addBorrow(BorrowInfo info) {
+		// TODO Auto-generated method stub
+		return borrowDao.addBorrow(info);
+	}
 	
 	
 }

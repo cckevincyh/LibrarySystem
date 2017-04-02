@@ -76,18 +76,26 @@ public class BorrowInfo implements Serializable{
 	public BorrowInfo() {
 		
 	}
+
+
 	@Override
 	public String toString() {
-		return "BorrowInfo [borrowId=" + borrowId + ", borrowDate="
-				+ borrowDate + ", backDate=" + backDate + ", overdueDay="
-				+ overdueDay + ", endDate=" + endDate + "]";
+		return "BorrowInfo [borrowId=" + borrowId + ", book=" + book
+				+ ", reader=" + reader + ", borrowDate=" + borrowDate
+				+ ", backDate=" + backDate + ", overdueDay=" + overdueDay
+				+ ", endDate=" + endDate + ", state=" + state + "]";
 	}
-
 	public Integer getState() {
 		return state;
 	}
 	public void setState(Integer state) {
 		this.state = state;
+	}
+	public BorrowInfo(Integer borrowId, Book book, Reader reader) {
+		super();
+		this.borrowId = borrowId;
+		this.book = book;
+		this.reader = reader;
 	}
 	
 	

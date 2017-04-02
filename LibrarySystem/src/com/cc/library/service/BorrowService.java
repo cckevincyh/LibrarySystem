@@ -5,6 +5,10 @@ import com.cc.library.domain.PageBean;
 
 public interface BorrowService {
 
-	PageBean<BorrowInfo> findBorrowInfoByPage(int pageCode, int pageSize);
+	public PageBean<BorrowInfo> findBorrowInfoByPage(int pageCode, int pageSize);
+
+	public BorrowInfo getBorrowInfoById(BorrowInfo info);
+
+	public boolean addBorrow(BorrowInfo info);
 
 }

@@ -8,13 +8,12 @@ import com.cc.library.domain.PageBean;
 
 public interface BookService {
 
-	public List<BookType> getAllBookTypes();
+
 
 	public PageBean<Book> findBookByPage(int pageCode, int pageSize);
 
 	public boolean addBook(Book book);
 
-	public BookType getBookType(BookType bookType);
 
 	public Book getBookById(Book book);
 

@@ -1,5 +1,7 @@
 package com.cc.library.service;
 
+import java.util.List;
+
 import com.cc.library.domain.BookType;
 import com.cc.library.domain.PageBean;
 
@@ -20,4 +22,7 @@ public interface BookTypeService {
 	public PageBean<BookType> queryBookType(BookType bookType, int pageCode,
 			int pageSize);
 
+	public BookType getBookType(BookType bookType);
+
+	public List<BookType> getAllBookTypes();
 }

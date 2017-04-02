@@ -1,5 +1,7 @@
 package com.cc.library.dao;
 
+import java.util.List;
+
 import com.cc.library.domain.Book;
 import com.cc.library.domain.BookType;
 import com.cc.library.domain.PageBean;
@@ -22,4 +24,8 @@ public interface BookTypeDao {
 			int pageSize);
 
 	public Book getBookById(Book book);
+
+	public BookType getBookType(BookType bookType);
+
+	public List<BookType> getAllBookTypes();
 }

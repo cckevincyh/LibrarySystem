@@ -10,6 +10,7 @@ import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.cc.library.dao.BorrowDao;
+import com.cc.library.domain.Book;
 import com.cc.library.domain.BorrowInfo;
 import com.cc.library.domain.PageBean;
 
@@ -70,6 +71,37 @@ public class BorrowDaoImpl extends HibernateDaoSupport implements BorrowDao{
 			return pb;
 		}
 		return null;
+	}
+
+
+
+
+	@Override
+	public BorrowInfo getBorrowInfoById(BorrowInfo info) {
+		String hql= "from BorrowInfo b where b.borrowId=?";
+		List list = this.getHibernateTemplate().find(hql, info.getBorrowId());
+		if(list!=null && list.size()>0){
+			return (BorrowInfo) list.get(0);
+		}
+		return null;
+	}
+
+
+
+
+	@Override
+	public boolean addBorrow(BorrowInfo info) {
+		boolean b = true;
+		try{
+			this.getHibernateTemplate().clear();
+			this.getHibernateTemplate().save(info);
+			this.getHibernateTemplate().flush();
+		}catch (Throwable e1) {
+			b = false;
+			e1.printStackTrace();
+			throw new RuntimeException(e1.getMessage());
+		}
+		return b;
 	}
 
 }

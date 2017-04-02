@@ -29,5 +29,8 @@
  		<property name="bookService">
  			<ref bean="bookService"/>
  		</property>
+ 		<property name="bookTypeService">
+ 			<ref bean="bookTypeService"/>
+ 		</property>
  	</bean>
  </beans>

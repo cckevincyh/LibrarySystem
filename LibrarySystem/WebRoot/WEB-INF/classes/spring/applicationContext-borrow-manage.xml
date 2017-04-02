@@ -23,11 +23,16 @@
  			<ref bean="borrowDao"/>
  		</property>
  	</bean>
+ 	
  
- 		
+ 
  	<bean id="borrowManageAction" class="com.cc.library.action.BorrowManageAction" scope="prototype">
  		<property name="borrowService">
  			<ref bean="borrowService"/>
  		</property>
+ 		<property name="bookService">
+ 			<ref bean="bookService"/>
+ 		</property>
  	</bean>
+ 	
  </beans>

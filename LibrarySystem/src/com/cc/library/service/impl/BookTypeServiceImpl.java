@@ -1,5 +1,6 @@
 package com.cc.library.service.impl;
 
+import java.util.List;
 import java.util.Set;
 
 import com.cc.library.dao.BookTypeDao;
@@ -61,6 +62,18 @@ public class BookTypeServiceImpl implements BookTypeService{
 			int pageSize) {
 		// TODO Auto-generated method stub
 		return bookTypeDao.queryBookType(bookType,pageCode,pageSize);
+	}
+
+	@Override
+	public BookType getBookType(BookType bookType) {
+		// TODO Auto-generated method stub
+		return bookTypeDao.getBookType(bookType);
+	}
+
+	@Override
+	public List<BookType> getAllBookTypes() {
+		// TODO Auto-generated method stub
+		return bookTypeDao.getAllBookTypes();
 	}
 	
 	

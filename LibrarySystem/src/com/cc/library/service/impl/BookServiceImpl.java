@@ -16,11 +16,7 @@ public class BookServiceImpl implements BookService{
 		this.bookDao = bookDao;
 	}
 
-	@Override
-	public List<BookType> getAllBookTypes() {
-		// TODO Auto-generated method stub
-		return bookDao.getAllBookTypes();
-	}
+
 
 	@Override
 	public PageBean<Book> findBookByPage(int pageCode, int pageSize) {
@@ -34,11 +30,6 @@ public class BookServiceImpl implements BookService{
 		return bookDao.addBook(book);
 	}
 
-	@Override
-	public BookType getBookType(BookType bookType) {
-		// TODO Auto-generated method stub
-		return bookDao.getBookType(bookType);
-	}
 
 	@Override
 	public Book getBookById(Book book) {

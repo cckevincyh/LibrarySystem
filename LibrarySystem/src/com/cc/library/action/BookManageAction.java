@@ -18,6 +18,7 @@ import com.cc.library.domain.Book;
 import com.cc.library.domain.BookType;
 import com.cc.library.domain.PageBean;
 import com.cc.library.service.BookService;
+import com.cc.library.service.BookTypeService;
 import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")
@@ -25,6 +26,14 @@ public class BookManageAction extends ActionSupport{
 
 	
 	private BookService bookService;
+	private BookTypeService bookTypeService;
+	
+	
+
+	public void setBookTypeService(BookTypeService bookTypeService) {
+		this.bookTypeService = bookTypeService;
+	}
+
 
 	public void setBookService(BookService bookService) {
 		this.bookService = bookService;
@@ -96,7 +105,7 @@ public class BookManageAction extends ActionSupport{
 	public String getAllBookTypes(){
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("application/json;charset=utf-8");
-		List<BookType> allBookTypes = bookService.getAllBookTypes();
+		List<BookType> allBookTypes = bookTypeService.getAllBookTypes();
 		
 		JsonConfig jsonConfig = new JsonConfig();
 
@@ -142,7 +151,7 @@ public class BookManageAction extends ActionSupport{
 	public String addBook(){
 		BookType bookType = new BookType();
 		bookType.setTypeId(bookTypeId);
-		BookType newBookType = bookService.getBookType(bookType);
+		BookType newBookType = bookTypeService.getBookType(bookType);
 		Date putdate = new Date(System.currentTimeMillis());
 		Book book = new Book(newBookType, bookName, autho, press, putdate, num, num, price, description);
 		System.out.println(book);
@@ -205,7 +214,7 @@ public class BookManageAction extends ActionSupport{
 		
 		BookType type = new BookType();
 		type.setTypeId(bookTypeId);
-		BookType bookType = bookService.getBookType(type);//得到图书类型
+		BookType bookType = bookTypeService.getBookType(type);//得到图书类型
 		updateBook.setBookType(bookType);//设置图书类型
 		updateBook.setDescription(description);
 		updateBook.setPress(press);

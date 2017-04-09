@@ -9,6 +9,11 @@ public interface BorrowService {
 
 	public BorrowInfo getBorrowInfoById(BorrowInfo info);
 
-	public boolean addBorrow(BorrowInfo info);
+	/**
+	 * 返回借阅状态码
+	 * @param info
+	 * @return
+	 */
+	public int addBorrow(BorrowInfo info);
 
 }

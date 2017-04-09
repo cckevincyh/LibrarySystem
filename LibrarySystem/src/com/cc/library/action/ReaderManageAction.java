@@ -98,38 +98,38 @@ public class ReaderManageAction extends ActionSupport{
 
 
 
-
-	/**
-	 *添加读者
-	 * @return
-	 */
-	public String addReader(){
-		Reader reader = new Reader(readerId, name, phone, pwd);
-		
-		Reader oldReader = readerService.getReader(reader);//检查是否已经存在该id
-		int success = 0;
-		if(oldReader!=null){
-			success = -1;//已存在该id
-		}else{
-			ReaderType type = new ReaderType();
-			type.setReaderTypeId(readerType);
-			reader.setReaderType(type);
-			
-			boolean b = readerService.addReader(reader);
-			if(b){
-				success = 1;
-			}
-		}
-		try {
-			ServletActionContext.getResponse().getWriter().print(success);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			throw new RuntimeException(e.getMessage());
-		}
-		return null;
-		
-	}
-	
+//
+//	/**
+//	 *添加读者
+//	 * @return
+//	 */
+//	public String addReader(){
+//		Reader reader = new Reader(readerId, name, phone, pwd);
+//		
+//		Reader oldReader = readerService.getReader(reader);//检查是否已经存在该id
+//		int success = 0;
+//		if(oldReader!=null){
+//			success = -1;//已存在该id
+//		}else{
+//			ReaderType type = new ReaderType();
+//			type.setReaderTypeId(readerType);
+//			reader.setReaderType(type);
+//			
+//			boolean b = readerService.addReader(reader);
+//			if(b){
+//				success = 1;
+//			}
+//		}
+//		try {
+//			ServletActionContext.getResponse().getWriter().print(success);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			throw new RuntimeException(e.getMessage());
+//		}
+//		return null;
+//		
+//	}
+//	
 	
 	/**
 	 * 根据页码查询读者

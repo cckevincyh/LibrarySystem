@@ -19,7 +19,7 @@ public class AdminDaoImpl extends HibernateDaoSupport implements AdminDao{
 
 	@Override
 	public Admin getAdminByUserName(Admin admin) {
-		String hql= "from Admin a where a.username=?";
+		String hql= "from Admin a where a.username=? and a.state=1";
 		List list = this.getHibernateTemplate().find(hql, admin.getUsername());
 		if(list!=null && list.size()>0){
 			return (Admin) list.get(0);
@@ -46,7 +46,7 @@ public class AdminDaoImpl extends HibernateDaoSupport implements AdminDao{
 
 	@Override
 	public List<Admin> getAllAdmins() {
-		String hql= "from Admin a where a.adminType=1 ";
+		String hql= "from Admin a where a.state=1";
 		List<Admin> list = null;
 		try{
 			list = this.getHibernateTemplate().find(hql);
@@ -76,8 +76,8 @@ public class AdminDaoImpl extends HibernateDaoSupport implements AdminDao{
 
 	@Override
 	public Admin getAdminById(Admin admin) {
-		String hql= "from Admin a where a.id=? ";
-		List list = this.getHibernateTemplate().find(hql, admin.getId());
+		String hql= "from Admin a where a.aid=? and a.state=1";
+		List list = this.getHibernateTemplate().find(hql, admin.getAid());
 		if(list!=null && list.size()>0){
 			return (Admin) list.get(0);
 		}
@@ -93,14 +93,14 @@ public class AdminDaoImpl extends HibernateDaoSupport implements AdminDao{
 		pb.setPageSize(pageSize);//设置页面记录数
 		List adminList = null;
 		try {
-			String sql = "SELECT count(*) FROM Admin a where a.adminType=1 ";
+			String sql = "SELECT count(*) FROM Admin a where a.state=1";
 			List list = this.getSession().createQuery(sql).list();
 			int totalRecord = Integer.parseInt(list.get(0).toString()); //得到总记录数
 			pb.setTotalRecord(totalRecord);	//设置总记录数
 			this.getSession().close();
 			
 			//不支持limit分页
-			String hql= "from Admin a where a.adminType=1 ";
+			String hql= "from Admin a where a.state=1";
 			//分页查询
 			adminList = doSplitPage(hql,pageCode,pageSize);
 		}catch (Throwable e1) {
@@ -153,8 +153,8 @@ public class AdminDaoImpl extends HibernateDaoSupport implements AdminDao{
 		
 		StringBuilder sb = new StringBuilder();
 		StringBuilder sb_sql = new StringBuilder();
-		String sql = "SELECT count(*) FROM Admin a where a.adminType=1 ";
-		String hql= "from Admin a where a.state=1 and a.adminType=1";
+		String sql = "SELECT count(*) FROM Admin a where a.state=1 ";
+		String hql= "from Admin a where a.state=1 ";
 		sb.append(hql);
 		sb_sql.append(sql);
 		if(!"".equals(admin.getUsername().trim())){
@@ -190,11 +190,12 @@ public class AdminDaoImpl extends HibernateDaoSupport implements AdminDao{
 	public boolean deleteAdmin(Admin admin) {
 		boolean b = true;
 		try{
-			Admin deleteAdmin = getAdminById(admin);
+			admin.setState(0);
 			this.getHibernateTemplate().clear();
-			this.getHibernateTemplate().delete(deleteAdmin);
+			//将传入的detached(分离的)状态的对象的属性复制到持久化对象中，并返回该持久化对象
+			this.getHibernateTemplate().merge(admin);
 			this.getHibernateTemplate().flush();
-		}catch  (Throwable e1){
+		}catch (Throwable e1) {
 			b = false;
 			e1.printStackTrace();
 			throw new RuntimeException(e1.getMessage());

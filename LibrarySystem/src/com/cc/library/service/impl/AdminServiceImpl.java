@@ -53,7 +53,8 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public boolean deleteAdmin(Admin admin) {
-		return adminDao.deleteAdmin(admin);
+		Admin deleteAdmin = getAdminById(admin);
+		return adminDao.deleteAdmin(deleteAdmin);
 		
 	}
 	

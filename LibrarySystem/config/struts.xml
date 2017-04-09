@@ -10,6 +10,8 @@
         作用:创建Action实例的过程由spring处理,其他的还是有struts2自己处理 -->
    <constant name="struts.objectFactory" value="spring" />
   
+
+  	<include file="struts2/struts-authorization.xml"></include>
  	<include file="struts2/struts-admin-login.xml"></include>
  	<include file="struts2/struts-reader-login.xml"></include>
  	<include file="struts2/struts-admin-info.xml"></include>

@@ -79,9 +79,9 @@
                         <a href="/library/admin/borrowInfo"><i class="glyphicon glyphicon-chevron-right"></i> 借阅查询</a>
                     </li>
                      <li>
-                        <a href="/library/admin/return"><i class="glyphicon glyphicon-chevron-right"></i> 罚金管理</a>
+                        <a href="/library/admin/return"><i class="glyphicon glyphicon-chevron-right"></i>逾期处理</a>
                     </li>
-             <s:if test="#session.admin.adminType==0"><!-- 对超级管理员和普通管理员进行权限区分 -->
+             <s:if test="#session.admin.authorization.superSet==1"><!-- 对超级管理员和普通管理员进行权限区分 -->
                     <li>
                         <a href="${pageContext.request.contextPath}/admin/adminManageAction_findAdminByPage.action"><i class="glyphicon glyphicon-chevron-right"></i> 管理员管理</a>
                     </li>
@@ -92,7 +92,7 @@
                    
                    
                    <li>
-                        <a href="${pageContext.request.contextPath}/admin/readerTypeManageAction_getAllReaderType.action"><i class="glyphicon glyphicon-chevron-right"></i> 读者分类设置</a>
+                        <a href="${pageContext.request.contextPath}/admin/readerTypeManageAction_getAllReaderType.action"><i class="glyphicon glyphicon-chevron-right"></i> 系统设置</a>
                     </li>
                    
                    
@@ -183,22 +183,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <div class="text-muted bootstrap-admin-box-title">管理员管理</div>
-                            </div>
-                            <div class="bootstrap-admin-panel-content">
-                                <ul>
-                                    <li>根据管理员编号、管理员名称查询管理员基本信息</li>
-                                    <li>添加、修改、删除管理员基本信息</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
+                   <div class="col-md-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <div class="text-muted bootstrap-admin-box-title">读者管理</div>
@@ -210,22 +195,39 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>
+                </div>
+             
+            </div>
+            
+            
+            <div class="row">
                     <div class="col-md-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <div class="text-muted bootstrap-admin-box-title">罚金处理</div>
+                                <div class="text-muted bootstrap-admin-box-title">逾期处理</div>
                             </div>
                             <div class="bootstrap-admin-panel-content">
                                 <ul>
-                                    <li>罚金处理</li>
-                                    <li>罚金处理</li>
+                                    <li>逾期处理</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
+                   <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="text-muted bootstrap-admin-box-title">系统设置</div>
+                            </div>
+                            <div class="bootstrap-admin-panel-content">
+                                <ul>
+                                    <li>系统设置</li>
+                                </ul>
+                            </div>
+                        </div>
                 </div>
+             
             </div>
+            
         </div>
     </div>
     

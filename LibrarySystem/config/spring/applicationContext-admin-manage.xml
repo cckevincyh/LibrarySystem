@@ -16,5 +16,8 @@
  		<property name="adminService">
  			<ref bean="adminService"/>
  		</property>
+ 		<property name="authorizationService">
+ 			<ref bean="authorizationService"/>
+ 		</property>
  	</bean>
  </beans>

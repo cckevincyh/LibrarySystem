@@ -13,6 +13,7 @@
            	
            	
  	<import resource="applicationContext-db.xml"/>
+ 	<import resource="applicationContext-authorization.xml"/>
  	<import resource="applicationContext-reader-login.xml"/>
  	<import resource="applicationContext-admin-login.xml"/>
  	<import resource="applicationContext-admin-info.xml"/>

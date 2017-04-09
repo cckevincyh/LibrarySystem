@@ -80,11 +80,11 @@ public class AdminInfoAction extends ActionSupport{
 	 */
 	public String adminInfo(){
 		Map<String, Object> session = ServletActionContext.getContext().getSession();
-		Admin admin = (Admin) session.get("admin");
+		Admin admin = (Admin) session.get("admin");//从session得到管理员对象
 		admin.setUsername(username);
 		admin.setName(name);
-		admin.setPhone(phone);
-		Admin newAdmin = adminService.updateAdminInfo(admin);
+		admin.setPhone(phone);//重新设置admin对象
+		Admin newAdmin = adminService.updateAdminInfo(admin);//修改admin对象
 		int success = 0;
 		if(newAdmin!=null){
 			success = 1;

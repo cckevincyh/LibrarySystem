@@ -9,41 +9,88 @@ import java.io.Serializable;
  */
 public class ForfeitInfo implements Serializable{
 	
-	private int forfeitId;	//罚金序号
-	private BorrowInfo info;	//借阅信息
+	private Integer borrowId;	//借阅编号
+	private BorrowInfo borrowInfo;
+	private Admin admin;	//操作员
 	private double forfeit;	//罚金金额
-	private Reader reader;	//逾期读者
 	private int isPay;	//是否已经支付罚金
-	public int getForfeitId() {
-		return forfeitId;
+	
+	
+	
+	
+
+
+
+
+	public Integer getBorrowId() {
+		return borrowId;
 	}
-	public void setForfeitId(int forfeitId) {
-		this.forfeitId = forfeitId;
+
+
+
+
+	public void setBorrowId(Integer borrowId) {
+		this.borrowId = borrowId;
 	}
-	public BorrowInfo getInfo() {
-		return info;
+
+
+
+
+	public BorrowInfo getBorrowInfo() {
+		return borrowInfo;
 	}
-	public void setInfo(BorrowInfo info) {
-		this.info = info;
+
+
+
+
+	public void setBorrowInfo(BorrowInfo borrowInfo) {
+		this.borrowInfo = borrowInfo;
 	}
+
+
+
+
+	public Admin getAdmin() {
+		return admin;
+	}
+
+
+
+
+	public void setAdmin(Admin admin) {
+		this.admin = admin;
+	}
+
+
+
+
 	public double getForfeit() {
 		return forfeit;
 	}
+
+
+
+
 	public void setForfeit(double forfeit) {
 		this.forfeit = forfeit;
 	}
-	public Reader getReader() {
-		return reader;
-	}
-	public void setReader(Reader reader) {
-		this.reader = reader;
-	}
+
+
+
+
 	public int getIsPay() {
 		return isPay;
 	}
+
+
+
+
 	public void setIsPay(int isPay) {
 		this.isPay = isPay;
 	}
+
+
+
 
 	public ForfeitInfo() {
 		

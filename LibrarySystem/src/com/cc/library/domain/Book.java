@@ -11,6 +11,7 @@ import java.util.Set;
  */
 public class Book implements Serializable{
 	private Integer bookId;	//图书编号
+	private String ISBN;//ISBN　国际标准书号
 	private BookType bookType;	//图书类型
 	private String bookName;	//图书名称
 	private String autho;	//作者名称
@@ -20,19 +21,23 @@ public class Book implements Serializable{
 	private Integer currentNum;	//在馆数量
 	private Double price;	//价格
 	private String description;	//简介
-	private Integer state = 1;	//状态(删除或者未删除,1表示未删除,0表示删除)
-
-	public Integer getState() {
-		return state;
-	}
-	public void setState(Integer state) {
-		this.state = state;
-	}
+	private Admin admin;	//操作管理员
+	private Integer state;	//删除状态
 	public Integer getBookId() {
 		return bookId;
 	}
 	public void setBookId(Integer bookId) {
 		this.bookId = bookId;
+	}
+
+	
+	
+	
+	public String getISBN() {
+		return ISBN;
+	}
+	public void setISBN(String iSBN) {
+		ISBN = iSBN;
 	}
 	public BookType getBookType() {
 		return bookType;
@@ -88,56 +93,26 @@ public class Book implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Book(Integer bookId, BookType bookType, String bookName,
-			String autho, String press, Date putdate, Integer num,
-			Integer currentNum, Double price, String description) {
-		super();
-		this.bookId = bookId;
-		this.bookType = bookType;
-		this.bookName = bookName;
-		this.autho = autho;
-		this.press = press;
-		this.putdate = putdate;
-		this.num = num;
-		this.currentNum = currentNum;
-		this.price = price;
-		this.description = description;
+	public Admin getAdmin() {
+		return admin;
+	}
+	public void setAdmin(Admin admin) {
+		this.admin = admin;
+	}
+	public Integer getState() {
+		return state;
+	}
+	public void setState(Integer state) {
+		this.state = state;
 	}
 	public Book() {
-		
-	}
-	public Book(BookType bookType, String bookName, String autho, String press,
-			Date putdate, Integer num, Integer currentNum, Double price,
-			String description) {
-		super();
-		this.bookType = bookType;
-		this.bookName = bookName;
-		this.autho = autho;
-		this.press = press;
-		this.putdate = putdate;
-		this.num = num;
-		this.currentNum = currentNum;
-		this.price = price;
-		this.description = description;
-	}
-	@Override
-	public String toString() {
-		return "Book [bookId=" + bookId + ", bookName=" + bookName + ", autho="
-				+ autho + ", press=" + press + ", putdate=" + putdate
-				+ ", num=" + num + ", currentNum=" + currentNum + ", price="
-				+ price + ", description=" + description + ", state=" + state
-				+ "]";
-	}
-	public Book(Integer bookId, BookType bookType, String bookName,
-			String autho, String press) {
-		super();
-		this.bookId = bookId;
-		this.bookType = bookType;
-		this.bookName = bookName;
-		this.autho = autho;
-		this.press = press;
-	}
 
+	
+	}
+	
+	
+	
+	
 	
 	
 	

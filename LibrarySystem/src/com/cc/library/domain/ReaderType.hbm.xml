@@ -8,6 +8,11 @@
 			<column name="readerTypeId" />
 			<generator class="assigned" />
 		</id>
+		
+		<property name="readerTypeName" type="java.lang.String"  not-null="true">
+			<column name="readerTypeName" />
+		</property>
+		
 		<property name="maxNum" type="java.lang.Integer" length="3" not-null="true">
 			<column name="maxNum" />
 		</property>

@@ -77,6 +77,10 @@ public class BorrowManageAction extends ActionSupport{
 	
 
 
+	/**
+	 * 根据页码分页查询借阅信息
+	 * @return
+	 */
 	public String findBorrowInfoByPage(){
 		//获取页面传递过来的当前页码数
 		if(pageCode==0){
@@ -96,7 +100,10 @@ public class BorrowManageAction extends ActionSupport{
 	
 	
 	
-	
+	/**
+	 * 根据借阅id查询该借阅信息
+	 * @return
+	 */
 	public String getBorrowInfoById(){
 		System.out.println(111);
 		HttpServletResponse response = ServletActionContext.getResponse();
@@ -125,20 +132,23 @@ public class BorrowManageAction extends ActionSupport{
 		}
 		return null;
 	}
+
 	
 	
-	public String borrowBook(){
-		//判断是否有该读者
-		//判断是否有该图书
-		Reader reader = new Reader();
-		reader.setReaderId(borrowReaderId);
-		Book book = new Book();
-		book.setBookId(borrowBookId);
-		BorrowInfo info = new BorrowInfo(borrowId, book, reader);
-		boolean b = borrowService.addBorrow(info);
-		
-		
-		return "success";
-	}
-	
+//	/**
+//	 * 借阅处理
+//	 * @return
+//	 */
+//	public String borrowBook(){
+//		Reader reader = new Reader();
+//		reader.setReaderId(borrowReaderId);
+//		Book book = new Book();
+//		book.setBookId(borrowBookId);
+//		BorrowInfo info = new BorrowInfo(borrowId, book, reader);
+//		int code = borrowService.addBorrow(info);//需要特殊处理
+//		
+//		
+//		return "success";
+//	}
+//	
 }

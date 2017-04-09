@@ -57,11 +57,11 @@ function updateAdmin(id){
 				params: "id=" + id,
 				type:"json",
 	    		callback:function(data) {
-					$("#updateId").val(data.id);
+					$("#updateId").val(data.aid);
 					$("#updateUsername").val(data.username);
 					$("#updateName").val(data.name);
-					$("#updatePhone").val(data.pwd);
-					$("#updatePwd").val(data.phone);
+					$("#updatePhone").val(data.phone);
+					$("#updatePwd").val(data.pwd);
 								
 				}
 			}

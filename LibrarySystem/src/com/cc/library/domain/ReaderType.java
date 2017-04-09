@@ -3,15 +3,21 @@ package com.cc.library.domain;
 public class ReaderType {
 
 	private Integer readerTypeId;
+	private String readerTypeName;//读者类型名称
 	private Integer maxNum;	//最大借书量
 	private Double penalty;	//每日罚金
 	private Integer bday;	//可借天数
-	
 	public Integer getReaderTypeId() {
 		return readerTypeId;
 	}
 	public void setReaderTypeId(Integer readerTypeId) {
 		this.readerTypeId = readerTypeId;
+	}
+	public String getReaderTypeName() {
+		return readerTypeName;
+	}
+	public void setReaderTypeName(String readerTypeName) {
+		this.readerTypeName = readerTypeName;
 	}
 	public Integer getMaxNum() {
 		return maxNum;
@@ -31,23 +37,11 @@ public class ReaderType {
 	public void setBday(Integer bday) {
 		this.bday = bday;
 	}
-	public ReaderType(Integer readerTypeId, Integer maxNum, Double penalty,
-			Integer bday) {
-		super();
-		this.readerTypeId = readerTypeId;
-		this.maxNum = maxNum;
-		this.penalty = penalty;
-		this.bday = bday;
-	}
 	public ReaderType() {
 
 	}
 	
-	@Override
-	public String toString() {
-		return "ReaderType [readerTypeId=" + readerTypeId + ", maxNum="
-				+ maxNum + ", penalty=" + penalty + ", bday=" + bday + "]";
-	}
+
 
 	
 	

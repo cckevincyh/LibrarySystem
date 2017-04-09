@@ -8,18 +8,22 @@ import java.io.Serializable;
  *
  */
 public class Admin implements Serializable{
-	private Integer id;	//编号
+	private Integer aid;	//编号
 	private String username;	//用户名
 	private String name;	//管理员姓名
-	private String phone;	//联系方式
-	private Integer adminType;	//管理员类型(超级管理员，普通管理员，0超级管理员，1普通管理员)
 	private String pwd;	//密码
-	
-	
+	private String phone;	//联系方式
+	private Authorization authorization;//权限
+	private Integer state;	//删除状态
+	public Integer getAid() {
+		return aid;
+	}
+	public void setAid(Integer aid) {
+		this.aid = aid;
+	}
 	public String getUsername() {
 		return username;
 	}
-
 	public void setUsername(String username) {
 		this.username = username;
 	}
@@ -29,37 +33,39 @@ public class Admin implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getPhone() {
-		return phone;
-	}
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
 	public String getPwd() {
 		return pwd;
 	}
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
-
-
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public Authorization getAuthorization() {
+		return authorization;
+	}
+	public void setAuthorization(Authorization authorization) {
+		this.authorization = authorization;
+	}
+	public Integer getState() {
+		return state;
+	}
+	public void setState(Integer state) {
+		this.state = state;
+	}
 	public Admin() {
+		
+		
+	}
 	
-	}
-	public Integer getAdminType() {
-		return adminType;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	public void setAdminType(Integer adminType) {
-		this.adminType = adminType;
-	}
+	
+	
+	
+	
 
 
 	

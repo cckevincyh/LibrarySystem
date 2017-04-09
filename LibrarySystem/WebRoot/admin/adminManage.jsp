@@ -24,7 +24,7 @@
               <script src="${pageContext.request.contextPath}/js/updateAdmin.js"></script>
               <script src="${pageContext.request.contextPath}/js/addAdmin.js"></script>
                 <script src="${pageContext.request.contextPath}/js/deleteAdmin.js"></script>
-       
+        <script src="${pageContext.request.contextPath}/js/addAuthorization.js"></script>
 </head>
 
 
@@ -85,7 +85,7 @@
                      <li>
                         <a href="/library/admin/return"><i class="glyphicon glyphicon-chevron-right"></i> 罚金管理</a>
                     </li>
-               <s:if test="#session.admin.adminType==0"><!-- 对超级管理员和普通管理员进行权限区分 -->
+               <s:if test="#session.admin.authorization.superSet==1"><!-- 对超级管理员和普通管理员进行权限区分 -->
                     <li class="active">
                         <a href="${pageContext.request.contextPath}/admin/adminManageAction_findAdminByPage.action"><i class="glyphicon glyphicon-chevron-right"></i> 管理员管理</a>
                     </li>
@@ -146,18 +146,23 @@
                             
                             <!---在此插入信息-->
                             <s:if test="#request.pb.beanList!=null">
-                            <s:iterator value="#request.pb.beanList" var="admin">
+                            <s:iterator value="#request.pb.beanList" var="admin">    
                              <tbody>
 	                         	   <td><s:property value="#admin.username"/></td>
 	                                <td><s:property value="#admin.name"/></td>
 	                                <td><s:property value="#admin.phone"/></td>
 	                                <td><s:property value="#admin.pwd"/></td>
 	                                <td>
-	                                	<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" onclick="updateAdmin(<s:property value="#admin.id"/>)">修改</button>
-	                                	<button type="button" class="btn btn-danger btn-xs" onclick="deleteAdmin(<s:property value="#admin.id"/>)">删除</button>
-	                                		
+	                                	<s:if test="#admin.authorization.superSet!=1">
+		                                	<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" onclick="updateAdmin(<s:property value="#admin.aid"/>)">修改</button>
+		                                	<button type="button" class="btn btn-danger btn-xs" onclick="deleteAdmin(<s:property value="#admin.aid"/>)">删除</button>
+		                                	<button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#powerModal" onclick="power(<s:property value="#admin.aid"/>)">权限</button>
+	                                	 </s:if>
+	                                	  <s:else>
+	                                	  			超级管理员
+	                                	    </s:else>
 	                               	</td>                                              
-                          	  </tbody>
+                          	  </tbody>                  	
                             </s:iterator>
                             </s:if>
                             <s:else>
@@ -548,7 +553,81 @@
 				</div>
 				    
     
- 
+        				  <!-- 权限模态框（Modal） -->
+                                     <!-------------------------------------------------------------->  
+                                
+                                        <!-- 权限模态框（Modal） -->
+                               <form class="form-horizontal">   <!--保证样式水平不混乱-->   
+									<div class="modal fade" id="powerModal" tabindex="-1" role="dialog" aria-labelledby="powerModalLabel" aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+														&times;
+													</button>
+													<h4 class="modal-title" id="powerModalLabel">
+														设置管理员权限
+													</h4>
+												</div>
+												<div class="modal-body">
+												
+										<!---------------------表单-------------------->
+											
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">图书分类管理权限</label>
+												<div class="col-sm-7">
+													<input type="hidden" id="updateId">
+													<input type="checkbox"  name="power" id="typeSet" value="typeSet">
+												</div>
+										</div>
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">图书管理权限</label>
+												<div class="col-sm-7">
+													<input type="checkbox" name="power" id="bookSet" value="bookSet">
+												</div>
+										</div>
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">读者管理权限</label>
+												<div class="col-sm-7">
+													<input type="checkbox" name="power" id="readerSet" value="readerSet">
+												</div>
+										</div>
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">借阅管理权限</label>
+												<div class="col-sm-7">
+													<input type="checkbox" name="power" id="borrowSet" value="borrowSet">
+												</div>
+										</div>
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">归还管理权限</label>
+												<div class="col-sm-7">
+													<input type="checkbox" name="power" id="backSet" value="backSet">
+												</div>
+										</div>
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">系统设置权限</label>
+												<div class="col-sm-7">
+													<input type="checkbox" name="power" id="sysSet" value="sysSet">
+												</div>
+										</div>
+										
+										
+										<!---------------------表单-------------------->
+															
+										</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+													</button>
+													<button type="button" class="btn btn-primary"  onclick="setPower()">
+														设置
+													</button>
+												</div>
+											</div><!-- /.modal-content -->
+										</div><!-- /.modal -->
+									</div>
+	
+                                 </form>
+                                   <!-------------------------------------------------------------->
  
  
 

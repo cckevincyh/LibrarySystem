@@ -9,6 +9,7 @@ import org.hibernate.classic.Session;
 import org.junit.Test;
 
 import com.cc.library.domain.Reader;
+import com.cc.library.domain.ReaderType;
 
 public class TestReader extends BaseSpring{
 
@@ -38,5 +39,29 @@ public class TestReader extends BaseSpring{
 		Reader reader = (Reader) createQuery.get(0);
 		System.out.println(reader);
 
+	}
+	
+	
+	
+	
+	@Test
+	public void testSaveReader2(){
+		SessionFactory sessionFactory = (SessionFactory)context.getBean("sessionFactory");
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		
+		Reader reader = new Reader();
+		reader.setReaderId("123");
+		reader.setName("菜肉");
+		reader.setPwd("123");
+		ReaderType readerType = new ReaderType();
+		readerType.setReaderTypeId(1);
+		reader.setReaderType(readerType);
+		
+	
+		
+		session.save(reader);
+		transaction.commit();
+		session.close();
 	}
 }

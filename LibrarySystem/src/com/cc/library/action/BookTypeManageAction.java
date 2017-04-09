@@ -31,12 +31,7 @@ public class BookTypeManageAction extends ActionSupport{
 	private String typeName;
 	private Integer id;
 	
-	
-	
-	
-	
-	
-	
+
 	
 	public void setId(Integer id) {
 		this.id = id;
@@ -44,15 +39,9 @@ public class BookTypeManageAction extends ActionSupport{
 
 
 
-
-
-
 	public void setTypeName(String typeName) {
 		this.typeName = typeName;
 	}
-
-
-
 
 
 
@@ -63,8 +52,10 @@ public class BookTypeManageAction extends ActionSupport{
 
 
 
-
-
+	/**
+	 * 根据页码查询图书类型信息
+	 * @return
+	 */
 	public String findBookTypeByPage(){
 		//获取页面传递过来的当前页码数
 		if(pageCode==0){
@@ -85,11 +76,14 @@ public class BookTypeManageAction extends ActionSupport{
 	
 	
 	
-	
+	/**
+	 * 添加图书类型
+	 * @return
+	 */
 	public String addBookType(){
 		BookType bookType = new BookType();
 		bookType.setTypeName(typeName);
-		BookType bookType2 = bookTypeService.getBookTypeByName(bookType);
+		BookType bookType2 = bookTypeService.getBookTypeByName(bookType);//根据名字查询图书类型，查看是否有重复的图书类型名称(已存在的图书类型)
 		int success = 0;
 		if(bookType2!=null){
 			success = -1;//已经存在该图书分类
@@ -111,7 +105,12 @@ public class BookTypeManageAction extends ActionSupport{
 		return null;
 	}
 	
-	
+	/**
+	 * 得到图书类型
+	 * ajax请求该方法
+	 * 返回图书类型集合的json对象
+	 * @return
+	 */
 	public String getBookType(){
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("application/json;charset=utf-8");
@@ -143,13 +142,16 @@ public class BookTypeManageAction extends ActionSupport{
 	
 	
 	
-	
+	/**
+	 * 修改图书类型
+	 * @return
+	 */
 	public String updateBookType(){
 		BookType bookType = new BookType();
 		bookType.setTypeId(id);
-		BookType updateBookType = bookTypeService.getBookTypeById(bookType);
-		updateBookType.setTypeName(typeName);
-		BookType newBookType = bookTypeService.updateBookTypeInfo(updateBookType);
+		BookType updateBookType = bookTypeService.getBookTypeById(bookType);//得到要修改的图书类型对象
+		updateBookType.setTypeName(typeName);//重新设置名称
+		BookType newBookType = bookTypeService.updateBookTypeInfo(updateBookType);//更新该图书类型对象
 		int success = 0;
 		if(newBookType!=null){
 			success = 1;
@@ -164,7 +166,10 @@ public class BookTypeManageAction extends ActionSupport{
 		return null;
 	}
 	
-	
+	/**
+	 * 删除图书类型
+	 * @return
+	 */
 	public String deleteBookType(){
 		BookType bookType = new BookType();
 		bookType.setTypeId(id);
@@ -185,6 +190,10 @@ public class BookTypeManageAction extends ActionSupport{
 	}
 	
 	
+	/**
+	 * 条件查询图书类型
+	 * @return
+	 */
 	public String queryBookType(){
 		//获取页面传递过来的当前页码数
 		if(pageCode==0){

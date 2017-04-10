@@ -8,4 +8,6 @@ public interface AuthorizationDao {
 
 	public Authorization getAuthorizationByaid(Authorization authorization);
 
+	public Authorization updateAuthorization(Authorization authorization);
+
 }

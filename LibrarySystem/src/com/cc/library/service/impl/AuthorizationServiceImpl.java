@@ -23,6 +23,12 @@ public class AuthorizationServiceImpl implements AuthorizationService{
 		// TODO Auto-generated method stub
 		return authorizationDao.getAuthorizationByaid(authorization);
 	}
+
+	@Override
+	public Authorization updateAuthorization(Authorization authorization) {
+		// TODO Auto-generated method stub
+		return authorizationDao.updateAuthorization(authorization);
+	}
 	
 	
 }

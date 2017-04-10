@@ -8,4 +8,6 @@ public interface AuthorizationService {
 	public boolean addAuthorization(Authorization authorization);
 
 	public Authorization getAuthorizationByaid(Authorization authorization);
+
+	public Authorization updateAuthorization(Authorization authorization);
 }

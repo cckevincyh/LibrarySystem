@@ -24,9 +24,17 @@ public class AuthorizationAction extends ActionSupport{
 	}
 	
 	private int id;
+	private String power;
 	
 	
 	
+	
+	public void setPower(String power) {
+		this.power = power;
+	}
+
+
+
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -54,6 +62,49 @@ public class AuthorizationAction extends ActionSupport{
 		try {
 			response.getWriter().print(jsonObject);
 		} catch (IOException e) {
+			throw new RuntimeException(e.getMessage());
+		}
+		return null;
+	}
+	
+	
+	public String addAuthorization(){
+		Authorization authorization = new Authorization();
+		authorization.setAid(id);
+		String[] str = power.split(",");
+		for(String s : str){
+			if(s.equals("typeSet")){
+				authorization.setTypeSet(1);
+			}
+			if(s.equals("bookSet")){
+				authorization.setBookSet(1);			
+			}
+			if(s.equals("readerSet")){
+				authorization.setReaderSet(1);
+			}
+			if(s.equals("borrowSet")){
+				authorization.setBookSet(1);
+			}
+			if(s.equals("backSet")){
+				authorization.setBackSet(1);
+			}
+			if(s.equals("sysSet")){
+				authorization.setSysSet(1);
+			}
+		}
+//		Admin admin = new Admin();
+//		admin.setAid(id);
+//		authorization.setAdmin(admin);
+		Authorization newAuthorization = authorizationService.updateAuthorization(authorization);//添加权限
+		int success = 0;
+		if(newAuthorization!=null){
+			success = 1;
+			//由于是转发并且js页面刷新,所以无需重查
+		}
+		try {
+			ServletActionContext.getResponse().getWriter().print(success);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			throw new RuntimeException(e.getMessage());
 		}
 		return null;

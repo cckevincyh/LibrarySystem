@@ -24,7 +24,7 @@
               <script src="${pageContext.request.contextPath}/js/updateAdmin.js"></script>
               <script src="${pageContext.request.contextPath}/js/addAdmin.js"></script>
                 <script src="${pageContext.request.contextPath}/js/deleteAdmin.js"></script>
-        <script src="${pageContext.request.contextPath}/js/addAuthorization.js"></script>
+        <script src="${pageContext.request.contextPath}/js/updateAuthorization.js"></script>
 </head>
 
 
@@ -576,7 +576,7 @@
 										<div class="form-group">	
 											<label for="firstname" class="col-sm-3 control-label">图书分类管理权限</label>
 												<div class="col-sm-7">
-													<input type="hidden" id="updateId">
+													<input type="hidden" id="aid">
 													<input type="checkbox"  name="power" id="typeSet" value="typeSet">
 												</div>
 										</div>

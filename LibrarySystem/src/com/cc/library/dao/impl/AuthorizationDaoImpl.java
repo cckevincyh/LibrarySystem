@@ -35,4 +35,19 @@ public class AuthorizationDaoImpl extends HibernateDaoSupport implements Authori
 		return null;
 	}
 
+	@Override
+	public Authorization updateAuthorization(Authorization authorization) {
+		Authorization newAuthorization = null;
+		try{
+			this.getHibernateTemplate().clear();
+			//将传入的detached(分离的)状态的对象的属性复制到持久化对象中，并返回该持久化对象
+			newAuthorization = (Authorization) this.getHibernateTemplate().merge(authorization);
+			this.getHibernateTemplate().flush();
+		}catch (Throwable e1) {
+			e1.printStackTrace();
+			throw new RuntimeException(e1.getMessage());
+		}
+		return newAuthorization;
+	}
+
 }

@@ -3,8 +3,10 @@ package com.cc.library.action;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.apache.struts2.ServletActionContext;
@@ -25,12 +27,20 @@ public class ReaderTypeManageAction extends ActionSupport{
 	private Integer maxNum;
 	private Integer bday;
 	private Double penalty;
+	private String readerTypeName;
 	
 	
 	
 	
 	
 	
+	
+	public void setReaderTypeName(String readerTypeName) {
+		this.readerTypeName = readerTypeName;
+	}
+
+
+
 	public void setMaxNum(Integer maxNum) {
 		this.maxNum = maxNum;
 	}
@@ -58,7 +68,8 @@ public class ReaderTypeManageAction extends ActionSupport{
 	public String getAllReaderType(){
 	
 		List<ReaderType> allReaderType = readerTypeService.getAllReaderType();
-		ServletActionContext.getRequest().setAttribute("readerTypes", allReaderType);
+		HttpServletRequest request = ServletActionContext.getRequest();
+		request.setAttribute("readerTypes", allReaderType);
 		return "success";
 	} 
 	
@@ -104,5 +115,43 @@ public class ReaderTypeManageAction extends ActionSupport{
 		}
 		return null;
 	}
+	
+	
+	
+	public String addReaderType(){
+		ReaderType readerType = new ReaderType();
+		readerType.setReaderTypeName(readerTypeName);
+		readerType.setPenalty(penalty);
+		readerType.setMaxNum(maxNum);
+		readerType.setBday(bday);
+		boolean b = readerTypeService.addReaderType(readerType);
+		int success = 0;
+		if(b){
+			success = 1;
+		}
+		try {
+			ServletActionContext.getResponse().getWriter().print(success);//向浏览器响应是否成功的状态码
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException(e.getMessage());
+		}
+		return null;
+	}
+	
+	
+	public String getAllReaderTypes(){
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("application/json;charset=utf-8");
+		List<ReaderType> allReaderTypes = readerTypeService.getAllReaderType();
+			
+		String json = JSONArray.fromObject(allReaderTypes).toString();//List------->JSONArray
+		try {
+			response.getWriter().print(json);
+		} catch (IOException e) {
+			throw new RuntimeException(e.getMessage());
+		}
+		return null;
+	}
+	
 	
 }

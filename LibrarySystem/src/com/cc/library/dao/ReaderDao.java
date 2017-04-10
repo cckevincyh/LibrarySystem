@@ -1,7 +1,10 @@
 package com.cc.library.dao;
 
+import java.util.List;
+
 import com.cc.library.domain.PageBean;
 import com.cc.library.domain.Reader;
+import com.cc.library.domain.ReaderType;
 
 public interface ReaderDao {
 
@@ -19,4 +22,7 @@ public interface ReaderDao {
 	public boolean deleteReader(Reader reader);
 
 	public PageBean<Reader> queryReader(Reader reader,int pageCode, int pageSize);
+
+	public Reader getReaderBypaperNO(Reader reader);
+
 }

@@ -12,6 +12,8 @@ public interface ReaderTypeService {
 	public ReaderType getTypeById(ReaderType readerType);
 
 	public ReaderType updateReaderType(ReaderType updateReaderType);
+
+	public boolean addReaderType(ReaderType readerType);
 	
 	
 	

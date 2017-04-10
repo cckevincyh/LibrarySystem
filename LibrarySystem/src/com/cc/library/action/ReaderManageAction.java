@@ -1,6 +1,7 @@
 package com.cc.library.action;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +12,8 @@ import net.sf.json.util.PropertyFilter;
 
 import org.apache.struts2.ServletActionContext;
 
+import com.cc.library.domain.Admin;
+import com.cc.library.domain.Authorization;
 import com.cc.library.domain.PageBean;
 import com.cc.library.domain.Reader;
 import com.cc.library.domain.ReaderType;
@@ -33,12 +36,14 @@ public class ReaderManageAction extends ActionSupport{
 
 
 
-	private String readerId;
+	private Integer readerId;
 	private String name;
 	private String phone;
 	private String pwd;
 	private Integer readerType;
 	private int pageCode;
+	private String paperNO;
+	private String email;
 	
 	
 	
@@ -47,6 +52,22 @@ public class ReaderManageAction extends ActionSupport{
 	
 	
 	
+	
+	
+	public void setPaperNO(String paperNO) {
+		this.paperNO = paperNO;
+	}
+
+
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+
+
 	public void setPageCode(int pageCode) {
 		this.pageCode = pageCode;
 	}
@@ -54,7 +75,7 @@ public class ReaderManageAction extends ActionSupport{
 
 
 
-	public void setReaderId(String readerId) {
+	public void setReaderId(Integer readerId) {
 		this.readerId = readerId;
 	}
 
@@ -98,38 +119,43 @@ public class ReaderManageAction extends ActionSupport{
 
 
 
-//
-//	/**
-//	 *添加读者
-//	 * @return
-//	 */
-//	public String addReader(){
-//		Reader reader = new Reader(readerId, name, phone, pwd);
-//		
-//		Reader oldReader = readerService.getReader(reader);//检查是否已经存在该id
-//		int success = 0;
-//		if(oldReader!=null){
-//			success = -1;//已存在该id
-//		}else{
-//			ReaderType type = new ReaderType();
-//			type.setReaderTypeId(readerType);
-//			reader.setReaderType(type);
-//			
-//			boolean b = readerService.addReader(reader);
-//			if(b){
-//				success = 1;
-//			}
-//		}
-//		try {
-//			ServletActionContext.getResponse().getWriter().print(success);
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			throw new RuntimeException(e.getMessage());
-//		}
-//		return null;
-//		
-//	}
-//	
+
+	/**
+	 *添加读者
+	 * @return
+	 */
+	public String addReader(){
+		//得到当前时间
+		Date createTime = new Date(System.currentTimeMillis());
+		//得到当前管理员
+		Admin admin = (Admin) ServletActionContext.getContext().getSession().get("admin");
+		//得到当前读者类型
+		ReaderType type = new ReaderType();
+		type.setReaderTypeId(readerType);
+		Reader reader = new Reader(name, pwd, phone, type, email, admin, paperNO, createTime);
+		
+		Reader oldReader = readerService.getReaderBypaperNO(reader);//检查是否已经存在该paperNO的读者
+		int success = 0;
+		if(oldReader!=null){
+			success = -1;//已存在该id
+		}else{
+			
+			
+			boolean b = readerService.addReader(reader);
+			if(b){
+				success = 1;
+			}
+		}
+		try {
+			ServletActionContext.getResponse().getWriter().print(success);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException(e.getMessage());
+		}
+		return null;
+		
+	}
+	
 	
 	/**
 	 * 根据页码查询读者
@@ -168,7 +194,7 @@ public class ReaderManageAction extends ActionSupport{
 
 		jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
 		    public boolean apply(Object obj, String name, Object value) {
-			if(obj instanceof Set||name.equals("borrowInfos") || name.equals("forfeitInfos")){//过滤掉集合
+			if(obj instanceof Set||name.equals("borrowInfos") || obj instanceof Authorization || name.equals("authorization") ){//过滤掉集合
 				return true;
 			}else{
 				return false;
@@ -199,6 +225,9 @@ public class ReaderManageAction extends ActionSupport{
 		updateReader.setName(name);
 		updateReader.setPhone(phone);
 		updateReader.setPwd(pwd);
+		updateReader.setPaperNO(paperNO);
+		updateReader.setEmail(email);
+		//设置reader的值
 		ReaderType type = new ReaderType();
 		type.setReaderTypeId(readerType);
 		updateReader.setReaderType(type);
@@ -243,30 +272,35 @@ public class ReaderManageAction extends ActionSupport{
 	
 	
 	
-	public String queryReader(){
-		//获取页面传递过来的当前页码数
-		if(pageCode==0){
-			pageCode = 1;
-		}
-		//给pageSize,每页的记录数赋值
-		int pageSize = 5;
-		PageBean<Reader> pb = null;
-		if("".equals(readerId.trim()) && "".equals(name.trim()) && readerType==-1){
-			pb = readerService.findReaderByPage(pageCode,pageSize);
-		}else{
-			Reader reader = new Reader();
-			reader.setReaderId(readerId);
-			ReaderType type = new ReaderType();
-			type.setReaderTypeId(readerType);
-			reader.setReaderType(type);
-			reader.setName(name);
-			pb = readerService.queryReader(reader,pageCode,pageSize);
-		}
-		if(pb!=null){
-			pb.setUrl("queryReader.action?readerId="+readerId+"&name="+name+"&readerType="+readerType+"&");
-		}
-		ServletActionContext.getRequest().setAttribute("pb", pb);
-		return "success";
-	}
+//	public String queryReader(){
+//		//获取页面传递过来的当前页码数
+//		if(pageCode==0){
+//			pageCode = 1;
+//		}
+//		//给pageSize,每页的记录数赋值
+//		int pageSize = 5;
+//		PageBean<Reader> pb = null;
+//		if("".equals(readerId.trim()) && "".equals(name.trim()) && readerType==-1){
+//			pb = readerService.findReaderByPage(pageCode,pageSize);
+//		}else{
+//			Reader reader = new Reader();
+//			reader.setReaderId(readerId);
+//			ReaderType type = new ReaderType();
+//			type.setReaderTypeId(readerType);
+//			reader.setReaderType(type);
+//			reader.setName(name);
+//			pb = readerService.queryReader(reader,pageCode,pageSize);
+//		}
+//		if(pb!=null){
+//			pb.setUrl("queryReader.action?readerId="+readerId+"&name="+name+"&readerType="+readerType+"&");
+//		}
+//		ServletActionContext.getRequest().setAttribute("pb", pb);
+//		return "success";
+//	}
+//	
+	
+	
+	
+
 
 }

@@ -29,6 +29,12 @@ public class ReaderTypeServiceImpl implements ReaderTypeService{
 		// TODO Auto-generated method stub
 		return readerTypeDao.updateReaderType(updateReaderType);
 	}
+
+	@Override
+	public boolean addReaderType(ReaderType readerType) {
+		// TODO Auto-generated method stub
+		return readerTypeDao.addReaderType(readerType);
+	}
 	
 	
 	

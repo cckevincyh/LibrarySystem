@@ -12,6 +12,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import com.cc.library.dao.ReaderDao;
 import com.cc.library.domain.PageBean;
 import com.cc.library.domain.Reader;
+import com.cc.library.domain.ReaderType;
 
 public class ReaderDaoImpl extends HibernateDaoSupport implements ReaderDao{
 
@@ -206,6 +207,18 @@ public class ReaderDaoImpl extends HibernateDaoSupport implements ReaderDao{
 		}
 		return null;
 	}
-	
+
+
+	@Override
+	public Reader getReaderBypaperNO(Reader reader) {
+		String hql= "from Reader r where r.paperNO=? and r.state=1";
+		List list = this.getHibernateTemplate().find(hql, reader.getPaperNO());
+		if(list!=null && list.size()>0){
+			return (Reader) list.get(0);
+		}
+		return null;
+	}
+
+
 
 }

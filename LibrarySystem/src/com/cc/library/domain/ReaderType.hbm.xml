@@ -6,7 +6,7 @@
 	<class name="com.cc.library.domain.ReaderType"  dynamic-insert="true" dynamic-update="true">
 		<id name="readerTypeId" type="java.lang.Integer" length="2">
 			<column name="readerTypeId" />
-			<generator class="assigned" />
+			<generator class="increment" />
 		</id>
 		
 		<property name="readerTypeName" type="java.lang.String"  not-null="true">
@@ -26,7 +26,6 @@
 			<column name="penalty" />
 		</property>
 		
-
 
 		
 		

@@ -8,7 +8,9 @@ $(function () {
 
     $('#updateReader').click(function () {
 
-	var postdata = "readerId="+$.trim($("#updateReaderID").val())+"&readerType="+$.trim($("#updateReaderType").val())+"&name="+$.trim($("#updateName").val())+"&phone="+ $.trim($("#updatePhone").val())+"&pwd="+ $.trim($("#updatePwd").val());
+	var postdata = "readerId="+$.trim($("#updateReaderID").val())+"&readerType="+$.trim($("#updateReaderType").val())
+	+"&name="+$.trim($("#updateName").val())+"&phone="+ $.trim($("#updatePhone").val())+"&pwd="+ $.trim($("#updatePwd").val())+"&email="+ $.trim($("#updateEmail").val())
+	+"&paperNO="+ $.trim($("#updatePaperNO").val());
 	ajax(
     		  {
 			  	method:'POST',
@@ -43,26 +45,52 @@ $(function () {
 
 
 
-
+/**
+ * 显示修改前的数据在输入框中
+ * @param {Object} id
+ */
 function updateReader(id){
+		$("#updateReaderType option[value!=-1]").remove();//移除先前的选项
 	ajax(
-    		  {
-			  	method:'POST',
-	    		url:'admin/readerManageAction_getReader.action',
-				params: "readerId=" + id,
-				type:"json",
+		  {
+	    		url:"admin/readerTypeManageAction_getAllReaderTypes.action",
+	    		type:"json",
 	    		callback:function(data) {
-					$("#updateReaderID").val(data.readerId);
-					$("#updateName").val(data.name);
-					$("#updateNum").val(data.maxNum);
-					$("#updatePhone").val(data.phone);
-					$("#updatePwd").val(data.pwd);
-					$("#updateReaderType").val(data.readerType.readerTypeId);
-
+					// 循环遍历每个读者分类，每个名称生成一个option对象，添加到<select>中
+					for(var index in data) {
+						var op = document.createElement("option");//创建一个指名名称元素
+						op.value = data[index].readerTypeId;//设置op的实际值为当前的读者分类编号
+						var textNode = document.createTextNode(data[index].readerTypeName);//创建文本节点
+						op.appendChild(textNode);//把文本子节点添加到op元素中，指定其显示值
+						
+						document.getElementById("updateReaderType").appendChild(op);
+					}
+						ajax(
+				    			  {
+								  	method:'POST',
+						    		url:'admin/readerManageAction_getReader.action',
+									params: "readerId=" + id,
+									type:"json",
+						    		callback:function(data) {
+										$("#updateReaderID").val(data.readerId);
+										$("#updatePaperNO").val(data.paperNO);
+										$("#updateName").val(data.name);
+										$("#updateEmail").val(data.email);
+										$("#updatePhone").val(data.phone);
+										$("#updatePwd").val(data.pwd);
+										$("#updateReaderType").val(data.readerType.readerTypeId);
+									}
+								}
+					   
+		    			);
 				}
-			}
-			   
-    	);
+				
+			
+				
+				
+		   }
+	);
+	
 			
 
 }

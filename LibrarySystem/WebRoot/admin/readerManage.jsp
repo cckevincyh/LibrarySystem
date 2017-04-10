@@ -25,6 +25,7 @@
 			
 			<script src="${pageContext.request.contextPath}/js/updateReader.js"></script>
       	 <script src="${pageContext.request.contextPath}/js/deleteReader.js"></script>
+      	 <script src="${pageContext.request.contextPath}/js/getAllReaderTypes.js"></script>
 </head>
 
 
@@ -137,16 +138,6 @@
 		                                        <select class="form-control" id="readerType" name="readerType">
 		                                            <option value="-1">请选择</option>
 		                                            
-		                                                <option value="0">
-		                                            	        学生
-		                                                </option>
-		                                            
-		                                                <option value="1">
-		                                               	     教师
-		                                                </option>
-		                                            
-		                                               
-		                                            
 		                                        </select>
 		                                        
 		                                    </div>
@@ -175,11 +166,12 @@
                         <table id="data_list" class="table table-hover table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
-                                <th>读者编证件号</th>
+                                <th>读者证件号</th>
                                 <th>读者姓名</th>
-                                <th>联系号码</th>
-                                <th>密码</th>
                                 <th>读者类型</th>
+                                <th>密码</th>
+                                <th>联系号码</th>
+                                <th>创建时间</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -189,19 +181,14 @@
                             <s:if test="#request.pb.beanList!=null">
                             <s:iterator value="#request.pb.beanList" var="reader">
                              <tbody>
-	                         	   <td><s:property value="#reader.readerId"/></td>
+	                         	   <td><s:property value="#reader.paperNO"/></td>
 	                                <td><s:property value="#reader.name"/></td>
+	                                 <td><s:property value="#reader.readerType.readerTypeName"/></td>
+	                                  <td><s:property value="#reader.pwd"/></td>
 	                                <td><s:property value="#reader.phone"/></td>
-	                                <td><s:property value="#reader.pwd"/></td>
+	                                 <td><s:date name="#reader.createTime" format="yyyy-MM-dd" /></td>
 	                                <td>
-										<s:if test="#reader.readerType.readerTypeId==0">
-											学生
-										</s:if>
-										<s:if test="#reader.readerType.readerTypeId==1">
-											教师
-										</s:if>
-									</td>
-	                                <td>
+	                                  <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#findModal" onclick="getReaderInfo(<s:property value="#reader.readerId"/>)" >查看</button>
 	                                	<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" onclick="updateReader(<s:property value="#reader.readerId"/>)">修改</button>
 	                                	<button type="button" class="btn btn-danger btn-xs" onclick="deleteReader(<s:property value="#reader.readerId"/>)">删除</button>
 	                                		
@@ -215,7 +202,8 @@
 	                                <td>暂无数据</td>
 	                                <td>暂无数据</td>
 	                                <td>暂无数据</td>
-	                                <td>暂无数据</td>   
+	                                <td>暂无数据</td>
+	                                <td>暂无数据</td>    
 	                                <td>暂无数据</td>                                           
                           	  </tbody>
                             </s:else>
@@ -320,9 +308,9 @@
 												
 										<!---------------------表单-------------------->
 										 <div class="form-group">
-											<label for="firstname" class="col-sm-3 control-label">读者编号</label>
+											<label for="firstname" class="col-sm-3 control-label">读者证件号</label>
 												<div class="col-sm-7">
-													<input type="text" class="form-control" id="addReaderId"  placeholder="请输入读者编号">
+													<input type="text" class="form-control" id="addPaperNO"  placeholder="请输入读者证件号">
 												
 												</div>
 										</div>
@@ -332,7 +320,7 @@
 										<div class="form-group">	
 											<label for="firstname" class="col-sm-3 control-label">真实姓名</label>
 												<div class="col-sm-7">
-													<input type="text" class="form-control" id="addName"  placeholder="请输入管理员真实姓名">
+													<input type="text" class="form-control" id="addName"  placeholder="请输入读者真实姓名">
 												
 												</div>
 										</div>
@@ -349,29 +337,24 @@
 										<div class="form-group">	
 											<label for="firstname" class="col-sm-3 control-label">联系电话</label>
 												<div class="col-sm-7">
-													<input type="text" class="form-control" id="addPhone"  placeholder="请输入管理员联系电话">
+													<input type="text" class="form-control" id="addPhone"  placeholder="请输入读者联系电话">
 												
 												</div>
 										</div>
 										
-										
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">邮箱</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="addEmail"  placeholder="请输入读者邮箱">
+												
+												</div>
+										</div>
 										<div class="form-group">	
 											<label for="firstname" class="col-sm-3 control-label">读者类型</label>
 												<div class="col-sm-7">
 													  <select class="form-control" id="addreaderType">
-		                                            <option value="-1">请选择</option>
-		                                            
-		                                                <option value="0">
-		                                            	        学生
-		                                                </option>
-		                                            
-		                                                <option value="1">
-		                                               	     教师
-		                                                </option>
-		                                            
-		                                               
-		                                            
-		                                        </select>
+		                                          		  <option value="-1">请选择</option>
+			                                       	 </select>
 												
 												</div>
 										</div>
@@ -417,9 +400,10 @@
 										<!---------------------表单-------------------->
 											
 										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">读者编号</label>
+											<label for="firstname" class="col-sm-3 control-label">读者证件号</label>
 												<div class="col-sm-7">
-													<input type="text" class="form-control" id="updateReaderID" readonly="readonly">
+													<input type="hidden" id="updateReaderID">
+													<input type="text" class="form-control" id="updatePaperNO" placeholder="请输入读者证件号">
 												
 												</div>
 										</div>
@@ -427,7 +411,7 @@
 										<div class="form-group">	
 											<label for="firstname" class="col-sm-3 control-label">真实姓名</label>
 												<div class="col-sm-7">
-													<input type="text" class="form-control" id="updateName"  placeholder="请输入管理员真实姓名">
+													<input type="text" class="form-control" id="updateName"  placeholder="请输入读者真实姓名">
 												
 												</div>
 										</div>
@@ -436,11 +420,17 @@
 										<div class="form-group">	
 											<label for="firstname" class="col-sm-3 control-label">联系电话</label>
 												<div class="col-sm-7">
-													<input type="text" class="form-control" id="updatePhone"  placeholder="请输入管理员联系电话">
+													<input type="text" class="form-control" id="updatePhone"  placeholder="请输入读者联系电话">
 												
 												</div>
 										</div>
-										
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">邮箱</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="updateEmail"  placeholder="请输入读者邮箱">
+												
+												</div>
+										</div>
 										
 										
 										<div class="form-group">	
@@ -455,19 +445,8 @@
 											<label for="firstname" class="col-sm-3 control-label">读者类型</label>
 												<div class="col-sm-7">
 													  <select class="form-control" id="updateReaderType">
-		                                            <option value="-1">请选择</option>
-		                                            
-		                                                <option value="0">
-		                                            	        学生
-		                                                </option>
-		                                            
-		                                                <option value="1">
-		                                               	     教师
-		                                                </option>
-		                                            
-		                                               
-		                                            
-		                                        </select>
+		                                         	   <option value="-1">请选择</option>
+		                                       		 </select>
 												
 												</div>
 										</div>
@@ -653,7 +632,93 @@
 				    
     
  
- 
+    <!--------------------------------------查看的模糊框------------------------>  
+                                 <form class="form-horizontal">   <!--保证样式水平不混乱-->   
+                                        <!-- 模态框（Modal） -->
+									<div class="modal fade" id="findModal" tabindex="-1" role="dialog" aria-labelledby="findModalLabel" aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+														&times;
+													</button>
+													<h4 class="modal-title" id="findModalLabel">
+														查看读者信息
+													</h4>
+												</div>
+												<div class="modal-body">
+												
+										<!---------------------表单-------------------->
+										<div class="form-group">
+											<label for="firstname" class="col-sm-3 control-label">读者证件号</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="findPaperNO" readonly="readonly">
+												
+												</div>
+										</div>
+										 <div class="form-group">
+											<label for="firstname" class="col-sm-3 control-label">读者姓名</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="findReaderName"  readonly="readonly">
+												
+												</div>
+										</div>
+											
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">读者类型</label>
+											<div class="col-sm-7">
+												<input type="text" class="form-control" id="findReaderType"  readonly="readonly">
+												
+											</div>
+										</div>
+											
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">密码</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="findPwd"  readonly="readonly">
+												
+												</div>
+										</div>
+										
+										
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">联系号码</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="findPhone"  readonly="readonly">
+												
+												</div>
+										</div>
+										
+										
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">邮箱</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="findEmail"  readonly="readonly">
+												
+												</div>
+										</div>
+										
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">操作管理员</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="findAdmin"  readonly="readonly">
+												
+												</div>
+										</div>
+										
+										
+										<!---------------------表单-------------------->
+									</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+													</button>
+												</div>
+											</div><!-- /.modal-content -->
+										</div><!-- /.modal -->
+									</div>
+
+                                 </form>	
+ 								<!--------------------------------------查看的模糊框------------------------>  
  
 
  

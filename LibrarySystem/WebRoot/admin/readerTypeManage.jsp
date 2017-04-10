@@ -23,7 +23,7 @@
              <script src="${pageContext.request.contextPath}/js/adminUpdatePwd.js"></script>
              
  		<script src="${pageContext.request.contextPath}/js/updateReaderType.js"></script>
-       
+       <script src="${pageContext.request.contextPath}/js/addReaderType.js"></script>
 </head>
 
 
@@ -102,7 +102,20 @@
 
            <!-- content -->
             <div class="col-md-10">
-              
+              <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default bootstrap-admin-no-table-panel">
+                            <div class="panel-heading">
+                                <div class="text-muted bootstrap-admin-box-title">添加读者类型</div>
+                            </div>
+                            <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
+                                    <div class="col-lg-2 form-group">
+                                        <button type="button" class="btn btn-primary" id="btn_add" data-toggle="modal" data-target="#addModal">添加</button>          
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-lg-12">
                         <table id="data_list" class="table table-hover table-bordered" cellspacing="0" width="100%">
@@ -121,20 +134,12 @@
                             <s:if test="#request.readerTypes!=null">
                             <s:iterator value="#request.readerTypes" var="readerType">
                              <tbody>
-	                         	   <td>
-		                         	   <s:if test="#readerType.readerTypeId==0">
-		                         	   		学生
-		                         	   </s:if>
-		                         	     <s:if test="#readerType.readerTypeId==1">
-		                         	   		教师
-		                         	   </s:if>
-	                         	   </td>
+	                         	   <td><s:property value="#readerType.readerTypeName"/></td>
 	                                <td><s:property value="#readerType.maxNum"/></td>
 	                                <td><s:property value="#readerType.bday"/></td>
 	                                <td><s:property value="#readerType.penalty"/></td>
 	                                <td>
 	                                	<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" onclick="updateReaderType(<s:property value="#readerType.readerTypeId"/>)">修改</button>
-	                                		
 	                               	</td>                                              
                           	  </tbody>
                             </s:iterator>
@@ -390,6 +395,70 @@
     
  
  
+  <!--------------------------------------添加的模糊框------------------------>  
+                                 <form class="form-horizontal">   <!--保证样式水平不混乱-->   
+                                        <!-- 模态框（Modal） -->
+									<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+														&times;
+													</button>
+													<h4 class="modal-title" id="myModalLabel">
+														添加新管理员
+													</h4>
+												</div>
+												<div class="modal-body">
+												
+										<!---------------------表单-------------------->
+										 <div class="form-group">
+											<label for="firstname" class="col-sm-3 control-label">读者类型</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="addType"  placeholder="请输入读者类型名称">
+												
+												</div>
+										</div>
+											
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">最大借阅书量</label>
+											<div class="col-sm-7">
+												<input type="password" class="form-control" id="addMaxNum"  placeholder="请输入最大借阅书量">
+
+											</div>
+										</div>
+											
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">可借天数</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="addBday"  placeholder="请输入可借天数">
+												
+												</div>
+										</div>
+										
+										
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">每日罚金</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="addPenalty"  placeholder="请输入每日罚金">
+												
+												</div>
+										</div>
+										<!---------------------表单-------------------->
+									</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+													</button>
+													<button type="button" class="btn btn-primary" id="addReaderType">
+														添加
+													</button>
+												</div>
+											</div><!-- /.modal-content -->
+										</div><!-- /.modal -->
+									</div>
+
+                                 </form>	
+ 								<!--------------------------------------添加的模糊框------------------------>  
  
 
  

@@ -1,8 +1,11 @@
 package com.cc.library.service.impl;
 
+import java.util.List;
+
 import com.cc.library.dao.ReaderDao;
 import com.cc.library.domain.PageBean;
 import com.cc.library.domain.Reader;
+import com.cc.library.domain.ReaderType;
 import com.cc.library.service.ReaderService;
 
 public class ReaderServiceImpl implements ReaderService{
@@ -63,6 +66,15 @@ public class ReaderServiceImpl implements ReaderService{
 	public PageBean<Reader> queryReader(Reader reader,int pageCode, int pageSize) {
 		return readerDao.queryReader(reader,pageCode,pageSize);
 	}
-	
+
+
+
+	@Override
+	public Reader getReaderBypaperNO(Reader reader) {
+		// TODO Auto-generated method stub
+		return readerDao.getReaderBypaperNO(reader);
+	}
+
+
 	
 }

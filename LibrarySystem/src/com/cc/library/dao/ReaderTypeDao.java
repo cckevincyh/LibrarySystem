@@ -12,4 +12,6 @@ public interface ReaderTypeDao {
 
 	public ReaderType updateReaderType(ReaderType updateReaderType);
 
+	public boolean addReaderType(ReaderType readerType);
+
 }

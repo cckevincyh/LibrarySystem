@@ -15,7 +15,11 @@ public class ReaderTypeDaoImpl extends HibernateDaoSupport implements ReaderType
 
 		String hql= "from ReaderType";
 		List list = this.getHibernateTemplate().find(hql);
-		return list;
+		if(list!=null && list.size()>0){
+			return list;
+		}
+		return null;
+		
 	}
 
 	@Override
@@ -41,6 +45,21 @@ public class ReaderTypeDaoImpl extends HibernateDaoSupport implements ReaderType
 			throw new RuntimeException(e1.getMessage());
 		}
 		return newReaderType;
+	}
+
+	@Override
+	public boolean addReaderType(ReaderType readerType) {
+		boolean b = true;
+		try{
+			this.getHibernateTemplate().clear();
+			this.getHibernateTemplate().save(readerType);
+			this.getHibernateTemplate().flush();
+		}catch (Throwable e1) {
+			b = false;
+			e1.printStackTrace();
+			throw new RuntimeException(e1.getMessage());
+		}
+		return b;
 	}
 
 }

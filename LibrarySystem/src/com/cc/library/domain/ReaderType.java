@@ -1,5 +1,7 @@
 package com.cc.library.domain;
 
+import java.util.Set;
+
 public class ReaderType {
 
 	private Integer readerTypeId;
@@ -7,6 +9,8 @@ public class ReaderType {
 	private Integer maxNum;	//最大借书量
 	private Double penalty;	//每日罚金
 	private Integer bday;	//可借天数
+	
+	
 	public Integer getReaderTypeId() {
 		return readerTypeId;
 	}

@@ -11,7 +11,7 @@ import java.util.Set;
  */
 public class Reader implements Serializable{
 
-	private String readerId;	//自动编号
+	private Integer readerId;	//自动编号
 	private String name;	//真实名称
 	private String pwd;	//密码
 	private String phone;	//联系方式
@@ -24,11 +24,13 @@ public class Reader implements Serializable{
 	
 	private Integer state;	//删除状态
 
-	public String getReaderId() {
+
+
+	public Integer getReaderId() {
 		return readerId;
 	}
 
-	public void setReaderId(String readerId) {
+	public void setReaderId(Integer readerId) {
 		this.readerId = readerId;
 	}
 
@@ -121,6 +123,20 @@ public class Reader implements Serializable{
 
 	
 	
+	}
+
+	public Reader(String name, String pwd, String phone,
+			ReaderType readerType, String email, Admin admin, String paperNO,
+			Date createTime) {
+		super();
+		this.name = name;
+		this.pwd = pwd;
+		this.phone = phone;
+		this.readerType = readerType;
+		this.email = email;
+		this.admin = admin;
+		this.paperNO = paperNO;
+		this.createTime = createTime;
 	}
 	
 	

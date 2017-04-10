@@ -16,7 +16,7 @@
 			<column name="state" default="1"/>
 		</property>
 				
-		<set name="books" lazy="false">
+		<set name="books" lazy="false" inverse="true">
 			<key>
 				<column name="typeId"></column>
 			</key>

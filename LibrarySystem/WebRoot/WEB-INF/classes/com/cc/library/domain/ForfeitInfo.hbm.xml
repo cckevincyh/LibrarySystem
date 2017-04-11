@@ -14,7 +14,7 @@
 			<column name="forfeit" />
 		</property>
 		
-		<property name="isPay" type="java.lang.Integer" length="2">
+		<property name="isPay" type="java.lang.Integer" >
 			<column name="isPay" default="0"/>
 		</property>
 		

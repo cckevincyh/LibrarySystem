@@ -45,16 +45,7 @@ public class BookTypeServiceImpl implements BookTypeService{
 
 	@Override
 	public boolean deleteBookType(BookType bookType) {
-		BookType deleteBookType = getBookTypeById(bookType);
-		Set<Book> books = deleteBookType.getBooks();
-		System.out.println(books.size());
-		for(Book book : books){
-			Book updateBook = bookTypeDao.getBookById(book);
-			if(updateBook!=null){
-				updateBook.setState(0);
-			}
-		}
-		return bookTypeDao.deleteBookType(deleteBookType);
+		return bookTypeDao.deleteBookType(bookType);
 	}
 
 	@Override

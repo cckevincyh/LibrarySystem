@@ -26,8 +26,8 @@ public class TestBookType extends BaseSpring{
 		List createQuery = session.createQuery(hql).list();
 		BookType bookType = (BookType) createQuery.get(0);
 		System.out.println(bookType);
-		Set<Book> books = bookType.getBooks();
-		System.out.println(books.size());
+//		Set<Book> books = bookType.getBooks();
+//		System.out.println(books.size());
 		
 		JsonConfig jsonConfig = new JsonConfig();
 
@@ -68,8 +68,8 @@ public class TestBookType extends BaseSpring{
 		List createQuery = session.createQuery(hql).list();
 		BookType bookType = (BookType) createQuery.get(0);
 		System.out.println(bookType);
-		Set<Book> books = bookType.getBooks();
-		System.out.println(books.size());
+//		Set<Book> books = bookType.getBooks();
+//		System.out.println(books.size());
 	}
 	
 	@Test
@@ -81,11 +81,10 @@ public class TestBookType extends BaseSpring{
 		List createQuery = session.createQuery(hql).list();
 		BookType bookType = (BookType) createQuery.get(0);
 		System.out.println(bookType);
-		Set<Book> books = bookType.getBooks();
-		for(Book book : books){
-			book.setState(0);
-		}
-		bookType.setState(0);
+//		Set<Book> books = bookType.getBooks();
+//		for(Book book : books){
+//			book.setState(0);
+//		}
 		session.update(bookType);
 		transaction.commit();
 		session.close();

@@ -26,7 +26,8 @@ $(function () {
 
     $('#addReader').click(function () {
 
-	var postdata = "paperNO="+$.trim($("#addPaperNO").val())+"&name="+$.trim($("#addName").val())+"&phone="+ $.trim($("#addPhone").val())+"&pwd="+ $.trim($("#addPwd").val())+"&readerType="+ $.trim($("#addreaderType").val());
+	var postdata = "paperNO="+$.trim($("#addPaperNO").val())+"&name="+$.trim($("#addName").val())+"&phone="+ $.trim($("#addPhone").val())+"&pwd="+ $.trim($("#addPwd").val())+"&readerType="+ $.trim($("#addreaderType").val())
+	+"&email="+ $.trim($("#addEmail").val());
 	ajax(
     		  {
 			  	method:'POST',

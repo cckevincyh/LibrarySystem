@@ -20,14 +20,14 @@ public class BookTypeDaoImpl extends HibernateDaoSupport implements BookTypeDao{
 	
 	@Override
 	public List<BookType> getAllBookTypes() {
-		String hql= "from BookType b where b.state=1";
+		String hql= "from BookType";
 		List list = this.getHibernateTemplate().find(hql);
 		return list;
 	}
 
 	@Override
 	public BookType getBookType(BookType bookType) {
-		String hql= "from BookType b where b.typeId=? and b.state=1";
+		String hql= "from BookType b where b.typeId=?";
 		List list = this.getHibernateTemplate().find(hql, bookType.getTypeId());
 		if(list!=null && list.size()>0){
 			return (BookType) list.get(0);
@@ -71,14 +71,14 @@ public class BookTypeDaoImpl extends HibernateDaoSupport implements BookTypeDao{
 		pb.setPageSize(pageSize);//设置页面记录数
 		List bookTypeList = null;
 		try {
-			String sql = "SELECT count(*) FROM BookType b where b.state=1";
+			String sql = "SELECT count(*) FROM BookType";
 			List list = this.getSession().createQuery(sql).list();
 			int totalRecord = Integer.parseInt(list.get(0).toString()); //得到总记录数
 			pb.setTotalRecord(totalRecord);	//设置总记录数
 			this.getSession().close();
 			
 			//不支持limit分页
-			String hql= "from BookType b where b.state=1";
+			String hql= "from BookType";
 			//分页查询
 			bookTypeList = doSplitPage(hql,pageCode,pageSize);
 			
@@ -96,7 +96,7 @@ public class BookTypeDaoImpl extends HibernateDaoSupport implements BookTypeDao{
 
 	@Override
 	public BookType getBookTypeByName(BookType bookType) {
-		String hql= "from BookType b where b.typeName=? and b.state=1";
+		String hql= "from BookType b where b.typeName=?";
 		List list = this.getHibernateTemplate().find(hql, bookType.getTypeName());
 		if(list!=null && list.size()>0){
 			return (BookType) list.get(0);
@@ -123,7 +123,7 @@ public class BookTypeDaoImpl extends HibernateDaoSupport implements BookTypeDao{
 
 	@Override
 	public BookType getBookTypeById(BookType bookType) {
-		String hql= "from BookType b where b.typeId=? and b.state=1";
+		String hql= "from BookType b where b.typeId=?";
 		List list = this.getHibernateTemplate().find(hql, bookType.getTypeId());
 		if(list!=null && list.size()>0){
 			return (BookType) list.get(0);
@@ -151,10 +151,9 @@ public class BookTypeDaoImpl extends HibernateDaoSupport implements BookTypeDao{
 	@Override
 	public boolean deleteBookType(BookType bookType) {
 		boolean b = true;
-		bookType.setState(0);
 		try{
 			this.getHibernateTemplate().clear();
-			this.getHibernateTemplate().update(bookType);
+			this.getHibernateTemplate().delete(bookType);
 			this.getHibernateTemplate().flush();
 		}catch (Throwable e1) {
 			b = false;
@@ -176,8 +175,8 @@ public class BookTypeDaoImpl extends HibernateDaoSupport implements BookTypeDao{
 		
 		StringBuilder sb = new StringBuilder();
 		StringBuilder sb_sql = new StringBuilder();
-		String sql = "SELECT count(*) FROM BookType b where b.state=1";
-		String hql= "from BookType b where b.state=1";
+		String sql = "SELECT count(*) FROM BookType b where 1=1";
+		String hql= "from BookType b where 1=1";
 		sb.append(hql);
 		sb_sql.append(sql);
 		if(!"".equals(bookType.getTypeName().trim())){
@@ -210,7 +209,7 @@ public class BookTypeDaoImpl extends HibernateDaoSupport implements BookTypeDao{
 	
 	@Override
 	public Book getBookById(Book book) {
-		String hql= "from Book b where b.bookId=? and b.state=1";
+		String hql= "from Book b where b.bookId=?";
 		List list = this.getHibernateTemplate().find(hql, book.getBookId());
 		if(list!=null && list.size()>0){
 			return (Book) list.get(0);

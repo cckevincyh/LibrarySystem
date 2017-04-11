@@ -26,6 +26,7 @@
 			<script src="${pageContext.request.contextPath}/js/updateReader.js"></script>
       	 <script src="${pageContext.request.contextPath}/js/deleteReader.js"></script>
       	 <script src="${pageContext.request.contextPath}/js/getAllReaderTypes.js"></script>
+      	  <script src="${pageContext.request.contextPath}/js/getReader.js"></script>
 </head>
 
 

@@ -21,7 +21,7 @@
 		</property>
 		
 		
-		<property name="phone" type="java.lang.String" length="11">
+		<property name="phone" type="java.lang.String" >
 			<column name="phone"  />
 		</property>
 		
@@ -30,7 +30,7 @@
 			<column name="email"  />
 		</property>
 			
-		<property name="state" type="java.lang.Integer" length="2">
+		<property name="state" type="java.lang.Integer" >
 			<column name="state" default="1"/>
 		</property>
 		

@@ -8,7 +8,7 @@
 			<column name="bookId" />
 			<generator class="increment" />
 		</id>
-		<property name="bookName" type="java.lang.String" length="20">
+		<property name="bookName" type="java.lang.String" >
 			<column name="bookName" />
 		</property>
 		
@@ -16,25 +16,25 @@
 			<column name="ISBN" />
 		</property>
 		
-		<property name="autho" type="java.lang.String" length="20">
+		<property name="autho" type="java.lang.String" >
 			<column name="autho" />
 		</property>
 		
-		<property name="num" type="java.lang.Integer" length="5">
+		<property name="num" type="java.lang.Integer" >
 			<column name="num" />
 		</property>
 		
 		
-		<property name="currentNum" type="java.lang.Integer" length="5">
+		<property name="currentNum" type="java.lang.Integer" >
 			<column name="currentNum" />
 		</property>
 		
-		<property name="press" type="java.lang.String" length="20">
+		<property name="press" type="java.lang.String">
 			<column name="press" />
 		</property>
 		
 
-		<property name="description" type="java.lang.String" length="200">
+		<property name="description" type="java.lang.String" >
 			<column name="description" />
 		</property>
 
@@ -46,7 +46,7 @@
 			<column name="putdate" />
 		</property>
 		
-		<property name="state" type="java.lang.Integer" length="20">
+		<property name="state" type="java.lang.Integer">
 			<column name="state" default="1"/>
 		</property>
 		

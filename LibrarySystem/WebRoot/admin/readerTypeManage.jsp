@@ -185,11 +185,21 @@
 												<div class="modal-body">
 												
 										<!---------------------表单-------------------->
+										
+										
+										
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">读者类型名称</label>
+												<div class="col-sm-7">
+													<input type="hidden" id="readerTypeId">
+													<input type="text" class="form-control" id="readerTypeName" placeholder="请输入读者类型名称">
+												
+												</div>
+										</div>
 											
 										<div class="form-group">	
 											<label for="firstname" class="col-sm-3 control-label">最大借阅数量</label>
 												<div class="col-sm-7">
-													<input type="hidden" id="readerTypeId">
 													<input type="text" class="form-control" id="maxNum" placeholder="请输入最大借阅数量">
 												
 												</div>

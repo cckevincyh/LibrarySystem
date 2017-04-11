@@ -176,9 +176,9 @@ public class ReaderDaoImpl extends HibernateDaoSupport implements ReaderDao{
 		String hql= "from Reader r where r.state=1";
 		sb.append(hql);
 		sb_sql.append(sql);
-		if(!"".equals(reader.getReaderId().trim())){
-			sb.append(" and r.name like '%" + reader.getReaderId() +"%'");
-			sb_sql.append(" and r.name like '%" + reader.getReaderId() +"%'");
+		if(!"".equals(reader.getPaperNO().trim())){
+			sb.append(" and r.paperNO like '%" + reader.getPaperNO() +"%'");
+			sb_sql.append(" and r.paperNO like '%" + reader.getPaperNO() +"%'");
 		}
 		if(!"".equals(reader.getName().trim())){
 			sb.append(" and r.name like '%" + reader.getName() +"%'");

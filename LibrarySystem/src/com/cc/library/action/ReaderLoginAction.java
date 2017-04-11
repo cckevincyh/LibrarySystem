@@ -24,15 +24,17 @@ public class ReaderLoginAction extends ActionSupport {
 
 
 
-	private String readerId;
+	private String paperNO;
 	private String pwd;
 
 
 	
 	
 	
-	public void setReaderId(String readerId) {
-		this.readerId = readerId;
+	
+
+	public void setPaperNO(String paperNO) {
+		this.paperNO = paperNO;
 	}
 
 
@@ -48,7 +50,7 @@ public class ReaderLoginAction extends ActionSupport {
 	public String login(){
 		//学生
 		Reader reader = new Reader();
-		reader.setReaderId(readerId);
+		reader.setPaperNO(paperNO);
 		reader.setPwd(pwd);
 		int login = 1;
 		Reader newReader = readerService.getReader(reader);

@@ -98,6 +98,7 @@ public class ReaderTypeManageAction extends ActionSupport{
 		ReaderType readerType = new ReaderType();
 		readerType.setReaderTypeId(id);
 		ReaderType updateReaderType = readerTypeService.getTypeById(readerType);
+		updateReaderType.setReaderTypeName(readerTypeName);
 		updateReaderType.setMaxNum(maxNum);
 		updateReaderType.setBday(bday);
 		updateReaderType.setPenalty(penalty);

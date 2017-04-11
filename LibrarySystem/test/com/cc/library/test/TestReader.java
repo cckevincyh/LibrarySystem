@@ -20,7 +20,7 @@ public class TestReader extends BaseSpring{
 		Transaction transaction = session.beginTransaction();
 		
 		Reader reader = new Reader();
-		reader.setReaderId("123");
+	//	reader.setReaderId("123");
 		reader.setName("菜肉");
 		reader.setPwd("123");
 		//reader.setReaderType(1);
@@ -51,7 +51,6 @@ public class TestReader extends BaseSpring{
 		Transaction transaction = session.beginTransaction();
 		
 		Reader reader = new Reader();
-		reader.setReaderId("123");
 		reader.setName("菜肉");
 		reader.setPwd("123");
 		ReaderType readerType = new ReaderType();

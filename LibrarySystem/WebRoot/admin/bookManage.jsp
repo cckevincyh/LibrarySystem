@@ -185,7 +185,7 @@
                         <table id="data_list" class="table table-hover table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
-                                <th>ISBN号</th>
+                                <th>图书ISBN号</th>
                                 <th>图书类型</th>
                                 <th>图书名称</th>
                                 <th>作者名称</th>

@@ -1,5 +1,6 @@
 package com.cc.library.dao.impl;
 
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import com.cc.library.dao.BorrowDao;
 import com.cc.library.domain.Book;
 import com.cc.library.domain.BorrowInfo;
 import com.cc.library.domain.PageBean;
+import com.cc.library.domain.Reader;
 
 public class BorrowDaoImpl extends HibernateDaoSupport implements BorrowDao{
 
@@ -90,18 +92,36 @@ public class BorrowDaoImpl extends HibernateDaoSupport implements BorrowDao{
 
 
 	@Override
-	public boolean addBorrow(BorrowInfo info) {
-		boolean b = true;
+	public int addBorrow(BorrowInfo info) {
+		Integer integer = 0;
 		try{
 			this.getHibernateTemplate().clear();
-			this.getHibernateTemplate().save(info);
+			//save方法返回的是Serializable接口，该结果的值就是你插入到数据库后新记录的主键值
+			Serializable save = this.getHibernateTemplate().save(info);
 			this.getHibernateTemplate().flush();
+			integer = (Integer)save;
 		}catch (Throwable e1) {
-			b = false;
+			integer = 0;
 			e1.printStackTrace();
 			throw new RuntimeException(e1.getMessage());
 		}
-		return b;
+		return integer;
+	}
+
+
+
+
+	@Override
+	public List<BorrowInfo> getBorrowInfoByReader(Reader reader) {
+		String hql= "from BorrowInfo b where b.reader.readerId=?";
+		List list = null;
+		try {
+			list = this.getHibernateTemplate().find(hql, reader.getReaderId());
+		}catch (Throwable e) {
+			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
+		}
+		return list;
 	}
 
 }

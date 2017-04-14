@@ -23,6 +23,10 @@
 			<column name="overday" default="0"/>
 		</property>
 		
+		<property name="penalty" type="java.lang.Double" >
+			<column name="penalty"/>
+		</property>
+		
 		<property name="state" type="java.lang.Integer" >
 			<column name="state" default="0"/>
 		</property>

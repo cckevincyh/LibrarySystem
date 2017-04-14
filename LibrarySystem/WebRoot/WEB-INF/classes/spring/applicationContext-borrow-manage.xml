@@ -22,6 +22,18 @@
  		<property name="borrowDao">
  			<ref bean="borrowDao"/>
  		</property>
+ 		<property name="bookDao">
+ 			<ref bean="bookDao"/>
+ 		</property>
+ 		<property name="readerDao">
+ 			<ref bean="readerDao"/>
+ 		</property>
+ 		<property name="forfeitDao">
+ 			<ref bean="forfeitDao"/>
+ 		</property>
+ 		<property name="backDao">
+ 			<ref bean="backDao"/>
+ 		</property>
  	</bean>
  	
  
@@ -29,9 +41,6 @@
  	<bean id="borrowManageAction" class="com.cc.library.action.BorrowManageAction" scope="prototype">
  		<property name="borrowService">
  			<ref bean="borrowService"/>
- 		</property>
- 		<property name="bookService">
- 			<ref bean="bookService"/>
  		</property>
  	</bean>
  	

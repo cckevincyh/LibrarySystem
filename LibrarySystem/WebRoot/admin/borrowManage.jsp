@@ -23,6 +23,8 @@
              <script src="${pageContext.request.contextPath}/js/adminUpdatePwd.js"></script>
              
  			<script src="${pageContext.request.contextPath}/js/getBorrowInfo.js"></script>
+ 			
+ 			<script src="${pageContext.request.contextPath}/js/borrowBook.js"></script>
        
 </head>
 
@@ -105,24 +107,34 @@
                             <div class="text-muted bootstrap-admin-box-title">借书</div>
                         </div>
                         <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
-                            <form class="form-horizontal" action="${pageContext.request.contextPath}/admin/borrowManageAction_borrowBook.action" method="post">
+                            <form class="form-horizontal">
                                 <div class="row">
                                     <div class="col-lg-5 form-group">
                                         <label class="col-lg-4 control-label" for="borrow_sno"><label class="text-danger">*&nbsp;</label>证件号</label>
                                         <div class="col-lg-8">
-                                            <input class="form-control" id="borrowReaderId" name="borrowReaderId" type="text" value="">
+                                            <input class="form-control" id="borrowReaderPaperNO" name="borrowReaderPaperNO" type="text" value="" placeholder="请输入读者证件号">
                                             <label class="control-label" for="borrow_sno" style="display: none"></label>
                                         </div>
                                     </div>
                                     <div class="col-lg-5 form-group">
-                                        <label class="col-lg-4 control-label" for="borrow_bno"><label class="text-danger">*&nbsp;</label>图书编号</label>
+                                        <label class="col-lg-4 control-label" for="borrow_bno"><label class="text-danger">*&nbsp;</label>图书ISBN号</label>
                                         <div class="col-lg-8">
-                                            <input class="form-control" id="borrowBookId" name="borrowBookId" type="text" value="">
+                                            <input class="form-control" id="borrowBookISBN" name="borrowBookISBN" type="text" value="" placeholder="请输入借阅图书的ISBN号">
                                             <label class="control-label" for="borrow_bno" style="display: none"></label>
                                         </div>
                                     </div>
+                                    
+                                    <div class="col-lg-5 form-group">
+                                        <label class="col-lg-4 control-label" for="borrow_bno"><label class="text-danger">*&nbsp;</label>读者密码</label>
+                                        <div class="col-lg-8">
+                                            <input class="form-control" id="pwd" name="pwd" type="password" value="" placeholder="请读者输入密码">
+                                            <label class="control-label" for="borrow_bno" style="display: none"></label>
+                                        </div>
+                                    </div>
+                                    
+                                    
                                     <div class="col-lg-2 form-group">
-                                        <button type="submit" class="btn btn-primary" id="btn_borrow" onclick="borrowBook()">借书</button>
+                                        <button type="button" class="btn btn-primary" id="btn_borrow">借书</button>
                                     </div>
                                 </div>
                             </form>
@@ -136,7 +148,7 @@
                             <thead>
                             <tr>
                             	 <th>借阅编号</th>
-                                <th>图书编号</th>
+                                <th>图书ISBN号</th>
 	                            <th>图书名称</th>
 	                            <th>读者证件号</th>
 	                            <th>读者名称</th>
@@ -152,9 +164,9 @@
                             <s:iterator value="#request.pb.beanList" var="borrow">
                              <tbody>
 	                         	   <td><s:property value="#borrow.borrowId"/></td>
-	                                <td><s:property value="#borrow.book.bookId"/></td>
+	                                <td><s:property value="#borrow.book.ISBN"/></td>
 	                                <td><s:property value="#borrow.book.bookName"/></td>
-	                                <td><s:property value="#borrow.reader.readerId"/></td>
+	                                <td><s:property value="#borrow.reader.paperNO"/></td>
 	                                <td><s:property value="#borrow.reader.name"/></td>
 	                                <td><s:date name="#borrow.borrowDate" format="yyyy-MM-dd" /></td>
 	                                <td><s:date name="#borrow.endDate" format="yyyy-MM-dd" /></td>
@@ -215,8 +227,8 @@
                         <div class="pull-right"><!--右对齐--->
                            <ul class="pagination">
                            <li class="disabled"><a href="#">第<s:property value="#request.pb.pageCode"/>页/共<s:property value="#request.pb.totaPage"/>页</a></li>
-                           <li><a href="${pageContext.request.contextPath}/admin/adminManageAction_${pb.url }pageCode=1">首页</a></li>
-                           <li><a href="${pageContext.request.contextPath}/admin/adminManageAction_${pb.url }pageCode=${pb.pageCode-1 }">&laquo;</a></li><!-- 上一页 -->
+                           <li><a href="${pageContext.request.contextPath}/admin/borrowManageAction_${pb.url }pageCode=1">首页</a></li>
+                           <li><a href="${pageContext.request.contextPath}/admin/borrowManageAction_${pb.url }pageCode=${pb.pageCode-1 }">&laquo;</a></li><!-- 上一页 -->
                            <%-- 循环显示页码列表 --%>
 								<c:forEach begin="${begin }" end="${end }" var="i">
 								  <c:choose>
@@ -225,16 +237,16 @@
 								  			<li class="active"><a>${i }</a><li>							 
 								  	</c:when>
 								  	<c:otherwise>
-								  		<li><a href="${pageContext.request.contextPath}/admin/adminManageAction_${pb.url }pageCode=${i}">${i}</a></li>
+								  		<li><a href="${pageContext.request.contextPath}/admin/borrowManageAction_${pb.url }pageCode=${i}">${i}</a></li>
 								  	</c:otherwise>
 								  </c:choose>
 								</c:forEach>
 				        	   <%--如果当前页数没到总页数，即没到最后一页,则需要显示下一页 --%>
 							  <c:if test="${pb.pageCode < pb.totaPage }">
-								  <li><a href="${pageContext.request.contextPath}/admin/adminManageAction_${pb.url }pageCode=${pb.pageCode+1}">&raquo;</a></li>
+								  <li><a href="${pageContext.request.contextPath}/admin/borrowManageAction_${pb.url }pageCode=${pb.pageCode+1}">&raquo;</a></li>
 							</c:if>
 							<%--否则显示尾页 --%>
-							<li><a href="${pageContext.request.contextPath}/admin/adminManageAction_${pb.url }pageCode=${pb.totaPage}">尾页</a></li>
+							<li><a href="${pageContext.request.contextPath}/admin/borrowManageAction_${pb.url }pageCode=${pb.totaPage}">尾页</a></li>
 							</ul>
                            </div>
                     </s:if>           
@@ -280,9 +292,9 @@
 										</div>
 											
 										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">借阅书籍编号</label>
+											<label for="firstname" class="col-sm-3 control-label">借阅书籍ISBN号</label>
 											<div class="col-sm-7">
-												<input type="text" class="form-control" id="bookId"  readonly="readonly">
+												<input type="text" class="form-control" id="ISBN"  readonly="readonly">
 
 											</div>
 										</div>
@@ -305,7 +317,7 @@
 										<div class="form-group">	
 											<label for="firstname" class="col-sm-3 control-label">读者证件号</label>
 												<div class="col-sm-7">
-													<input type="text" class="form-control" id="readerId"  readonly="readonly">
+													<input type="text" class="form-control" id="paperNO"  readonly="readonly">
 										
 												</div>
 										</div>
@@ -324,6 +336,15 @@
 										
 												</div>
 										</div>
+										
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">操作管理员</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="admin"  readonly="readonly">
+										
+												</div>
+										</div>
+										
 										
 										<div class="form-group">	
 											<label for="firstname" class="col-sm-3 control-label">归还状态</label>

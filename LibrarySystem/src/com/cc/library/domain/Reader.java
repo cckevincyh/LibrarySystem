@@ -138,6 +138,15 @@ public class Reader implements Serializable{
 		this.paperNO = paperNO;
 		this.createTime = createTime;
 	}
+
+	@Override
+	public String toString() {
+		return "Reader [readerId=" + readerId + ", name=" + name + ", pwd="
+				+ pwd + ", phone=" + phone + ", readerType=" + readerType
+				+ ", email=" + email + ", admin=" + admin + ", paperNO="
+				+ paperNO + ", createTime=" + createTime + ", state=" + state
+				+ "]";
+	}
 	
 	
 

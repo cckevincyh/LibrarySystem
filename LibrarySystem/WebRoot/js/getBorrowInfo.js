@@ -23,22 +23,18 @@ function getBorrowInfoById(id){
     		callback:function(data) {
 				
 				$("#borrowId").val(data.borrowId);
-				$("#bookId").val(data.book.bookId);
+				$("#ISBN").val(data.book.ISBN);
 				$("#bookName").val(data.book.bookName);
 				$("#bookType").val(data.book.bookType.typeName);
-				$("#readerId").val(data.reader.readerId);
+				$("#paperNO").val(data.reader.paperNO);
 				$("#readerName").val(data.reader.name);
-				if (data.reader.readerTypeId == 0) {
-					$("#readerType").val("学生");
-				}else{
-					$("#readerType").val("教师");
-				}
+				$("#readerType").val(data.reader.readerType.readerTypeName);
 				if (data.state == 0) {
 					$("#state").val("未归还");
 				}else{
 					$("#state").val("已归还");
 				}
-				
+				$("#admin").val(data.admin.name);
 			}
 		}
 										   

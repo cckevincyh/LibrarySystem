@@ -17,12 +17,20 @@ public class BorrowInfo implements Serializable{
 	private Date borrowDate;	//借阅日期
 	private Admin admin;	//操作员
 	private Date endDate;	//截止日期
+	private Double penalty;	//每日罚金
 	private Integer overday;	//逾期天数
 	private Integer state; //状态 (归还或者未归还)
 
 	
 	
 	
+	
+	public Double getPenalty() {
+		return penalty;
+	}
+	public void setPenalty(Double penalty) {
+		this.penalty = penalty;
+	}
 	public Integer getOverday() {
 		return overday;
 	}

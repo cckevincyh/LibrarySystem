@@ -44,6 +44,12 @@ public class ReaderType {
 	public ReaderType() {
 
 	}
+	@Override
+	public String toString() {
+		return "ReaderType [readerTypeId=" + readerTypeId + ", readerTypeName="
+				+ readerTypeName + ", maxNum=" + maxNum + ", penalty="
+				+ penalty + ", bday=" + bday + "]";
+	}
 	
 
 

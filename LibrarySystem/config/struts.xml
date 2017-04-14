@@ -22,4 +22,6 @@
  	<include file="struts2/struts-bookType-manage.xml"></include>
  	<include file="struts2/struts-book-manage.xml"></include>
  	<include file="struts2/struts-borrow-manage.xml"></include>
+ 	<include file="struts2/struts-forfeit-manage.xml"></include>
+ 	<include file="struts2/struts-back-manage.xml"></include>
 </struts>	

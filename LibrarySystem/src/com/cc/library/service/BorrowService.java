@@ -1,7 +1,10 @@
 package com.cc.library.service;
 
+import java.util.List;
+
 import com.cc.library.domain.BorrowInfo;
 import com.cc.library.domain.PageBean;
+import com.cc.library.domain.Reader;
 
 public interface BorrowService {
 
@@ -15,5 +18,7 @@ public interface BorrowService {
 	 * @return
 	 */
 	public int addBorrow(BorrowInfo info);
+
+
 
 }

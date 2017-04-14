@@ -195,6 +195,16 @@ public class BookDaoImpl extends HibernateDaoSupport implements BookDao{
 		return b;
 	}
 
+	@Override
+	public Book getBookByISBN(Book book) {
+		String hql= "from Book b where b.ISBN=? and b.state=1";
+		List list = this.getHibernateTemplate().find(hql, book.getISBN());
+		if(list!=null && list.size()>0){
+			return (Book) list.get(0);
+		}
+		return null;
+	}
+
 
 
 

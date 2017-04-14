@@ -23,5 +23,8 @@ public interface BookDao {
 
 	public boolean deleteBook(Book book);
 
+	public Book getBookByISBN(Book book);
+
+
 
 }

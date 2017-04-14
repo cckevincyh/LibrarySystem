@@ -1,6 +1,7 @@
 package com.cc.library.action;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +12,8 @@ import net.sf.json.util.PropertyFilter;
 
 import org.apache.struts2.ServletActionContext;
 
+import com.cc.library.domain.Admin;
+import com.cc.library.domain.Authorization;
 import com.cc.library.domain.Book;
 import com.cc.library.domain.BorrowInfo;
 import com.cc.library.domain.PageBean;
@@ -18,12 +21,17 @@ import com.cc.library.domain.Reader;
 import com.cc.library.domain.ReaderType;
 import com.cc.library.service.BookService;
 import com.cc.library.service.BorrowService;
+import com.cc.library.service.ReaderService;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class BorrowManageAction extends ActionSupport{
 
 	private BorrowService borrowService;
-	private BookService bookService;
+	
+
+
+
+
 
 	public void setBorrowService(BorrowService borrowService) {
 		this.borrowService = borrowService;
@@ -34,8 +42,21 @@ public class BorrowManageAction extends ActionSupport{
 
 
 
-	public void setBookService(BookService bookService) {
-		this.bookService = bookService;
+
+
+
+
+	private int pageCode;
+	private int borrowId;
+	private String ISBN;
+	private String paperNO;
+	private String pwd;
+	
+	
+	
+	
+	public void setISBN(String iSBN) {
+		ISBN = iSBN;
 	}
 
 
@@ -43,12 +64,24 @@ public class BorrowManageAction extends ActionSupport{
 
 
 
-	private int pageCode;
-	private int borrowId;
-	private String borrowReaderId;
-	private Integer borrowBookId;
-	
-	
+	public void setPaperNO(String paperNO) {
+		this.paperNO = paperNO;
+	}
+
+
+
+
+
+
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
+
+
+
+
+
+
 	public void setBorrowId(Integer borrowId) {
 		this.borrowId = borrowId;
 	}
@@ -56,16 +89,6 @@ public class BorrowManageAction extends ActionSupport{
 
 
 
-	public void setBorrowReaderId(String borrowReaderId) {
-		this.borrowReaderId = borrowReaderId;
-	}
-
-
-
-
-	public void setBorrowBookId(int borrowBookId) {
-		this.borrowBookId = borrowBookId;
-	}
 
 
 
@@ -105,7 +128,6 @@ public class BorrowManageAction extends ActionSupport{
 	 * @return
 	 */
 	public String getBorrowInfoById(){
-		System.out.println(111);
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("application/json;charset=utf-8");
 		BorrowInfo info = new BorrowInfo();
@@ -115,7 +137,7 @@ public class BorrowManageAction extends ActionSupport{
 		JsonConfig jsonConfig = new JsonConfig();
 		jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
 		    public boolean apply(Object obj, String name, Object value) {
-			if(obj instanceof Set||name.equals("books")||obj instanceof Set||name.equals("borrowInfos")||obj instanceof Set||name.equals("forfeitInfos")){	
+			if(obj instanceof Authorization||name.equals("authorization") || obj instanceof Set || name.equals("borrowInfos")){	
 				return true;
 			}else{
 				return false;
@@ -135,20 +157,65 @@ public class BorrowManageAction extends ActionSupport{
 
 	
 	
-//	/**
-//	 * 借阅处理
-//	 * @return
-//	 */
-//	public String borrowBook(){
-//		Reader reader = new Reader();
-//		reader.setReaderId(borrowReaderId);
-//		Book book = new Book();
-//		book.setBookId(borrowBookId);
-//		BorrowInfo info = new BorrowInfo(borrowId, book, reader);
-//		int code = borrowService.addBorrow(info);//需要特殊处理
-//		
-//		
-//		return "success";
-//	}
-//	
+	/**
+	 * 借阅处理
+	 * @return
+	 */
+	public String borrowBook(){
+		//借阅的主要步骤
+		
+		/*
+		 * 1. 得到借阅的读者
+		 * 
+		 * 2. 查看读者输入的密码是否匹配
+		 * 		2.1 如果不匹配提示 密码错误
+		 * 		2.2 如果匹配,执行第3步骤
+		 * 
+		 * 3. 查看该读者的借阅信息
+		 * 		3.1 查看借阅信息的条数
+		 * 		3.2 查看该读者的类型得出该读者的最大借阅数量
+		 * 		3.3 匹配借阅的数量是否小于最大借阅量
+		 * 			3.3.1 小于,则可以借阅
+		 * 			3.3.2 大于,则不可以借阅,直接返回借阅数量已超过
+		 * 		3.4 查看读者的罚款信息,是否有未缴纳的罚款
+		 * 			3.4.1 如果没有,继续第3的操作步骤
+		 * 			3.4.2 如果有,直接返回有尚未缴纳的罚金
+		 * 
+		 * 4. 查看借阅的书籍
+		 * 		4.1 查看该书籍的在馆数量是否大于1,,如果为1则不能借阅,必须留在馆内浏览
+		 * 			4.1.1 如果大于1,进入第4操作步骤
+		 * 			4.1.2 如果小于等于1,提示该图书为馆内最后一本,无法借阅
+		 * 
+		 * 5. 处理借阅信息
+		 * 		5.1 得到该读者的最大借阅天数,和每日罚金
+		 * 			5.1.1 获得当前时间
+		 * 			5.1.2 根据最大借阅天数,计算出截止日期
+		 * 			5.1.3 为借阅信息设置每日的罚金金额
+		 * 		5.2 获得该读者的信息,为借阅信息设置读者信息
+		 * 		5.3 获得图书信息,为借阅信息设置图书信息
+		 * 		5.4 获得管理员信息,为借阅信息设置操作的管理员信息
+		 * 
+		 * 6. 存储借阅信息
+		 * 
+		 */
+		BorrowInfo borrowInfo = new BorrowInfo();
+		Reader reader = new Reader();
+		reader.setPaperNO(paperNO);
+		reader.setPwd(pwd);
+		borrowInfo.setReader(reader);
+		Admin admin = (Admin) ServletActionContext.getContext().getSession().get("admin");
+		borrowInfo.setAdmin(admin);
+		Book book = new Book();
+		book.setISBN(ISBN);
+		borrowInfo.setBook(book);
+		int addBorrow = borrowService.addBorrow(borrowInfo);
+		try {
+			ServletActionContext.getResponse().getWriter().print(addBorrow);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException(e.getMessage());
+		}
+		return null;
+	}
+	
 }

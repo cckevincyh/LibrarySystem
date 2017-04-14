@@ -4,7 +4,8 @@ $(function () {
 
   $('#addBook').click(function () {
 
-	var postdata = "bookName="+$.trim($("#addBookName").val())+"&autho="+ $.trim($("#addAutho").val())+"&press="+ $.trim($("#addPress").val())+"&num="+ $.trim($("#addNum").val())+"&price="+ $.trim($("#addPrice").val())+"&description="+ $.trim($("#addDescription").val())+"&bookTypeId="+ $.trim($("#addBookType").val());
+	var postdata = "bookName="+$.trim($("#addBookName").val())+"&autho="+ $.trim($("#addAutho").val())+"&press="+ $.trim($("#addPress").val())+"&num="+ $.trim($("#addNum").val())+"&price="+ $.trim($("#addPrice").val())+"&description="
+	+ $.trim($("#addDescription").val())+"&bookTypeId="+ $.trim($("#addBookType").val())+"&ISBN="+ $.trim($("#addISBN").val());
 	
 	ajax(
     		  {

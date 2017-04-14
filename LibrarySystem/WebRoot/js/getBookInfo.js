@@ -22,7 +22,7 @@ function getBookInfo(id){
 			params: "bookId=" + id,
 			type:"json",
     		callback:function(data) {
-				$("#findBookId").val(data.bookId);
+				$("#findISBN").val(data.ISBN);
 				$("#findBookName").val(data.bookName);
 				$("#findBookType").val(data.bookType.typeName);
 				$("#findAutho").val(data.autho);
@@ -30,6 +30,7 @@ function getBookInfo(id){
 				$("#findPrice").val(data.price);
 				$("#findDescription").val(data.description);
 				$("#findNum").val(data.num);
+				$("#findAdmin").val(data.admin.name);
 				$("#findCurrentNum").val(data.currentNum);
 			}
 		}

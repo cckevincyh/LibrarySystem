@@ -1,7 +1,7 @@
-function addBookNum(id){
+function addBookNum(id,isbn){
 	
 	$("#addBookNumId").val(id);
-	
+	$("#addBookNumISBN").val(isbn);
 }
 
 

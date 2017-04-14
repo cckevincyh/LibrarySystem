@@ -109,6 +109,31 @@ public class Book implements Serializable{
 
 	
 	}
+	public Book(String iSBN, BookType bookType, String bookName, String autho,
+			String press, Date putdate, Integer num, Integer currentNum,
+			Double price, String description, Admin admin) {
+		super();
+		ISBN = iSBN;
+		this.bookType = bookType;
+		this.bookName = bookName;
+		this.autho = autho;
+		this.press = press;
+		this.putdate = putdate;
+		this.num = num;
+		this.currentNum = currentNum;
+		this.price = price;
+		this.description = description;
+		this.admin = admin;
+	}
+	public Book(String iSBN, BookType bookType, String bookName, String autho,
+			String press) {
+		super();
+		ISBN = iSBN;
+		this.bookType = bookType;
+		this.bookName = bookName;
+		this.autho = autho;
+		this.press = press;
+	}
 	
 	
 	

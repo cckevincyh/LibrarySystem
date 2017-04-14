@@ -14,6 +14,8 @@ import net.sf.json.util.PropertyFilter;
 
 import org.apache.struts2.ServletActionContext;
 
+import com.cc.library.domain.Admin;
+import com.cc.library.domain.Authorization;
 import com.cc.library.domain.Book;
 import com.cc.library.domain.BookType;
 import com.cc.library.domain.PageBean;
@@ -56,8 +58,16 @@ public class BookManageAction extends ActionSupport{
 	private Double price;	//价格
 	private String description;	//简介
 	private int bookId;//图书编号
+	private String ISBN;
+	
+	
 	
 
+
+
+	public void setISBN(String iSBN) {
+		ISBN = iSBN;
+	}
 
 
 	public void setBookTypeId(Integer bookTypeID) {
@@ -113,20 +123,9 @@ public class BookManageAction extends ActionSupport{
 		response.setContentType("application/json;charset=utf-8");
 		List<BookType> allBookTypes = bookTypeService.getAllBookTypes();
 		
-		JsonConfig jsonConfig = new JsonConfig();
-
-		jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
-		    public boolean apply(Object obj, String name, Object value) {
-			if(obj instanceof Set||name.equals("books")){//过滤掉集合
-				return true;
-			}else{
-				return false;
-			}
-		   }
-		});
 		
 		
-		String json = JSONArray.fromObject(allBookTypes,jsonConfig).toString();//List------->JSONArray,配置过滤
+		String json = JSONArray.fromObject(allBookTypes).toString();//List------->JSONArray
 		try {
 			response.getWriter().print(json);
 		} catch (IOException e) {
@@ -156,32 +155,32 @@ public class BookManageAction extends ActionSupport{
 		return  "success";
 	}
 	
-//	/**
-//	 * 添加图书
-//	 * @return
-//	 */
-//	public String addBook(){
-//		BookType bookType = new BookType();
-//		bookType.setTypeId(bookTypeId);
-//		BookType newBookType = bookTypeService.getBookType(bookType);//得到图书类型
-//		Date putdate = new Date(System.currentTimeMillis());//得到当前时间,作为上架时间
-//		Book book = new Book(newBookType, bookName, autho, press, putdate, num, num, price, description);//设置图书
-//		boolean b = bookService.addBook(book);//添加图书.返回是否成功添加
-//		int success = 0;
-//		if(b){
-//			success = 1;
-//		}else{
-//			success = 0;
-//		}
-//		try {
-//			ServletActionContext.getResponse().getWriter().print(success);
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			throw new RuntimeException(e.getMessage());
-//		}
-//		return null;
-//	}
-//	
+	/**
+	 * 添加图书
+	 * @return
+	 */
+	public String addBook(){
+		BookType bookType = new BookType();
+		bookType.setTypeId(bookTypeId);
+		Date putdate = new Date(System.currentTimeMillis());//得到当前时间,作为上架时间
+		Admin admin = (Admin) ServletActionContext.getContext().getSession().get("admin");//得到操作管理员
+		Book book = new Book(ISBN, bookType, bookName, autho, press, putdate, num, num, price, description, admin);//设置图书
+		boolean b = bookService.addBook(book);//添加图书.返回是否成功添加
+		int success = 0;
+		if(b){
+			success = 1;
+		}else{
+			success = 0;
+		}
+		try {
+			ServletActionContext.getResponse().getWriter().print(success);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException(e.getMessage());
+		}
+		return null;
+	}
+	
 	
 	/**
 	 * 得到指定图书编号的图书信息
@@ -199,7 +198,7 @@ public class BookManageAction extends ActionSupport{
 		JsonConfig jsonConfig = new JsonConfig();
 		jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
 		    public boolean apply(Object obj, String name, Object value) {
-			if(obj instanceof Set||name.equals("books")){	//不过滤book里面的bookType，等到转化bookType的时候，过滤掉其中的set的book集合，解除死循环
+			if(obj instanceof Authorization||name.equals("authorization")){	
 				return true;
 			}else{
 				return false;
@@ -230,11 +229,10 @@ public class BookManageAction extends ActionSupport{
 		Book updateBook = bookService.getBookById(book);//得到修改的图书信息
 		updateBook.setBookName(bookName);
 		updateBook.setAutho(autho);//对图书进行修改
-		
+		updateBook.setISBN(ISBN);
 		BookType type = new BookType();
 		type.setTypeId(bookTypeId);
-		BookType bookType = bookTypeService.getBookType(type);//得到图书类型
-		updateBook.setBookType(bookType);//设置图书类型
+		updateBook.setBookType(type);//设置图书类型
 		updateBook.setDescription(description);
 		updateBook.setPress(press);
 		updateBook.setPrice(price);//对图书进行修改
@@ -257,35 +255,35 @@ public class BookManageAction extends ActionSupport{
 	
 	
 	
-//	/**
-//	 * 多条件查询图书
-//	 * @return
-//	 */
-//	public String queryBook(){
-//		//获取页面传递过来的当前页码数
-//		if(pageCode==0){
-//			pageCode = 1;
-//		}
-//		//给pageSize,每页的记录数赋值
-//		int pageSize = 5;
-//		PageBean<Book> pb = null;
-//
-//		if(bookId==0 && "".equals(bookName.trim()) && bookTypeId==-1 && "".equals(press.trim()) && "".equals(autho.trim())){
-//			pb = bookService.findBookByPage(pageCode,pageSize);
-//		}else{
-//			BookType bookType = new BookType();
-//			bookType.setTypeId(bookTypeId);
-//			Book book = new Book(bookId, bookType, bookName, autho, press);
-//
-//			pb = bookService.queryBook(book,pageCode,pageSize);
-//		}
-//		if(pb!=null){
-//			pb.setUrl("queryBook.action?bookId="+bookId+"&bookName="+bookName+"&bookTypeId="+bookTypeId+"&press="+press+"&autho="+autho+"&");
-//		}
-//		ServletActionContext.getRequest().setAttribute("pb", pb);
-//		return "success";
-//	}
-//	
+	/**
+	 * 多条件查询图书
+	 * @return
+	 */
+	public String queryBook(){
+		//获取页面传递过来的当前页码数
+		if(pageCode==0){
+			pageCode = 1;
+		}
+		//给pageSize,每页的记录数赋值
+		int pageSize = 5;
+		PageBean<Book> pb = null;
+
+		if("".equals(ISBN.trim()) && "".equals(bookName.trim()) && bookTypeId==-1 && "".equals(press.trim()) && "".equals(autho.trim())){
+			pb = bookService.findBookByPage(pageCode,pageSize);
+		}else{
+			BookType bookType = new BookType();
+			bookType.setTypeId(bookTypeId);
+			Book book = new Book(ISBN, bookType, bookName, autho, press);
+
+			pb = bookService.queryBook(book,pageCode,pageSize);
+		}
+		if(pb!=null){
+			pb.setUrl("queryBook.action?ISBN="+ISBN+"&bookName="+bookName+"&bookTypeId="+bookTypeId+"&press="+press+"&autho="+autho+"&");
+		}
+		ServletActionContext.getRequest().setAttribute("pb", pb);
+		return "success";
+	}
+	
 	
 	
 	/**

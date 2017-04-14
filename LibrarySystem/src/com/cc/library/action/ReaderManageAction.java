@@ -272,32 +272,32 @@ public class ReaderManageAction extends ActionSupport{
 	
 	
 	
-//	public String queryReader(){
-//		//获取页面传递过来的当前页码数
-//		if(pageCode==0){
-//			pageCode = 1;
-//		}
-//		//给pageSize,每页的记录数赋值
-//		int pageSize = 5;
-//		PageBean<Reader> pb = null;
-//		if("".equals(readerId.trim()) && "".equals(name.trim()) && readerType==-1){
-//			pb = readerService.findReaderByPage(pageCode,pageSize);
-//		}else{
-//			Reader reader = new Reader();
-//			reader.setReaderId(readerId);
-//			ReaderType type = new ReaderType();
-//			type.setReaderTypeId(readerType);
-//			reader.setReaderType(type);
-//			reader.setName(name);
-//			pb = readerService.queryReader(reader,pageCode,pageSize);
-//		}
-//		if(pb!=null){
-//			pb.setUrl("queryReader.action?readerId="+readerId+"&name="+name+"&readerType="+readerType+"&");
-//		}
-//		ServletActionContext.getRequest().setAttribute("pb", pb);
-//		return "success";
-//	}
-//	
+	public String queryReader(){
+		//获取页面传递过来的当前页码数
+		if(pageCode==0){
+			pageCode = 1;
+		}
+		//给pageSize,每页的记录数赋值
+		int pageSize = 5;
+		PageBean<Reader> pb = null;
+		if("".equals(paperNO.trim()) && "".equals(name.trim()) && readerType==-1){
+			pb = readerService.findReaderByPage(pageCode,pageSize);
+		}else{
+			Reader reader = new Reader();
+			reader.setPaperNO(paperNO);
+			ReaderType type = new ReaderType();
+			type.setReaderTypeId(readerType);
+			reader.setReaderType(type);
+			reader.setName(name);
+			pb = readerService.queryReader(reader,pageCode,pageSize);
+		}
+		if(pb!=null){
+			pb.setUrl("queryReader.action?paperNO="+paperNO+"&name="+name+"&readerType="+readerType+"&");
+		}
+		ServletActionContext.getRequest().setAttribute("pb", pb);
+		return "success";
+	}
+	
 	
 	
 	

@@ -121,9 +121,9 @@
                             <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
                                 <form class="form-horizontal" action="${pageContext.request.contextPath}/admin/bookManageAction_queryBook.action" method="post">
                                     <div class="col-lg-5 form-group">
-                                        <label class="col-lg-4 control-label" for="query_bno">图书编号</label>
+                                        <label class="col-lg-4 control-label" for="query_bno">图书ISBN号</label>
                                         <div class="col-lg-8">
-                                            <input class="form-control" id="bookId" name="bookId" type="text" value="">
+                                            <input class="form-control" id="bookId" name="ISBN" type="text" value="">
                                             <label class="control-label" for="query_bno" style="display: none;"></label>
                                         </div>
                                     </div>
@@ -185,7 +185,7 @@
                         <table id="data_list" class="table table-hover table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
-                                <th>图书编号</th>
+                                <th>ISBN号</th>
                                 <th>图书类型</th>
                                 <th>图书名称</th>
                                 <th>作者名称</th>
@@ -204,7 +204,7 @@
                             <s:if test="#request.pb.beanList!=null">
                             <s:iterator value="#request.pb.beanList" var="book">
                              <tbody>
-	                         	   <td><s:property value="#book.bookId"/></td>
+	                         	   <td><s:property value="#book.ISBN"/></td>
 	                                <td><s:property value="#book.bookType.typeName"/></td>
 	                                <td><s:property value="#book.bookName"/></td>
 	                                <td><s:property value="#book.autho"/></td>
@@ -217,7 +217,7 @@
 	                                <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#findModal" onclick="getBookInfo(<s:property value="#book.bookId"/>)" >查看</button>
 	                                	<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" id="btn_update" onclick="updateBook(<s:property value="#book.bookId"/>)">修改</button>
 	                                	<button type="button" class="btn btn-danger btn-xs" onclick="deleteBook(<s:property value="#book.bookId"/>)">删除</button>
-	                                	<button type="button" class="btn btn-success btn-xs" onclick="addBookNum(<s:property value="#book.bookId"/>)"  data-toggle="modal" data-target="#addNumModal">新增</button>
+	                                	<button type="button" class="btn btn-success btn-xs" onclick="addBookNum(<s:property value="#book.bookId"/>,<s:property value="#book.ISBN"/>)"  data-toggle="modal" data-target="#addNumModal">新增</button>
 	                               	</td>                                              
                           	  </tbody>
                             </s:iterator>
@@ -329,9 +329,9 @@
 												
 										<!---------------------表单-------------------->
 										<div class="form-group">
-											<label for="firstname" class="col-sm-3 control-label">图书编号</label>
+											<label for="firstname" class="col-sm-3 control-label">ISBN号</label>
 												<div class="col-sm-7">
-													<input type="text" class="form-control" id="findBookId" readonly="readonly">
+													<input type="text" class="form-control" id="findISBN" readonly="readonly">
 												
 												</div>
 										</div>
@@ -393,6 +393,13 @@
 												
 												</div>
 										</div>
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">操作管理员</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="findAdmin"  readonly="readonly">
+												
+												</div>
+										</div>
 										
 										
 										<div class="form-group">	
@@ -443,9 +450,10 @@
 												
 										<!---------------------表单-------------------->
 										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">图书编号</label>
+											<label for="firstname" class="col-sm-3 control-label">图书ISBN号</label>
 												<div class="col-sm-7">
-													<input type="text" class="form-control" id="addBookNumId" readonly="readonly">
+												<input type="hidden"  id="addBookNumId" >
+													<input type="text" class="form-control" id="addBookNumISBN" readonly="readonly">
 												
 												</div>
 										</div>
@@ -502,6 +510,15 @@
 												<div class="modal-body">
 												
 										<!---------------------表单-------------------->
+										
+										<div class="form-group">
+											<label for="firstname" class="col-sm-3 control-label">图书ISBN号</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="addISBN"  placeholder="请输入国际标准书号">
+												
+												</div>
+										</div>
+										
 										 <div class="form-group">
 											<label for="firstname" class="col-sm-3 control-label">图书名称</label>
 												<div class="col-sm-7">
@@ -602,11 +619,20 @@
 												<div class="modal-body">
 												
 										<!---------------------表单-------------------->
+										
+										<div class="form-group">
+											<label for="firstname" class="col-sm-3 control-label">图书ISBN号</label>
+												<div class="col-sm-7">
+												<input type="hidden" id="updateBookId">
+													<input type="text" class="form-control" id="updateISBN"  placeholder="请输入国际标准书号">
+												
+												</div>
+										</div>
+										
 											
 										 <div class="form-group">
 											<label for="firstname" class="col-sm-3 control-label">图书名称</label>
 												<div class="col-sm-7">
-												<input type="hidden" id="updateBookId">
 													<input type="text" class="form-control" id="updateBookName"  placeholder="请输入图书名称">
 												
 												</div>

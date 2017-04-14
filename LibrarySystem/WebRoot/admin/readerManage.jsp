@@ -117,7 +117,7 @@
 		                                    <div class="col-lg-5 form-group">
 		                                        <label class="col-lg-4 control-label" for="query_sno">证件号</label>
 		                                        <div class="col-lg-8">
-		                                            <input class="form-control" id="readerId" type="text" value="" name="readerId">
+		                                            <input class="form-control" id="readerId" type="text" value="" name="paperNO">
 		                                            <label class="control-label" for="query_sno" style="display: none;"></label>
 		                                        </div>
 		                                    </div>

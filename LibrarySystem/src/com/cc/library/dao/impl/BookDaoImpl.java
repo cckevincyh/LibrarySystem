@@ -136,9 +136,9 @@ public class BookDaoImpl extends HibernateDaoSupport implements BookDao{
 		String hql= "from Book b where b.state=1";
 		sb.append(hql);
 		sb_sql.append(sql);
-		if(book.getBookId()!=0){
-			sb.append(" and b.bookId like '%" + book.getBookId() +"%'");
-			sb_sql.append(" and b.bookId like '%" + book.getBookId() +"%'");
+		if(!"".equals(book.getISBN().trim())){
+			sb.append(" and b.ISBN like '%" + book.getISBN() +"%'");
+			sb_sql.append(" and b.ISBN like '%" + book.getISBN() +"%'");
 		}
 		if(!"".equals(book.getBookName().trim())){
 			sb.append(" and b.bookName like '%" +book.getBookName() +"%'");

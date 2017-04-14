@@ -4,7 +4,9 @@ $(function () {
 
     $('#updateBook').click(function () {
 
-	var postdata = "bookId="+$.trim($("#updateBookId").val())+"&bookName="+$.trim($("#updateBookName").val())+"&bookTypeId="+$.trim($("#updateBookType").val())+"&autho="+ $.trim($("#updateAutho").val())+"&press="+ $.trim($("#updatePress").val())+"&price="+ $.trim($("#updatePrice").val())+"&description="+ $.trim($("#updateDescription").val());
+	var postdata = "bookId="+$.trim($("#updateBookId").val())+"&bookName="+$.trim($("#updateBookName").val())+"&bookTypeId="+$.trim($("#updateBookType").val())
+	+"&autho="+ $.trim($("#updateAutho").val())+"&press="+ $.trim($("#updatePress").val())+"&price="+ $.trim($("#updatePrice").val())
+	+"&description="+ $.trim($("#updateDescription").val())+"&ISBN="+ $.trim($("#updateISBN").val());
 	ajax(
     		  {
 			  	method:'POST',
@@ -71,6 +73,7 @@ function updateBook(id){
 											type:"json",
 								    		callback:function(data) {
 												$("#updateBookId").val(data.bookId);
+												$("#updateISBN").val(data.ISBN);
 												$("#updateBookName").val(data.bookName);
 												$("#updateBookType").val(data.bookType.typeId);
 												$("#updateAutho").val(data.autho);

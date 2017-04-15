@@ -20,7 +20,7 @@
 		
 		
 		
-		<one-to-one name="borrowInfo" constrained="true"></one-to-one>  
+		<one-to-one name="borrowInfo" constrained="true" lazy="false"></one-to-one>  
 		
 		
 		<many-to-one name="admin" class="com.cc.library.domain.Admin"  lazy="false">

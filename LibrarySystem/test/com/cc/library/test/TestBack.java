@@ -25,4 +25,13 @@ public class TestBack extends BaseSpring{
 		transaction.commit();
 		session.close();
 	}
+	
+	@Test
+	public void testGetBack(){
+		SessionFactory sessionFactory = (SessionFactory)context.getBean("sessionFactory");
+		Session session = sessionFactory.openSession();
+		BackInfo back = (BackInfo) session.get(BackInfo.class, 4);
+		System.out.println(back);
+		session.close();
+	}
 }

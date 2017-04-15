@@ -85,6 +85,13 @@ public class BorrowInfo implements Serializable{
 	public BorrowInfo() {
 
 	}
+	@Override
+	public String toString() {
+		return "BorrowInfo [borrowId=" + borrowId + ", book=" + book
+				+ ", reader=" + reader + ", borrowDate=" + borrowDate
+				+ ", admin=" + admin + ", endDate=" + endDate + ", penalty="
+				+ penalty + ", overday=" + overday + ", state=" + state + "]";
+	}
 	
 	
 	

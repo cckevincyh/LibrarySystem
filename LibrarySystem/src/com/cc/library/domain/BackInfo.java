@@ -46,6 +46,13 @@ public class BackInfo {
 
 	
 	}
+	@Override
+	public String toString() {
+		return "BackInfo [borrowId=" + borrowId + ", borrowInfo=" + borrowInfo
+				+ ", admin=" + admin + ", backDate=" + backDate + ", state="
+				+ state + "]";
+	}
+	
 	
 	
 	

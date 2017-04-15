@@ -74,7 +74,7 @@
                         <a href="${pageContext.request.contextPath}/admin/borrowManageAction_findBorrowInfoByPage.action"><i class="glyphicon glyphicon-chevron-right"></i> 图书借阅</a>
                     </li>
                     <li>
-                        <a href="/library/admin/return"><i class="glyphicon glyphicon-chevron-right"></i> 图书归还</a>
+                        <a href="${pageContext.request.contextPath}/admin/backManageAction_findBackInfoByPage.action"><i class="glyphicon glyphicon-chevron-right"></i> 图书归还</a>
                     </li>
                     
                     <li>
@@ -109,14 +109,14 @@
                                     <div class="col-lg-5 form-group">
                                         <label class="col-lg-4 control-label" for="borrow_sno"><label class="text-danger">*&nbsp;</label>证件号</label>
                                         <div class="col-lg-8">
-                                            <input class="form-control" id="borrowReaderPaperNO" name="borrowReaderPaperNO" type="text" value="" placeholder="请输入读者证件号">
+                                            <input class="form-control" id="borrowReaderPaperNO" name="backReaderPaperNO" type="text" value="" placeholder="请输入读者证件号">
                                             <label class="control-label" for="borrow_sno" style="display: none"></label>
                                         </div>
                                     </div>
                                     <div class="col-lg-5 form-group">
                                         <label class="col-lg-4 control-label" for="borrow_bno"><label class="text-danger">*&nbsp;</label>图书ISBN号</label>
                                         <div class="col-lg-8">
-                                            <input class="form-control" id="borrowBookISBN" name="borrowBookISBN" type="text" value="" placeholder="请输入归还图书的ISBN号">
+                                            <input class="form-control" id="borrowBookISBN" name="backBookISBN" type="text" value="" placeholder="请输入归还图书的ISBN号">
                                             <label class="control-label" for="borrow_bno" style="display: none"></label>
                                         </div>
                                     </div>
@@ -137,7 +137,7 @@
                         <table id="data_list" class="table table-hover table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
-                            	 <th>归还编号</th>
+                            	 <th>借阅编号</th>
                                 <th>图书ISBN号</th>
 	                            <th>图书名称</th>
 	                            <th>读者证件号</th>
@@ -151,18 +151,18 @@
                             
                             <!---在此插入信息-->
                             <s:if test="#request.pb.beanList!=null">
-                            <s:iterator value="#request.pb.beanList" var="borrow">
+                            <s:iterator value="#request.pb.beanList" var="back">
                              <tbody>
-	                         	   <td><s:property value="#borrow.borrowId"/></td>
-	                                <td><s:property value="#borrow.book.ISBN"/></td>
-	                                <td><s:property value="#borrow.book.bookName"/></td>
-	                                <td><s:property value="#borrow.reader.paperNO"/></td>
-	                                <td><s:property value="#borrow.reader.name"/></td>
-	                                <td><s:date name="#borrow.borrowDate" format="yyyy-MM-dd" /></td>
-	                                <td><s:date name="#borrow.endDate" format="yyyy-MM-dd" /></td>
+	                         	   <td><s:property value="#back.borrowId"/></td>
+	                                <td><s:property value="#back.borrowInfo.book.ISBN"/></td>
+	                                <td><s:property value="#back.borrowInfo.book.bookName"/></td>
+	                                <td><s:property value="#back.borrowInfo.reader.paperNO"/></td>
+	                                <td><s:property value="#back.borrowInfo.reader.name"/></td>
+	                                <td><s:date name="#back.backDate" format="yyyy-MM-dd" /></td>
+	                                <td><s:date name="#back.borrowInfo.endDate" format="yyyy-MM-dd" /></td>
 	                                <td>         
-	                                	<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#findBorrowModal" onclick="getBorrowInfoById(<s:property value="#borrow.borrowId"/>)">查看</button>
-	                                		
+	                                	<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#findBackModal" onclick="getBackInfoById(<s:property value="#back.borrowId"/>)">查看</button>
+	                                	<button type="button" class="btn btn-success btn-xs" onclick="" >归还</button>
 	                               	</td>                                              
                           	  </tbody>
                             </s:iterator>
@@ -217,8 +217,8 @@
                         <div class="pull-right"><!--右对齐--->
                            <ul class="pagination">
                            <li class="disabled"><a href="#">第<s:property value="#request.pb.pageCode"/>页/共<s:property value="#request.pb.totaPage"/>页</a></li>
-                           <li><a href="${pageContext.request.contextPath}/admin/borrowManageAction_${pb.url }pageCode=1">首页</a></li>
-                           <li><a href="${pageContext.request.contextPath}/admin/borrowManageAction_${pb.url }pageCode=${pb.pageCode-1 }">&laquo;</a></li><!-- 上一页 -->
+                           <li><a href="${pageContext.request.contextPath}/admin/backManageAction_${pb.url }pageCode=1">首页</a></li>
+                           <li><a href="${pageContext.request.contextPath}/admin/backManageAction_${pb.url }pageCode=${pb.pageCode-1 }">&laquo;</a></li><!-- 上一页 -->
                            <%-- 循环显示页码列表 --%>
 								<c:forEach begin="${begin }" end="${end }" var="i">
 								  <c:choose>
@@ -227,16 +227,16 @@
 								  			<li class="active"><a>${i }</a><li>							 
 								  	</c:when>
 								  	<c:otherwise>
-								  		<li><a href="${pageContext.request.contextPath}/admin/borrowManageAction_${pb.url }pageCode=${i}">${i}</a></li>
+								  		<li><a href="${pageContext.request.contextPath}/admin/backManageAction_${pb.url }pageCode=${i}">${i}</a></li>
 								  	</c:otherwise>
 								  </c:choose>
 								</c:forEach>
 				        	   <%--如果当前页数没到总页数，即没到最后一页,则需要显示下一页 --%>
 							  <c:if test="${pb.pageCode < pb.totaPage }">
-								  <li><a href="${pageContext.request.contextPath}/admin/borrowManageAction_${pb.url }pageCode=${pb.pageCode+1}">&raquo;</a></li>
+								  <li><a href="${pageContext.request.contextPath}/admin/backManageAction_${pb.url }pageCode=${pb.pageCode+1}">&raquo;</a></li>
 							</c:if>
 							<%--否则显示尾页 --%>
-							<li><a href="${pageContext.request.contextPath}/admin/borrowManageAction_${pb.url }pageCode=${pb.totaPage}">尾页</a></li>
+							<li><a href="${pageContext.request.contextPath}/admin/backManageAction_${pb.url }pageCode=${pb.totaPage}">尾页</a></li>
 							</ul>
                            </div>
                     </s:if>           
@@ -259,7 +259,7 @@
      <!--------------------------------------查看的模糊框------------------------>  
                                  <form class="form-horizontal">   <!--保证样式水平不混乱-->   
                                         <!-- 模态框（Modal） -->
-									<div class="modal fade" id="findBorrowModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+									<div class="modal fade" id="findBackModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 										<div class="modal-dialog">
 											<div class="modal-content">
 												<div class="modal-header">

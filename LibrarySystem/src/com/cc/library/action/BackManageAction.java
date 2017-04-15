@@ -1,7 +1,18 @@
 package com.cc.library.action;
 
+import java.io.IOException;
+import java.util.Set;
+
+import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
+import net.sf.json.util.PropertyFilter;
+
 import org.apache.struts2.ServletActionContext;
 
+import com.cc.library.domain.Authorization;
+import com.cc.library.domain.BackInfo;
 import com.cc.library.domain.BorrowInfo;
 import com.cc.library.domain.PageBean;
 import com.cc.library.service.BackService;
@@ -18,8 +29,15 @@ public class BackManageAction extends ActionSupport{
 	
 	private int pageCode;
 	
+	private int borrowId;
 	
 	
+	public void setBorrowId(int borrowId) {
+		this.borrowId = borrowId;
+	}
+
+
+
 	public void setPageCode(int pageCode) {
 		this.pageCode = pageCode;
 	}
@@ -43,5 +61,33 @@ public class BackManageAction extends ActionSupport{
 		//存入request域中
 		ServletActionContext.getRequest().setAttribute("pb", pb);
 		return  "success";
+	}
+	
+	
+	public String  getBackInfoById(){
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("application/json;charset=utf-8");
+		BackInfo backInfo = new BackInfo();
+		backInfo.setBorrowId(borrowId);
+		BackInfo newBackInfo = backService.getBackInfoById(backInfo);
+		JsonConfig jsonConfig = new JsonConfig();
+		jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
+		    public boolean apply(Object obj, String name, Object value) {
+			if(obj instanceof Authorization||name.equals("authorization") || obj instanceof Set || name.equals("borrowInfos")){	
+				return true;
+			}else{
+				return false;
+			}
+		   }
+		});
+		
+		
+		JSONObject jsonObject = JSONObject.fromObject(newBackInfo,jsonConfig);
+		try {
+			response.getWriter().print(jsonObject);
+		} catch (IOException e) {
+			throw new RuntimeException(e.getMessage());
+		}
+		return null;
 	}
 }

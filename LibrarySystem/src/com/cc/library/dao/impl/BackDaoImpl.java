@@ -87,4 +87,15 @@ public class BackDaoImpl extends HibernateDaoSupport implements BackDao{
 		return null;
 	}
 
+
+	@Override
+	public BackInfo getBackInfoById(BackInfo backInfo) {
+		String hql= "from BackInfo b where b.borrowId=?";
+		List list = this.getHibernateTemplate().find(hql, backInfo.getBorrowId());
+		if(list!=null && list.size()>0){
+			return (BackInfo) list.get(0);
+		}
+		return null;
+	}
+
 }

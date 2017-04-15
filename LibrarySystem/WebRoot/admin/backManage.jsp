@@ -21,8 +21,7 @@
             <script src="${pageContext.request.contextPath}/ajax-lib/ajaxutils.js"></script>
             <script src="${pageContext.request.contextPath}/js/adminUpdateInfo.js"></script>
              <script src="${pageContext.request.contextPath}/js/adminUpdatePwd.js"></script>
-             
-       
+              <script src="${pageContext.request.contextPath}/js/getBackInfo.js"></script>
 </head>
 
 
@@ -267,7 +266,7 @@
 														&times;
 													</button>
 													<h4 class="modal-title" id="myModalLabel">
-														查看借阅信息
+														查看归还信息
 													</h4>
 												</div>
 												<div class="modal-body">

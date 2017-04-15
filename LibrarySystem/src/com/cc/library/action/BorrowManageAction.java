@@ -133,7 +133,6 @@ public class BorrowManageAction extends ActionSupport{
 		BorrowInfo info = new BorrowInfo();
 		info.setBorrowId(borrowId);
 		BorrowInfo newInfo = borrowService.getBorrowInfoById(info);
-		System.out.println(newInfo);
 		JsonConfig jsonConfig = new JsonConfig();
 		jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
 		    public boolean apply(Object obj, String name, Object value) {

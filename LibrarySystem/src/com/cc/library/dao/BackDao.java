@@ -11,4 +11,6 @@ public interface BackDao {
 
 	public PageBean<BorrowInfo> findBackInfoByPage(int pageCode, int pageSize);
 
+	public BackInfo getBackInfoById(BackInfo backInfo);
+
 }

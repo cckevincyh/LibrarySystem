@@ -64,15 +64,15 @@
             <div class="col-md-2 bootstrap-admin-col-left">
                 <ul class="nav navbar-collapse collapse bootstrap-admin-navbar-side">
                     <li>
-                        <a href="/library/admin/book"><i class="glyphicon glyphicon-chevron-right"></i> 图书管理</a>
+                        <a href="${pageContext.request.contextPath}/admin/bookManageAction_findBookByPage.action"><i class="glyphicon glyphicon-chevron-right"></i> 图书管理</a>
                     </li>
                     <li>
-                        <a href="/library/admin/bookType"><i class="glyphicon glyphicon-chevron-right"></i> 图书分类管理</a>
+                        <a href="${pageContext.request.contextPath}/admin/bookTypeManageAction_findBookTypeByPage.action"><i class="glyphicon glyphicon-chevron-right"></i> 图书分类管理</a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="${pageContext.request.contextPath}/admin/borrowManageAction_findBorrowInfoByPage.action"><i class="glyphicon glyphicon-chevron-right"></i> 图书借阅</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="${pageContext.request.contextPath}/admin/backManageAction_findBackInfoByPage.action"><i class="glyphicon glyphicon-chevron-right"></i> 图书归还</a>
                     </li>
                     
@@ -80,7 +80,7 @@
                         <a href="/library/admin/borrowInfo"><i class="glyphicon glyphicon-chevron-right"></i> 借阅查询</a>
                     </li>
                      <li>
-                        <a href="/library/admin/return"><i class="glyphicon glyphicon-chevron-right"></i> 罚金管理</a>
+                        <a href="/library/admin/return"><i class="glyphicon glyphicon-chevron-right"></i> 逾期处理</a>
                     </li>
                <s:if test="#session.admin.adminType==0"><!-- 对超级管理员和普通管理员进行权限区分 -->
                     <li>
@@ -90,7 +90,9 @@
                     <li>
                         <a href="${pageContext.request.contextPath}/admin/readerManageAction_findReaderByPage.action"><i class="glyphicon glyphicon-chevron-right"></i> 读者管理</a>
                     </li>
-                   
+                    <li>
+                        <a href="${pageContext.request.contextPath}/admin/readerTypeManageAction_getAllReaderType.action"><i class="glyphicon glyphicon-chevron-right"></i> 系统设置</a>
+                    </li>
                 </ul>
             </div>
 
@@ -103,19 +105,19 @@
                             <div class="text-muted bootstrap-admin-box-title">还书查询</div>
                         </div>
                         <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
-                            <form class="form-horizontal">
+                            <form class="form-horizontal" action="${pageContext.request.contextPath}/admin/backManageAction_queryBackInfo.action" method="post">
                                 <div class="row">
                                     <div class="col-lg-5 form-group">
                                         <label class="col-lg-4 control-label" for="borrow_sno"><label class="text-danger">*&nbsp;</label>证件号</label>
                                         <div class="col-lg-8">
-                                            <input class="form-control" id="borrowReaderPaperNO" name="backReaderPaperNO" type="text" value="" placeholder="请输入读者证件号">
+                                            <input class="form-control"  name="paperNO" type="text" value="" placeholder="请输入读者证件号">
                                             <label class="control-label" for="borrow_sno" style="display: none"></label>
                                         </div>
                                     </div>
                                     <div class="col-lg-5 form-group">
                                         <label class="col-lg-4 control-label" for="borrow_bno"><label class="text-danger">*&nbsp;</label>图书ISBN号</label>
                                         <div class="col-lg-8">
-                                            <input class="form-control" id="borrowBookISBN" name="backBookISBN" type="text" value="" placeholder="请输入归还图书的ISBN号">
+                                            <input class="form-control" name="ISBN" type="text" value="" placeholder="请输入归还图书的ISBN号">
                                             <label class="control-label" for="borrow_bno" style="display: none"></label>
                                         </div>
                                     </div>

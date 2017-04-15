@@ -1,5 +1,8 @@
 package com.cc.library.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.cc.library.dao.BackDao;
 import com.cc.library.domain.BackInfo;
 import com.cc.library.domain.BorrowInfo;
@@ -15,7 +18,7 @@ public class BackServiceImpl implements BackService{
 	}
 
 	@Override
-	public PageBean<BorrowInfo> findBackInfoByPage(int pageCode, int pageSize) {
+	public PageBean<BackInfo> findBackInfoByPage(int pageCode, int pageSize) {
 		// TODO Auto-generated method stub
 		return backDao.findBackInfoByPage(pageCode,pageSize);
 	}
@@ -24,6 +27,28 @@ public class BackServiceImpl implements BackService{
 	public BackInfo getBackInfoById(BackInfo backInfo) {
 		// TODO Auto-generated method stub
 		return backDao.getBackInfoById(backInfo);
+	}
+
+	@Override
+	public PageBean<BackInfo> queryBackInfo(String iSBN, String paperNO,int pageCode,int pageSize) {
+		PageBean<BackInfo> pageBean = new PageBean<BackInfo>();
+		pageBean.setPageCode(pageCode);
+		pageBean.setPageSize(pageSize);
+		PageBean<Integer> list = backDao.getBorrowIdList(iSBN,paperNO,pageCode,pageSize);
+		pageBean.setTotalRecord(list.getTotalRecord());
+		List<Integer> beanList = list.getBeanList();
+		if(beanList.size()==0){
+			return null;
+		}
+		List<BackInfo> backInfos = new ArrayList<BackInfo>();
+		for(Integer i : beanList){
+			BackInfo backInfo = new BackInfo();
+			backInfo.setBorrowId(i);
+			BackInfo info = backDao.getBackInfoById(backInfo);
+			backInfos.add(info);
+		}
+		pageBean.setBeanList(backInfos);
+		return pageBean;
 	}
 	
 	

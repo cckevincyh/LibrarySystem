@@ -11,6 +11,7 @@ import net.sf.json.util.PropertyFilter;
 
 import org.apache.struts2.ServletActionContext;
 
+import com.cc.library.domain.Admin;
 import com.cc.library.domain.Authorization;
 import com.cc.library.domain.BackInfo;
 import com.cc.library.domain.BorrowInfo;
@@ -30,8 +31,23 @@ public class BackManageAction extends ActionSupport{
 	private int pageCode;
 	
 	private int borrowId;
+	private String ISBN;
+	private String paperNO;
 	
 	
+	
+	public void setISBN(String iSBN) {
+		ISBN = iSBN;
+	}
+
+
+
+	public void setPaperNO(String paperNO) {
+		this.paperNO = paperNO;
+	}
+
+
+
 	public void setBorrowId(int borrowId) {
 		this.borrowId = borrowId;
 	}
@@ -53,8 +69,7 @@ public class BackManageAction extends ActionSupport{
 		//给pageSize,每页的记录数赋值
 		int pageSize = 5;
 		
-		PageBean<BorrowInfo> pb = backService.findBackInfoByPage(pageCode,pageSize);
-		System.out.println(pb);
+		PageBean<BackInfo> pb = backService.findBackInfoByPage(pageCode,pageSize);
 		if(pb!=null){
 			pb.setUrl("findBackInfoByPage.action?");
 		}
@@ -90,4 +105,33 @@ public class BackManageAction extends ActionSupport{
 		}
 		return null;
 	}
+	
+	
+	
+	public String queryBackInfo(){
+		//获取页面传递过来的当前页码数
+		if(pageCode==0){
+			pageCode = 1;
+		}
+		//给pageSize,每页的记录数赋值
+		int pageSize = 5;
+		PageBean<BackInfo> pb = null;
+		if("".equals(ISBN.trim()) && "".equals(paperNO.trim())){
+			pb = backService.findBackInfoByPage(pageCode,pageSize);
+		}else{
+			pb = backService.queryBackInfo(ISBN,paperNO,pageCode,pageSize);
+		}
+		if(pb!=null){
+			pb.setUrl("queryBackInfo.action?ISBN="+ISBN+"&paperNO="+paperNO+"&");
+		}
+
+		ServletActionContext.getRequest().setAttribute("pb", pb);
+		return "success";
+	}
+	
+	
+	
+	
+	
 }
+

@@ -17,4 +17,6 @@ public interface BackDao {
 
 	public PageBean<Integer> getBorrowIdList(String iSBN, String paperNO,int pageCode, int pageSize);
 
+	public BackInfo updateBackInfo(BackInfo backInfoById);
+
 }

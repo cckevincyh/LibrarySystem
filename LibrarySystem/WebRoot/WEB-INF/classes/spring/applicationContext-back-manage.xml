@@ -22,6 +22,12 @@
  		<property name="backDao">
  			<ref bean="backDao"/>
  		</property>
+ 		<property name="bookDao">
+ 			<ref bean="bookDao"/>
+ 		</property>
+ 		<property name="borrowDao">
+ 			<ref bean="borrowDao"/>
+ 		</property>
  	</bean>
  	
  

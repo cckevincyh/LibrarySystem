@@ -11,4 +11,6 @@ public interface BackService {
 
 	public PageBean<BackInfo> queryBackInfo(String iSBN, String paperNO,int pageCode,int pageSize);
 
+	public int addBackInfo(BackInfo backInfo);
+
 }

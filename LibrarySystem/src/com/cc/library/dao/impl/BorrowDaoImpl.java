@@ -11,6 +11,7 @@ import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.cc.library.dao.BorrowDao;
+import com.cc.library.domain.BackInfo;
 import com.cc.library.domain.Book;
 import com.cc.library.domain.BorrowInfo;
 import com.cc.library.domain.PageBean;
@@ -123,5 +124,27 @@ public class BorrowDaoImpl extends HibernateDaoSupport implements BorrowDao{
 		}
 		return list;
 	}
+
+
+
+
+	@Override
+	public BorrowInfo updateBorrowInfo(BorrowInfo borrowInfoById) {
+		BorrowInfo borrowInfo = null;
+		try{
+			this.getHibernateTemplate().clear();
+			//将传入的detached(分离的)状态的对象的属性复制到持久化对象中，并返回该持久化对象
+			borrowInfo = (BorrowInfo) this.getHibernateTemplate().merge(borrowInfoById);
+			this.getHibernateTemplate().flush();
+		}catch (Throwable e1) {
+			e1.printStackTrace();
+			throw new RuntimeException(e1.getMessage());
+		}
+		return borrowInfo;
+	}
+	
+	
+	
+	
 
 }

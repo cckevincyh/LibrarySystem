@@ -16,4 +16,6 @@ public interface BorrowDao {
 
 	public List<BorrowInfo> getBorrowInfoByReader(Reader reader);
 
+	public BorrowInfo updateBorrowInfo(BorrowInfo borrowInfoById);
+
 }

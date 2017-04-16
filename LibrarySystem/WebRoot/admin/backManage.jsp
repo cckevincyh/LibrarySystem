@@ -22,6 +22,8 @@
             <script src="${pageContext.request.contextPath}/js/adminUpdateInfo.js"></script>
              <script src="${pageContext.request.contextPath}/js/adminUpdatePwd.js"></script>
               <script src="${pageContext.request.contextPath}/js/getBackInfo.js"></script>
+              
+                 <script src="${pageContext.request.contextPath}/js/backBook.js"></script>
 </head>
 
 
@@ -163,7 +165,7 @@
 	                                <td><s:date name="#back.borrowInfo.endDate" format="yyyy-MM-dd" /></td>
 	                                <td>         
 	                                	<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#findBackModal" onclick="getBackInfoById(<s:property value="#back.borrowId"/>)">查看</button>
-	                                	<button type="button" class="btn btn-success btn-xs" onclick="" >归还</button>
+	                                	<button type="button" class="btn btn-success btn-xs" onclick="backBook(<s:property value="#back.borrowId"/>)" >归还</button>
 	                               	</td>                                              
                           	  </tbody>
                             </s:iterator>

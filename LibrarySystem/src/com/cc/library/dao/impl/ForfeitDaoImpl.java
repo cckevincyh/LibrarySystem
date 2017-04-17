@@ -1,5 +1,6 @@
 package com.cc.library.dao.impl;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +52,21 @@ public class ForfeitDaoImpl extends HibernateDaoSupport implements ForfeitDao{
 			throw new RuntimeException(e.getMessage());
 		}
 		return null;
+	}
+
+	@Override
+	public boolean addForfeitInfo(ForfeitInfo forfeitInfo) {
+		boolean  b  = true;
+		try{
+			this.getHibernateTemplate().clear();	
+			this.getHibernateTemplate().save(forfeitInfo);
+			this.getHibernateTemplate().flush();
+		}catch (Throwable e1) {
+			b = false;
+			e1.printStackTrace();
+			throw new RuntimeException(e1.getMessage());
+		}
+		return b;
 	}
 	
 	

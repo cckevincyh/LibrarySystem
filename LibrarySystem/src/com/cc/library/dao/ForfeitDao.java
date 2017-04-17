@@ -9,4 +9,6 @@ public interface ForfeitDao {
 
 	public List<ForfeitInfo> getForfeitByReader(Reader reader);
 
+	public boolean addForfeitInfo(ForfeitInfo forfeitInfo);
+
 }

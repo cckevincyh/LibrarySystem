@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/aop 
+           http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+           http://www.springframework.org/schema/context
+           	http://www.springframework.org/schema/context/spring-context-2.5.xsd
+           	http://www.springframework.org/schema/tx 
+           	http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+           
+           
+           
+    <!-- task -->
+    <!-- 定义了一个任务 -->
+    <bean id="quartzClock" class="org.springframework.scheduling.quartz.JobDetailBean">
+       <property name="jobClass">
+        <value>com.cc.library.quartz.CheckBorrowInfo</value><!-- 类的名字 有这个类完成具体的 任务 -->
+       </property>
+       <property name="jobDataAsMap"><!-- 非常重要，用来向JobDetail传参 -->  
+            <map>  
+              <entry key ="borrowService" value-ref="borrowService"/>  
+              <entry key="timeout" value="5" />  
+            </map>  
+        </property>  
+       
+    </bean>
+    
+
+
+    <!-- 这种配置可以精确几点执行定时任务 -->
+    <!-- 定义了任务的执行方式 -->
+    <bean id="cronQuartzClock" class="org.springframework.scheduling.quartz.CronTriggerBean" >
+       <property name="jobDetail">
+        <ref bean="quartzClock"></ref>
+       </property>
+
+       <property name="cronExpression">
+        <value>0 30 23 ? * *</value><!-- 每天晚上十一点半执行 -->
+       </property>
+    </bean>
+
+    <!--第三步 启动定时任务,注意这里的ref bean -->
+    <bean  id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+       <property name="triggers">
+        <list>
+         <ref bean="cronQuartzClock"></ref>
+        </list>
+       </property>
+    </bean>
+    
+
+</beans>

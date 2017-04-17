@@ -19,6 +19,8 @@ public interface BorrowService {
 	 */
 	public int addBorrow(BorrowInfo info);
 
+	public boolean checkBorrowInfo();
+
 
 
 }

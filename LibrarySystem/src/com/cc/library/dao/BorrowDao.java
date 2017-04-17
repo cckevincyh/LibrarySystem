@@ -18,4 +18,6 @@ public interface BorrowDao {
 
 	public BorrowInfo updateBorrowInfo(BorrowInfo borrowInfoById);
 
+	public List<BorrowInfo> getBorrowInfoByState(int state);
+
 }

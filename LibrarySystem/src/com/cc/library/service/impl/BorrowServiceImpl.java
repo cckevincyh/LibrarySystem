@@ -177,5 +177,63 @@ public class BorrowServiceImpl implements BorrowService{
 		return state;
 	}
 
+	@Override
+	public boolean checkBorrowInfo() {
+		// 检查借阅表是否有逾期
+		//主要步骤
+		/*
+		 *	1.得到所有的未归还的借阅记录
+		 *
+		 * 	2.遍历所有的未归还的借阅记录
+		 * 
+		 * 	3.查看当前时间和借阅的截止的时间的大小
+		 *		3.1 如果小于,直接跳过
+		 *		3.2如果大于则需要进行逾期处理的,进行第4步操作
+		 *
+		 *	4.用当前时间减去截止时间得到逾期的天数
+		 *
+		 *	5.为当前借阅记录设置逾期天数,并进行数据库修改
+		 *
+		 *	6.需要生成罚金记录
+		 *		6.1 得到当前借阅记录的罚金金额,和当前的逾期天数进行相乘,得到罚金金额
+		 *		6.2 将当前借阅记录的id和罚金的金额设置进新生成的罚金记录
+		 * 
+		 */
+		//得到所有的未归还的借阅记录
+		List<BorrowInfo> borrowInfos = borrowDao.getBorrowInfoByState(0);
+		if(borrowInfos!=null){
+			for (BorrowInfo borrowInfo : borrowInfos) {
+				long time1 = borrowInfo.getEndDate().getTime();//截止时间
+				long time2 = System.currentTimeMillis();//当前时间
+				if(time2>time1){
+					//当前时间大于截止时间,已经逾期
+					Double days =Math.floor((time2-time1)/(24*60*60*1000));
+					//用当前时间减去截止时间得到逾期的天数
+					int day = days.intValue();
+					//为当前借阅记录设置逾期天数,并进行数据库修改
+					borrowInfo.setOverday(day);
+					//进行数据库修改
+					borrowDao.updateBorrowInfo(borrowInfo);
+					//需要生成罚金记录
+					ForfeitInfo forfeitInfo = new ForfeitInfo();
+					forfeitInfo.setBorrowId(borrowInfo.getBorrowId());
+					forfeitInfo.setBorrowInfo(borrowInfo);
+					// 得到当前借阅记录的罚金金额,和当前的逾期天数进行相乘,得到罚金金额
+					double pay = borrowInfo.getPenalty() * day;
+					//将当前借阅记录的id和罚金的金额设置进新生成的罚金记录
+					forfeitInfo.setForfeit(pay);
+					//生成的罚金记录
+					boolean flag = forfeitDao.addForfeitInfo(forfeitInfo);
+					if(!flag){
+						return false;
+						
+					}
+				}
+			}
+		}
+		return true;
+		
+	}
+
 	
 }

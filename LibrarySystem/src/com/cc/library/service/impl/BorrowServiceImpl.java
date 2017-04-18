@@ -114,7 +114,7 @@ public class BorrowServiceImpl implements BorrowService{
 			return -1;//返回-1表示密码错误
 		}
 		//3. 查看该读者的借阅信息
-		List<BorrowInfo> readerInfos = borrowDao.getBorrowInfoByReader(reader);
+		List<BorrowInfo> readerInfos = borrowDao.getBorrowInfoByReader(reader);///查询的应该是为归还的记录
 		//查看借阅信息的条数
 		//查看该读者的类型得出该读者的最大借阅数量
 		// 匹配借阅的数量是否小于最大借阅量

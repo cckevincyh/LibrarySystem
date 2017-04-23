@@ -147,9 +147,8 @@ public class ReaderDaoImpl extends HibernateDaoSupport implements ReaderDao{
 	public boolean deleteReader(Reader reader) {
 		boolean b = true;
 		try{
-			Reader deleteReader = getReaderById(reader);
 			this.getHibernateTemplate().clear();
-			this.getHibernateTemplate().delete(deleteReader);
+			this.getHibernateTemplate().delete(reader);
 			this.getHibernateTemplate().flush();
 		}catch  (Throwable e1){
 			b = false;

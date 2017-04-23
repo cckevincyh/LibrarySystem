@@ -182,9 +182,9 @@ public class BorrowServiceImpl implements BorrowService{
 		// 检查借阅表是否有逾期
 		//主要步骤
 		/*
-		 *	1.得到所有的未归还的借阅记录(包括未归还,逾期为归还,续借为归还,续借逾期不归还)
+		 *	1.得到所有的未归还的借阅记录(包括未归还,逾期未归还,续借未归还,续借逾期未归还)
 		 *
-		 * 	2.遍历所有的未归还的借阅记录(包括为归还和续借为归还)
+		 * 	2.遍历所有的未归还的借阅记录(包括未归还,逾期为归还,续借为归还,续借逾期未归还)
 		 * 
 		 * 	3.查看当前时间和借阅的截止的时间的大小
 		 *		3.1 如果小于,直接跳过
@@ -201,8 +201,8 @@ public class BorrowServiceImpl implements BorrowService{
 		 *	7.设置当前借阅记录的状态
 		 *		7.1 如果是未归还，则改为逾期未归还
 		 *		7.2如果是续借未归还，则改为续借逾期未归还
-		 *		7.3如果是逾期为归还不改变
-		 *		7.4如果是续借逾期不归还
+		 *		7.3如果是逾期未归,则不改变
+		 *		7.4如果是续借逾期不归还,则不改变
 		 * 
 		 */
 		//得到所有的未归还的借阅记录(包括未归还,逾期为归还,续借为归还,续借逾期不归还)
@@ -246,6 +246,82 @@ public class BorrowServiceImpl implements BorrowService{
 		}
 		return true;
 		
+	}
+
+	@Override
+	public int renewBook(BorrowInfo borrowInfo) {
+		//续借步骤：
+		/*
+		 * 1. 得到借阅的记录
+		 * 
+		 * 2. 得到借阅的记录的状态
+		 * 		2.1 如果已经是续借状态(包括续借未归还,续借逾期未归还),则返回已经续借过了,返回-2
+		 * 		2.2 如果是归还状态(包括归还,续借归还),则返回该书已还,无法续借,返回-1
+		 *		2.3 如果都不是以上情况,则进行下一步。
+		 * 
+		 * 3. 得到借阅的读者
+		 * 
+		 * 4. 得到借阅的读者类型
+		 * 
+		 * 5. 得到可续借的天数
+		 * 
+		 * 6. 在当前记录的截止日期上叠加可续借天数
+		 * 		6.1 如果叠加后的时候比当前时间小,则返回你已超续借期了,无法进行续借,提示读者快去还书和缴纳罚金  返回-3
+		 * 		6.2如果大于当前时间进行下一步
+		 * 
+		 * 7. 得到当前借阅记录的状态
+		 * 		7.1 如果当前记录为逾期未归还,则需要取消当前借阅记录的罚金记录,并将该记录的状态设置为续借未归还
+		 * 		7.2 如果为未归还状态,直接将当前状态设置为续借未归还
+		 * 
+		 * 8. 为当前借阅记录进行设置,设置之后重新update该记录 返回1
+		 */
+		//得到借阅的记录
+		BorrowInfo borrowInfoById = borrowDao.getBorrowInfoById(borrowInfo);
+		//得到借阅的记录的状态
+		Integer state = borrowInfoById.getState();
+		if(state==3 || state==4){
+			//如果已经是续借状态(包括续借未归还,续借逾期未归还),则返回已经续借过了,返回-2
+			return -2;
+		}
+		if(state==2 || state==5){
+			//如果是归还状态(包括归还,续借归还),则返回该书已还,无法续借,返回-1
+			return -1;
+		}
+		//得到可续借的天数
+		Integer renewDays = borrowInfoById.getReader().getReaderType().getRenewDays();
+		//在当前记录的截止日期上叠加可续借天数
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(borrowInfoById.getEndDate());
+		calendar.add(Calendar.DAY_OF_MONTH, +renewDays);//+renewDays ,今天的时间加renewDays天
+		// 根据可续借天数,计算出截止日期
+		Date endDate = calendar.getTime();
+		//设置截止时间
+		borrowInfoById.setEndDate(endDate);
+		if(System.currentTimeMillis()>endDate.getTime()){
+			//如果叠加后的时候比当前时间小,则返回你已超续借期了,无法进行续借,提示读者快去还书和缴纳罚金  返回-3
+			return -3;
+		}
+		
+		//得到当前借阅记录的状态
+		//如果当前记录为逾期未归还,则需要取消当前借阅记录的罚金记录,并将该记录的状态设置为续借未归还
+		if(state==1){
+			BackInfo backInfo = new BackInfo();
+			backInfo.setBorrowId(borrowInfoById.getBorrowId());
+			//删除该罚金记录
+			boolean deleteBackInfo = backDao.deleteBackInfo(backInfo);
+			if(!deleteBackInfo){
+				return 0;
+			}
+		}
+		//将当前状态设置为续借未归还
+		borrowInfoById.setState(3);
+		//为当前借阅记录进行设置,设置之后重新update该记录 返回1
+		BorrowInfo updateBorrowInfo = borrowDao.updateBorrowInfo(borrowInfoById);
+		if(borrowInfo!=null){
+			return 1;
+		}
+		
+		return 0;
 	}
 
 	

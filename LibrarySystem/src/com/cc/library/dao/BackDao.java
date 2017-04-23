@@ -19,4 +19,6 @@ public interface BackDao {
 
 	public BackInfo updateBackInfo(BackInfo backInfoById);
 
+	public boolean deleteBackInfo(BackInfo backInfo);
+
 }

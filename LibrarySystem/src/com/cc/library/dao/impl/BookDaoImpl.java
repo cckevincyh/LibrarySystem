@@ -182,9 +182,8 @@ public class BookDaoImpl extends HibernateDaoSupport implements BookDao{
 	public boolean deleteBook(Book book) {
 		boolean b = true;
 		try{
-			Book deleteBook = getBookById(book);
 			this.getHibernateTemplate().clear();
-			this.getHibernateTemplate().delete(deleteBook);
+			this.getHibernateTemplate().delete(book);
 			this.getHibernateTemplate().flush();
 		}catch  (Throwable e1){
 			b = false;

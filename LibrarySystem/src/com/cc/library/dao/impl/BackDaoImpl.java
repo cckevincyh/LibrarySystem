@@ -15,6 +15,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import com.cc.library.dao.BackDao;
 import com.cc.library.domain.Admin;
 import com.cc.library.domain.BackInfo;
+import com.cc.library.domain.Book;
 import com.cc.library.domain.BorrowInfo;
 import com.cc.library.domain.PageBean;
 
@@ -186,6 +187,22 @@ public class BackDaoImpl extends HibernateDaoSupport implements BackDao{
 			throw new RuntimeException(e1.getMessage());
 		}
 		return backInfo;
+	}
+
+
+	@Override
+	public boolean deleteBackInfo(BackInfo backInfo) {
+		boolean b = true;
+		try{
+			this.getHibernateTemplate().clear();
+			this.getHibernateTemplate().delete(backInfo);
+			this.getHibernateTemplate().flush();
+		}catch  (Throwable e1){
+			b = false;
+			e1.printStackTrace();
+			throw new RuntimeException(e1.getMessage());
+		}
+		return b;
 	}
 
 }

@@ -21,6 +21,8 @@ public interface BorrowService {
 
 	public boolean checkBorrowInfo();
 
+	public int renewBook(BorrowInfo borrowInfo);
+
 
 
 }

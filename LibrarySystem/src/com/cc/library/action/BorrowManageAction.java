@@ -217,4 +217,47 @@ public class BorrowManageAction extends ActionSupport{
 		return null;
 	}
 	
+	
+	
+	
+	
+	public String renewBook(){
+		//续借步骤：
+		/*
+		 * 1. 得到借阅的记录
+		 * 
+		 * 2. 得到借阅的记录的状态
+		 * 		2.1 如果已经是续借状态(包括续借未归还,续借逾期未归还),则返回已经续借过了,返回-2
+		 * 		2.2 如果是归还状态(包括归还,续借归还),则返回该书已还,无法续借,返回-1
+		 *		2.3 如果都不是以上情况,则进行下一步。
+		 * 
+		 * 3. 得到借阅的读者
+		 * 
+		 * 4. 得到借阅的读者类型
+		 * 
+		 * 5. 得到可续借的天数
+		 * 
+		 * 6. 在当前记录的截止日期上叠加可续借天数
+		 * 		6.1 如果叠加后的时候比当前时间小,则返回你已超续借期了,无法进行续借,提示读者快去还书和缴纳罚金  返回-3
+		 * 		6.2如果大于当前时间进行下一步
+		 * 
+		 * 7. 得到当前借阅记录的状态
+		 * 		7.1 如果当前记录为逾期未归还,则需要取消当前借阅记录的罚金记录,并将该记录的状态设置为续借未归还
+		 * 		7.2如果为未归还状态,直接将当前状态设置为续借未归还
+		 * 
+		 * 8. 为当前借阅记录进行设置,设置之后重新update该记录 返回1
+		 */
+		BorrowInfo borrowInfo = new BorrowInfo();
+		borrowInfo.setBorrowId(borrowId);
+		int renewBook = borrowService.renewBook(borrowInfo);
+		try {
+			ServletActionContext.getResponse().getWriter().print(renewBook);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException(e.getMessage());
+		}
+		
+		return null;
+	}
+	
 }

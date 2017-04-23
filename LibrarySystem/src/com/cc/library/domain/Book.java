@@ -22,7 +22,6 @@ public class Book implements Serializable{
 	private Double price;	//价格
 	private String description;	//简介
 	private Admin admin;	//操作管理员
-	private Integer state;	//删除状态
 	public Integer getBookId() {
 		return bookId;
 	}
@@ -99,12 +98,7 @@ public class Book implements Serializable{
 	public void setAdmin(Admin admin) {
 		this.admin = admin;
 	}
-	public Integer getState() {
-		return state;
-	}
-	public void setState(Integer state) {
-		this.state = state;
-	}
+
 	public Book() {
 
 	

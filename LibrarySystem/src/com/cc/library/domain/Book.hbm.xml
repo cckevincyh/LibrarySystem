@@ -46,10 +46,7 @@
 			<column name="putdate" />
 		</property>
 		
-		<property name="state" type="java.lang.Integer">
-			<column name="state" default="1"/>
-		</property>
-		
+
 
 		
 		<many-to-one name="bookType" class="com.cc.library.domain.BookType"  lazy="false" >

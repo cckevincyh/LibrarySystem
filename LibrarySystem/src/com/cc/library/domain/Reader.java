@@ -21,8 +21,7 @@ public class Reader implements Serializable{
     private String paperNO;	//证件号码
 	private Date createTime;	//创建时间
 	private Set<BorrowInfo> borrowInfos;	//该读者的借阅信息
-	
-	private Integer state;	//删除状态
+
 
 
 
@@ -111,13 +110,6 @@ public class Reader implements Serializable{
 
 
 
-	public Integer getState() {
-		return state;
-	}
-
-	public void setState(Integer state) {
-		this.state = state;
-	}
 
 	public Reader() {
 
@@ -139,15 +131,7 @@ public class Reader implements Serializable{
 		this.createTime = createTime;
 	}
 
-	@Override
-	public String toString() {
-		return "Reader [readerId=" + readerId + ", name=" + name + ", pwd="
-				+ pwd + ", phone=" + phone + ", readerType=" + readerType
-				+ ", email=" + email + ", admin=" + admin + ", paperNO="
-				+ paperNO + ", createTime=" + createTime + ", state=" + state
-				+ "]";
-	}
-	
+
 	
 
 

@@ -25,6 +25,8 @@ function backBook(id){
 
 	                }else if(data == -1){
 						showInfo("该书已经还了");
+					}else if(data == 2){
+						showInfo("还书成功,请缴纳逾期罚金");
 					}else{
 						showInfo("还书失败");
 					}

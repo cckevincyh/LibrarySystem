@@ -20,7 +20,7 @@ public class ReaderDaoImpl extends HibernateDaoSupport implements ReaderDao{
 	public Reader getReader(Reader reader) {
 		//this.getHibernateTemplate().find(hql, value)方法无法执行的问题(未解决)
 		//解决需要catch (Throwable e)
-		String hql= "from Reader r where r.readerId=? and r.state=1";
+		String hql= "from Reader r where r.readerId=?";
 		try {
 			List list = this.getHibernateTemplate().find(hql, reader.getReaderId());
 			System.out.println(list);
@@ -107,7 +107,7 @@ public class ReaderDaoImpl extends HibernateDaoSupport implements ReaderDao{
 		pb.setPageSize(pageSize);//设置页面记录数
 		List readerList = null;
 		try {
-			String sql = "SELECT count(*) FROM Reader r where r.state=1";
+			String sql = "SELECT count(*) FROM Reader";
 			List list = this.getSession().createQuery(sql).list();
 			int totalRecord = Integer.parseInt(list.get(0).toString()); //得到总记录数
 			
@@ -115,7 +115,7 @@ public class ReaderDaoImpl extends HibernateDaoSupport implements ReaderDao{
 			this.getSession().close();
 			
 			//不支持limit分页
-			String hql= "from Reader r where r.state=1";
+			String hql= "from Reader";
 			//分页查询
 			readerList = doSplitPage(hql,pageCode,pageSize);
 			
@@ -134,7 +134,7 @@ public class ReaderDaoImpl extends HibernateDaoSupport implements ReaderDao{
 
 	@Override
 	public Reader getReaderById(Reader reader) {
-		String hql= "from Reader r where r.readerId=? and r.state=1";
+		String hql= "from Reader r where r.readerId=?";
 		List list = this.getHibernateTemplate().find(hql, reader.getReaderId());
 		if(list!=null && list.size()>0){
 			return (Reader) list.get(0);
@@ -145,13 +145,11 @@ public class ReaderDaoImpl extends HibernateDaoSupport implements ReaderDao{
 
 	@Override
 	public boolean deleteReader(Reader reader) {
-		//把读者的状态修改为0
 		boolean b = true;
 		try{
 			Reader deleteReader = getReaderById(reader);
-			deleteReader.setState(0);
 			this.getHibernateTemplate().clear();
-			this.getHibernateTemplate().update(deleteReader);
+			this.getHibernateTemplate().delete(deleteReader);
 			this.getHibernateTemplate().flush();
 		}catch  (Throwable e1){
 			b = false;
@@ -172,8 +170,8 @@ public class ReaderDaoImpl extends HibernateDaoSupport implements ReaderDao{
 		
 		StringBuilder sb = new StringBuilder();
 		StringBuilder sb_sql = new StringBuilder();
-		String sql = "SELECT count(*) FROM Reader r where r.state=1";
-		String hql= "from Reader r where r.state=1";
+		String sql = "SELECT count(*) FROM Reader r where 1=1";
+		String hql= "from Reader r where 1=1";
 		sb.append(hql);
 		sb_sql.append(sql);
 		if(!"".equals(reader.getPaperNO().trim())){
@@ -211,7 +209,7 @@ public class ReaderDaoImpl extends HibernateDaoSupport implements ReaderDao{
 
 	@Override
 	public Reader getReaderBypaperNO(Reader reader) {
-		String hql= "from Reader r where r.paperNO=? and r.state=1";
+		String hql= "from Reader r where r.paperNO=?";
 		List list = this.getHibernateTemplate().find(hql, reader.getPaperNO());
 		if(list!=null && list.size()>0){
 			return (Reader) list.get(0);

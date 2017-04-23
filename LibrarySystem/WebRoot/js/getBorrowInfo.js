@@ -29,10 +29,19 @@ function getBorrowInfoById(id){
 				$("#paperNO").val(data.reader.paperNO);
 				$("#readerName").val(data.reader.name);
 				$("#readerType").val(data.reader.readerType.readerTypeName);
+			
 				if (data.state == 0) {
 					$("#state").val("未归还");
-				}else{
-					$("#state").val("已归还");
+				}else if(data.state == 1){
+					$("#state").val("逾期未归还");
+				}else if(data.state == 2){
+					$("#state").val("归还");
+				}else if(data.state == 3){
+					$("#state").val("续借未归还");
+				}else if(data.state == 4){
+					$("#state").val("续借逾期未归还");
+				}else if(data.state == 5){
+					$("#state").val("续借归还");
 				}
 				$("#admin").val(data.admin.name);
 			}

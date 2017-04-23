@@ -114,7 +114,7 @@ public class BorrowServiceImpl implements BorrowService{
 			return -1;//返回-1表示密码错误
 		}
 		//3. 查看该读者的借阅信息
-		List<BorrowInfo> readerInfos = borrowDao.getBorrowInfoByReader(reader);///查询的应该是为归还的记录
+		List<BorrowInfo> readerInfos = borrowDao.getBorrowInfoByReader(reader);///查询的应该是未归还的记录
 		//查看借阅信息的条数
 		//查看该读者的类型得出该读者的最大借阅数量
 		// 匹配借阅的数量是否小于最大借阅量
@@ -182,9 +182,9 @@ public class BorrowServiceImpl implements BorrowService{
 		// 检查借阅表是否有逾期
 		//主要步骤
 		/*
-		 *	1.得到所有的未归还的借阅记录
+		 *	1.得到所有的未归还的借阅记录(包括未归还,逾期为归还,续借为归还,续借逾期不归还)
 		 *
-		 * 	2.遍历所有的未归还的借阅记录
+		 * 	2.遍历所有的未归还的借阅记录(包括为归还和续借为归还)
 		 * 
 		 * 	3.查看当前时间和借阅的截止的时间的大小
 		 *		3.1 如果小于,直接跳过
@@ -197,10 +197,16 @@ public class BorrowServiceImpl implements BorrowService{
 		 *	6.需要生成罚金记录
 		 *		6.1 得到当前借阅记录的罚金金额,和当前的逾期天数进行相乘,得到罚金金额
 		 *		6.2 将当前借阅记录的id和罚金的金额设置进新生成的罚金记录
+		 *
+		 *	7.设置当前借阅记录的状态
+		 *		7.1 如果是未归还，则改为逾期未归还
+		 *		7.2如果是续借未归还，则改为续借逾期未归还
+		 *		7.3如果是逾期为归还不改变
+		 *		7.4如果是续借逾期不归还
 		 * 
 		 */
-		//得到所有的未归还的借阅记录
-		List<BorrowInfo> borrowInfos = borrowDao.getBorrowInfoByState(0);
+		//得到所有的未归还的借阅记录(包括未归还,逾期为归还,续借为归还,续借逾期不归还)
+		List<BorrowInfo> borrowInfos = borrowDao.getBorrowInfoByNoBackState();
 		if(borrowInfos!=null){
 			for (BorrowInfo borrowInfo : borrowInfos) {
 				long time1 = borrowInfo.getEndDate().getTime();//截止时间
@@ -212,6 +218,13 @@ public class BorrowServiceImpl implements BorrowService{
 					int day = days.intValue();
 					//为当前借阅记录设置逾期天数,并进行数据库修改
 					borrowInfo.setOverday(day);
+					//设置当前借阅记录的状态
+					if(borrowInfo.getState()==0){
+						//如果是未归还，则改为逾期未归还
+						borrowInfo.setState(1);
+					}else if(borrowInfo.getState()==3){
+						borrowInfo.setState(4);
+					}
 					//进行数据库修改
 					borrowDao.updateBorrowInfo(borrowInfo);
 					//需要生成罚金记录

@@ -19,7 +19,7 @@ public class BorrowInfo implements Serializable{
 	private Date endDate;	//截止日期
 	private Double penalty;	//每日罚金
 	private Integer overday;	//逾期天数
-	private Integer state; //状态 (归还或者未归还)
+	private Integer state; //状态 (未归还=0,逾期未归还=1,归还=2,续借未归还=3,续借逾期未归还=4,续借归还=5)
 
 	
 	

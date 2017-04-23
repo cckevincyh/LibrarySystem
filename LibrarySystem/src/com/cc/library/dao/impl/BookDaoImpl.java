@@ -52,13 +52,13 @@ public class BookDaoImpl extends HibernateDaoSupport implements BookDao{
 		pb.setPageSize(pageSize);//设置页面记录数
 		List bookList = null;
 		try {
-			String sql = "SELECT count(*) FROM Book b where b.state=1";
+			String sql = "SELECT count(*) FROM Book";
 			List list = this.getSession().createQuery(sql).list();
 			int totalRecord = Integer.parseInt(list.get(0).toString()); //得到总记录数
 			pb.setTotalRecord(totalRecord);	//设置总记录数
 			this.getSession().close();
 			//不支持limit分页
-			String hql= "from Book b where b.state=1";
+			String hql= "from Book";
 			//分页查询
 			bookList = doSplitPage(hql,pageCode,pageSize);
 		}catch (Throwable e1) {
@@ -95,7 +95,7 @@ public class BookDaoImpl extends HibernateDaoSupport implements BookDao{
 
 	@Override
 	public Book getBookById(Book book) {
-		String hql= "from Book b where b.bookId=? and b.state=1";
+		String hql= "from Book b where b.bookId=? ";
 		List list = this.getHibernateTemplate().find(hql, book.getBookId());
 		if(list!=null && list.size()>0){
 			return (Book) list.get(0);
@@ -132,8 +132,8 @@ public class BookDaoImpl extends HibernateDaoSupport implements BookDao{
 		
 		StringBuilder sb = new StringBuilder();
 		StringBuilder sb_sql = new StringBuilder();
-		String sql = "SELECT count(*) FROM Book b where b.state=1";
-		String hql= "from Book b where b.state=1";
+		String sql = "SELECT count(*) FROM Book b where 1=1";
+		String hql= "from Book b where 1=1";
 		sb.append(hql);
 		sb_sql.append(sql);
 		if(!"".equals(book.getISBN().trim())){
@@ -183,9 +183,8 @@ public class BookDaoImpl extends HibernateDaoSupport implements BookDao{
 		boolean b = true;
 		try{
 			Book deleteBook = getBookById(book);
-			deleteBook.setState(0);
 			this.getHibernateTemplate().clear();
-			this.getHibernateTemplate().update(deleteBook);
+			this.getHibernateTemplate().delete(deleteBook);
 			this.getHibernateTemplate().flush();
 		}catch  (Throwable e1){
 			b = false;
@@ -197,7 +196,7 @@ public class BookDaoImpl extends HibernateDaoSupport implements BookDao{
 
 	@Override
 	public Book getBookByISBN(Book book) {
-		String hql= "from Book b where b.ISBN=? and b.state=1";
+		String hql= "from Book b where b.ISBN=?";
 		List list = this.getHibernateTemplate().find(hql, book.getISBN());
 		if(list!=null && list.size()>0){
 			return (Book) list.get(0);

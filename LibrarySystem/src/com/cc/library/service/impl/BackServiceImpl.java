@@ -71,18 +71,34 @@ public class BackServiceImpl implements BackService{
 		//还书的步骤
 		/*
 		 * 1. 获得操作的借阅编号
+		 * 
 		 * 2. 获得当前的管理员
+		 * 
 		 * 3. 获得借阅的书籍
 		 * 		3.1 书籍的在馆数量增加
+		 * 
+		 * 
 		 * 4. 获取当前时间
+		 * 
 		 * 5. 设置操作管理员
+		 * 
 		 * 6. 设置归还时间
-		 * 7. 设置归还的状态
-		 * 8. 设置借阅的状态 
+		 * 
+		 * 
+		 * 7. 设置借阅的状态
+		 * 		7.1 如果当前借阅不属于续借，则设置为归还
+		 * 		7.2 如果当前借阅属于续借,则设置为续借归还
+		 * 
+		 * 8. 查看该借阅记录有逾期罚金未缴纳的记录
+		 * 		8.1 如果有，返回状态码2,提示读者去缴费
+		 *		8.2 如果没有,则结束
+		 * 
+		 * 
+		 * 
 		 */
 		BorrowInfo borrowInfoById = borrowDao.getBorrowInfoById(backInfo.getBorrowInfo());//获得操作的借阅编号
-		if(borrowInfoById.getState()==1){
-			return -1;
+		if(borrowInfoById.getState()==2 || borrowInfoById.getState()==5){//如果已经归还了。
+			return -1;//该书已还
 		}
 		Book book = borrowInfoById.getBook();
 		Book bookById = bookDao.getBookById(book);//获得借阅的书籍
@@ -92,18 +108,27 @@ public class BackServiceImpl implements BackService{
 		BackInfo backInfoById = backDao.getBackInfoById(backInfo);
 		backInfoById.setAdmin(backInfo.getAdmin());//设置管理员
 		backInfoById.setBackDate(backDate);//设置归还时间
-		backInfoById.setState(1);///设置归还的状态
+		int state = borrowInfoById.getState();
 		BackInfo ba = null;
 		if(b!=null){
 			 ba = backDao.updateBackInfo(backInfoById);//修改归还记录
 		}
-		borrowInfoById.setState(1);//设置借阅的状态
+		if(borrowInfoById.getState()==0 || borrowInfoById.getState()==1){
+			borrowInfoById.setState(2);//设置借阅的状态
+		}
+		if(borrowInfoById.getState()==3 || borrowInfoById.getState()==4){
+			borrowInfoById.setState(5);//设置借阅的状态
+		}
 		BorrowInfo bi = null;
 		if(ba!=null){
 			 bi = borrowDao.updateBorrowInfo(borrowInfoById);
 		}
 		if(bi!=null){
-			return 1;
+			if(state==1 || state==4){
+				return 2;//提示读者去缴费
+			}else{		
+				return 1;
+			}
 		}
 		return 0;
 	}

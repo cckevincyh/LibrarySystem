@@ -146,12 +146,16 @@ public class BorrowDaoImpl extends HibernateDaoSupport implements BorrowDao{
 
 
 
+
+
+
+
 	@Override
-	public List<BorrowInfo> getBorrowInfoByState(int state) {
-		String hql= "from BorrowInfo b where b.state=?";
+	public List<BorrowInfo> getBorrowInfoByNoBackState() {
+		String hql= "from BorrowInfo b where b.state=0 or b.state=1 or b.state=3 or b.state=4";
 		List<BorrowInfo> list = null;
 		try {
-			list = this.getHibernateTemplate().find(hql, state);
+			list = this.getHibernateTemplate().find(hql);
 		}catch (Throwable e) {
 			e.printStackTrace();
 			throw new RuntimeException(e.getMessage());

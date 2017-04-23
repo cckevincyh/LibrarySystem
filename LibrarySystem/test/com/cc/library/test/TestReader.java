@@ -65,12 +65,24 @@ public class TestReader extends BaseSpring{
 	}
 	
 	@Test
-	public void testSaveReader3(){
+	public void testDeleteReaderType(){
 		SessionFactory sessionFactory = (SessionFactory)context.getBean("sessionFactory");
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
 		ReaderType readerType = (ReaderType) session.get(ReaderType.class, 1);
 		session.delete(readerType);
+		transaction.commit();
+		session.close();
+	}
+	
+	
+	@Test
+	public void testDeleteReader(){
+		SessionFactory sessionFactory = (SessionFactory)context.getBean("sessionFactory");
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Reader reader = (Reader) session.get(Reader.class, 1);
+		session.delete(reader);
 		transaction.commit();
 		session.close();
 	}

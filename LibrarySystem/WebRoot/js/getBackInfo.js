@@ -29,10 +29,18 @@ function getBackInfoById(id){
 				$("#paperNO").val(data.borrowInfo.reader.paperNO);
 				$("#readerName").val(data.borrowInfo.reader.name);
 				$("#readerType").val(data.borrowInfo.reader.readerType.readerTypeName);
-				if (data.state == 0) {
+				if (data.borrowInfo.state == 0) {
 					$("#state").val("未归还");
-				}else{
-					$("#state").val("已归还");
+				}else if(data.borrowInfo.state == 1){
+					$("#state").val("逾期未归还");
+				}else if(data.borrowInfo.state == 2){
+					$("#state").val("归还");
+				}else if(data.borrowInfo.state == 3){
+					$("#state").val("续借未归还");
+				}else if(data.borrowInfo.state == 4){
+					$("#state").val("续借逾期未归还");
+				}else if(data.borrowInfo.state == 5){
+					$("#state").val("续借归还");
 				}
 				$("#admin").val(data.admin.name);
 			}

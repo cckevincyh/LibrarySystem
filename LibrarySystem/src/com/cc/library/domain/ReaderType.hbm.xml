@@ -26,6 +26,11 @@
 			<column name="penalty" />
 		</property>
 		
+		
+		
+		<property name="renewDays" type="java.lang.Integer">
+			<column name="renewDays" />
+		</property>
 
 		
 		

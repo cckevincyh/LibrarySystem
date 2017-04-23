@@ -9,7 +9,7 @@ $(function () {
     $('#updateType').click(function () {
 
 	var postdata = "id="+$.trim($("#readerTypeId").val())+"&maxNum="+$.trim($("#maxNum").val())+"&bday="+$.trim($("#bday").val())+"&penalty="+ $.trim($("#penalty").val())
-	+"&readerTypeName="+ $.trim($("#readerTypeName").val());
+	+"&readerTypeName="+ $.trim($("#readerTypeName").val())+"&renewDays="+ $.trim($("#renewDays").val());
 	ajax(
     		  {
 			  	method:'POST',
@@ -58,7 +58,8 @@ function updateReaderType(id){
 					$("#readerTypeName").val(data.readerTypeName);
 					$("#maxNum").val(data.maxNum);
 					$("#bday").val(data.bday);
-					$("#penalty").val(data.penalty);							
+					$("#penalty").val(data.penalty);	
+					$("#renewDays").val(data.renewDays);	
 				}
 			}
 			   

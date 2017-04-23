@@ -9,7 +9,7 @@ public class ReaderType {
 	private Integer maxNum;	//最大借书量
 	private Double penalty;	//每日罚金
 	private Integer bday;	//可借天数
-	
+	private Integer renewDays;	//续借天数
 	
 	public Integer getReaderTypeId() {
 		return readerTypeId;
@@ -43,6 +43,15 @@ public class ReaderType {
 	}
 	public ReaderType() {
 
+	}
+	
+	
+	
+	public Integer getRenewDays() {
+		return renewDays;
+	}
+	public void setRenewDays(Integer renewDays) {
+		this.renewDays = renewDays;
 	}
 	@Override
 	public String toString() {

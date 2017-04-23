@@ -4,7 +4,8 @@ $(function () {
 
     $('#addReaderType').click(function () {
 
-	var postdata = "readerTypeName="+$.trim($("#addType").val())+"&maxNum="+$.trim($("#addMaxNum").val())+"&bday="+ $.trim($("#addBday").val())+"&penalty="+ $.trim($("#addPenalty").val());
+	var postdata = "readerTypeName="+$.trim($("#addType").val())+"&maxNum="+$.trim($("#addMaxNum").val())+"&bday="+ $.trim($("#addBday").val())
+	+"&penalty="+ $.trim($("#addPenalty").val())+"&renewDays="+ $.trim($("#addrenewDays").val());
 	ajax(
     		  {
 			  	method:'POST',

@@ -28,6 +28,7 @@ public class ReaderTypeManageAction extends ActionSupport{
 	private Integer bday;
 	private Double penalty;
 	private String readerTypeName;
+	private Integer renewDays;
 	
 	
 	
@@ -35,6 +36,14 @@ public class ReaderTypeManageAction extends ActionSupport{
 	
 	
 	
+	
+	
+	public void setRenewDays(Integer renewDays) {
+		this.renewDays = renewDays;
+	}
+
+
+
 	public void setReaderTypeName(String readerTypeName) {
 		this.readerTypeName = readerTypeName;
 	}
@@ -102,6 +111,7 @@ public class ReaderTypeManageAction extends ActionSupport{
 		updateReaderType.setMaxNum(maxNum);
 		updateReaderType.setBday(bday);
 		updateReaderType.setPenalty(penalty);
+		updateReaderType.setRenewDays(renewDays);
 		ReaderType newReaderType = readerTypeService.updateReaderType(updateReaderType);
 		int success = 0;
 		if(newReaderType!=null){
@@ -125,6 +135,7 @@ public class ReaderTypeManageAction extends ActionSupport{
 		readerType.setPenalty(penalty);
 		readerType.setMaxNum(maxNum);
 		readerType.setBday(bday);
+		readerType.setRenewDays(renewDays);
 		boolean b = readerTypeService.addReaderType(readerType);
 		int success = 0;
 		if(b){

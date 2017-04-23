@@ -125,6 +125,7 @@
                                 <th>最大借阅数量</th>
                                 <th>可借阅天数</th>
                                 <th>逾期每日罚金</th>
+                                <th>可续借天数</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -138,6 +139,7 @@
 	                                <td><s:property value="#readerType.maxNum"/></td>
 	                                <td><s:property value="#readerType.bday"/></td>
 	                                <td><s:property value="#readerType.penalty"/></td>
+	                                <td><s:property value="#readerType.renewDays"/></td>
 	                                <td>
 	                                	<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" onclick="updateReaderType(<s:property value="#readerType.readerTypeId"/>)">修改</button>
 	                               	</td>                                              
@@ -146,6 +148,7 @@
                             </s:if>
                             <s:else>
                             	<tbody>
+	                         	   	<td>暂无数据</td>
 	                         	   	<td>暂无数据</td>
 	                                <td>暂无数据</td>
 	                                <td>暂无数据</td>
@@ -220,6 +223,14 @@
 											<label for="firstname" class="col-sm-3 control-label">逾期每日罚金</label>
 												<div class="col-sm-7">
 													<input type="text" class="form-control" id="penalty"  placeholder="请输入逾期每日罚金">
+												
+												</div>
+										</div>
+										
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">续借天数</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="renewDays"  placeholder="请输入逾期每日罚金">
 												
 												</div>
 										</div>
@@ -448,9 +459,16 @@
 										
 										
 										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">每日罚金</label>
+											<label for="firstname" class="col-sm-3 control-label">逾期每日罚金</label>
 												<div class="col-sm-7">
 													<input type="text" class="form-control" id="addPenalty"  placeholder="请输入每日罚金">
+												
+												</div>
+										</div>
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">续借天数</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="addrenewDays"  placeholder="请输入逾期每日罚金">
 												
 												</div>
 										</div>

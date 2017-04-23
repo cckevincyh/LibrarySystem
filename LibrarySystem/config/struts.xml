@@ -24,4 +24,5 @@
  	<include file="struts2/struts-borrow-manage.xml"></include>
  	<include file="struts2/struts-forfeit-manage.xml"></include>
  	<include file="struts2/struts-back-manage.xml"></include>
+ 	<include file="struts2/struts-borrow-search.xml"></include>
 </struts>	

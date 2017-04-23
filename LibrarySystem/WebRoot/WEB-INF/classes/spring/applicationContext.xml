@@ -26,5 +26,6 @@
  	<import resource="applicationContext-forfeit-manage.xml"/>
  	<import resource="applicationContext-back-manage.xml"/>
  	<import resource="applicationContext-borrow-manage.xml"/>
+ 	<import resource="applicationContext-borrow-search.xml"/>
  	<import resource="applicationContext-quartz.xml"/>
  </beans>

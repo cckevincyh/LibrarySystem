@@ -5,7 +5,7 @@
 <struts>
   <package name="forfeitManage" extends="struts-default" namespace="/admin">
   	<action name="forfeitManageAction_*" method="{1}" class="forfeitManageAction">
-  		
+  		<result name="success">forfeitManage.jsp</result>
   	</action>
   </package>
   

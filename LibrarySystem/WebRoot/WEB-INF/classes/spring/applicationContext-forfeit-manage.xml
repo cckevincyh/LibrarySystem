@@ -22,6 +22,9 @@
  		<property name="forfeitDao">
  			<ref bean="forfeitDao"/>
  		</property>
+ 		<property name="backDao">
+ 			<ref bean="backDao"/>
+ 		</property>
  	</bean>
  
  		

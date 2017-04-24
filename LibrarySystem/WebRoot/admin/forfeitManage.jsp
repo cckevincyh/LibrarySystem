@@ -107,7 +107,7 @@
                             <div class="text-muted bootstrap-admin-box-title">罚金查询</div>
                         </div>
                         <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
-                            <form class="form-horizontal" action="${pageContext.request.contextPath}/admin/ForfeitManageAction_queryForfeitInfo.action" method="post">
+                            <form class="form-horizontal" action="${pageContext.request.contextPath}/admin/forfeitManageAction_queryForfeitInfo.action" method="post">
                                 <div class="row">
                                		 <div class="col-lg-5 form-group">
                                         <label class="col-lg-4 control-label" for="borrow_sno"><label class="text-danger"></label>借阅编号</label>
@@ -126,7 +126,7 @@
                                     <div class="col-lg-5 form-group">
                                         <label class="col-lg-4 control-label" for="borrow_bno"><label class="text-danger"></label>图书ISBN号</label>
                                         <div class="col-lg-8">
-                                            <input class="form-control" name="ISBN" type="text" value="" placeholder="请输入归还图书的ISBN号">
+                                            <input class="form-control" name="ISBN" type="text" value="" placeholder="请输入借阅图书的ISBN号">
                                             <label class="control-label" for="borrow_bno" style="display: none"></label>
                                         </div>
                                     </div>
@@ -172,7 +172,7 @@
 	                                <td><s:property value="#forfeit.borrowInfo.penalty"/></td>
 	                                <td>         
 	                                	<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#findBackModal" onclick="getBackInfoById(<s:property value="#back.borrowId"/>)">查看</button>
-	                                	<button type="button" class="btn btn-success btn-xs" onclick="pay(<s:property value="#back.borrowId"/>)" >归还</button>
+	                                	<button type="button" class="btn btn-success btn-xs" onclick="pay(<s:property value="#back.borrowId"/>)" >付款</button>
 	                               	</td>                                              
                           	  </tbody>
                             </s:iterator>
@@ -227,8 +227,8 @@
                         <div class="pull-right"><!--右对齐--->
                            <ul class="pagination">
                            <li class="disabled"><a href="#">第<s:property value="#request.pb.pageCode"/>页/共<s:property value="#request.pb.totaPage"/>页</a></li>
-                           <li><a href="${pageContext.request.contextPath}/admin/backManageAction_${pb.url }pageCode=1">首页</a></li>
-                           <li><a href="${pageContext.request.contextPath}/admin/backManageAction_${pb.url }pageCode=${pb.pageCode-1 }">&laquo;</a></li><!-- 上一页 -->
+                           <li><a href="${pageContext.request.contextPath}/admin/forfeitManageAction_${pb.url }pageCode=1">首页</a></li>
+                           <li><a href="${pageContext.request.contextPath}/admin/forfeitManageAction_${pb.url }pageCode=${pb.pageCode-1 }">&laquo;</a></li><!-- 上一页 -->
                            <%-- 循环显示页码列表 --%>
 								<c:forEach begin="${begin }" end="${end }" var="i">
 								  <c:choose>
@@ -237,16 +237,16 @@
 								  			<li class="active"><a>${i }</a><li>							 
 								  	</c:when>
 								  	<c:otherwise>
-								  		<li><a href="${pageContext.request.contextPath}/admin/backManageAction_${pb.url }pageCode=${i}">${i}</a></li>
+								  		<li><a href="${pageContext.request.contextPath}/admin/forfeitManageAction_${pb.url }pageCode=${i}">${i}</a></li>
 								  	</c:otherwise>
 								  </c:choose>
 								</c:forEach>
 				        	   <%--如果当前页数没到总页数，即没到最后一页,则需要显示下一页 --%>
 							  <c:if test="${pb.pageCode < pb.totaPage }">
-								  <li><a href="${pageContext.request.contextPath}/admin/backManageAction_${pb.url }pageCode=${pb.pageCode+1}">&raquo;</a></li>
+								  <li><a href="${pageContext.request.contextPath}/admin/forfeitManageAction_${pb.url }pageCode=${pb.pageCode+1}">&raquo;</a></li>
 							</c:if>
 							<%--否则显示尾页 --%>
-							<li><a href="${pageContext.request.contextPath}/admin/backManageAction_${pb.url }pageCode=${pb.totaPage}">尾页</a></li>
+							<li><a href="${pageContext.request.contextPath}/admin/forfeitManageAction_${pb.url }pageCode=${pb.totaPage}">尾页</a></li>
 							</ul>
                            </div>
                     </s:if>           
@@ -277,7 +277,7 @@
 														&times;
 													</button>
 													<h4 class="modal-title" id="myModalLabel">
-														查看归还信息
+														查看罚款信息
 													</h4>
 												</div>
 												<div class="modal-body">
@@ -355,7 +355,7 @@
 										
 										
 										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">归还状态</label>
+											<label for="firstname" class="col-sm-3 control-label">缴纳状态</label>
 												<div class="col-sm-7">
 													<input type="text" class="form-control" id="state"  readonly="readonly">
 										

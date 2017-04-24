@@ -19,4 +19,6 @@ public interface ForfeitDao {
 
 	public ForfeitInfo getForfeitInfoById(ForfeitInfo forfeitInfo);
 
+	public ForfeitInfo updateForfeitInfo(ForfeitInfo forfeitInfoById);
+
 }

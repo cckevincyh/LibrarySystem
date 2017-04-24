@@ -5,10 +5,14 @@ import com.cc.library.domain.PageBean;
 
 public interface ForfeitService {
 
-	PageBean<ForfeitInfo> findForfeitInfoByPage(int pageCode, int pageSize);
+	public PageBean<ForfeitInfo> findForfeitInfoByPage(int pageCode, int pageSize);
 
-	PageBean<ForfeitInfo> queryForfeitInfo(String iSBN, String paperNO,
+	public PageBean<ForfeitInfo> queryForfeitInfo(String iSBN, String paperNO,
 			int borrowId, int pageCode, int pageSize);
+
+	public ForfeitInfo getForfeitInfoById(ForfeitInfo forfeitInfo);
+
+	public int payForfeit(ForfeitInfo forfeitInfo);
 
 }
  

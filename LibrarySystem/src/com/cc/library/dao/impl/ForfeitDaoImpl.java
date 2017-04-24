@@ -143,6 +143,21 @@ public class ForfeitDaoImpl extends HibernateDaoSupport implements ForfeitDao{
 		}
 		return null;
 	}
+
+	@Override
+	public ForfeitInfo updateForfeitInfo(ForfeitInfo forfeitInfoById) {
+		ForfeitInfo forfeitInfo = null;
+		try{
+			this.getHibernateTemplate().clear();
+			//将传入的detached(分离的)状态的对象的属性复制到持久化对象中，并返回该持久化对象
+			forfeitInfo = (ForfeitInfo) this.getHibernateTemplate().merge(forfeitInfoById);
+			this.getHibernateTemplate().flush();
+		}catch (Throwable e1) {
+			e1.printStackTrace();
+			throw new RuntimeException(e1.getMessage());
+		}
+		return forfeitInfo;
+	}
 	
 	
 	

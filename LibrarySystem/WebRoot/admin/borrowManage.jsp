@@ -84,7 +84,7 @@
                         <a href="${pageContext.request.contextPath}/admin/borrowSearchAction_findBackInfoByPage.action"><i class="glyphicon glyphicon-chevron-right"></i> 借阅查询</a>
                     </li>
                      <li>
-                        <a href="/library/admin/return"><i class="glyphicon glyphicon-chevron-right"></i> 逾期处理</a>
+                        <a href="${pageContext.request.contextPath}/admin/forfeitManageAction_findForfeitInfoByPage.action"><i class="glyphicon glyphicon-chevron-right"></i> 逾期处理</a>
                     </li>
               <s:if test="#session.admin.authorization.superSet==1"><!-- 对超级管理员和普通管理员进行权限区分 -->
                     <li>
@@ -335,6 +335,14 @@
 											<label for="firstname" class="col-sm-3 control-label">读者类型</label>
 												<div class="col-sm-7">
 													<input type="text" class="form-control" id="readerType"  readonly="readonly">
+										
+												</div>
+										</div>
+										
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">逾期天数</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="overday"  readonly="readonly">
 										
 												</div>
 										</div>

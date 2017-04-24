@@ -29,7 +29,7 @@ function getBorrowInfoById(id){
 				$("#paperNO").val(data.reader.paperNO);
 				$("#readerName").val(data.reader.name);
 				$("#readerType").val(data.reader.readerType.readerTypeName);
-			
+				$("#overday").val(data.overday);
 				if (data.state == 0) {
 					$("#state").val("未归还");
 				}else if(data.state == 1){

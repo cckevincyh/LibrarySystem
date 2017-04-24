@@ -9,7 +9,7 @@ public interface BackService {
 
 	public BackInfo getBackInfoById(BackInfo backInfo);
 
-	public PageBean<BackInfo> queryBackInfo(String iSBN, String paperNO,int pageCode,int pageSize);
+	public PageBean<BackInfo> queryBackInfo(String iSBN, String paperNO,int borrowId,int pageCode,int pageSize);
 
 	public int addBackInfo(BackInfo backInfo);
 

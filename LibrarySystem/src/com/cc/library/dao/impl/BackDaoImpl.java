@@ -104,7 +104,7 @@ public class BackDaoImpl extends HibernateDaoSupport implements BackDao{
 
 
 	@Override
-	public PageBean<Integer> getBorrowIdList(String iSBN, String paperNO,int pageCode, int pageSize) {
+	public PageBean<Integer> getBorrowIdList(String iSBN, String paperNO,int borrowId,int pageCode, int pageSize) {
 		PageBean<Integer> pb = new PageBean<Integer>();	//pageBean对象，用于分页
 		//根据传入的pageCode当前页码和pageSize页面记录数来设置pb对象
 		pb.setPageCode(pageCode);//设置当前页码
@@ -127,6 +127,10 @@ public class BackDaoImpl extends HibernateDaoSupport implements BackDao{
 		if(!"".equals(paperNO.trim())){
 			sb.append(" and r.paperNO like '%" + paperNO +"%'");
 			sb_sql.append(" and r.paperNO like '%" + paperNO +"%'");
+		}
+		if(borrowId!=0){
+			sb.append(" and bo.borrowId like '%" + borrowId +"%'");
+			sb_sql.append(" and bo.borrowId like '%" + borrowId +"%'");
 		}
 		
 		try {

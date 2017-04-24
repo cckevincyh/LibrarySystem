@@ -45,11 +45,11 @@ public class BackServiceImpl implements BackService{
 	}
 
 	@Override
-	public PageBean<BackInfo> queryBackInfo(String iSBN, String paperNO,int pageCode,int pageSize) {
+	public PageBean<BackInfo> queryBackInfo(String iSBN, String paperNO,int borrowId,int pageCode,int pageSize) {
 		PageBean<BackInfo> pageBean = new PageBean<BackInfo>();
 		pageBean.setPageCode(pageCode);
 		pageBean.setPageSize(pageSize);
-		PageBean<Integer> list = backDao.getBorrowIdList(iSBN,paperNO,pageCode,pageSize);
+		PageBean<Integer> list = backDao.getBorrowIdList(iSBN,paperNO,borrowId,pageCode,pageSize);
 		pageBean.setTotalRecord(list.getTotalRecord());
 		List<Integer> beanList = list.getBeanList();
 		if(beanList.size()==0){

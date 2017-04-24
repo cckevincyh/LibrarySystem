@@ -29,6 +29,7 @@ function getBackInfoById(id){
 				$("#paperNO").val(data.borrowInfo.reader.paperNO);
 				$("#readerName").val(data.borrowInfo.reader.name);
 				$("#readerType").val(data.borrowInfo.reader.readerType.readerTypeName);
+				$("#overday").val(data.borrowInfo.overday);
 				if (data.borrowInfo.state == 0) {
 					$("#state").val("未归还");
 				}else if(data.borrowInfo.state == 1){

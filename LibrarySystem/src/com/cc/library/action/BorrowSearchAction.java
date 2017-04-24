@@ -21,9 +21,16 @@ public class BorrowSearchAction extends ActionSupport{
 	private int pageCode;
 	private String ISBN;
 	private String paperNO;
+	private int borrowId;
 	
 	
 	
+	
+	public void setBorrowId(int borrowId) {
+		this.borrowId = borrowId;
+	}
+
+
 	public void setISBN(String iSBN) {
 		ISBN = iSBN;
 	}
@@ -66,13 +73,13 @@ public class BorrowSearchAction extends ActionSupport{
 		//给pageSize,每页的记录数赋值
 		int pageSize = 5;
 		PageBean<BackInfo> pb = null;
-		if("".equals(ISBN.trim()) && "".equals(paperNO.trim())){
+		if("".equals(ISBN.trim()) && "".equals(paperNO.trim()) && borrowId==0){
 			pb = backService.findBackInfoByPage(pageCode,pageSize);
 		}else{
-			pb = backService.queryBackInfo(ISBN,paperNO,pageCode,pageSize);
+			pb = backService.queryBackInfo(ISBN,paperNO,borrowId,pageCode,pageSize);
 		}
 		if(pb!=null){
-			pb.setUrl("queryBorrowSearchInfo.action?ISBN="+ISBN+"&paperNO="+paperNO+"&");
+			pb.setUrl("queryBorrowSearchInfo.action?ISBN="+ISBN+"&paperNO="+paperNO+"&borrowId="+borrowId+"&");
 		}
 
 		ServletActionContext.getRequest().setAttribute("pb", pb);

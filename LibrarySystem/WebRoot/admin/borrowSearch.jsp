@@ -82,7 +82,7 @@
                         <a href="${pageContext.request.contextPath}/admin/borrowSearchAction_findBackInfoByPage.action"><i class="glyphicon glyphicon-chevron-right"></i> 借阅查询</a>
                     </li>
                      <li>
-                        <a href="/library/admin/return"><i class="glyphicon glyphicon-chevron-right"></i> 逾期处理</a>
+                        <a href="${pageContext.request.contextPath}/admin/forfeitManageAction_findForfeitInfoByPage.action"><i class="glyphicon glyphicon-chevron-right"></i> 逾期处理</a>
                     </li>
              <s:if test="#session.admin.authorization.superSet==1"><!-- 对超级管理员和普通管理员进行权限区分 -->
                     <li>
@@ -109,15 +109,23 @@
                         <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
                             <form class="form-horizontal" action="${pageContext.request.contextPath}/admin/borrowSearchAction_queryBorrowSearchInfo.action" method="post">
                                 <div class="row">
+                                
+                                <div class="col-lg-5 form-group">
+                                        <label class="col-lg-4 control-label" for="borrow_sno"><label class="text-danger"></label>借阅编号</label>
+                                        <div class="col-lg-8">
+                                            <input class="form-control"  name="borrowId" type="text" value="" placeholder="请输入借阅编号">
+                                            <label class="control-label" for="borrow_sno" style="display: none"></label>
+                                        </div>
+                                    </div>
                                     <div class="col-lg-5 form-group">
-                                        <label class="col-lg-4 control-label" for="borrow_sno"><label class="text-danger">*&nbsp;</label>证件号</label>
+                                        <label class="col-lg-4 control-label" for="borrow_sno"><label class="text-danger"></label>证件号</label>
                                         <div class="col-lg-8">
                                             <input class="form-control"  name="paperNO" type="text" value="" placeholder="请输入读者证件号">
                                             <label class="control-label" for="borrow_sno" style="display: none"></label>
                                         </div>
                                     </div>
                                     <div class="col-lg-5 form-group">
-                                        <label class="col-lg-4 control-label" for="borrow_bno"><label class="text-danger">*&nbsp;</label>图书ISBN号</label>
+                                        <label class="col-lg-4 control-label" for="borrow_bno"><label class="text-danger"></label>图书ISBN号</label>
                                         <div class="col-lg-8">
                                             <input class="form-control" name="ISBN" type="text" value="" placeholder="请输入借阅图书的ISBN号">
                                             <label class="control-label" for="borrow_bno" style="display: none"></label>
@@ -328,6 +336,14 @@
 											<label for="firstname" class="col-sm-3 control-label">读者类型</label>
 												<div class="col-sm-7">
 													<input type="text" class="form-control" id="readerType"  readonly="readonly">
+										
+												</div>
+										</div>
+										
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">逾期天数</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="overday"  readonly="readonly">
 										
 												</div>
 										</div>

@@ -21,9 +21,9 @@
             <script src="${pageContext.request.contextPath}/ajax-lib/ajaxutils.js"></script>
             <script src="${pageContext.request.contextPath}/js/adminUpdateInfo.js"></script>
              <script src="${pageContext.request.contextPath}/js/adminUpdatePwd.js"></script>
-             
- 		<script src="${pageContext.request.contextPath}/js/updateReaderType.js"></script>
-       <script src="${pageContext.request.contextPath}/js/addReaderType.js"></script>
+              <script src="${pageContext.request.contextPath}/js/getBackInfo.js"></script>
+              
+                 <script src="${pageContext.request.contextPath}/js/backBook.js"></script>
 </head>
 
 
@@ -71,7 +71,7 @@
                     <li>
                         <a href="${pageContext.request.contextPath}/admin/bookTypeManageAction_findBookTypeByPage.action"><i class="glyphicon glyphicon-chevron-right"></i> 图书分类管理</a>
                     </li>
-                    <li >
+                    <li>
                         <a href="${pageContext.request.contextPath}/admin/borrowManageAction_findBorrowInfoByPage.action"><i class="glyphicon glyphicon-chevron-right"></i> 图书借阅</a>
                     </li>
                     <li>
@@ -81,10 +81,10 @@
                     <li>
                         <a href="${pageContext.request.contextPath}/admin/borrowSearchAction_findBackInfoByPage.action"><i class="glyphicon glyphicon-chevron-right"></i> 借阅查询</a>
                     </li>
-                     <li>
+                     <li class="active">
                         <a href="${pageContext.request.contextPath}/admin/forfeitManageAction_findForfeitInfoByPage.action"><i class="glyphicon glyphicon-chevron-right"></i> 逾期处理</a>
                     </li>
-              <s:if test="#session.admin.authorization.superSet==1"><!-- 对超级管理员和普通管理员进行权限区分 -->
+                <s:if test="#session.admin.authorization.superSet==1"><!-- 对超级管理员和普通管理员进行权限区分 -->
                     <li>
                         <a href="${pageContext.request.contextPath}/admin/adminManageAction_findAdminByPage.action"><i class="glyphicon glyphicon-chevron-right"></i> 管理员管理</a>
                     </li>
@@ -92,56 +92,87 @@
                     <li>
                         <a href="${pageContext.request.contextPath}/admin/readerManageAction_findReaderByPage.action"><i class="glyphicon glyphicon-chevron-right"></i> 读者管理</a>
                     </li>
-                    
-                    <li class="active">
+                    <li>
                         <a href="${pageContext.request.contextPath}/admin/readerTypeManageAction_getAllReaderType.action"><i class="glyphicon glyphicon-chevron-right"></i> 系统设置</a>
                     </li>
-                   
                 </ul>
             </div>
 
            <!-- content -->
-            <div class="col-md-10">
-              <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-default bootstrap-admin-no-table-panel">
-                            <div class="panel-heading">
-                                <div class="text-muted bootstrap-admin-box-title">添加读者类型</div>
-                            </div>
-                            <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
-                                    <div class="col-lg-2 form-group">
-                                        <button type="button" class="btn btn-primary" id="btn_add" data-toggle="modal" data-target="#addModal">添加</button>          
+             <div class="col-md-10">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default bootstrap-admin-no-table-panel">
+                        <div class="panel-heading">
+                            <div class="text-muted bootstrap-admin-box-title">罚金查询</div>
+                        </div>
+                        <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
+                            <form class="form-horizontal" action="${pageContext.request.contextPath}/admin/ForfeitManageAction_queryForfeitInfo.action" method="post">
+                                <div class="row">
+                               		 <div class="col-lg-5 form-group">
+                                        <label class="col-lg-4 control-label" for="borrow_sno"><label class="text-danger"></label>借阅编号</label>
+                                        <div class="col-lg-8">
+                                            <input class="form-control"  name="borrowId" type="text" value="" placeholder="请输入借阅编号">
+                                            <label class="control-label" for="borrow_sno" style="display: none"></label>
+                                        </div>
                                     </div>
-                            </div>
+                                    <div class="col-lg-5 form-group">
+                                        <label class="col-lg-4 control-label" for="borrow_sno"><label class="text-danger"></label>证件号</label>
+                                        <div class="col-lg-8">
+                                            <input class="form-control"  name="paperNO" type="text" value="" placeholder="请输入读者证件号">
+                                            <label class="control-label" for="borrow_sno" style="display: none"></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5 form-group">
+                                        <label class="col-lg-4 control-label" for="borrow_bno"><label class="text-danger"></label>图书ISBN号</label>
+                                        <div class="col-lg-8">
+                                            <input class="form-control" name="ISBN" type="text" value="" placeholder="请输入归还图书的ISBN号">
+                                            <label class="control-label" for="borrow_bno" style="display: none"></label>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    
+                                    <div class="col-lg-2 form-group">
+                                        <button type="submit" class="btn btn-primary" id="btn_borrow">查询</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
+            </div>
                 <div class="row">
                     <div class="col-lg-12">
                         <table id="data_list" class="table table-hover table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
-                                <th>读者类型</th>
-                                <th>最大借阅数量</th>
-                                <th>可借阅天数</th>
-                                <th>逾期每日罚金</th>
-                                <th>可续借天数</th>
-                                <th>操作</th>
+                            	 <th>借阅编号</th>
+                                <th>图书ISBN号</th>
+	                            <th>图书名称</th>
+	                            <th>读者证件号</th>
+	                            <th>读者名称</th>
+	                            <th>逾期天数</th>
+	                            <th>需缴纳罚金</th>
+	                            <th>操作</th>
                             </tr>
                             </thead>
                             
                             
                             <!---在此插入信息-->
-                            <s:if test="#request.readerTypes!=null">
-                            <s:iterator value="#request.readerTypes" var="readerType">
+                            <s:if test="#request.pb.beanList!=null">
+                            <s:iterator value="#request.pb.beanList" var="forfeit">
                              <tbody>
-	                         	   <td><s:property value="#readerType.readerTypeName"/></td>
-	                                <td><s:property value="#readerType.maxNum"/></td>
-	                                <td><s:property value="#readerType.bday"/></td>
-	                                <td><s:property value="#readerType.penalty"/></td>
-	                                <td><s:property value="#readerType.renewDays"/></td>
-	                                <td>
-	                                	<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" onclick="updateReaderType(<s:property value="#readerType.readerTypeId"/>)">修改</button>
+	                         	   <td><s:property value="#forfeit.borrowId"/></td>
+	                                <td><s:property value="#forfeit.borrowInfo.book.ISBN"/></td>
+	                                <td><s:property value="#forfeit.borrowInfo.book.bookName"/></td>
+	                                <td><s:property value="#forfeit.borrowInfo.reader.paperNO"/></td>
+	                                <td><s:property value="#forfeit.borrowInfo.reader.name"/></td>
+	                                <td><s:property value="#forfeit.borrowInfo.overday"/></td>
+	                                <td><s:property value="#forfeit.borrowInfo.penalty"/></td>
+	                                <td>         
+	                                	<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#findBackModal" onclick="getBackInfoById(<s:property value="#back.borrowId"/>)">查看</button>
+	                                	<button type="button" class="btn btn-success btn-xs" onclick="pay(<s:property value="#back.borrowId"/>)" >归还</button>
 	                               	</td>                                              
                           	  </tbody>
                             </s:iterator>
@@ -153,13 +184,72 @@
 	                                <td>暂无数据</td>
 	                                <td>暂无数据</td>
 	                                <td>暂无数据</td>
-	                                <td>暂无数据</td>                                              
+	                                <td>暂无数据</td> 
+	                                <td>暂无数据</td>  
+	                                <td>暂无数据</td>                                               
                           	  </tbody>
                             </s:else>
                             
                         </table>
                         
-                               
+                        
+                    <s:if test="#request.pb!=null">
+					                    
+					                    		   <%-- 定义页码列表的长度，5个长 --%>
+								   <c:choose>
+									<%-- 第一条：如果总页数<=5，那么页码列表为1 ~ totaPage 从第一页到总页数--%>
+									<%--如果总页数<=5的情况 --%>
+									  <c:when test="${pb.totaPage <= 5 }">
+									    <c:set var="begin" value="1"/>
+									    <c:set var="end" value="${pb.totaPage }"/>
+									  </c:when>
+									  <%--总页数>5的情况 --%>
+									  <c:otherwise>
+										  	<%-- 第二条：按公式计算，让列表的头为当前页-2；列表的尾为当前页+2 --%>
+										  	<c:set var="begin" value="${pb.pageCode-2 }"/>
+										    <c:set var="end" value="${pb.pageCode+2 }"/>
+										    
+										    <%-- 第三条：第二条只适合在中间，而两端会出问题。这里处理begin出界！ --%>
+										    <%-- 如果begin<1，那么让begin=1，相应end=5 --%>
+										    <c:if test="${begin<1 }">
+										    	<c:set var="begin" value="1"/>
+										    	<c:set var="end" value="5"/>
+										    </c:if>
+										    <%-- 第四条：处理end出界。如果end>tp，那么让end=tp，相应begin=tp-4 --%>
+										    <c:if test="${end>pb.totaPage }">
+										    	<c:set var="begin" value="${pb.totaPage-4 }"/>
+										    	<c:set var="end" value="${pb.totaPage }"/>
+										    </c:if>
+									  </c:otherwise>
+								</c:choose>
+                    
+                        
+                        <div class="pull-right"><!--右对齐--->
+                           <ul class="pagination">
+                           <li class="disabled"><a href="#">第<s:property value="#request.pb.pageCode"/>页/共<s:property value="#request.pb.totaPage"/>页</a></li>
+                           <li><a href="${pageContext.request.contextPath}/admin/backManageAction_${pb.url }pageCode=1">首页</a></li>
+                           <li><a href="${pageContext.request.contextPath}/admin/backManageAction_${pb.url }pageCode=${pb.pageCode-1 }">&laquo;</a></li><!-- 上一页 -->
+                           <%-- 循环显示页码列表 --%>
+								<c:forEach begin="${begin }" end="${end }" var="i">
+								  <c:choose>
+								  <%--如果是当前页则设置无法点击超链接 --%>
+								  	<c:when test="${i eq pb.pageCode }">							  	
+								  			<li class="active"><a>${i }</a><li>							 
+								  	</c:when>
+								  	<c:otherwise>
+								  		<li><a href="${pageContext.request.contextPath}/admin/backManageAction_${pb.url }pageCode=${i}">${i}</a></li>
+								  	</c:otherwise>
+								  </c:choose>
+								</c:forEach>
+				        	   <%--如果当前页数没到总页数，即没到最后一页,则需要显示下一页 --%>
+							  <c:if test="${pb.pageCode < pb.totaPage }">
+								  <li><a href="${pageContext.request.contextPath}/admin/backManageAction_${pb.url }pageCode=${pb.pageCode+1}">&raquo;</a></li>
+							</c:if>
+							<%--否则显示尾页 --%>
+							<li><a href="${pageContext.request.contextPath}/admin/backManageAction_${pb.url }pageCode=${pb.totaPage}">尾页</a></li>
+							</ul>
+                           </div>
+                    </s:if>           
                     </div>
                 </div>
             </div>
@@ -167,96 +257,128 @@
     </div>
     
     
-
-     
-                                     <!-- 修改模态框（Modal） -->
-                                     <!-------------------------------------------------------------->  
-                                
-                                        <!-- 修改模态框（Modal） -->
-                               <form class="form-horizontal">   <!--保证样式水平不混乱-->   
-									<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+     <!--------------------------------------查看的模糊框------------------------>  
+                                 <form class="form-horizontal">   <!--保证样式水平不混乱-->   
+                                        <!-- 模态框（Modal） -->
+									<div class="modal fade" id="findBackModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 										<div class="modal-dialog">
 											<div class="modal-content">
 												<div class="modal-header">
 													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 														&times;
 													</button>
-													<h4 class="modal-title" id="updateModalLabel">
-														修改读者分类设置
+													<h4 class="modal-title" id="myModalLabel">
+														查看归还信息
 													</h4>
 												</div>
 												<div class="modal-body">
 												
 										<!---------------------表单-------------------->
-										
-										
-										
-										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">读者类型名称</label>
+										 <div class="form-group">
+											<label for="firstname" class="col-sm-3 control-label">借阅编号</label>
 												<div class="col-sm-7">
-													<input type="hidden" id="readerTypeId">
-													<input type="text" class="form-control" id="readerTypeName" placeholder="请输入读者类型名称">
+													<input type="text" class="form-control" id="borrowId"  readonly="readonly">
 												
 												</div>
 										</div>
 											
 										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">最大借阅数量</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control" id="maxNum" placeholder="请输入最大借阅数量">
-												
-												</div>
+											<label for="firstname" class="col-sm-3 control-label">借阅书籍ISBN号</label>
+											<div class="col-sm-7">
+												<input type="text" class="form-control" id="ISBN"  readonly="readonly">
+
+											</div>
 										</div>
 											
-									
-										
-										
 										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">最大借阅天数</label>
+											<label for="firstname" class="col-sm-3 control-label">借阅书籍名称</label>
 												<div class="col-sm-7">
-													<input type="text" class="form-control" id="bday" placeholder="请输入最大借阅天数">
+													<input type="text" class="form-control" id="bookName"  readonly="readonly">
+												
+												</div>
+										</div>
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">借阅书籍类型</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="bookType"  readonly="readonly">
 												
 												</div>
 										</div>
 										
 										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">逾期每日罚金</label>
+											<label for="firstname" class="col-sm-3 control-label">读者证件号</label>
 												<div class="col-sm-7">
-													<input type="text" class="form-control" id="penalty"  placeholder="请输入逾期每日罚金">
-												
+													<input type="text" class="form-control" id="paperNO"  readonly="readonly">
+										
+												</div>
+										</div>
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">读者名称</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="readerName"  readonly="readonly">
+										
 												</div>
 										</div>
 										
 										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">续借天数</label>
+											<label for="firstname" class="col-sm-3 control-label">读者类型</label>
 												<div class="col-sm-7">
-													<input type="text" class="form-control" id="renewDays"  placeholder="请输入逾期每日罚金">
-												
+													<input type="text" class="form-control" id="readerType"  readonly="readonly">
+										
 												</div>
 										</div>
+										
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">逾期天数</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="overday"  readonly="readonly">
+										
+												</div>
+										</div>
+										
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">操作管理员</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="admin"  readonly="readonly">
+										
+												</div>
+										</div>
+										
+										
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">归还状态</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="state"  readonly="readonly">
+										
+												</div>
+										</div>
+										
 										
 										<!---------------------表单-------------------->
-															
-										</div>
+									</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-default" data-dismiss="modal">关闭
-													</button>
-													<button type="button" class="btn btn-primary" id="updateType">
-														修改
 													</button>
 												</div>
 											</div><!-- /.modal-content -->
 										</div><!-- /.modal -->
 									</div>
-	
-                                 </form>
-                                   <!-------------------------------------------------------------->
+
+                                 </form>	
+ 								<!--------------------------------------添加的模糊框------------------------>  
  
-    
-    
-    
-    
  
+ 
+
  
  
  
@@ -416,77 +538,6 @@
     
  
  
-  <!--------------------------------------添加的模糊框------------------------>  
-                                 <form class="form-horizontal">   <!--保证样式水平不混乱-->   
-                                        <!-- 模态框（Modal） -->
-									<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-										<div class="modal-dialog">
-											<div class="modal-content">
-												<div class="modal-header">
-													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-														&times;
-													</button>
-													<h4 class="modal-title" id="myModalLabel">
-														添加新管理员
-													</h4>
-												</div>
-												<div class="modal-body">
-												
-										<!---------------------表单-------------------->
-										 <div class="form-group">
-											<label for="firstname" class="col-sm-3 control-label">读者类型</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control" id="addType"  placeholder="请输入读者类型名称">
-												
-												</div>
-										</div>
-											
-										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">最大借阅书量</label>
-											<div class="col-sm-7">
-												<input type="password" class="form-control" id="addMaxNum"  placeholder="请输入最大借阅书量">
-
-											</div>
-										</div>
-											
-										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">可借天数</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control" id="addBday"  placeholder="请输入可借天数">
-												
-												</div>
-										</div>
-										
-										
-										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">逾期每日罚金</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control" id="addPenalty"  placeholder="请输入每日罚金">
-												
-												</div>
-										</div>
-										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">续借天数</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control" id="addrenewDays"  placeholder="请输入逾期每日罚金">
-												
-												</div>
-										</div>
-										<!---------------------表单-------------------->
-									</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-default" data-dismiss="modal">关闭
-													</button>
-													<button type="button" class="btn btn-primary" id="addReaderType">
-														添加
-													</button>
-												</div>
-											</div><!-- /.modal-content -->
-										</div><!-- /.modal -->
-									</div>
-
-                                 </form>	
- 								<!--------------------------------------添加的模糊框------------------------>  
  
 
  

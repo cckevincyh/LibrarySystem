@@ -1,8 +1,9 @@
 package com.cc.library.domain;
 
+import java.io.Serializable;
 import java.util.Set;
 
-public class ReaderType {
+public class ReaderType implements Serializable{
 
 	private Integer readerTypeId;
 	private String readerTypeName;//读者类型名称

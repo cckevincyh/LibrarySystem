@@ -18,12 +18,11 @@ public class ReaderDaoImpl extends HibernateDaoSupport implements ReaderDao{
 
 	@Override
 	public Reader getReader(Reader reader) {
-		//this.getHibernateTemplate().find(hql, value)方法无法执行的问题(未解决)
+		//this.getHibernateTemplate().find(hql, value)方法无法执行的问题
 		//解决需要catch (Throwable e)
 		String hql= "from Reader r where r.readerId=?";
 		try {
 			List list = this.getHibernateTemplate().find(hql, reader.getReaderId());
-			System.out.println(list);
 			if(list!=null && list.size()>0){
 				return (Reader) list.get(0);
 			}	

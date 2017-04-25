@@ -53,7 +53,7 @@ public class ReaderLoginAction extends ActionSupport {
 		reader.setPaperNO(paperNO);
 		reader.setPwd(pwd);
 		int login = 1;
-		Reader newReader = readerService.getReader(reader);
+		Reader newReader = readerService.getReaderByPaperNO(reader);
 		if(newReader==null){
 			//用户名不存在
 			login = -1;

@@ -65,7 +65,7 @@
         <div class="col-md-2 bootstrap-admin-col-left">
             <ul class="nav navbar-collapse collapse bootstrap-admin-navbar-side">
                 <li>
-                    <a href="/library/student/book"><i class="glyphicon glyphicon-chevron-right"></i> 图书查询</a>
+                    <a href="${pageContext.request.contextPath}/bookAction_findBookByPage.action"><i class="glyphicon glyphicon-chevron-right"></i> 图书查询</a>
                 </li>
                 <s:if test="#session.reader!=null"><!-- 判断是否登录 -->
 	                <li>

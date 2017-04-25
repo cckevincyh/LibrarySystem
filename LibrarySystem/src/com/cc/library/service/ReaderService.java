@@ -24,4 +24,6 @@ public interface ReaderService {
 
 	public Reader getReaderBypaperNO(Reader reader);
 
+	public Reader getReaderByPaperNO(Reader reader);
+
 }

@@ -76,5 +76,13 @@ public class ReaderServiceImpl implements ReaderService{
 	}
 
 
+
+	@Override
+	public Reader getReaderByPaperNO(Reader reader) {
+		// TODO Auto-generated method stub
+		return readerDao.getReaderBypaperNO(reader);
+	}
+
+
 	
 }

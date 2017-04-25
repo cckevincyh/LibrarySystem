@@ -7,7 +7,7 @@ $(function () {
         }
 		
 		
-	var postdata = "readerId="+$.trim($("#username").val())+"&pwd="+ $.trim($("#password").val());
+	var postdata = "paperNO="+$.trim($("#username").val())+"&pwd="+ $.trim($("#password").val());
 	ajax(
     		  {
 			  	method:'POST',

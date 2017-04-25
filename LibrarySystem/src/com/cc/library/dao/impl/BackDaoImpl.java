@@ -18,6 +18,7 @@ import com.cc.library.domain.BackInfo;
 import com.cc.library.domain.Book;
 import com.cc.library.domain.BorrowInfo;
 import com.cc.library.domain.PageBean;
+import com.cc.library.domain.Reader;
 
 public class BackDaoImpl extends HibernateDaoSupport implements BackDao{
 
@@ -208,5 +209,8 @@ public class BackDaoImpl extends HibernateDaoSupport implements BackDao{
 		}
 		return b;
 	}
+
+
+	
 
 }

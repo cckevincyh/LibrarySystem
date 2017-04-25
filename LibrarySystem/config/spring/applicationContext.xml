@@ -29,4 +29,5 @@
  	<import resource="applicationContext-borrow-search.xml"/>
  	<import resource="applicationContext-quartz.xml"/>
  	<import resource="applicationContext-book.xml"/>
+ 	<import resource="applicationContext-borrow.xml"/>
  </beans>

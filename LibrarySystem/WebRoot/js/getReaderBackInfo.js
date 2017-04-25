@@ -17,7 +17,7 @@ function getBackInfoById(id){
 	ajax(
 		  {
 		  	method:'POST',
-		  	url:'admin/backManageAction_getBackInfoById.action',
+    		url:'borrowAction_getBackInfoById.action',
 			params: "borrowId=" + id,
 			type:"json",
     		callback:function(data) {

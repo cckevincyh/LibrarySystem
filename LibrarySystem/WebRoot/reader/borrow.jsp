@@ -19,14 +19,10 @@
             <script src="${pageContext.request.contextPath}/js/bootstrap-dropdown.min.js"></script>
             
             <script src="${pageContext.request.contextPath}/ajax-lib/ajaxutils.js"></script>
-                      <script src="${pageContext.request.contextPath}/js/readerUpdateInfo.js"></script>
+     <script src="${pageContext.request.contextPath}/js/readerUpdateInfo.js"></script>
              <script src="${pageContext.request.contextPath}/js/readerUpdatePwd.js"></script>
-
-                
-                
-       <script src="${pageContext.request.contextPath}/js/getBookTypes.js"></script>
-                
-                   <script src="${pageContext.request.contextPath}/js/getReaderBookInfo.js"></script>
+              <script src="${pageContext.request.contextPath}/js/getReaderBackInfo.js"></script>
+              
 </head>
 
 
@@ -51,7 +47,7 @@
                                       <li role="presentation" class="divider"></li>
                                     <li><a href="#updatepwd" data-toggle="modal">修改密码</a></li>
                                      <li role="presentation" class="divider"></li>
-                                    <li><a href="${pageContext.request.contextPath}/reader/readerLoginAction_logout.action">退出</a></li>
+                                  <li><a href="${pageContext.request.contextPath}/reader/readerLoginAction_logout.action">退出</a></li>
                                 </ul>
                                 
                             </li>
@@ -64,15 +60,15 @@
 
     <div class="container">
         <!-- left, vertical navbar & content -->
-        <div class="row">
+         <div class="row">
             <!-- left, vertical navbar -->
            <div class="col-md-2 bootstrap-admin-col-left">
             <ul class="nav navbar-collapse collapse bootstrap-admin-navbar-side">
-                <li class="active">
+                <li>
                     <a href="${pageContext.request.contextPath}/bookAction_findBookByPage.action"><i class="glyphicon glyphicon-chevron-right"></i> 图书查询</a>
                 </li>
                 <s:if test="#session.reader!=null"><!-- 判断是否登录 -->
-	                <li>
+	                <li class="active">
 	                    <a href="${pageContext.request.contextPath}/borrowAction_findMyBorrowInfoByPage.action"><i class="glyphicon glyphicon-chevron-right"></i> 借阅信息</a>
 	                </li>
                 </s:if>
@@ -83,114 +79,73 @@
             </ul>
         </div>
 
-  <!-- content -->
-            <div class="col-md-10">
-                
-                    
-                        
-                            
-                        
-                    
-                
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-default bootstrap-admin-no-table-panel">
-                            <div class="panel-heading">
-                                <div class="text-muted bootstrap-admin-box-title">查询</div>
-                            </div>
-                            <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
-                                <form class="form-horizontal" action="${pageContext.request.contextPath}/bookAction_queryBook.action" method="post">
+           <!-- content -->
+             <div class="col-md-10">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default bootstrap-admin-no-table-panel">
+                        <div class="panel-heading">
+                            <div class="text-muted bootstrap-admin-box-title">借阅查询</div>
+                        </div>
+                        <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
+                            <form class="form-horizontal" action="${pageContext.request.contextPath}/borrowAction_queryBorrowSearchInfo.action" method="post">
+                                <div class="row">
+                                <div class="col-lg-5 form-group">
+                                        <label class="col-lg-4 control-label" for="borrow_sno"><label class="text-danger"></label>借阅编号</label>
+                                        <div class="col-lg-8">
+                                            <input class="form-control"  name="borrowId" type="text" value="" placeholder="请输入借阅编号">
+                                            <label class="control-label" for="borrow_sno" style="display: none"></label>
+                                        </div>
+                                    </div>
                                     <div class="col-lg-5 form-group">
-                                        <label class="col-lg-4 control-label" for="query_bno">图书ISBN号</label>
+                                        <label class="col-lg-4 control-label" for="borrow_bno"><label class="text-danger"></label>图书ISBN号</label>
                                         <div class="col-lg-8">
-                                            <input class="form-control" id="bookId" name="ISBN" type="text" value="">
-                                            <label class="control-label" for="query_bno" style="display: none;"></label>
-                                        </div>
-                                    </div>
-                                  
-                                     <div class="col-lg-5 form-group">
-                                        <label class="col-lg-4 control-label" for="query_bno1">图书分类</label>
-                                          <div class="col-lg-8">
-                                        <select class="form-control" id="bookTypeId" name="bookTypeId">
-                                            <option value="-1">请选择</option>                                         
-                                        </select>
-                                        
-                                    </div>
-                                    </div>
-                                       
-                                    <div class="col-lg-5 form-group">
-                                        <label class="col-lg-4 control-label" for="query_bname">图书名称</label>
-                                        <div class="col-lg-8">
-                                            <input class="form-control" id="bookName" name="bookName" type="text" value="">
-                                            <label class="control-label" for="query_bname" style="display: none;"></label>
+                                            <input class="form-control" name="ISBN" type="text" value="" placeholder="请输入归还图书的ISBN号">
+                                            <label class="control-label" for="borrow_bno" style="display: none"></label>
                                         </div>
                                     </div>
                                     
-                                  <div class="col-lg-5 form-group">
-                                        <label class="col-lg-4 control-label" for="query_bname2">作者名称</label>
-                                        <div class="col-lg-8">
-                                            <input class="form-control" id="autho" name="autho" type="text" value="">
-                                            <label class="control-label" for="query_bname2" style="display: none;"></label>
-                                        </div>
-                                    </div>
                                     
-                                     <div class="col-lg-5 form-group">
-                                        <label class="col-lg-4 control-label" for="query_bname3">出版社名称</label>
-                                        <div class="col-lg-8">
-                                            <input class="form-control" id="press" name="press" type="text" value="">
-                                            <label class="control-label" for="query_bname2" style="display: none;"></label>
-                                        </div>
-                                    </div>
                                     
-                                  
-                                    
-                                  
-                                    <div class="col-lg-3 form-group">
-
-                                        <button type="submit" class="btn btn-primary" id="btn_query" onclick="query()">查询</button>
+                                    <div class="col-lg-2 form-group">
+                                        <button type="submit" class="btn btn-primary" id="btn_borrow">查询</button>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-                
-                
+            </div>
                 <div class="row">
                     <div class="col-lg-12">
                         <table id="data_list" class="table table-hover table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
+                            	 <th>借阅编号</th>
                                 <th>图书ISBN号</th>
-                                <th>图书类型</th>
-                                <th>图书名称</th>
-                                <th>作者名称</th>
-                                 <th>出版社</th>
-                                <th>上架日期</th>
-                                <th>总数量</th>
-                                <th>在馆数量</th>
-                                <th>价格</th>
-                                <th>操作</th>
-                                
+	                            <th>图书名称</th>
+	                            <th>读者证件号</th>
+	                            <th>读者名称</th>
+	                            <th>归还日期</th>
+	                            <th>截止还书日期</th>
+	                            <th>操作</th>
                             </tr>
                             </thead>
                             
                             
                             <!---在此插入信息-->
                             <s:if test="#request.pb.beanList!=null">
-                            <s:iterator value="#request.pb.beanList" var="book">
+                            <s:iterator value="#request.pb.beanList" var="back">
                              <tbody>
-	                         	   <td><s:property value="#book.ISBN"/></td>
-	                                <td><s:property value="#book.bookType.typeName"/></td>
-	                                <td><s:property value="#book.bookName"/></td>
-	                                <td><s:property value="#book.autho"/></td>
-	                                 <td><s:property value="#book.press"/></td>
-	                                  <td><s:date name="#book.putdate" format="yyyy-MM-dd" /></td>
-	                                    <td><s:property value="#book.num"/></td>
-	                                    <td><s:property value="#book.currentNum"/></td>
-	                                    <td><s:property value="#book.price"/></td>
-	                                <td>
-	                                <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#findModal" onclick="getBookInfo(<s:property value="#book.bookId"/>)" >查看</button>   	
+	                         	   <td><s:property value="#back.borrowId"/></td>
+	                                <td><s:property value="#back.borrowInfo.book.ISBN"/></td>
+	                                <td><s:property value="#back.borrowInfo.book.bookName"/></td>
+	                                <td><s:property value="#back.borrowInfo.reader.paperNO"/></td>
+	                                <td><s:property value="#back.borrowInfo.reader.name"/></td>
+	                                <td><s:date name="#back.backDate" format="yyyy-MM-dd" /></td>
+	                                <td><s:date name="#back.borrowInfo.endDate" format="yyyy-MM-dd" /></td>
+	                                <td>         
+	                                	<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#findBackModal" onclick="getBackInfoById(<s:property value="#back.borrowId"/>)">查看</button>
 	                               	</td>                                              
                           	  </tbody>
                             </s:iterator>
@@ -198,15 +153,13 @@
                             <s:else>
                             	<tbody>
 	                         	   	<td>暂无数据</td>
+	                         	   	<td>暂无数据</td>
 	                                <td>暂无数据</td>
 	                                <td>暂无数据</td>
 	                                <td>暂无数据</td>
-	                                <td>暂无数据</td>  
-	                                <td>暂无数据</td> 
-	                                <td>暂无数据</td> 
 	                                <td>暂无数据</td> 
 	                                <td>暂无数据</td>  
-	                                <td>暂无数据</td>                                            
+	                                <td>暂无数据</td>                                               
                           	  </tbody>
                             </s:else>
                             
@@ -247,8 +200,8 @@
                         <div class="pull-right"><!--右对齐--->
                            <ul class="pagination">
                            <li class="disabled"><a href="#">第<s:property value="#request.pb.pageCode"/>页/共<s:property value="#request.pb.totaPage"/>页</a></li>
-                           <li><a href="${pageContext.request.contextPath}/bookAction_${pb.url }pageCode=1">首页</a></li>
-                           <li><a href="${pageContext.request.contextPath}/bookAction_${pb.url }pageCode=${pb.pageCode-1 }">&laquo;</a></li><!-- 上一页 -->
+                           <li><a href="${pageContext.request.contextPath}/borrowAction_${pb.url }pageCode=1">首页</a></li>
+                           <li><a href="${pageContext.request.contextPath}/borrowAction_${pb.url }pageCode=${pb.pageCode-1 }">&laquo;</a></li><!-- 上一页 -->
                            <%-- 循环显示页码列表 --%>
 								<c:forEach begin="${begin }" end="${end }" var="i">
 								  <c:choose>
@@ -257,16 +210,16 @@
 								  			<li class="active"><a>${i }</a><li>							 
 								  	</c:when>
 								  	<c:otherwise>
-								  		<li><a href="${pageContext.request.contextPath}/bookAction_${pb.url }pageCode=${i}">${i}</a></li>
+								  		<li><a href="${pageContext.request.contextPath}/borrowAction_${pb.url }pageCode=${i}">${i}</a></li>
 								  	</c:otherwise>
 								  </c:choose>
 								</c:forEach>
 				        	   <%--如果当前页数没到总页数，即没到最后一页,则需要显示下一页 --%>
 							  <c:if test="${pb.pageCode < pb.totaPage }">
-								  <li><a href="${pageContext.request.contextPath}/bookAction_${pb.url }pageCode=${pb.pageCode+1}">&raquo;</a></li>
+								  <li><a href="${pageContext.request.contextPath}/borrowAction_${pb.url }pageCode=${pb.pageCode+1}">&raquo;</a></li>
 							</c:if>
 							<%--否则显示尾页 --%>
-							<li><a href="${pageContext.request.contextPath}/bookAction_${pb.url }pageCode=${pb.totaPage}">尾页</a></li>
+							<li><a href="${pageContext.request.contextPath}/borrowAction_${pb.url }pageCode=${pb.totaPage}">尾页</a></li>
 							</ul>
                            </div>
                     </s:if>           
@@ -284,103 +237,104 @@
     
     
     
-    <!--------------------------------------查看的模糊框------------------------>  
+    
+    
+     <!--------------------------------------查看的模糊框------------------------>  
                                  <form class="form-horizontal">   <!--保证样式水平不混乱-->   
                                         <!-- 模态框（Modal） -->
-									<div class="modal fade" id="findModal" tabindex="-1" role="dialog" aria-labelledby="findModalLabel" aria-hidden="true">
+									<div class="modal fade" id="findBackModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 										<div class="modal-dialog">
 											<div class="modal-content">
 												<div class="modal-header">
 													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 														&times;
 													</button>
-													<h4 class="modal-title" id="findModalLabel">
-														查看图书信息
+													<h4 class="modal-title" id="myModalLabel">
+														查看归还信息
 													</h4>
 												</div>
 												<div class="modal-body">
 												
 										<!---------------------表单-------------------->
-										<div class="form-group">
-											<label for="firstname" class="col-sm-3 control-label">ISBN号</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control" id="findISBN" readonly="readonly">
-												
-												</div>
-										</div>
 										 <div class="form-group">
-											<label for="firstname" class="col-sm-3 control-label">图书名称</label>
+											<label for="firstname" class="col-sm-3 control-label">借阅编号</label>
 												<div class="col-sm-7">
-													<input type="text" class="form-control" id="findBookName"  readonly="readonly">
+													<input type="text" class="form-control" id="borrowId"  readonly="readonly">
 												
 												</div>
 										</div>
 											
 										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">图书类型</label>
+											<label for="firstname" class="col-sm-3 control-label">借阅书籍ISBN号</label>
 											<div class="col-sm-7">
-												<input type="text" class="form-control" id="findBookType"  readonly="readonly">
-												
+												<input type="text" class="form-control" id="ISBN"  readonly="readonly">
+
 											</div>
 										</div>
 											
 										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">作者名称</label>
+											<label for="firstname" class="col-sm-3 control-label">借阅书籍名称</label>
 												<div class="col-sm-7">
-													<input type="text" class="form-control" id="findAutho"  readonly="readonly">
+													<input type="text" class="form-control" id="bookName"  readonly="readonly">
 												
 												</div>
 										</div>
-										
-										
 										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">出版社</label>
+											<label for="firstname" class="col-sm-3 control-label">借阅书籍类型</label>
 												<div class="col-sm-7">
-													<input type="text" class="form-control" id="findPress"  readonly="readonly">
-												
-												</div>
-										</div>
-										
-										
-										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">总数量</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control" id="findNum"  readonly="readonly">
+													<input type="text" class="form-control" id="bookType"  readonly="readonly">
 												
 												</div>
 										</div>
 										
 										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">当前数量</label>
+											<label for="firstname" class="col-sm-3 control-label">读者证件号</label>
 												<div class="col-sm-7">
-													<input type="text" class="form-control" id="findCurrentNum"  readonly="readonly">
-												
+													<input type="text" class="form-control" id="paperNO"  readonly="readonly">
+										
 												</div>
 										</div>
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">读者名称</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="readerName"  readonly="readonly">
 										
+												</div>
+										</div>
 										
 										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">价格</label>
+											<label for="firstname" class="col-sm-3 control-label">读者类型</label>
 												<div class="col-sm-7">
-													<input type="text" class="form-control" id="findPrice"  readonly="readonly">
-												
+													<input type="text" class="form-control" id="readerType"  readonly="readonly">
+										
 												</div>
 										</div>
+										
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">逾期天数</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="overday"  readonly="readonly">
+										
+												</div>
+										</div>
+										
 										<div class="form-group">	
 											<label for="firstname" class="col-sm-3 control-label">操作管理员</label>
 												<div class="col-sm-7">
-													<input type="text" class="form-control" id="findAdmin"  readonly="readonly">
-												
+													<input type="text" class="form-control" id="admin"  readonly="readonly">
+										
 												</div>
 										</div>
 										
 										
 										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">简介</label>
+											<label for="firstname" class="col-sm-3 control-label">归还状态</label>
 												<div class="col-sm-7">
-												<textarea class="form-control" rows="3" id="findDescription" readonly="readonly"></textarea>
+													<input type="text" class="form-control" id="state"  readonly="readonly">
+										
 												</div>
 										</div>
+										
 										
 										<!---------------------表单-------------------->
 									</div>
@@ -393,14 +347,15 @@
 									</div>
 
                                  </form>	
- 								<!--------------------------------------查看的模糊框------------------------>  
-    
-    
-    
-    
-    
-    
-    
+ 								<!--------------------------------------添加的模糊框------------------------>  
+ 
+ 
+ 
+
+ 
+ 
+ 
+        
     <!-------------------------------------------------------------->  
                  
                    <form class="form-horizontal">   <!--保证样式水平不混乱-->                  
@@ -521,7 +476,8 @@
 
 				</form>	
                                    <!-------------------------------------------------------------->
-
+    
+    
     
     
     

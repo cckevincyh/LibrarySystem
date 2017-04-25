@@ -5,6 +5,7 @@ import java.util.List;
 import com.cc.library.domain.BackInfo;
 import com.cc.library.domain.BorrowInfo;
 import com.cc.library.domain.PageBean;
+import com.cc.library.domain.Reader;
 
 
 public interface BackDao {
@@ -20,5 +21,7 @@ public interface BackDao {
 	public BackInfo updateBackInfo(BackInfo backInfoById);
 
 	public boolean deleteBackInfo(BackInfo backInfo);
+
+	
 
 }

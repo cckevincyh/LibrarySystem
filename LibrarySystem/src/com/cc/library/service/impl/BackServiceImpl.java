@@ -11,6 +11,7 @@ import com.cc.library.domain.BackInfo;
 import com.cc.library.domain.Book;
 import com.cc.library.domain.BorrowInfo;
 import com.cc.library.domain.PageBean;
+import com.cc.library.domain.Reader;
 import com.cc.library.service.BackService;
 
 public class BackServiceImpl implements BackService{
@@ -131,6 +132,16 @@ public class BackServiceImpl implements BackService{
 			}
 		}
 		return 0;
+	}
+
+	@Override
+	public PageBean<BackInfo> findMyBorrowInfoByPage(Reader reader,
+			int pageCode, int pageSize) {
+		// TODO Auto-generated method stub
+		String iSBN = "";
+		int borrowId = 0;
+		String paperNO = reader.getPaperNO();
+		return queryBackInfo(iSBN, paperNO, borrowId, pageCode, pageSize);
 	}
 	
 	

@@ -3,9 +3,9 @@
 	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
 	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
 <struts>
-  <package name="borrow" extends="struts-default" namespace="/reader">
-  	<action name="borrowAction_*" method="{1}" class="borrowAction">
-  		<result name="success">borrow.jsp</result>
+  <package name="forfeit" extends="struts-default" namespace="/reader">
+  	<action name="forfeitAction_*" method="{1}" class="forfeitAction">
+  		<result name="success">forfeit.jsp</result>
   	</action>
   </package>
   

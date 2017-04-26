@@ -3,9 +3,9 @@
 	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
 	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
 <struts>
-  <package name="borrow" extends="struts-default" >
+  <package name="borrow" extends="struts-default" namespace="/reader">
   	<action name="borrowAction_*" method="{1}" class="borrowAction">
-  		<result name="success">reader/borrow.jsp</result>
+  		<result name="success">borrow.jsp</result>
   	</action>
   </package>
   

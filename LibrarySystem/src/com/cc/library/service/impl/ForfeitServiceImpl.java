@@ -10,6 +10,7 @@ import com.cc.library.domain.BackInfo;
 import com.cc.library.domain.BorrowInfo;
 import com.cc.library.domain.ForfeitInfo;
 import com.cc.library.domain.PageBean;
+import com.cc.library.domain.Reader;
 import com.cc.library.service.ForfeitService;
 
 public class ForfeitServiceImpl implements ForfeitService{
@@ -110,6 +111,16 @@ public class ForfeitServiceImpl implements ForfeitService{
 			return 1;
 		}
 		return 0;
+	}
+
+	@Override
+	public PageBean<ForfeitInfo> findMyForfeitInfoByPage(Reader reader,
+			int pageCode, int pageSize) {
+		// TODO Auto-generated method stub
+		String iSBN = "";
+		int borrowId = 0;
+		String paperNO = reader.getPaperNO();
+		return queryForfeitInfo(iSBN, paperNO, borrowId, pageCode, pageSize);
 	}
 	
 	

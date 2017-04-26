@@ -30,4 +30,5 @@
  	<import resource="applicationContext-quartz.xml"/>
  	<import resource="applicationContext-book.xml"/>
  	<import resource="applicationContext-borrow.xml"/>
+ 	<import resource="applicationContext-forfeit.xml"/>
  </beans>

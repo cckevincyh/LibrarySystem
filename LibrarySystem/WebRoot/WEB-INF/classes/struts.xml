@@ -27,4 +27,5 @@
  	<include file="struts2/struts-borrow-search.xml"></include>
  	<include file="struts2/struts-book.xml"></include>
  	<include file="struts2/struts-borrow.xml"></include>
+ 	<include file="struts2/struts-forfeit.xml"></include>
 </struts>	

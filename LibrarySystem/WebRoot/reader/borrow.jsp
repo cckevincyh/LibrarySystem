@@ -37,7 +37,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="collapse navbar-collapse main-navbar-collapse">
-                        <a class="navbar-brand" href="${pageContext.request.contextPath}/admin/admin.jsp"><strong>欢迎使用图书馆管理系统</strong></a>
+                        <a class="navbar-brand" href="${pageContext.request.contextPath}/reader/reader.jsp"><strong>欢迎使用图书馆管理系统</strong></a>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
                                 <a href="#" role="button" class="dropdown-toggle" data-hover="dropdown"> <i class="glyphicon glyphicon-user"></i> 欢迎您，<s:property value="#session.reader.name"/> <i class="caret"></i></a>
@@ -69,10 +69,14 @@
                 </li>
                 <s:if test="#session.reader!=null"><!-- 判断是否登录 -->
 	                <li class="active">
-	                    <a href="${pageContext.request.contextPath}/borrowAction_findMyBorrowInfoByPage.action"><i class="glyphicon glyphicon-chevron-right"></i> 借阅信息</a>
+	                    <a href="${pageContext.request.contextPath}/reader/borrowAction_findMyBorrowInfoByPage.action"><i class="glyphicon glyphicon-chevron-right"></i> 借阅信息</a>
 	                </li>
                 </s:if>
-                
+                <s:if test="#session.reader!=null"><!-- 判断是否登录 -->
+	                <li>
+	                    <a href="${pageContext.request.contextPath}/reader/forfeitAction_findMyForfeitInfoByPage.action"><i class="glyphicon glyphicon-chevron-right"></i> 逾期信息</a>
+	                </li>
+                </s:if>
                 
                     
                 
@@ -88,7 +92,7 @@
                             <div class="text-muted bootstrap-admin-box-title">借阅查询</div>
                         </div>
                         <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
-                            <form class="form-horizontal" action="${pageContext.request.contextPath}/borrowAction_queryBorrowSearchInfo.action" method="post">
+                            <form class="form-horizontal" action="${pageContext.request.contextPath}/reader/borrowAction_queryBorrowSearchInfo.action" method="post">
                                 <div class="row">
                                 <div class="col-lg-5 form-group">
                                         <label class="col-lg-4 control-label" for="borrow_sno"><label class="text-danger"></label>借阅编号</label>
@@ -200,8 +204,8 @@
                         <div class="pull-right"><!--右对齐--->
                            <ul class="pagination">
                            <li class="disabled"><a href="#">第<s:property value="#request.pb.pageCode"/>页/共<s:property value="#request.pb.totaPage"/>页</a></li>
-                           <li><a href="${pageContext.request.contextPath}/borrowAction_${pb.url }pageCode=1">首页</a></li>
-                           <li><a href="${pageContext.request.contextPath}/borrowAction_${pb.url }pageCode=${pb.pageCode-1 }">&laquo;</a></li><!-- 上一页 -->
+                           <li><a href="${pageContext.request.contextPath}/reader/borrowAction_${pb.url }pageCode=1">首页</a></li>
+                           <li><a href="${pageContext.request.contextPath}/reader/borrowAction_${pb.url }pageCode=${pb.pageCode-1 }">&laquo;</a></li><!-- 上一页 -->
                            <%-- 循环显示页码列表 --%>
 								<c:forEach begin="${begin }" end="${end }" var="i">
 								  <c:choose>
@@ -210,16 +214,16 @@
 								  			<li class="active"><a>${i }</a><li>							 
 								  	</c:when>
 								  	<c:otherwise>
-								  		<li><a href="${pageContext.request.contextPath}/borrowAction_${pb.url }pageCode=${i}">${i}</a></li>
+								  		<li><a href="${pageContext.request.contextPath}/reader/borrowAction_${pb.url }pageCode=${i}">${i}</a></li>
 								  	</c:otherwise>
 								  </c:choose>
 								</c:forEach>
 				        	   <%--如果当前页数没到总页数，即没到最后一页,则需要显示下一页 --%>
 							  <c:if test="${pb.pageCode < pb.totaPage }">
-								  <li><a href="${pageContext.request.contextPath}/borrowAction_${pb.url }pageCode=${pb.pageCode+1}">&raquo;</a></li>
+								  <li><a href="${pageContext.request.contextPath}/reader/borrowAction_${pb.url }pageCode=${pb.pageCode+1}">&raquo;</a></li>
 							</c:if>
 							<%--否则显示尾页 --%>
-							<li><a href="${pageContext.request.contextPath}/borrowAction_${pb.url }pageCode=${pb.totaPage}">尾页</a></li>
+							<li><a href="${pageContext.request.contextPath}/reader/borrowAction_${pb.url }pageCode=${pb.totaPage}">尾页</a></li>
 							</ul>
                            </div>
                     </s:if>           

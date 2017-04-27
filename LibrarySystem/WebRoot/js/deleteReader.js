@@ -10,8 +10,11 @@ function deleteReader(id){
 	    		callback:function(data) {
 					if (data == 1) {
 						showInfo("删除成功");
-					}
-					else {
+					}else if(data == -1){
+						showInfo("该读者有未还书记录,不能删除");
+					}else if(data==-2){
+						showInfo("该读者有未缴纳的罚款,不能删除");
+					}else{
 						showInfo("删除失败");
 					}
 								

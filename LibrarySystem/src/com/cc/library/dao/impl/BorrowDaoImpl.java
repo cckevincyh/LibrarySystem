@@ -113,8 +113,8 @@ public class BorrowDaoImpl extends HibernateDaoSupport implements BorrowDao{
 
 
 	@Override
-	public List<BorrowInfo> getBorrowInfoByReader(Reader reader) {
-		String hql= "from BorrowInfo b where b.reader.readerId=? and b.state=0";
+	public List<BorrowInfo> getNoBackBorrowInfoByReader(Reader reader) {
+		String hql= "from BorrowInfo b where b.state=0 or b.state=1 or b.state=3 or b.state=4 and b.reader.readerId=? ";
 		List list = null;
 		try {
 			list = this.getHibernateTemplate().find(hql, reader.getReaderId());

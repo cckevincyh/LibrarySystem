@@ -137,7 +137,13 @@ public class ForfeitDaoImpl extends HibernateDaoSupport implements ForfeitDao{
 	@Override
 	public ForfeitInfo getForfeitInfoById(ForfeitInfo forfeitInfo) {
 		String hql= "from ForfeitInfo f where f.borrowId=?";
-		List list = this.getHibernateTemplate().find(hql, forfeitInfo.getBorrowId());
+		List list = null;
+		try{
+			list = this.getHibernateTemplate().find(hql, forfeitInfo.getBorrowId());
+		}catch (Throwable e) {
+			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
+		}
 		if(list!=null && list.size()>0){
 			return (ForfeitInfo) list.get(0);
 		}

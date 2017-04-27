@@ -12,7 +12,7 @@ public class ForfeitInfo implements Serializable{
 	private Integer borrowId;	//借阅编号
 	private BorrowInfo borrowInfo;
 	private Admin admin;	//操作员
-	private double forfeit;	//罚金金额
+	private Double forfeit;	//罚金金额
 	private int isPay;	//是否已经支付罚金
 	
 	
@@ -64,14 +64,14 @@ public class ForfeitInfo implements Serializable{
 
 
 
-	public double getForfeit() {
+	public Double getForfeit() {
 		return forfeit;
 	}
 
 
 
 
-	public void setForfeit(double forfeit) {
+	public void setForfeit(Double forfeit) {
 		this.forfeit = forfeit;
 	}
 
@@ -95,6 +95,18 @@ public class ForfeitInfo implements Serializable{
 	public ForfeitInfo() {
 		
 	}
+
+
+
+
+	@Override
+	public String toString() {
+		return "ForfeitInfo [borrowId=" + borrowId + ", borrowInfo="
+				+ borrowInfo + ", admin=" + admin + ", forfeit=" + forfeit
+				+ ", isPay=" + isPay + "]";
+	}
+	
+	
 	
 	
 }

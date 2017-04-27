@@ -18,7 +18,7 @@ public interface ReaderService {
 
 	public Reader getReaderById(Reader reader);
 
-	public boolean deleteReader(Reader reader);
+	public int deleteReader(Reader reader);
 
 	public PageBean<Reader> queryReader(Reader reader,int pageCode, int pageSize);
 

@@ -252,14 +252,11 @@ public class ReaderManageAction extends ActionSupport{
 	 * @return
 	 */
 	public String deleteReader(){
+		//删除读者需要注意的点：如果该读者有尚未归还的书籍或者尚未缴纳的罚款,则不能删除
 		Reader reader = new Reader();
 		reader.setReaderId(readerId);
-		boolean deleteReader = readerService.deleteReader(reader);
-		int success = 0;
-		if(deleteReader){
-			success = 1;
-			//由于是转发并且js页面刷新,所以无需重查
-		}
+		int success = readerService.deleteReader(reader);
+
 		try {
 			ServletActionContext.getResponse().getWriter().print(success);
 		} catch (IOException e) {

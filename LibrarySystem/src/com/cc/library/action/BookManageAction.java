@@ -291,14 +291,11 @@ public class BookManageAction extends ActionSupport{
 	 * @return
 	 */
 	public String deleteBook(){
+		//删除图书需要注意的事项：如果该书有尚未归还的记录或者尚未缴纳的罚款记录,则不能删除
 		Book book = new Book();
 		book.setBookId(bookId);
-		boolean deleteBook = bookService.deleteBook(book);//删除图书
-		int success = 0;
-		if(deleteBook){
-			success = 1;
-			//由于是转发并且js页面刷新,所以无需重查
-		}
+		int success = bookService.deleteBook(book);//删除图书
+
 		try {
 			ServletActionContext.getResponse().getWriter().print(success);
 		} catch (IOException e) {

@@ -8,10 +8,13 @@ function deleteBook(id){
 	    		url:'admin/bookManageAction_deleteBook.action',
 				params: "bookId=" + id,
 	    		callback:function(data) {
-					if (data == 1) {
+	    			if (data == 1) {
 						showInfo("删除成功");
-					}
-					else {
+					}else if(data == -1){
+						showInfo("该书有未还书记录,不能删除");
+					}else if(data==-2){
+						showInfo("该书有未缴纳的罚款,不能删除");
+					}else{
 						showInfo("删除失败");
 					}
 								

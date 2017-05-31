@@ -21,7 +21,7 @@ public interface BookService {
 
 	public PageBean<Book> queryBook(Book book, int pageCode, int pageSize);
 
-	public boolean deleteBook(Book book);
+	public int deleteBook(Book book);
 
 
 }

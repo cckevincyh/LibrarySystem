@@ -1,9 +1,9 @@
-create database librarySystem;
+create database LibrarySystem;
 use librarySystem;
 
 CREATE TABLE `admin` (
   `aid` int(11) NOT NULL,
-  `username` varchar(20) NOT NULL,
+  `username`  varchar(20) BINARY NOT NULL,
   `name` varchar(20) DEFAULT NULL,
   `pwd` varchar(20) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
@@ -20,6 +20,7 @@ CREATE TABLE `authorization` (
   `borrowSet` int(2) DEFAULT '0',
   `typeSet` int(2) DEFAULT '0',
   `backSet` int(2) DEFAULT '0',
+  `forfeitSet` int(2) DEFAULT '0',
   `sysSet` int(2) DEFAULT '0',
   `superSet` int(2) DEFAULT '0',
   PRIMARY KEY (`aid`),
@@ -33,6 +34,7 @@ CREATE TABLE `readertype` (
   `maxNum` int(5) NOT NULL,
   `bday` int(5) NOT NULL,
   `penalty` double NOT NULL,
+  `renewDays` int(5) NOT NULL,
   PRIMARY KEY (`readerTypeId`)
 );
 
@@ -44,7 +46,7 @@ CREATE TABLE `reader` (
   `readerId` varchar(255) NOT NULL,
   `pwd` varchar(20) NOT NULL,
   `name` varchar(20) NOT NULL,
-  `paperNO` varchar(20) NOT NULL,
+  `paperNO` varchar(20) UNIQUE NOT NULL,
   `phone` varchar(20) DEFAULT NULL,
   `email` varchar(30) DEFAULT NULL,
   `createTime` datetime DEFAULT NULL,

@@ -5,7 +5,7 @@
 <struts>
   <package name="borrowManage" extends="struts-default" namespace="/admin">
   	<action name="borrowManageAction_*" method="{1}" class="borrowManageAction">
-  		<result name="success">borrowManage.jsp</result>
+  		<result name="success">/WEB-INF/admin/borrowManage.jsp</result>
   	</action>
   </package>
   

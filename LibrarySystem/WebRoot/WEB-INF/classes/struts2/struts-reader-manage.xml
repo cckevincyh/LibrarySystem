@@ -5,7 +5,7 @@
 <struts>
   <package name="readerManage" extends="struts-default" namespace="/admin">
   	<action name="readerManageAction_*" method="{1}" class="readerManageAction">
-  		<result name="success">readerManage.jsp</result>
+  		<result name="success">/WEB-INF/admin/readerManage.jsp</result>
   	</action>
   </package>
   

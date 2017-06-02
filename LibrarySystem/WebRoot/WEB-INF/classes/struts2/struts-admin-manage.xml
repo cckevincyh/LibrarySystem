@@ -5,7 +5,7 @@
 <struts>
   <package name="adminManage" extends="struts-default" namespace="/admin">
   	<action name="adminManageAction_*" method="{1}" class="adminManageAction">
-  		<result name="success">adminManage.jsp</result>
+  		<result name="success">/WEB-INF/admin/adminManage.jsp</result>
   	</action>
   </package>
   

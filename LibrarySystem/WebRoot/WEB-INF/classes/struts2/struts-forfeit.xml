@@ -5,7 +5,7 @@
 <struts>
   <package name="forfeit" extends="struts-default" namespace="/reader">
   	<action name="forfeitAction_*" method="{1}" class="forfeitAction">
-  		<result name="success">forfeit.jsp</result>
+  		<result name="success">/WEB-INF/reader/forfeit.jsp</result>
   	</action>
   </package>
   

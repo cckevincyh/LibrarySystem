@@ -5,7 +5,7 @@
 <struts>
   <package name="borrowSearch" extends="struts-default" namespace="/admin">
   	<action name="borrowSearchAction_*" method="{1}" class="borrowSearchAction">
-  		<result name="success">borrowSearch.jsp</result>
+  		<result name="success">/WEB-INF/admin/borrowSearch.jsp</result>
   	</action>
   </package>
   

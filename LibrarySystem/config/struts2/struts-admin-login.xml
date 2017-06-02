@@ -5,7 +5,7 @@
 <struts>
   <package name="adminLogin" extends="struts-default">
   	<action name="adminLoginAction_*" method="{1}" class="adminLoginAction">
-  		<result name="logout" type="redirect">admin/adminLogin.jsp</result>
+  		<result name="logout" type="redirect">adminLogin.jsp</result>
   	</action>
   </package>
 </struts>	

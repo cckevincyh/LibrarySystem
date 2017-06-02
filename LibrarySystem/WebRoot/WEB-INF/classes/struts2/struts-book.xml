@@ -5,7 +5,7 @@
 <struts>
   <package name="book" extends="struts-default" >
   	<action name="bookAction_*" method="{1}" class="bookAction">
-  		<result name="success">reader/book.jsp</result>
+  		<result name="success">/WEB-INF/reader/book.jsp</result>
   	</action>
   </package>
   

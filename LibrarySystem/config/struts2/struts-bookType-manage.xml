@@ -5,7 +5,7 @@
 <struts>
   <package name="bookTypeManage" extends="struts-default" namespace="/admin">
   	<action name="bookTypeManageAction_*" method="{1}" class="bookTypeManageAction">
-  		<result name="success">bookTypeManage.jsp</result>
+  		<result name="success">/WEB-INF/admin/bookTypeManage.jsp</result>
   	</action>
   </package>
   

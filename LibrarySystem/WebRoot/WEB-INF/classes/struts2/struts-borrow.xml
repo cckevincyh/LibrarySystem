@@ -5,7 +5,7 @@
 <struts>
   <package name="borrow" extends="struts-default" namespace="/reader">
   	<action name="borrowAction_*" method="{1}" class="borrowAction">
-  		<result name="success">borrow.jsp</result>
+  		<result name="success">/WEB-INF/reader/borrow.jsp</result>
   	</action>
   </package>
   

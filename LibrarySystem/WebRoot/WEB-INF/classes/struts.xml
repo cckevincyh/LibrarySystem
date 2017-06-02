@@ -4,7 +4,7 @@
 	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
 <struts>
    <!-- 配置文件改了以后不用重新启动 -->
-   <constant name="struts.devMode" value="true"/>
+   <constant name="struts.devMode" value="false"/><!-- 设置为false不显示详细错误 -->
   
    <!-- 把struts的请求委托给spring管理,
         作用:创建Action实例的过程由spring处理,其他的还是有struts2自己处理 -->

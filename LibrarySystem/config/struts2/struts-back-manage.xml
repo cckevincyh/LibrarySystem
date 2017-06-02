@@ -5,7 +5,7 @@
 <struts>
   <package name="backManage" extends="struts-default" namespace="/admin">
   	<action name="backManageAction_*" method="{1}" class="backManageAction">
-  		<result name="success">backManage.jsp</result>
+  		<result name="success">/WEB-INF/admin/backManage.jsp</result>
   	</action>
   </package>
   

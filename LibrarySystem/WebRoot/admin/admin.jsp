@@ -45,7 +45,7 @@
                                        <li><a href="#updatepwd" data-toggle="modal">修改密码</a></li>
                                         <li role="presentation" class="divider"></li>
                                      <!-- href="#identifier"  来指定要切换的特定的模态框（带有 id="identifier"）。-->  
-                                    <li><a href="${pageContext.request.contextPath}/admin/adminLoginAction_logout.action">退出</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/adminLoginAction_logout.action">退出</a></li>
                                 </ul>
                                 
                             </li>

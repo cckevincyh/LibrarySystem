@@ -11,11 +11,11 @@ $(function () {
 	ajax(
     		  {
 			  	method:'POST',
-	    		url:'reader/readerLoginAction_login.action',
+	    		url:'readerLoginAction_login.action',
 				params: postdata,
 	    		callback:function(data) {
 					if (data == 1) {
-	                    window.location.href = "reader/reader.jsp";
+	                    window.location.href = "reader.jsp";
 	                } else if (data == -1) {
 	                    showInfo("账号不存在");
 	                } else if (data == -2) {

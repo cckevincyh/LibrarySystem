@@ -34,7 +34,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="collapse navbar-collapse main-navbar-collapse">
-                    <a class="navbar-brand" href="${pageContext.request.contextPath}/reader/reader.jsp"><strong>欢迎使用图书馆管理系统</strong></a>
+                    <a class="navbar-brand" href="${pageContext.request.contextPath}/reader.jsp"><strong>欢迎使用图书馆管理系统</strong></a>
                     <ul class="nav navbar-nav navbar-right">
                     <s:if test="#session.reader!=null"><!-- 判断是否已经登录 -->
                         <li class="dropdown">
@@ -44,7 +44,7 @@
                                  <li role="presentation" class="divider"></li>
                                 <li><a href="#updatepwd" data-toggle="modal">修改密码</a></li>
                                 <li role="presentation" class="divider"></li>
-                                <li><a href="${pageContext.request.contextPath}/reader/readerLoginAction_logout.action">退出</a></li>
+                                <li><a href="${pageContext.request.contextPath}/readerLoginAction_logout.action">退出</a></li>
                             </ul>
                         </li>
                         </s:if>

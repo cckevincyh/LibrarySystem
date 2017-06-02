@@ -21,7 +21,7 @@
             <script src="${pageContext.request.contextPath}/ajax-lib/ajaxutils.js"></script>
                       <script src="${pageContext.request.contextPath}/js/readerUpdateInfo.js"></script>
              <script src="${pageContext.request.contextPath}/js/readerUpdatePwd.js"></script>
-
+ 		<script src="${pageContext.request.contextPath}/js/reader.js"></script>
                 
                 
        <script src="${pageContext.request.contextPath}/js/getBookTypes.js"></script>
@@ -41,8 +41,9 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="collapse navbar-collapse main-navbar-collapse">
-                        <a class="navbar-brand" href="${pageContext.request.contextPath}/reader/reader.jsp"><strong>欢迎使用图书馆管理系统</strong></a>
+                        <a class="navbar-brand" href="${pageContext.request.contextPath}/reader.jsp"><strong>欢迎使用图书馆管理系统</strong></a>
                         <ul class="nav navbar-nav navbar-right">
+                           <s:if test="#session.reader!=null"><!-- 判断是否已经登录 -->
                             <li class="dropdown">
                                 <a href="#" role="button" class="dropdown-toggle" data-hover="dropdown"> <i class="glyphicon glyphicon-user"></i> 欢迎您，<s:property value="#session.reader.name"/> <i class="caret"></i></a>
                             
@@ -51,10 +52,14 @@
                                       <li role="presentation" class="divider"></li>
                                     <li><a href="#updatepwd" data-toggle="modal">修改密码</a></li>
                                      <li role="presentation" class="divider"></li>
-                                    <li><a href="${pageContext.request.contextPath}/reader/readerLoginAction_logout.action">退出</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/readerLoginAction_logout.action">退出</a></li>
                                 </ul>
                                 
                             </li>
+                             </s:if>
+                        <s:else><!-- 如果未登录，出现登录按钮 -->
+                        	<button type="button" class="btn btn-default btn-sm "  id="btn_login" style="margin: 10" data-dismiss="modal">登录</button>
+                        </s:else>
                         </ul>
                     </div>
                 </div>

@@ -88,6 +88,9 @@ public class AuthorizationAction extends ActionSupport{
 			if(s.equals("backSet")){
 				authorization.setBackSet(1);
 			}
+			if(s.equals("forfeitSet")){
+				authorization.setForfeitSet(1);
+			}
 			if(s.equals("sysSet")){
 				authorization.setSysSet(1);
 			}

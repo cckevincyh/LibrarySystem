@@ -62,10 +62,6 @@ public class Admin implements Serializable{
 		
 	}
 	
-	
-	
-	
-	
 
 
 	

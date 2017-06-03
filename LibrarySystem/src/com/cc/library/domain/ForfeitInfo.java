@@ -99,14 +99,7 @@ public class ForfeitInfo implements Serializable{
 
 
 
-	@Override
-	public String toString() {
-		return "ForfeitInfo [borrowId=" + borrowId + ", borrowInfo="
-				+ borrowInfo + ", admin=" + admin + ", forfeit=" + forfeit
-				+ ", isPay=" + isPay + "]";
-	}
-	
-	
+
 	
 	
 }

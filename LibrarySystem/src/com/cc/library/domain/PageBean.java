@@ -68,14 +68,7 @@ public class PageBean<T> implements Serializable{
 		this.url = url;
 	}
 
-	@Override
-	public String toString() {
-		return "PageBean [pageCode=" + pageCode + ", totaPage=" + totaPage
-				+ ", totalRecord=" + totalRecord + ", pageSize=" + pageSize
-				+ ", beanList=" + beanList + ", url=" + url + "]";
-	}
 
-	
 	
 	
 

@@ -54,13 +54,6 @@ public class ReaderType implements Serializable{
 	public void setRenewDays(Integer renewDays) {
 		this.renewDays = renewDays;
 	}
-	@Override
-	public String toString() {
-		return "ReaderType [readerTypeId=" + readerTypeId + ", readerTypeName="
-				+ readerTypeName + ", maxNum=" + maxNum + ", penalty="
-				+ penalty + ", bday=" + bday + "]";
-	}
-	
 
 
 	

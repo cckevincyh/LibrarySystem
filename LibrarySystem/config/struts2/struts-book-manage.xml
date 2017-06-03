@@ -7,7 +7,7 @@
   
           <interceptors>
             <!-- 声明自定义的拦截器 -->
-            <interceptor name="bookInterceptor" class="com.cc.library.action.interceptor.Booknterceptor" />
+            <interceptor name="bookInterceptor" class="com.cc.library.action.interceptor.BookInterceptor" />
 
             <!-- 声明自定义拦截器栈 -->
             <interceptor-stack name="bookStack">
@@ -24,7 +24,7 @@
   
   	<action name="bookManageAction_*" method="{1}" class="bookManageAction">
   		<result name="success">/WEB-INF/admin/bookManage.jsp</result>
-  		<result name="nopass" type="redirect">admin.jsp</result>
+  		<result name="nopass" type="redirect">/error/nopass.jsp</result>
   	</action>
   </package>
   

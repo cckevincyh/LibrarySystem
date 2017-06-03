@@ -68,6 +68,9 @@ function power(id){
 					if(data.backSet!=0){
 						$("#backSet").attr("checked","checked");
 					}	
+					if(data.forfeitSet!=0){
+						$("#forfeitSet").attr("checked","checked");
+					}	
 					if(data.sysSet!=0){
 						$("#sysSet").attr("checked","checked");
 					}		

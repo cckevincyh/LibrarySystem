@@ -10,6 +10,7 @@ public class Authorization implements Serializable{
 	private Integer typeSet;	//图书分类设置权限
 	private Integer borrowSet;	//借阅设置权限
 	private Integer backSet;	//归还设置权限
+	private Integer forfeitSet;	//逾期设置权限
 	private Integer superSet;	//超级管理权限
 	private Admin admin;
 	
@@ -22,6 +23,12 @@ public class Authorization implements Serializable{
 	}
 	
 
+	public Integer getForfeitSet() {
+		return forfeitSet;
+	}
+	public void setForfeitSet(Integer forfeitSet) {
+		this.forfeitSet = forfeitSet;
+	}
 	public Integer getAid() {
 		return aid;
 	}
@@ -74,8 +81,6 @@ public class Authorization implements Serializable{
 
 	
 	}
-
-	
 	
 	
 

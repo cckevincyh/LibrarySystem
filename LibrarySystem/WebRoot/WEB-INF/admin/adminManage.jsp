@@ -608,6 +608,12 @@
 												</div>
 										</div>
 										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">逾期管理权限</label>
+												<div class="col-sm-7">
+													<input type="checkbox" name="power" id="forfeitSet" value="forfeitSet">
+												</div>
+										</div>
+										<div class="form-group">	
 											<label for="firstname" class="col-sm-3 control-label">系统设置权限</label>
 												<div class="col-sm-7">
 													<input type="checkbox" name="power" id="sysSet" value="sysSet">

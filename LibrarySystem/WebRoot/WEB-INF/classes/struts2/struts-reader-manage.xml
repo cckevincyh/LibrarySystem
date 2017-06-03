@@ -4,8 +4,27 @@
 	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
 <struts>
   <package name="readerManage" extends="struts-default" namespace="/admin">
+  
+  	 <interceptors>
+            <!-- 声明自定义的拦截器 -->
+            <interceptor name="readerInterceptor" class="com.cc.library.action.interceptor.ReaderInterceptor" />
+
+            <!-- 声明自定义拦截器栈 -->
+            <interceptor-stack name="readerStack">
+                <interceptor-ref name="defaultStack"/>
+
+                <!-- 配置使用自定义拦截器 -->
+                <interceptor-ref name="readerInterceptor"/>
+
+            </interceptor-stack>
+        </interceptors>
+
+        <!-- 配置修改struts2框架运行时，默认执行的是自定义拦截器栈 -->
+        <default-interceptor-ref name="readerStack" />
+  
   	<action name="readerManageAction_*" method="{1}" class="readerManageAction">
   		<result name="success">/WEB-INF/admin/readerManage.jsp</result>
+  		<result name="nopass" type="redirect">/error/nopass.jsp</result>
   	</action>
   </package>
   

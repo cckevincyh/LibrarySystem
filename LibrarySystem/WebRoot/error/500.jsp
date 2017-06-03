@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />  
-<title>服务器错误</title>
+<title>出错啦~</title>
 <style>
 *{margin:0;padding:0;outline:none;font-family:\5FAE\8F6F\96C5\9ED1,宋体;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;-khtml-user-select:none;user-select:none;cursor:default;font-weight:lighter;}
 .center{margin:0 auto;}
@@ -22,7 +22,7 @@ p{color:#fff;margin-top:40px;font-size:24px;}
 		document.getElementById("num").innerHTML=num;
 		if(num<0){
 			document.getElementById("num").innerHTML=0;
-			location.href='<c:url value="/index.jsp"></c:url>';
+			location.href='<c:url value="/reader.jsp"></c:url>';
 			}
 		}
 	setInterval("redirect()", 1000);

@@ -4,8 +4,27 @@
 	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
 <struts>
   <package name="adminManage" extends="struts-default" namespace="/admin">
+  
+          <interceptors>
+            <!-- 声明自定义的拦截器 -->
+            <interceptor name="adminInterceptor" class="com.cc.library.action.interceptor.AdminInterceptor" />
+
+            <!-- 声明自定义拦截器栈 -->
+            <interceptor-stack name="adminStack">
+                <interceptor-ref name="defaultStack"/>
+
+                <!-- 配置使用自定义拦截器 -->
+                <interceptor-ref name="adminInterceptor"/>
+
+            </interceptor-stack>
+        </interceptors>
+
+        <!-- 配置修改struts2框架运行时，默认执行的是自定义拦截器栈 -->
+        <default-interceptor-ref name="adminStack" />
+  
   	<action name="adminManageAction_*" method="{1}" class="adminManageAction">
   		<result name="success">/WEB-INF/admin/adminManage.jsp</result>
+  		<result name="nopass" type="redirect">/error/nopass.jsp</result>
   	</action>
   </package>
   

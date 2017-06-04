@@ -57,7 +57,12 @@ public class ForfeitServiceImpl implements ForfeitService{
 			ForfeitInfo forfeitInfo = new ForfeitInfo();
 			forfeitInfo.setBorrowId(i);
 			ForfeitInfo info = forfeitDao.getForfeitInfoById(forfeitInfo);
-			forfeitInfos.add(info);
+			if(info!=null){
+				forfeitInfos.add(info);
+			}
+		}
+		if(forfeitInfos.size()==0){
+			return null;
 		}
 		pageBean.setBeanList(forfeitInfos);
 		return pageBean;

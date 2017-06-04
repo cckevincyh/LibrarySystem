@@ -444,7 +444,7 @@
 										<div class="form-group">	
 											<label for="firstname" class="col-sm-3 control-label">最大借阅书量</label>
 											<div class="col-sm-7">
-												<input type="password" class="form-control" id="addMaxNum"  placeholder="请输入最大借阅书量">
+												<input type="text" class="form-control" id="addMaxNum"  placeholder="请输入最大借阅书量">
 
 											</div>
 										</div>

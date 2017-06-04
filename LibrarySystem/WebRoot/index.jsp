@@ -13,7 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    
 
 		<%
-			response.sendRedirect("login.jsp");
+			response.sendRedirect("reader.jsp");
 		 %>
   </body>
 </html>

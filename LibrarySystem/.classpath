@@ -7,7 +7,6 @@
 	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.j2eedt.core.MYECLIPSE_JAVAEE_5_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/db/mysql-connector-java-5.1.10-bin.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/hibernate3.5.6/antlr-2.7.6.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/hibernate3.5.6/commons-collections-3.1.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/hibernate3.5.6/dom4j-1.6.1.jar"/>
@@ -43,5 +42,6 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/struts2/struts2-spring-plugin-2.1.8.1.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/struts2/xwork-core-2.1.6.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/quartz1.7.3/quartz-1.7.3.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/db/mysql-connector-java-5.1.10-bin.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

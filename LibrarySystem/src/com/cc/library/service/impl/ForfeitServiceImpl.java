@@ -57,7 +57,7 @@ public class ForfeitServiceImpl implements ForfeitService{
 			ForfeitInfo forfeitInfo = new ForfeitInfo();
 			forfeitInfo.setBorrowId(i);
 			ForfeitInfo info = forfeitDao.getForfeitInfoById(forfeitInfo);
-			if(info!=null){
+			if(info!=null){//防止当逾期记录还不存在时候，读者点击查看个人逾期的时候报空指针的问题
 				forfeitInfos.add(info);
 			}
 		}

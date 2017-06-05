@@ -23,6 +23,10 @@ $(function () {
 						showInfo("请先缴纳未缴纳的罚金");
 					}else if(data==-4){
 						showInfo("该图书为馆内最后一本,无法借阅");
+					}else if(data==2){
+						showInfo("读者证件号有误,请重试");
+					}else if(data==3){
+						showInfo("图书ISBN号码有误,请重试");
 					}else{
 						showInfo("借阅失败");
 					}			

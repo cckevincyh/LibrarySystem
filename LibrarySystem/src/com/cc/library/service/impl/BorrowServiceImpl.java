@@ -105,10 +105,22 @@ public class BorrowServiceImpl implements BorrowService{
 		 * 8. 生成归还记录
 		 * 
 		 */
+		
 		//得到密码
 		String pwd = info.getReader().getPwd();
 		//1. 得到借阅的读者
 		Reader reader = readerDao.getReaderBypaperNO(info.getReader());
+		
+		//先检查属于的图书ISBN码和读者的证件号是否正确存在
+		if(reader==null){
+			return 2;//读者证件号有误
+		}
+		Book book = bookDao.getBookByISBN(info.getBook());
+		if(book==null){
+			return 3;//图书ISBN号码有误
+		}
+		
+		
 		//2. 查看读者输入的密码是否匹配
 		if(!reader.getPwd().equals(pwd)){
 			return -1;//返回-1表示密码错误

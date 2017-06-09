@@ -19,12 +19,19 @@ public class ReaderInfoAction extends ActionSupport{
 	
 	private String name;
 	private String phone;
+	private String email;
 	private String oldPwd;
 	private String newPwd;
 	private String confirmPwd;
 	
 	
 	
+	
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
 	public ReaderService getReaderService() {
 		return readerService;
 	}
@@ -64,6 +71,7 @@ public class ReaderInfoAction extends ActionSupport{
 		Reader reader = (Reader) session.get("reader");
 		reader.setName(name);
 		reader.setPhone(phone);
+		reader.setEmail(email);
 		Reader newReader = readerService.updateReaderInfo(reader);
 		int success = 0;
 		if(newReader!=null){

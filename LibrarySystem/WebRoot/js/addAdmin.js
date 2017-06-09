@@ -5,9 +5,14 @@
  */
 $(function () {
 	
+	
+	
 
     $('#addAdmin').click(function () {
 
+	 if (!validAddAdmin()) {
+        return;
+    }
 	var postdata = "username="+$.trim($("#addUsername").val())+"&name="+$.trim($("#addName").val())+"&phone="+ $.trim($("#addPhone").val())+"&pwd="+ $.trim($("#addPwd").val());
 	ajax(
     		  {
@@ -45,7 +50,83 @@ $(function () {
 
 
 
+function validAddAdmin() {
+    var flag = true;
 
+    var username = $.trim($("#addUsername").val());
+    if (username == "") {
+        $('#addUsername').parent().addClass("has-error");
+        $('#addUsername').next().text("请输入用户名");
+        $("#addUsername").next().show();
+        flag = false;
+    } else if (username.length<2 || username.length > 15) {
+        $("#addUsername").parent().addClass("has-error");
+        $("#addUsername").next().text("用户名长度必须在2~15之间");
+        $("#addUsername").next().show();
+        flag = false;
+    } else {
+        $('#addUsername').parent().removeClass("has-error");
+        $('#addUsername').next().text("");
+        $("#addUsername").next().hide();
+    }
+
+    var password = $.trim($("#addPwd").val());
+    if (password == "") {
+        $('#addPwd').parent().addClass("has-error");
+        $('#addPwd').next().text("请输入密码");
+        $("#addPwd").next().show();
+        flag = false;
+    } else if (password.length<3 || password.length > 15) {
+        $("#addPwd").parent().addClass("has-error");
+        $("#addPwd").next().text("密码长度必须在3~15之间");
+        $("#addPwd").next().show();
+        flag = false;
+    } else {
+        $('#addPwd').parent().removeClass("has-error");
+        $('#addPwd').next().text("");
+        $("#addPwd").next().hide();
+    }
+	
+	
+	var reg = new RegExp("[\\u4E00-\\u9FFF]+","g");	
+	var name = $.trim($("#addName").val());
+	if(name == ""){
+		 $('#addName').parent().addClass("has-error");
+        $('#addName').next().text("请输入真实姓名");
+        $("#addName").next().show();
+        flag = false;
+	}else if(!reg.test(name)){
+		 $('#addName').parent().addClass("has-error");
+        $('#addName').next().text("真实姓名必须为中文");
+        $("#addName").next().show();
+		 flag = false;
+	}else {
+        $('#addName').parent().removeClass("has-error");
+        $('#addName').next().text("");
+        $("#addName").next().hide();
+    }
+	
+	var phone = $.trim($("#addPhone").val());
+	if(phone == ""){
+		 $('#addPhone').parent().addClass("has-error");
+        $('#addPhone').next().text("请输入联系号码");
+        $("#addPhone").next().show();
+        flag = false;
+	}else if(!(/^1[34578]\d{9}$/.test(phone))){ 
+		//电话号码格式的校验
+         $('#addPhone').parent().addClass("has-error");
+        $('#addPhone').next().text("手机号码有误");
+        $("#addPhone").next().show();  
+        return false; 
+    }else {
+        $('#addPhone').parent().removeClass("has-error");
+        $('#addPhone').next().text("");
+        $("#addPhone").next().hide();
+    } 
+
+	
+    return flag;
+}
 
 
 

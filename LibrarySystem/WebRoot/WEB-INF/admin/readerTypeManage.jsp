@@ -196,7 +196,7 @@
 												<div class="col-sm-7">
 													<input type="hidden" id="readerTypeId">
 													<input type="text" class="form-control" id="readerTypeName" placeholder="请输入读者类型名称">
-												
+													<label class="control-label" for="readerTypeName" style="display: none;"></label>	
 												</div>
 										</div>
 											
@@ -204,7 +204,7 @@
 											<label for="firstname" class="col-sm-3 control-label">最大借阅数量</label>
 												<div class="col-sm-7">
 													<input type="text" class="form-control" id="maxNum" placeholder="请输入最大借阅数量">
-												
+												<label class="control-label" for="maxNum" style="display: none;"></label>	
 												</div>
 										</div>
 											
@@ -215,7 +215,7 @@
 											<label for="firstname" class="col-sm-3 control-label">最大借阅天数</label>
 												<div class="col-sm-7">
 													<input type="text" class="form-control" id="bday" placeholder="请输入最大借阅天数">
-												
+												<label class="control-label" for="bday" style="display: none;"></label>	
 												</div>
 										</div>
 										
@@ -223,15 +223,15 @@
 											<label for="firstname" class="col-sm-3 control-label">逾期每日罚金</label>
 												<div class="col-sm-7">
 													<input type="text" class="form-control" id="penalty"  placeholder="请输入逾期每日罚金">
-												
+												<label class="control-label" for="penalty" style="display: none;"></label>	
 												</div>
 										</div>
 										
 										<div class="form-group">	
 											<label for="firstname" class="col-sm-3 control-label">续借天数</label>
 												<div class="col-sm-7">
-													<input type="text" class="form-control" id="renewDays"  placeholder="请输入逾期每日罚金">
-												
+													<input type="text" class="form-control" id="renewDays"  placeholder="请输入续借天数">
+													<label class="control-label" for="renewDays" style="display: none;"></label>	
 												</div>
 										</div>
 										
@@ -284,7 +284,7 @@
 								<label for="firstname" class="col-sm-3 control-label">原密码</label>
 								<div class="col-sm-7">
 									<input type="password" class="form-control" id="oldPwd"  placeholder="请输入原密码">
-												
+											<label class="control-label" for="oldPwd" style="display: none;"></label>			
 								</div>
 							</div>	
 							
@@ -292,7 +292,7 @@
 								<label for="firstname" class="col-sm-3 control-label">新密码</label>
 								<div class="col-sm-7">
 									<input type="password" class="form-control" id="newPwd"  placeholder="请输入新密码">
-												
+										<label class="control-label" for="newPwd" style="display: none;"></label>			
 								</div>
 							</div>	
 							
@@ -300,7 +300,7 @@
 								<label for="firstname" class="col-sm-3 control-label">确认密码</label>
 								<div class="col-sm-7">
 									<input type="password" class="form-control" id="confirmPwd"  placeholder="请输入确认密码">
-												
+										<label class="control-label" for="confirmPwd" style="display: none;"></label>			
 								</div>
 							</div>	
 								<!--正文-->
@@ -352,7 +352,7 @@
 								<label for="firstname" class="col-sm-3 control-label">用户名</label>
 								<div class="col-sm-7">
 									<input type="text" class="form-control" id="username"  value='<s:property value="#session.admin.username"/>'>
-												
+											<label class="control-label" for="username" style="display: none;"></label>		
 								</div>
 							</div>				
 								
@@ -361,7 +361,7 @@
 								<label for="firstname" class="col-sm-3 control-label">真实姓名</label>
 								<div class="col-sm-7">
 									<input type="text" class="form-control" id="name"  placeholder="请输入您的真实姓名" value='<s:property value="#session.admin.name"/>'>
-												
+												<label class="control-label" for="name" style="display: none;"></label>	
 								</div>
 							</div>	
 							
@@ -369,7 +369,7 @@
 								<label for="firstname" class="col-sm-3 control-label">联系号码</label>
 								<div class="col-sm-7">
 									<input type="text" class="form-control" id="phone"  placeholder="请输入您的联系号码" value='<s:property value="#session.admin.phone"/>'>
-												
+											<label class="control-label" for="phone" style="display: none;"></label>			
 								</div>
 							</div>	
 							
@@ -427,7 +427,7 @@
 														&times;
 													</button>
 													<h4 class="modal-title" id="myModalLabel">
-														添加新管理员
+														添加新读者分类
 													</h4>
 												</div>
 												<div class="modal-body">
@@ -437,7 +437,7 @@
 											<label for="firstname" class="col-sm-3 control-label">读者类型</label>
 												<div class="col-sm-7">
 													<input type="text" class="form-control" id="addType"  placeholder="请输入读者类型名称">
-												
+												<label class="control-label" for="addType" style="display: none;"></label>		
 												</div>
 										</div>
 											
@@ -445,7 +445,7 @@
 											<label for="firstname" class="col-sm-3 control-label">最大借阅书量</label>
 											<div class="col-sm-7">
 												<input type="text" class="form-control" id="addMaxNum"  placeholder="请输入最大借阅书量">
-
+											<label class="control-label" for="addMaxNum" style="display: none;"></label>	
 											</div>
 										</div>
 											
@@ -453,7 +453,7 @@
 											<label for="firstname" class="col-sm-3 control-label">可借天数</label>
 												<div class="col-sm-7">
 													<input type="text" class="form-control" id="addBday"  placeholder="请输入可借天数">
-												
+												<label class="control-label" for="addBday" style="display: none;"></label>	
 												</div>
 										</div>
 										
@@ -462,14 +462,14 @@
 											<label for="firstname" class="col-sm-3 control-label">逾期每日罚金</label>
 												<div class="col-sm-7">
 													<input type="text" class="form-control" id="addPenalty"  placeholder="请输入每日罚金">
-												
+												<label class="control-label" for="addPenalty" style="display: none;"></label>	
 												</div>
 										</div>
 										<div class="form-group">	
 											<label for="firstname" class="col-sm-3 control-label">续借天数</label>
 												<div class="col-sm-7">
 													<input type="text" class="form-control" id="addrenewDays"  placeholder="请输入逾期每日罚金">
-												
+												<label class="control-label" for="addrenewDays" style="display: none;"></label>	
 												</div>
 										</div>
 										<!---------------------表单-------------------->

@@ -259,7 +259,7 @@
 											<label for="firstname" class="col-sm-3 control-label">图书分类名称</label>
 												<div class="col-sm-7">
 													<input type="text" class="form-control" id="addBookTypeName"  placeholder="请输入图书分类名称">
-												
+												<label class="control-label" for="addBookTypeName" style="display: none;"></label>	
 												</div>
 										</div>
 											
@@ -308,7 +308,7 @@
 												<div class="col-sm-7">
 													<input type="hidden" id="updateBookTypeId">
 													<input type="text" class="form-control" id="updateBookTypeName" placeholder="请输入图书分类名称">
-												
+												<label class="control-label" for="updateBookTypeName" style="display: none;"></label>	
 												</div>
 										</div>
 											
@@ -363,7 +363,7 @@
 								<label for="firstname" class="col-sm-3 control-label">原密码</label>
 								<div class="col-sm-7">
 									<input type="password" class="form-control" id="oldPwd"  placeholder="请输入原密码">
-												
+											<label class="control-label" for="oldPwd" style="display: none;"></label>		
 								</div>
 							</div>	
 							
@@ -371,7 +371,7 @@
 								<label for="firstname" class="col-sm-3 control-label">新密码</label>
 								<div class="col-sm-7">
 									<input type="password" class="form-control" id="newPwd"  placeholder="请输入新密码">
-												
+										<label class="control-label" for="newPwd" style="display: none;"></label>				
 								</div>
 							</div>	
 							
@@ -379,7 +379,7 @@
 								<label for="firstname" class="col-sm-3 control-label">确认密码</label>
 								<div class="col-sm-7">
 									<input type="password" class="form-control" id="confirmPwd"  placeholder="请输入确认密码">
-												
+											<label class="control-label" for="confirmPwd" style="display: none;"></label>		
 								</div>
 							</div>	
 								<!--正文-->
@@ -431,7 +431,7 @@
 								<label for="firstname" class="col-sm-3 control-label">用户名</label>
 								<div class="col-sm-7">
 									<input type="text" class="form-control" id="username"  value='<s:property value="#session.admin.username"/>'>
-												
+										<label class="control-label" for="username" style="display: none;"></label>				
 								</div>
 							</div>				
 								
@@ -440,7 +440,7 @@
 								<label for="firstname" class="col-sm-3 control-label">真实姓名</label>
 								<div class="col-sm-7">
 									<input type="text" class="form-control" id="name"  placeholder="请输入您的真实姓名" value='<s:property value="#session.admin.name"/>'>
-												
+										<label class="control-label" for="name" style="display: none;"></label>			
 								</div>
 							</div>	
 							
@@ -448,7 +448,7 @@
 								<label for="firstname" class="col-sm-3 control-label">联系号码</label>
 								<div class="col-sm-7">
 									<input type="text" class="form-control" id="phone"  placeholder="请输入您的联系号码" value='<s:property value="#session.admin.phone"/>'>
-												
+											<label class="control-label" for="phone" style="display: none;"></label>				
 								</div>
 							</div>	
 							

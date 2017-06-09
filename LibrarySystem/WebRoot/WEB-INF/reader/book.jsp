@@ -433,7 +433,7 @@
 								<label for="firstname" class="col-sm-3 control-label">原密码</label>
 								<div class="col-sm-7">
 									<input type="password" class="form-control" id="oldPwd"  placeholder="请输入原密码">
-												
+										<label class="control-label" for="oldPwd" style="display: none"></label>			
 								</div>
 							</div>	
 							
@@ -441,7 +441,7 @@
 								<label for="firstname" class="col-sm-3 control-label">新密码</label>
 								<div class="col-sm-7">
 									<input type="password" class="form-control" id="newPwd"  placeholder="请输入新密码">
-												
+										<label class="control-label" for="newPwd" style="display: none"></label>			
 								</div>
 							</div>	
 							
@@ -449,7 +449,7 @@
 								<label for="firstname" class="col-sm-3 control-label">确认密码</label>
 								<div class="col-sm-7">
 									<input type="password" class="form-control" id="confirmPwd"  placeholder="请输入确认密码">
-												
+										<label class="control-label" for="confirmPwd" style="display: none"></label>				
 								</div>
 							</div>	
 								<!--正文-->
@@ -501,7 +501,7 @@
 								<label for="firstname" class="col-sm-3 control-label">真实姓名</label>
 								<div class="col-sm-7">
 									<input type="text" class="form-control" id="name"  placeholder="请输入您的真实姓名" value='<s:property value="#session.reader.name"/>'>
-												
+										<label class="control-label" for="name" style="display: none"></label>			
 								</div>
 							</div>	
 							
@@ -509,10 +509,17 @@
 								<label for="firstname" class="col-sm-3 control-label">联系号码</label>
 								<div class="col-sm-7">
 									<input type="text" class="form-control" id="phone"  placeholder="请输入您的联系号码" value='<s:property value="#session.reader.phone"/>'>
-												
+										<label class="control-label" for="phone" style="display: none"></label>			
 								</div>
 							</div>	
 							
+							<div class="form-group">
+								<label for="firstname" class="col-sm-3 control-label">邮箱</label>
+								<div class="col-sm-7">
+									<input type="text" class="form-control" id="email"  placeholder="请输入您的邮箱" value='<s:property value="#session.reader.email"/>'>
+											<label class="control-label" for="email" style="display: none"></label>				
+								</div>
+							</div>	
 								<!--正文-->
 								
 								

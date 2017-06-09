@@ -10,6 +10,10 @@ $(function () {
 
     $('#add_BookNum').click(function () {
 
+    	
+    	if (!validAddBookNum()) {
+            return;
+        }
 	var postdata = "bookId="+$.trim($("#addBookNumId").val())+"&num="+$.trim($("#addBookNum").val());
 	ajax(
     		  {
@@ -42,6 +46,31 @@ $(function () {
 
 });
 
+
+
+function validAddBookNum() {
+    var flag = true;
+
+    var num = $.trim($("#addBookNum").val());
+    if (num == "") {
+        $('#addBookNum').parent().addClass("has-error");
+        $('#addBookNum').next().text("请输入新增图书数量");
+        $("#addBookNum").next().show();
+        flag = false;
+    }else if(num<=0 || num!=parseInt(num)){
+    	$('#addBookNum').parent().addClass("has-error");
+        $('#addBookNum').next().text("图书数量必须为正整数");
+        $("#addBookNum").next().show();
+        flag = false;
+	} else {
+        $('#addBookNum').parent().removeClass("has-error");
+        $('#addBookNum').next().text("");
+        $("#addBookNum").next().hide();
+    }
+
+
+    return flag;
+}
 
 
 function showInfo(msg) {

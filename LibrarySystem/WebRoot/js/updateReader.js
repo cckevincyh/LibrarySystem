@@ -8,6 +8,11 @@ $(function () {
 
     $('#updateReader').click(function () {
 
+    	
+    	if (!validUpdateReader()) {
+            return;
+        }
+    	
 	var postdata = "readerId="+$.trim($("#updateReaderID").val())+"&readerType="+$.trim($("#updateReaderType").val())
 	+"&name="+$.trim($("#updateName").val())+"&phone="+ $.trim($("#updatePhone").val())+"&pwd="+ $.trim($("#updatePwd").val())+"&email="+ $.trim($("#updateEmail").val())
 	+"&paperNO="+ $.trim($("#updatePaperNO").val());
@@ -94,6 +99,115 @@ function updateReader(id){
 			
 
 }
+
+
+
+function validUpdateReader() {
+    var flag = true;
+
+    var paperNO = $.trim($("#updatePaperNO").val());
+    if (paperNO == "") {
+        $('#updatePaperNO').parent().addClass("has-error");
+        $('#updatePaperNO').next().text("请输入读者证件号");
+        $("#updatePaperNO").next().show();
+        flag = false;
+    }else {
+        $('#updatePaperNO').parent().removeClass("has-error");
+        $('#updatePaperNO').next().text("");
+        $("#updatePaperNO").next().hide();
+    }
+
+    var password = $.trim($("#updatePwd").val());
+    if (password == "") {
+        $('#updatePwd').parent().addClass("has-error");
+        $('#updatePwd').next().text("请输入密码");
+        $("#updatePwd").next().show();
+        flag = false;
+    } else if (password.length<3 || password.length > 15) {
+        $("#updatePwd").parent().addClass("has-error");
+        $("#updatePwd").next().text("密码长度必须在3~15之间");
+        $("#updatePwd").next().show();
+        flag = false;
+    } else {
+        $('#updatePwd').parent().removeClass("has-error");
+        $('#updatePwd').next().text("");
+        $("#updatePwd").next().hide();
+    }
+	
+	
+	var reg = new RegExp("[\\u4E00-\\u9FFF]+","g");	
+	var name = $.trim($("#updateName").val());
+	if(name == ""){
+		 $('#updateName').parent().addClass("has-error");
+        $('#updateName').next().text("请输入真实姓名");
+        $("#updateName").next().show();
+        flag = false;
+	}else if(!reg.test(name)){
+		 $('#updateName').parent().addClass("has-error");
+        $('#updateName').next().text("真实姓名必须为中文");
+        $("#updateName").next().show();
+		 flag = false;
+	}else {
+        $('#updateName').parent().removeClass("has-error");
+        $('#updateName').next().text("");
+        $("#updateName").next().hide();
+    }
+	
+	var phone = $.trim($("#updatePhone").val());
+	if(phone == ""){
+		 $('#updatePhone').parent().addClass("has-error");
+        $('#updatePhone').next().text("请输入联系号码");
+        $("#updatePhone").next().show();
+        flag = false;
+	}else if(!(/^1[34578]\d{9}$/.test(phone))){ 
+		//电话号码格式的校验
+         $('#updatePhone').parent().addClass("has-error");
+        $('#updatePhone').next().text("手机号码有误");
+        $("#updatePhone").next().show();  
+        return false; 
+    }else {
+        $('#updatePhone').parent().removeClass("has-error");
+        $('#updatePhone').next().text("");
+        $("#updatePhone").next().hide();
+    } 
+
+	var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/; 
+	var email = $.trim($("#updateEmail").val());
+	if(email == ""){
+		 $('#updateEmail').parent().addClass("has-error");
+        $('#updateEmail').next().text("请输入邮箱");
+        $("#updateEmail").next().show();
+        flag = false;
+	}else if(!reg.test(email)){ 
+		//邮箱格式的校验
+         $('#updateEmail').parent().addClass("has-error");
+        $('#updateEmail').next().text("邮箱格式有误");
+        $("#updateEmail").next().show();  
+        return false; 
+    }else {
+        $('#updateEmail').parent().removeClass("has-error");
+        $('#updateEmail').next().text("");
+        $("#updateEmail").next().hide();
+    } 
+	
+	
+	
+	var readerType = $.trim($("#updateReaderType").val());
+	if(readerType == -1){
+		 $('#updateReaderType').parent().addClass("has-error");
+        $('#updateReaderType').next().text("请选择读者类型");
+        $("#updateReaderType").next().show();
+        flag = false;
+	}else {
+        $('#updateReaderType').parent().removeClass("has-error");
+        $('#updateReaderType').next().text("");
+        $("#updateReaderType").next().hide();
+    } 
+	
+    return flag;
+}
+
+
 
 
 

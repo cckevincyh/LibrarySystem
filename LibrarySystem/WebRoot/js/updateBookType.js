@@ -8,6 +8,11 @@ $(function () {
 
     $('#updateBookType').click(function () {
 
+    	
+    	if (!validUpdateBookType()) {
+            return;
+        }
+    	
 	var postdata = "id="+$.trim($("#updateBookTypeId").val())+"&typeName="+$.trim($("#updateBookTypeName").val());
 	ajax(
     		  {
@@ -66,6 +71,35 @@ function updateBookType(id){
     	);
 			
 
+}
+
+
+
+function validUpdateBookType() {
+    var flag = true;
+
+    var reg = new RegExp("[\\u4E00-\\u9FFF]+","g");	
+	var bookType = $.trim($("#updateBookTypeName").val());
+	if(bookType == ""){
+		 $('#updateBookTypeName').parent().addClass("has-error");
+        $('#updateBookTypeName').next().text("请输入图书分类名称");
+        $("#updateBookTypeName").next().show();
+        flag = false;
+	}else if(!reg.test(bookType)){
+		$('#updateBookTypeName').parent().addClass("has-error");
+        $('#updateBookTypeName').next().text("图书分类名称必须为中文");
+        $("#updateBookTypeName").next().show();
+        flag = false;
+	}else {
+        $('#updateBookTypeName').parent().removeClass("has-error");
+        $('#updateBookTypeName').next().text("");
+        $("#updateBookTypeName").next().hide();
+    }
+	
+	
+	
+	
+    return flag;
 }
 
 

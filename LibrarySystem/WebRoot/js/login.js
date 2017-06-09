@@ -53,9 +53,9 @@ function validLogin() {
         $('#username').next().text("请输入账号");
         $("#username").next().show();
         flag = false;
-    } else if (username.length > 20) {
+    } else if (username.length<2 || username.length > 15) {
         $("#username").parent().addClass("has-error");
-        $("#username").next().text("账号长度不能大于20");
+        $("#username").next().text("账号长度必须在2~15之间");
         $("#username").next().show();
         flag = false;
     } else {
@@ -70,9 +70,9 @@ function validLogin() {
         $('#password').next().text("请输入密码");
         $("#password").next().show();
         flag = false;
-    } else if (password.length > 20) {
+    } else if (password.length<3||password.length > 15) {
         $("#password").parent().addClass("has-error");
-        $("#password").next().text("密码长度不能大于20");
+        $("#password").next().text("密码长度必须在3~15之间");
         $("#password").next().show();
         flag = false;
     } else {

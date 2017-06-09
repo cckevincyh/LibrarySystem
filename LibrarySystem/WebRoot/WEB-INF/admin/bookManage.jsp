@@ -456,7 +456,7 @@
 												<div class="col-sm-7">
 												<input type="hidden"  id="addBookNumId" >
 													<input type="text" class="form-control" id="addBookNumISBN" readonly="readonly">
-												
+												<label class="control-label" for="addBookNumISBN" style="display: none;"></label>	
 												</div>
 										</div>
 
@@ -464,7 +464,7 @@
 											<label for="firstname" class="col-sm-3 control-label">新增数量</label>
 												<div class="col-sm-7">
 													<input type="text" class="form-control" id="addBookNum" placeholder="请输入新增的图书数量">
-												
+												<label class="control-label" for="addBookNum" style="display: none;"></label>	
 												</div>
 										</div>
 										
@@ -517,7 +517,7 @@
 											<label for="firstname" class="col-sm-3 control-label">图书ISBN号</label>
 												<div class="col-sm-7">
 													<input type="text" class="form-control" id="addISBN"  placeholder="请输入国际标准书号">
-												
+												<label class="control-label" for="addISBN" style="display: none;"></label>	
 												</div>
 										</div>
 										
@@ -525,7 +525,7 @@
 											<label for="firstname" class="col-sm-3 control-label">图书名称</label>
 												<div class="col-sm-7">
 													<input type="text" class="form-control" id="addBookName"  placeholder="请输入图书名称">
-												
+													<label class="control-label" for="addBookName" style="display: none;"></label>	
 												</div>
 										</div>
 											
@@ -535,7 +535,7 @@
 												 <select class="form-control" id="addBookType">
                                            				 <option value="-1">请选择</option>                                         
                                       			  </select>
-
+								<label class="control-label" for="addBookType" style="display: none;"></label>	
 											</div>
 										</div>
 											
@@ -543,7 +543,7 @@
 											<label for="firstname" class="col-sm-3 control-label">作者名称</label>
 												<div class="col-sm-7">
 													<input type="text" class="form-control" id="addAutho"  placeholder="请输入作者名称">
-												
+												<label class="control-label" for="addAutho" style="display: none;"></label>	
 												</div>
 										</div>
 										
@@ -552,7 +552,7 @@
 											<label for="firstname" class="col-sm-3 control-label">出版社</label>
 												<div class="col-sm-7">
 													<input type="text" class="form-control" id="addPress"  placeholder="请输入出版社">
-												
+												<label class="control-label" for="addPress" style="display: none;"></label>	
 												</div>
 										</div>
 										
@@ -561,7 +561,7 @@
 											<label for="firstname" class="col-sm-3 control-label">总数量</label>
 												<div class="col-sm-7">
 													<input type="text" class="form-control" id="addNum"  placeholder="请输入图书总数量">
-												
+												<label class="control-label" for="addNum" style="display: none;"></label>	
 												</div>
 										</div>
 										
@@ -570,7 +570,7 @@
 											<label for="firstname" class="col-sm-3 control-label">价格</label>
 												<div class="col-sm-7">
 													<input type="text" class="form-control" id="addPrice"  placeholder="请输入图书价格">
-												
+												<label class="control-label" for="addPrice" style="display: none;"></label>
 												</div>
 										</div>
 										
@@ -579,6 +579,7 @@
 											<label for="firstname" class="col-sm-3 control-label">简介</label>
 												<div class="col-sm-7">
 												<textarea class="form-control" rows="3" id="addDescription" placeholder="请输入图书简介"></textarea>
+												<label class="control-label" for="addDescription" style="display: none;"></label>
 												</div>
 										</div>
 										
@@ -627,7 +628,7 @@
 												<div class="col-sm-7">
 												<input type="hidden" id="updateBookId">
 													<input type="text" class="form-control" id="updateISBN"  placeholder="请输入国际标准书号">
-												
+												<label class="control-label" for="updateISBN" style="display: none;"></label>
 												</div>
 										</div>
 										
@@ -636,7 +637,7 @@
 											<label for="firstname" class="col-sm-3 control-label">图书名称</label>
 												<div class="col-sm-7">
 													<input type="text" class="form-control" id="updateBookName"  placeholder="请输入图书名称">
-												
+												<label class="control-label" for="updateBookName" style="display: none;"></label>
 												</div>
 										</div>
 											
@@ -646,7 +647,7 @@
 												 <select class="form-control" id="updateBookType">
                                            				 <option value="-1">请选择</option>                                         
                                       			  </select>
-
+											<label class="control-label" for="updateBookType" style="display: none;"></label>
 											</div>
 										</div>
 											
@@ -654,7 +655,7 @@
 											<label for="firstname" class="col-sm-3 control-label">作者名称</label>
 												<div class="col-sm-7">
 													<input type="text" class="form-control" id="updateAutho"  placeholder="请输入作者名称">
-												
+												<label class="control-label" for="updateAutho" style="display: none;"></label>
 												</div>
 										</div>
 										
@@ -663,7 +664,7 @@
 											<label for="firstname" class="col-sm-3 control-label">出版社</label>
 												<div class="col-sm-7">
 													<input type="text" class="form-control" id="updatePress"  placeholder="请输入出版社">
-												
+												<label class="control-label" for="updatePress" style="display: none;"></label>
 												</div>
 										</div>
 										
@@ -674,7 +675,7 @@
 											<label for="firstname" class="col-sm-3 control-label">价格</label>
 												<div class="col-sm-7">
 													<input type="text" class="form-control" id="updatePrice"  placeholder="请输入图书价格">
-												
+												<label class="control-label" for="updatePrice" style="display: none;"></label>
 												</div>
 										</div>
 										
@@ -683,6 +684,7 @@
 											<label for="firstname" class="col-sm-3 control-label">简介</label>
 												<div class="col-sm-7">
 												<textarea class="form-control" rows="3" id="updateDescription" placeholder="请输入图书简介"></textarea>
+												<label class="control-label" for="updateDescription" style="display: none;"></label>
 												</div>
 										</div>
 										
@@ -735,7 +737,7 @@
 								<label for="firstname" class="col-sm-3 control-label">原密码</label>
 								<div class="col-sm-7">
 									<input type="password" class="form-control" id="oldPwd"  placeholder="请输入原密码">
-												
+										<label class="control-label" for="oldPwd" style="display: none;"></label>
 								</div>
 							</div>	
 							
@@ -743,7 +745,7 @@
 								<label for="firstname" class="col-sm-3 control-label">新密码</label>
 								<div class="col-sm-7">
 									<input type="password" class="form-control" id="newPwd"  placeholder="请输入新密码">
-												
+											<label class="control-label" for="newPwd" style="display: none;"></label>	
 								</div>
 							</div>	
 							
@@ -751,7 +753,7 @@
 								<label for="firstname" class="col-sm-3 control-label">确认密码</label>
 								<div class="col-sm-7">
 									<input type="password" class="form-control" id="confirmPwd"  placeholder="请输入确认密码">
-												
+									<label class="control-label" for="confirmPwd" style="display: none;"></label>	
 								</div>
 							</div>	
 								<!--正文-->
@@ -803,7 +805,7 @@
 								<label for="firstname" class="col-sm-3 control-label">用户名</label>
 								<div class="col-sm-7">
 									<input type="text" class="form-control" id="username"  value='<s:property value="#session.admin.username"/>'>
-												
+											<label class="control-label" for="username" style="display: none;"></label>		
 								</div>
 							</div>				
 								
@@ -812,7 +814,7 @@
 								<label for="firstname" class="col-sm-3 control-label">真实姓名</label>
 								<div class="col-sm-7">
 									<input type="text" class="form-control" id="name"  placeholder="请输入您的真实姓名" value='<s:property value="#session.admin.name"/>'>
-												
+											<label class="control-label" for="name" style="display: none;"></label>	
 								</div>
 							</div>	
 							
@@ -820,7 +822,8 @@
 								<label for="firstname" class="col-sm-3 control-label">联系号码</label>
 								<div class="col-sm-7">
 									<input type="text" class="form-control" id="phone"  placeholder="请输入您的联系号码" value='<s:property value="#session.admin.phone"/>'>
-												
+											<label class="control-label" for="phone" style="display: none;"></label>
+													
 								</div>
 							</div>	
 							

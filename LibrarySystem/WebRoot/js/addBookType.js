@@ -8,6 +8,11 @@ $(function () {
 
     $('#addBookType').click(function () {
 
+    	
+    	if (!validAddBookType()) {
+            return;
+        }
+    	
 	var postdata = "typeName="+$.trim($("#addBookTypeName").val());
 	ajax(
     		  {
@@ -45,7 +50,32 @@ $(function () {
 
 
 
+function validAddBookType() {
+    var flag = true;
 
+    var reg = new RegExp("[\\u4E00-\\u9FFF]+","g");	
+	var bookType = $.trim($("#addBookTypeName").val());
+	if(bookType == ""){
+		 $('#addBookTypeName').parent().addClass("has-error");
+        $('#addBookTypeName').next().text("请输入图书分类名称");
+        $("#addBookTypeName").next().show();
+        flag = false;
+	}else if(!reg.test(bookType)){
+		$('#addName').parent().addClass("has-error");
+        $('#addName').next().text("图书分类名称必须为中文");
+        $("#addName").next().show();
+        flag = false;
+	}else {
+        $('#addBookTypeName').parent().removeClass("has-error");
+        $('#addBookTypeName').next().text("");
+        $("#addBookTypeName").next().hide();
+    }
+	
+	
+	
+	
+    return flag;
+}
 
 
 

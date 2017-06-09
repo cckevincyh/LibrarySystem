@@ -41,12 +41,12 @@
             </div>
             <form class="bootstrap-admin-login-form">
                 <div class="form-group">
-                    <label class="control-label" for="username">账&nbsp;号</label>
+                    <label class="firstname" for="username">账&nbsp;号</label>
                     <input type="text" class="form-control" id="username" placeholder="管理员用户名"/>
                     <label class="control-label" for="username" style="display:none;"></label>
                 </div>
                 <div class="form-group">
-                    <label class="control-label" for="password">密&nbsp;码</label>
+                    <label class="firstname" for="password">密&nbsp;码</label>
                     <input type="password" class="form-control" id="password" placeholder="密码"/>
                     <label class="control-label" for="username" style="display:none;"></label>
                 </div>

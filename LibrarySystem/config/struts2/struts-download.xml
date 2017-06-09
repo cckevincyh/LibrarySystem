@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>        
+   <package name="struts2" extends="struts-default" namespace="/admin">        
+       <action name="FileDownloadAction" class="fileDownloadAction">  
+           <result name="success" type="stream">  
+               <param name="contentType">application/vnd.ms-excel</param>  
+               <param name="contentDisposition">attachment;fileName="reader.xls"</param>  
+               <param name="inputName">downloadFile</param>  
+               <param name="bufferSize">1024</param>  
+           </result>  
+       </action>  
+     
+   </package>  
+     
+</struts>  

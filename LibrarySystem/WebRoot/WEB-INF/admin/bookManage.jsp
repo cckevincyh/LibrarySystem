@@ -535,7 +535,7 @@
 												 <select class="form-control" id="addBookType">
                                            				 <option value="-1">请选择</option>                                         
                                       			  </select>
-								<label class="control-label" for="addBookType" style="display: none;"></label>	
+												<label class="control-label" for="addBookType" style="display: none;"></label>	
 											</div>
 										</div>
 											

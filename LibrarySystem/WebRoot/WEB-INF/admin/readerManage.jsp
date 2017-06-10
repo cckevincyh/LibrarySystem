@@ -2,7 +2,10 @@
 <%@ taglib uri="/struts-tags"   prefix="s"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="zh-CN" class="ax-vertical-centered">
 <head>
@@ -27,6 +30,8 @@
       	 <script src="${pageContext.request.contextPath}/js/deleteReader.js"></script>
       	 <script src="${pageContext.request.contextPath}/js/getAllReaderTypes.js"></script>
       	  <script src="${pageContext.request.contextPath}/js/getReader.js"></script>
+      	      <script type="text/javascript" src="${pageContext.request.contextPath}/jQuery/ajaxfileupload.js"></script>
+				 <script src="${pageContext.request.contextPath}/js/ajax_upload.js"></script>
 </head>
 
 
@@ -316,10 +321,10 @@
 											<div class="col-sm-7">
 											 <label for="inputfile"></label>
 										     <!--为了jquery获得basePath的值，必须写（如果没有更好的办法） -->
-											<input type="hidden" value="" id="updateBasePath"/>
-											<input type="hidden" id="updateImg"/>
+											<input type="hidden" value="<%=basePath%>" id="basePath"/>
+											<input type="hidden" id="excel"/>
 											<!--id是给jquery使用的，name是给后台action使用的，必须和后台的名字相同！！ -->
-											<input type="file" id="updateUpload" name="upload"/><br/>
+											<input type="file" id="upload" name="upload"/><br/>
 											<label class="control-label" for="updateUpload" style="display: none;"></label>	
 										    
 											</div>

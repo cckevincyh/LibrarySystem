@@ -10,7 +10,17 @@
         作用:创建Action实例的过程由spring处理,其他的还是有struts2自己处理 -->
    <constant name="struts.objectFactory" value="spring" />
   
-
+<!-- 
+		配置所有资源文件，省略后缀名，如果配置多个资源文件时，用","隔开。不仅是国际化资源文件
+		* 类型转换器的错误提示资源文件
+		* 国际化资源文件
+		* 上传文件的错误提示信息资源文件
+	 -->
+	<constant name="struts.custom.i18n.resources" 
+			value="com.cc.library.action.fileuploadmessage">
+	</constant>
+	
+	
   	<include file="struts2/struts-authorization.xml"></include>
  	<include file="struts2/struts-admin-login.xml"></include>
  	<include file="struts2/struts-reader-login.xml"></include>
@@ -29,4 +39,5 @@
  	<include file="struts2/struts-borrow.xml"></include>
  	<include file="struts2/struts-forfeit.xml"></include>
  	<include file="struts2/struts-download.xml"></include>
+ 	<include file="struts2/struts-upload.xml"></include>
 </struts>	

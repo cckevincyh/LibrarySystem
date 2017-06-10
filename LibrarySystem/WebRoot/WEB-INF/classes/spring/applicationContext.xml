@@ -32,4 +32,5 @@
  	<import resource="applicationContext-borrow.xml"/>
  	<import resource="applicationContext-forfeit.xml"/>
  	<import resource="applicationContext-download.xml"/>
+ 	<import resource="applicationContext-upload.xml"/>
  </beans>

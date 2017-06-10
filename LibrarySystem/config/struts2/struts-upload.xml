@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+  <package name="fileUpload" extends="struts-default" namespace="/admin">
+  	<action name="fileUploadAction_*" method="{1}" class="fileUploadAction">
+  		<result name="input">/WEB-INF/error.jsp</result>
+		<!-- 配置拦截器的参数，这里是文件上传拦截器 -->
+            <interceptor-ref name="defaultStack">
+                <!-- 
+             			       配置文件上传拦截器的参数
+                        * 与定义参数的顺序无关
+                        * 允许的类型(allowedTypes)和允许的扩展名(allowedExtensions)必须保持一致
+                 -->
+                <!-- 
+                    * 配置上传文件的大小
+                        * struts.xml文件中配置的是上传文件的总大小
+                        * 这里配置的是上传文件的单个大小
+                 -->
+                <param name="fileUpload.maximumSize">20971520</param>
+                <!-- 配置上传文件允许的类型，如果配置多个值的话，用","隔开 -->
+                <param name="fileUpload.allowedTypes">application/vnd.ms-excel</param>
+                <!-- 配置上传文件的扩展名，如果配置多个值的话，用","隔开 -->
+                <param name="fileUpload.allowedExtensions">.xls</param>
+            </interceptor-ref>
+  	</action>
+  </package>
+  
+  
+</struts>	

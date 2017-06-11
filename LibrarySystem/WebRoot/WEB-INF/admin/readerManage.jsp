@@ -32,6 +32,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       	  <script src="${pageContext.request.contextPath}/js/getReader.js"></script>
       	      <script type="text/javascript" src="${pageContext.request.contextPath}/jQuery/ajaxfileupload.js"></script>
 				 <script src="${pageContext.request.contextPath}/js/ajax_upload.js"></script>
+				 
+				  <script src="${pageContext.request.contextPath}/js/batchAddReader.js"></script>
 </head>
 
 
@@ -325,7 +327,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<input type="hidden" id="excel"/>
 											<!--id是给jquery使用的，name是给后台action使用的，必须和后台的名字相同！！ -->
 											<input type="file" id="upload" name="upload"/><br/>
-											<label class="control-label" for="updateUpload" style="display: none;"></label>	
+											<label class="control-label" for="upload" style="display: none;"></label>	
 										    
 											</div>
 										</div>

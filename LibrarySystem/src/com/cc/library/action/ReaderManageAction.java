@@ -26,7 +26,6 @@ public class ReaderManageAction extends ActionSupport{
 	
 	
 	
-	
 	public void setReaderService(ReaderService readerService) {
 		this.readerService = readerService;
 	}
@@ -45,6 +44,7 @@ public class ReaderManageAction extends ActionSupport{
 	private String paperNO;
 	private String email;
 	
+	private String fileName;
 	
 	
 	
@@ -54,6 +54,17 @@ public class ReaderManageAction extends ActionSupport{
 	
 	
 	
+	
+	/**
+	 * @param fileName the fileName to set
+	 */
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+
+
+
 	public void setPaperNO(String paperNO) {
 		this.paperNO = paperNO;
 	}
@@ -293,6 +304,12 @@ public class ReaderManageAction extends ActionSupport{
 		}
 		ServletActionContext.getRequest().setAttribute("pb", pb);
 		return "success";
+	}
+	
+	public String batchAddReader() {
+		System.out.println(fileName);
+	//	readerService.batchAddReader(fileName);
+		return null;
 	}
 	
 	

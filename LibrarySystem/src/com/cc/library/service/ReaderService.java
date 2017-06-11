@@ -26,4 +26,6 @@ public interface ReaderService {
 
 	public Reader getReaderByPaperNO(Reader reader);
 
+	public void batchAddReader(String fileName);
+
 }

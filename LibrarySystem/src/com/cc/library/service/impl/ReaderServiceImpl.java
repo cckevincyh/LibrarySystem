@@ -118,5 +118,13 @@ public class ReaderServiceImpl implements ReaderService{
 	}
 
 
+
+	@Override
+	public void batchAddReader(String fileName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 	
 }

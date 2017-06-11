@@ -2,7 +2,10 @@
 <%@ taglib uri="/struts-tags"   prefix="s"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="zh-CN" class="ax-vertical-centered">
 <head>
@@ -167,14 +170,18 @@
                                   
                                     
                                   
-                                    <div class="col-lg-3 form-group">
+                                    <div class="col-lg-2 form-group">
 
                                         <button type="submit" class="btn btn-primary" id="btn_query" onclick="query()">查询</button>
                                     </div>
                                     <div class="col-lg-2 form-group">
 
-                                        <button type="button" class="btn btn-primary" id="btn_add" data-toggle="modal" data-target="#addModal">添加新图书</button>
+                                        <button type="button" class="btn btn-primary" id="btn_add" data-toggle="modal" data-target="#addModal">添加图书</button>
                                     </div>
+                                    
+                                      <div class="col-lg-2 form-group">
+											 <button type="button" class="btn btn-primary"   data-toggle="modal" data-target="#batchAddModal">批量添加</button>
+										 </div>
                                 </form>
                             </div>
                         </div>
@@ -307,7 +314,62 @@
     
     
     
-    
+      
+                   <!-------------------------------------批量添加的模糊框------------------------>  
+                                 <form class="form-horizontal">   <!--保证样式水平不混乱-->   
+                                        <!-- 模态框（Modal） -->
+									<div class="modal fade" id="batchAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+														&times;
+													</button>
+													<h4 class="modal-title" id="myModalLabel">
+														批量添加新图书
+													</h4>
+												</div>
+												<div class="modal-body">
+												
+										<!---------------------表单-------------------->
+										 <div class="form-group">
+											<label for="firstname" class="col-sm-3 control-label">下载模板</label>
+												<div class="col-sm-7" style="padding-top: 7px">
+												  <a href="${pageContext.request.contextPath}/admin/FileDownloadAction.action?fileName=book.xls">点击下载</a><br/>  
+												</div>
+										</div>
+										
+										<div class="form-group">	
+											<label for="firstname" class="col-sm-3 control-label">上传文件</label>
+											<div class="col-sm-7">
+											 <label for="inputfile"></label>
+										     <!--为了jquery获得basePath的值，必须写（如果没有更好的办法） -->
+											<input type="hidden" value="<%=basePath%>" id="basePath"/>
+											<input type="hidden" id="excel"/>
+											<!--id是给jquery使用的，name是给后台action使用的，必须和后台的名字相同！！ -->
+											<input type="file" id="upload" name="upload"/><br/>
+											<label class="control-label" for="upload" style="display: none;"></label>	
+										    
+											</div>
+										</div>
+											
+					
+									
+									</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+													</button>
+													<button type="button" class="btn btn-primary" id="batchAdd">
+														添加
+													</button>
+												</div>
+											</div><!-- /.modal-content -->
+										</div><!-- /.modal -->
+									</div>
+
+                                 </form>	
+ 								<!--------------------------------------添加的模糊框------------------------>  
+                
     
     
     

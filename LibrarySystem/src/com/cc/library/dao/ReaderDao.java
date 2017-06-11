@@ -25,4 +25,6 @@ public interface ReaderDao {
 
 	public Reader getReaderBypaperNO(Reader reader);
 
+	public int batchAddReader(List<Reader> readers,List<Reader> failReaders);
+
 }

@@ -62,4 +62,14 @@ public class ReaderTypeDaoImpl extends HibernateDaoSupport implements ReaderType
 		return b;
 	}
 
+	@Override
+	public ReaderType getTypeByName(ReaderType type) {
+		String hql= "from ReaderType r where r.readerTypeName=?";
+		List list = this.getHibernateTemplate().find(hql, type.getReaderTypeName());
+		if(list!=null && list.size()>0){
+			return (ReaderType) list.get(0);
+		}
+		return null;
+	}
+
 }

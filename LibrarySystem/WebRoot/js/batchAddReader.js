@@ -11,15 +11,24 @@ $(function () {
 		    		  {
 					  	method:'POST',
 			    		url:'admin/readerManageAction_batchAddReader.action',
+			    		type:"json",
 						params: postdata,
 			    		callback:function(data) {
-							if (data == 1) {
+							if (data.state==2) {
+								 //获得basePath
+							    basePath=$('#basePath').val();
 								$("#batchAddModal").modal("hide");//关闭模糊框		
-								showInfo("批量添加成功");	
+								showInfo(data.message + ",未成功的数据:<a href='" + basePath + data.failPath + "'>点击下载</a>");	
 		
-			                }else {
+			                }else if(data.state==1){
+								$("#batchAddModal").modal("hide");//关闭模糊框		
+								showInfo(data.message);	
+			                }else if(data.state==-1){
 								$("#batchAddModal").modal("hide");//关闭模糊框
-								showInfo("批量添加失败");
+								showInfo(data.error);
+							}else{
+								$("#batchAddModal").modal("hide");//关闭模糊框
+								showInfo("失败,请重试");
 							}
 										
 						}
@@ -74,7 +83,7 @@ function checkFileExt(filename)
 
 
 function showInfo(msg) {
-    $("#div_info").text(msg);
+    $("#div_info").html(msg);
     $("#modal_info").modal('show');
 }
 

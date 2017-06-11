@@ -216,5 +216,24 @@ public class ReaderDaoImpl extends HibernateDaoSupport implements ReaderDao{
 	}
 
 
+	@Override
+	public int batchAddReader(List<Reader> readers,List<Reader> failReaders) {
+		int success = 0;
+		for (int i = 0; i < readers.size(); i++) {
+			try{
+				this.getHibernateTemplate().clear();
+				this.getHibernateTemplate().save(readers.get(i));
+				this.getHibernateTemplate().flush();
+				success++;
+			}catch (Throwable e1) {
+				failReaders.add(readers.get(i));
+				continue ;
+				
+			}
+		}
+		return success;
+	}
+
+
 
 }

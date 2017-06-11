@@ -7,7 +7,7 @@
        <action name="FileDownloadAction" class="fileDownloadAction">  
            <result name="success" type="stream">  
                <param name="contentType">application/vnd.ms-excel</param>  
-               <param name="contentDisposition">attachment;fileName="reader.xls"</param>  
+               <param name="contentDisposition">attachment;fileName="${fileName}"</param>  
                <param name="inputName">downloadFile</param>  
                <param name="bufferSize">1024</param>  
            </result>  

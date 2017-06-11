@@ -25,6 +25,9 @@
  		<property name="forfeitDao">
  			<ref bean="forfeitDao"/>
  		</property>
+ 		<property name="readerTypeDao">
+ 			<ref bean="readerTypeDao"/>
+ 		</property>
  	</bean>
  	
  	<bean id="readerLoginAction" class="com.cc.library.action.ReaderLoginAction" scope="prototype">

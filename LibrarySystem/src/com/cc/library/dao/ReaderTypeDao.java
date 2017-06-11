@@ -14,4 +14,6 @@ public interface ReaderTypeDao {
 
 	public boolean addReaderType(ReaderType readerType);
 
+	public ReaderType getTypeByName(ReaderType type);
+
 }

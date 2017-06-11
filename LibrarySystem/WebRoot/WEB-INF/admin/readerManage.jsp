@@ -314,7 +314,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										 <div class="form-group">
 											<label for="firstname" class="col-sm-3 control-label">下载模板</label>
 												<div class="col-sm-7" style="padding-top: 7px">
-												  <a href="${pageContext.request.contextPath}/admin/FileDownloadAction.action">点击下载</a><br/>  
+												  <a href="${pageContext.request.contextPath}/admin/FileDownloadAction.action?fileName=reader.xls">点击下载</a><br/>  
 												</div>
 										</div>
 										

@@ -306,9 +306,19 @@ public class ReaderManageAction extends ActionSupport{
 		return "success";
 	}
 	
+	
+	
 	public String batchAddReader() {
-		System.out.println(fileName);
-	//	readerService.batchAddReader(fileName);
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("application/json;charset=utf-8");
+		Admin admin = (Admin) ServletActionContext.getContext().getSession().get("admin");
+		JSONObject batchAddReader = readerService.batchAddReader(fileName,admin);
+		System.out.println(batchAddReader);
+		try {
+			response.getWriter().print(batchAddReader);
+		} catch (IOException e) {
+			throw new RuntimeException(e.getMessage());
+		}
 		return null;
 	}
 	

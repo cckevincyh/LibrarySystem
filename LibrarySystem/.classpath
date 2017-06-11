@@ -43,7 +43,6 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/struts2/xwork-core-2.1.6.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/quartz1.7.3/quartz-1.7.3.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/db/mysql-connector-java-5.1.10-bin.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/JXL/commons-io-2.5.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/JXL/jxl.jar"/>
+	<classpathentry exported="true" kind="lib" path="WebRoot/WEB-INF/lib/JXL/jxl.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

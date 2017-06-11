@@ -2,6 +2,9 @@ package com.cc.library.service;
 
 import java.util.List;
 
+import net.sf.json.JSONObject;
+
+import com.cc.library.domain.Admin;
 import com.cc.library.domain.PageBean;
 import com.cc.library.domain.Reader;
 import com.cc.library.domain.ReaderType;
@@ -26,6 +29,6 @@ public interface ReaderService {
 
 	public Reader getReaderByPaperNO(Reader reader);
 
-	public void batchAddReader(String fileName);
+	public JSONObject batchAddReader(String fileName,Admin admin);
 
 }

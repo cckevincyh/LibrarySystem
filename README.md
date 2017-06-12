@@ -158,3 +158,33 @@
 
 ![image](https://github.com/cckevincyh/LibrarySystem/blob/master/img/27.png)
 
+
+---
+### 新增功能
+
+1 . 下载图书信息excel表格模板并填入对应信息，上传导入填写后的excel之后执行添加相关的图书信息功能，还可以导出数据库的图书信息到excel表格中。
+
+2 . 下载读者信息excel表格模板并填入对应信息，上传导入填写后的excel之后执行添加相关的读者信息功能，还可以导出数据库的读者信息到excel表格中。
+
+
+### 相关截图
+
+
+- 读者导出页面
+
+![image](https://github.com/cckevincyh/LibrarySystem/blob/master/img/28.png)
+
+
+- 批量导入读者页面
+
+![image](https://github.com/cckevincyh/LibrarySystem/blob/master/img/29.png)
+
+
+- 图书导出页面
+
+![image](https://github.com/cckevincyh/LibrarySystem/blob/master/img/30.png)
+
+
+- 批量导入图书页面
+
+![image](https://github.com/cckevincyh/LibrarySystem/blob/master/img/31.png)

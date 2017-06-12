@@ -37,6 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	      <script type="text/javascript" src="${pageContext.request.contextPath}/jQuery/ajaxfileupload.js"></script>
 				 <script src="${pageContext.request.contextPath}/js/ajax_upload.js"></script>
 				 <script src="${pageContext.request.contextPath}/js/batchAddBook.js"></script>
+				 <script src="${pageContext.request.contextPath}/js/exportBook.js"></script>
 </head>
 
 
@@ -184,6 +185,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     
                                       <div class="col-lg-2 form-group">
 											 <button type="button" class="btn btn-primary"   data-toggle="modal" data-target="#batchAddModal">批量添加</button>
+										 </div>
+										 
+										  <div class="col-lg-2 form-group">
+											 <button type="button" class="btn btn-primary" onclick="exportBook()">导出</button>
 										 </div>
                                 </form>
                             </div>

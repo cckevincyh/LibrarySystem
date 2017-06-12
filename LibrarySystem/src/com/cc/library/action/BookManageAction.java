@@ -354,4 +354,16 @@ public class BookManageAction extends ActionSupport{
 		}
 		return null;
 	}
+	
+	
+	public String exportBook(){
+		HttpServletResponse response = ServletActionContext.getResponse();
+		String filePath = bookService.exportBook();
+		try {
+			response.getWriter().print(filePath);
+		} catch (IOException e) {
+			throw new RuntimeException(e.getMessage());
+		}
+		return null;
+	}
 }

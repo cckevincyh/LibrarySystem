@@ -355,4 +355,82 @@ public class BookServiceImpl implements BookService{
 		return fileName;
 	}
 
+
+
+
+
+	@Override
+	public String exportBook() {
+		List<Book> findAllBooks = bookDao.findAllBooks();
+		String exportBookExcel = exportBookExcel(findAllBooks);
+		return "admin/FileDownloadAction.action?fileName=" + exportBookExcel;
+	}
+	
+	
+	
+	
+	/**
+	 * 导出所有的图书excel文件
+	 * @param 导出的数据
+	 * @return 返回文件路径
+	 */
+	public String exportBookExcel(List<Book> books){
+		//用数组存储表头
+        String[] title = {"图书ISBN号","图书类型","图书名称","作者名称","出版社","价格","数量","在馆数量","上架时间","操作管理员","描述"};
+        String path = ServletActionContext.getServletContext().getRealPath("/download");
+        String fileName = +System.currentTimeMillis()+"_allBooks.xls";
+        //创建Excel文件
+        File file = new File(path, fileName);
+        try {
+            file.createNewFile();
+            //创建工作簿
+            WritableWorkbook workbook = Workbook.createWorkbook(file);
+            WritableSheet sheet = workbook.createSheet("sheet1", 0);
+
+            Label label = null;
+
+            //第一行设置列名
+            for(int i = 0; i<title.length; i++){
+                label = new Label(i, 0, title[i]);
+                sheet.addCell(label);
+            }
+
+            //追加数据
+            for(int i = 1; i<=books.size(); i++){
+                label = new Label(0, i, books.get(i-1).getISBN());
+                sheet.addCell(label);
+                label = new Label(1, i, books.get(i-1).getBookType().getTypeName());
+                sheet.addCell(label);
+                label = new Label(2, i, books.get(i-1).getBookName());
+                sheet.addCell(label);
+                label = new Label(3, i, books.get(i-1).getAutho());
+                sheet.addCell(label);
+                label = new Label(4, i, books.get(i-1).getPress());
+                sheet.addCell(label);
+                label = new Label(5, i, books.get(i-1).getPrice().toString());
+                sheet.addCell(label);
+                label = new Label(6, i, books.get(i-1).getNum().toString());
+                sheet.addCell(label);
+                label = new Label(7, i, books.get(i-1).getCurrentNum().toString());
+                sheet.addCell(label);
+                label = new Label(8, i, books.get(i-1).getPutdate().toLocaleString());
+                sheet.addCell(label);
+                label = new Label(9, i, books.get(i-1).getAdmin().getName());
+                sheet.addCell(label);
+                label = new Label(10, i, books.get(i-1).getDescription());
+                sheet.addCell(label);
+                
+            }
+            //写入数据
+            workbook.write();
+
+            workbook.close();
+
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+		return fileName;
+	}
+
 }

@@ -28,5 +28,6 @@ public interface BookDao {
 	public int batchAddBook(List<Book> books, List<Book> failBooks);
 
 
+	public List<Book> findAllBooks();
 
 }

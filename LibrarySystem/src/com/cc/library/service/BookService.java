@@ -28,5 +28,7 @@ public interface BookService {
 
 	public JSONObject batchAddBook(String fileName, Admin admin);
 
+	public String exportBook();
+
 
 }

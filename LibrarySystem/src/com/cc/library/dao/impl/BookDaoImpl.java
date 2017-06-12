@@ -227,4 +227,13 @@ public class BookDaoImpl extends HibernateDaoSupport implements BookDao{
 
 
 
+	@Override
+	public List<Book> findAllBooks() {
+		String hql= "from Book ";
+		List list = this.getHibernateTemplate().find(hql);
+		return list;
+	}
+
+
+
 }

@@ -317,7 +317,16 @@ public class ReaderManageAction extends ActionSupport{
 	
 	
 	
-	
+	public String exportReader(){
+		HttpServletResponse response = ServletActionContext.getResponse();
+		String filePath = readerService.exportReader();
+		try {
+			response.getWriter().print(filePath);
+		} catch (IOException e) {
+			throw new RuntimeException(e.getMessage());
+		}
+		return null;
+	}
 
 
 }

@@ -27,4 +27,6 @@ public interface ReaderDao {
 
 	public int batchAddReader(List<Reader> readers,List<Reader> failReaders);
 
+	public List<Reader> findAllReaders();
+
 }

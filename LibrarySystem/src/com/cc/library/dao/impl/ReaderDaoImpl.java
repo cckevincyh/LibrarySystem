@@ -237,5 +237,13 @@ public class ReaderDaoImpl extends HibernateDaoSupport implements ReaderDao{
 	}
 
 
+	@Override
+	public List<Reader> findAllReaders() {
+		String hql= "from Reader ";
+		List list = this.getHibernateTemplate().find(hql);
+		return list;
+	}
+
+
 
 }

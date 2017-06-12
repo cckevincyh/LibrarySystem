@@ -31,4 +31,6 @@ public interface ReaderService {
 
 	public JSONObject batchAddReader(String fileName,Admin admin);
 
+	public String exportReader();
+
 }

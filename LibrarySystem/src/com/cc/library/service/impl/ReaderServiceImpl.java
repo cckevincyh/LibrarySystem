@@ -264,7 +264,7 @@ public class ReaderServiceImpl implements ReaderService{
             JSONObject jsonObject = new JSONObject();
             if(failReaders.size() != 0){
             	 //把不成功的导出成excel文件
-                String exportExcel = exportExcel(failReaders);
+                String exportExcel = exportExcel(failReaders,"failReaders.xls");
                 jsonObject.put("state", "2");
                 jsonObject.put("message","成功" + success + "条,失败" + failReaders.size() + "条");
                 jsonObject.put("failPath", "admin/FileDownloadAction.action?fileName=" + exportExcel);
@@ -286,17 +286,16 @@ public class ReaderServiceImpl implements ReaderService{
     	
 	}
 	
-	
 	/**
 	 * 导出excel文件
 	 * @param failReaders 失败的数据
 	 * @return 返回文件路径
 	 */
-	public String exportExcel(List<Reader> failReaders){
+	public String exportExcel(List<Reader> failReaders,String name){
 		//用数组存储表头
         String[] title = {"证件号码","姓名","读者类型","邮箱","联系方式"};
         String path = ServletActionContext.getServletContext().getRealPath("/download");
-        String fileName = +System.currentTimeMillis()+"_failReaders.xls";
+        String fileName = +System.currentTimeMillis()+"_" + name;
         //创建Excel文件
         File file = new File(path, fileName);
         try {
@@ -337,5 +336,16 @@ public class ReaderServiceImpl implements ReaderService{
         }
 		return fileName;
 	}
+
+
+
+	@Override
+	public String exportReader() {
+		List<Reader> findAllReaders = readerDao.findAllReaders();
+		String exportReaderExcel = exportExcel(findAllReaders,"allReaders.xls");
+		return "admin/FileDownloadAction.action?fileName=" + exportReaderExcel;
+	}
+
+
 
 }

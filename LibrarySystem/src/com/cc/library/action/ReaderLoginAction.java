@@ -8,6 +8,7 @@ import org.apache.struts2.ServletActionContext;
 
 import com.cc.library.domain.Reader;
 import com.cc.library.service.ReaderService;
+import com.cc.library.util.Md5Utils;
 import com.opensymphony.xwork2.ActionSupport;
 
 
@@ -51,7 +52,7 @@ public class ReaderLoginAction extends ActionSupport {
 		//学生
 		Reader reader = new Reader();
 		reader.setPaperNO(paperNO);
-		reader.setPwd(pwd);
+		reader.setPwd(Md5Utils.md5(pwd));
 		int login = 1;
 		Reader newReader = readerService.getReaderByPaperNO(reader);
 		if(newReader==null){

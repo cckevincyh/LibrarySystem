@@ -18,6 +18,7 @@ import com.cc.library.domain.PageBean;
 import com.cc.library.domain.Reader;
 import com.cc.library.domain.ReaderType;
 import com.cc.library.service.ReaderService;
+import com.cc.library.util.Md5Utils;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class ReaderManageAction extends ActionSupport{
@@ -38,7 +39,6 @@ public class ReaderManageAction extends ActionSupport{
 	private Integer readerId;
 	private String name;
 	private String phone;
-	private String pwd;
 	private Integer readerType;
 	private int pageCode;
 	private String paperNO;
@@ -113,11 +113,6 @@ public class ReaderManageAction extends ActionSupport{
 
 
 
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
-	}
-
-
 
 
 
@@ -143,7 +138,7 @@ public class ReaderManageAction extends ActionSupport{
 		//得到当前读者类型
 		ReaderType type = new ReaderType();
 		type.setReaderTypeId(readerType);
-		Reader reader = new Reader(name, pwd, phone, type, email, admin, paperNO, createTime);
+		Reader reader = new Reader(name, Md5Utils.md5("123456"), phone, type, email, admin, paperNO, createTime);
 		
 		Reader oldReader = readerService.getReaderBypaperNO(reader);//检查是否已经存在该paperNO的读者
 		int success = 0;
@@ -235,7 +230,6 @@ public class ReaderManageAction extends ActionSupport{
 		Reader updateReader = readerService.getReaderById(reader);//查出需要修改的读者对象;
 		updateReader.setName(name);
 		updateReader.setPhone(phone);
-		updateReader.setPwd(pwd);
 		updateReader.setPaperNO(paperNO);
 		updateReader.setEmail(email);
 		//设置reader的值

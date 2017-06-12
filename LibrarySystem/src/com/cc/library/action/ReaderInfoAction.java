@@ -7,6 +7,7 @@ import org.apache.struts2.ServletActionContext;
 
 import com.cc.library.domain.Reader;
 import com.cc.library.service.ReaderService;
+import com.cc.library.util.Md5Utils;
 import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")
@@ -96,10 +97,10 @@ public class ReaderInfoAction extends ActionSupport{
 		Reader reader = (Reader) ServletActionContext.getContext().getSession().get("reader");
 		int state = -1;//原密码错误
 		//取出原密码进行比对
-		if(reader.getPwd().equals(oldPwd)){
+		if(reader.getPwd().equals(Md5Utils.md5(oldPwd))){
 			if(newPwd.equals(confirmPwd)){
 				state = 1;//修改成功
-				reader.setPwd(newPwd);
+				reader.setPwd(Md5Utils.md5(newPwd));
 				reader = readerService.updateReaderInfo(reader);
 				//重新存入session
 				ServletActionContext.getContext().getSession().put("reader", reader);

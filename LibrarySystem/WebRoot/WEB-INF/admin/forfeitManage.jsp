@@ -169,7 +169,7 @@
 	                                <td><s:property value="#forfeit.borrowInfo.reader.paperNO"/></td>
 	                                <td><s:property value="#forfeit.borrowInfo.reader.name"/></td>
 	                                <td><s:property value="#forfeit.borrowInfo.overday"/></td>
-	                                <td><s:property value="#forfeit.borrowInfo.penalty"/></td>
+	                                <td><s:property value="#forfeit.forfeit"/></td>
 	                                <td>         
 	                                	<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#findBackModal" onclick="getForfeitInfoById(<s:property value="#forfeit.borrowId"/>)">查看</button>
 	                                	<button type="button" class="btn btn-success btn-xs" onclick="pay(<s:property value="#forfeit.borrowId"/>)" >付款</button>

@@ -12,7 +12,6 @@ function getReaderInfo(id){
 					$("#findReaderName").val(data.name);
 					$("#findEmail").val(data.email);
 					$("#findPhone").val(data.phone);
-					$("#findPwd").val(data.pwd);
 					$("#findReaderType").val(data.readerType.readerTypeName);
 					$("#findAdmin").val(data.admin.name);
 				}

@@ -30,7 +30,7 @@ $(function () {
             return;
         }
 
-	var postdata = "paperNO="+$.trim($("#addPaperNO").val())+"&name="+$.trim($("#addName").val())+"&phone="+ $.trim($("#addPhone").val())+"&pwd="+ $.trim($("#addPwd").val())+"&readerType="+ $.trim($("#addreaderType").val())
+	var postdata = "paperNO="+$.trim($("#addPaperNO").val())+"&name="+$.trim($("#addName").val())+"&phone="+ $.trim($("#addPhone").val())+"&readerType="+ $.trim($("#addreaderType").val())
 	+"&email="+ $.trim($("#addEmail").val());
 	ajax(
     		  {
@@ -83,22 +83,6 @@ function validAddReader() {
         $("#addPaperNO").next().hide();
     }
 
-    var password = $.trim($("#addPwd").val());
-    if (password == "") {
-        $('#addPwd').parent().addClass("has-error");
-        $('#addPwd').next().text("请输入密码");
-        $("#addPwd").next().show();
-        flag = false;
-    } else if (password.length<3 || password.length > 15) {
-        $("#addPwd").parent().addClass("has-error");
-        $("#addPwd").next().text("密码长度必须在3~15之间");
-        $("#addPwd").next().show();
-        flag = false;
-    } else {
-        $('#addPwd').parent().removeClass("has-error");
-        $('#addPwd').next().text("");
-        $("#addPwd").next().hide();
-    }
 	
 	
 	var reg = new RegExp("[\\u4E00-\\u9FFF]+","g");	

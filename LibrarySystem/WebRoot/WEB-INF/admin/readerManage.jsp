@@ -181,7 +181,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <th>读者证件号</th>
                                 <th>读者姓名</th>
                                 <th>读者类型</th>
-                                <th>密码</th>
                                 <th>联系号码</th>
                                 <th>创建时间</th>
                                 <th>操作</th>
@@ -196,7 +195,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                         	   <td><s:property value="#reader.paperNO"/></td>
 	                                <td><s:property value="#reader.name"/></td>
 	                                 <td><s:property value="#reader.readerType.readerTypeName"/></td>
-	                                  <td><s:property value="#reader.pwd"/></td>
 	                                <td><s:property value="#reader.phone"/></td>
 	                                 <td><s:date name="#reader.createTime" format="yyyy-MM-dd" /></td>
 	                                <td>
@@ -211,7 +209,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <s:else>
                             	<tbody>
 	                         	   	<td>暂无数据</td>
-	                                <td>暂无数据</td>
 	                                <td>暂无数据</td>
 	                                <td>暂无数据</td>
 	                                <td>暂无数据</td>
@@ -393,13 +390,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 												</div>
 										</div>
 										
-										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">密码</label>
-											<div class="col-sm-7">
-												<input type="password" class="form-control" id="addPwd"  placeholder="请输入密码">
-												 <label class="control-label" for="addPwd" style="display: none;"></label>
-											</div>
-										</div>
 										
 																	
 										<div class="form-group">	
@@ -501,13 +491,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										</div>
 										
 										
-										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">密码</label>
-											<div class="col-sm-7">
-												<input type="password" class="form-control" id="updatePwd"  placeholder="请输入密码">
-												<label class="control-label" for="updatePwd" style="display: none;"></label>
-											</div>
-										</div>
 										
 										<div class="form-group">	
 											<label for="firstname" class="col-sm-3 control-label">读者类型</label>
@@ -740,13 +723,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											</div>
 										</div>
 											
-										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">密码</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control" id="findPwd"  readonly="readonly">
-												
-												</div>
-										</div>
 										
 										
 										<div class="form-group">	

@@ -236,7 +236,6 @@ public class BookServiceImpl implements BookService{
                 
                 //需要根据类型名称找到对应的读者类型
                 BookType typeByName = bookTypeDao.getBookTypeByName(bookType);
-                book.setBookType(typeByName);
                 if(typeByName==null){
                 	//找不到这个类型，就说明这条数据非法,跳出循环
                 	//保存这条非法数据
@@ -245,7 +244,7 @@ public class BookServiceImpl implements BookService{
                 	continue;
                 }
                 
-                
+                book.setBookType(typeByName);
                 //有这个类型的读者,接下来就是封装数据，准备进行批量添加
                 book.setPutdate(new Date(System.currentTimeMillis()));
                 book.setAdmin(admin);

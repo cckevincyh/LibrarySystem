@@ -33,6 +33,7 @@ import com.cc.library.domain.Reader;
 import com.cc.library.domain.ReaderType;
 import com.cc.library.service.ReaderService;
 import com.cc.library.util.CheckUtils;
+import com.cc.library.util.Md5Utils;
 
 
 public class ReaderServiceImpl implements ReaderService{
@@ -251,7 +252,7 @@ public class ReaderServiceImpl implements ReaderService{
                 
                 
                 //有这个类型的读者,接下来就是封装数据，准备进行批量添加
-                reader.setPwd("123456");//默认密码123456
+                reader.setPwd(Md5Utils.md5("123456"));//默认密码123456
                 reader.setReaderType(typeByName);
                 reader.setCreateTime(new Date(System.currentTimeMillis()));
                 reader.setAdmin(admin);

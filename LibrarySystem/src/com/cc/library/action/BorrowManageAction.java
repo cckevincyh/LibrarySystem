@@ -22,6 +22,7 @@ import com.cc.library.domain.ReaderType;
 import com.cc.library.service.BookService;
 import com.cc.library.service.BorrowService;
 import com.cc.library.service.ReaderService;
+import com.cc.library.util.Md5Utils;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class BorrowManageAction extends ActionSupport{
@@ -200,7 +201,7 @@ public class BorrowManageAction extends ActionSupport{
 		BorrowInfo borrowInfo = new BorrowInfo();
 		Reader reader = new Reader();
 		reader.setPaperNO(paperNO);
-		reader.setPwd(pwd);
+		reader.setPwd(Md5Utils.md5(pwd));
 		borrowInfo.setReader(reader);
 		Admin admin = (Admin) ServletActionContext.getContext().getSession().get("admin");
 		borrowInfo.setAdmin(admin);

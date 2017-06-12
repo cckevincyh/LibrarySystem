@@ -141,7 +141,6 @@
                                 <th>管理员用户名</th>
                                 <th>管理员姓名</th>
                                 <th>联系号码</th>
-                                <th>密码</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -154,7 +153,6 @@
 	                         	   <td><s:property value="#admin.username"/></td>
 	                                <td><s:property value="#admin.name"/></td>
 	                                <td><s:property value="#admin.phone"/></td>
-	                                <td><s:property value="#admin.pwd"/></td>
 	                                <td>
 	                                	<s:if test="#admin.authorization.superSet!=1">
 		                                	<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" onclick="updateAdmin(<s:property value="#admin.aid"/>)">修改</button>
@@ -170,7 +168,6 @@
                             </s:if>
                             <s:else>
                             	<tbody>
-	                         	   	<td>暂无数据</td>
 	                                <td>暂无数据</td>
 	                                <td>暂无数据</td>
 	                                <td>暂无数据</td>
@@ -279,13 +276,6 @@
 												</div>
 										</div>
 											
-										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">密码</label>
-											<div class="col-sm-7">
-												<input type="password" class="form-control" id="addPwd"  placeholder="请输入密码">
-												<label class="control-label" for="addPwd" style="display:none;"></label>
-											</div>
-										</div>
 											
 										<div class="form-group">	
 											<label for="firstname" class="col-sm-3 control-label">真实姓名</label>
@@ -369,13 +359,6 @@
 												</div>
 										</div>
 										
-										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">密码</label>
-											<div class="col-sm-7">
-												<input type="password" class="form-control" id="updatePwd"  placeholder="请输入密码">
-											<label class="control-label" for="updatePwd" style="display:none;"></label>
-											</div>
-										</div>
 										
 										<!---------------------表单-------------------->
 															

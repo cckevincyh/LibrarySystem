@@ -13,7 +13,7 @@ $(function () {
 	 if (!validAddAdmin()) {
         return;
     }
-	var postdata = "username="+$.trim($("#addUsername").val())+"&name="+$.trim($("#addName").val())+"&phone="+ $.trim($("#addPhone").val())+"&pwd="+ $.trim($("#addPwd").val());
+	var postdata = "username="+$.trim($("#addUsername").val())+"&name="+$.trim($("#addName").val())+"&phone="+ $.trim($("#addPhone").val());
 	ajax(
     		  {
 			  	method:'POST',
@@ -70,22 +70,6 @@ function validAddAdmin() {
         $("#addUsername").next().hide();
     }
 
-    var password = $.trim($("#addPwd").val());
-    if (password == "") {
-        $('#addPwd').parent().addClass("has-error");
-        $('#addPwd').next().text("请输入密码");
-        $("#addPwd").next().show();
-        flag = false;
-    } else if (password.length<3 || password.length > 15) {
-        $("#addPwd").parent().addClass("has-error");
-        $("#addPwd").next().text("密码长度必须在3~15之间");
-        $("#addPwd").next().show();
-        flag = false;
-    } else {
-        $('#addPwd').parent().removeClass("has-error");
-        $('#addPwd').next().text("");
-        $("#addPwd").next().hide();
-    }
 	
 	
 	var reg = new RegExp("[\\u4E00-\\u9FFF]+","g");	

@@ -8,6 +8,7 @@ import org.apache.struts2.ServletActionContext;
 
 import com.cc.library.domain.Admin;
 import com.cc.library.service.AdminService;
+import com.cc.library.util.Md5Utils;
 
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -45,7 +46,7 @@ public class AdminLoginAction extends ActionSupport {
 		//管理员
 		Admin admin = new  Admin();
 		admin.setUsername(username);
-		admin.setPwd(pwd);
+		admin.setPwd(Md5Utils.md5(pwd));
 		Admin newAdmin = adminService.getAdminByUserName(admin);
 		int login = 1;
 		if(newAdmin==null){

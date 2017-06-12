@@ -19,6 +19,7 @@ import com.cc.library.domain.Authorization;
 import com.cc.library.domain.PageBean;
 import com.cc.library.service.AdminService;
 import com.cc.library.service.AuthorizationService;
+import com.cc.library.util.Md5Utils;
 import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")
@@ -128,7 +129,6 @@ public class AdminManageAction extends ActionSupport{
 		updateAdmin.setUsername(username);
 		updateAdmin.setName(name);
 		updateAdmin.setPhone(phone);
-		updateAdmin.setPwd(pwd);
 		Admin newAdmin = adminService.updateAdminInfo(updateAdmin);//修改该管理员
 		int success = 0;
 		if(newAdmin!=null){
@@ -159,7 +159,7 @@ public class AdminManageAction extends ActionSupport{
 		}else{
 			admin.setName(name);
 			admin.setPhone(phone);
-			admin.setPwd(pwd);
+			admin.setPwd(Md5Utils.md5("123456"));
 			Authorization authorization = new Authorization();
 			authorization.setAdmin(admin);
 			admin.setAuthorization(authorization);//设置权限

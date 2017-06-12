@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import com.cc.library.domain.Admin;
 import com.cc.library.domain.Authorization;
+import com.cc.library.util.Md5Utils;
 
 public class TestAdmin extends BaseSpring{
 
@@ -19,7 +20,7 @@ public class TestAdmin extends BaseSpring{
 		Admin admin = new Admin();
 		admin.setName("cairou");
 		admin.setUsername("admin");
-		admin.setPwd("admin");
+		admin.setPwd(Md5Utils.md5("admin"));
 		session.save(admin);
 		transaction.commit();
 		session.close();

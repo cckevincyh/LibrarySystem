@@ -7,6 +7,7 @@ import org.apache.struts2.ServletActionContext;
 
 import com.cc.library.domain.Admin;
 import com.cc.library.service.AdminService;
+import com.cc.library.util.Md5Utils;
 import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")
@@ -108,10 +109,10 @@ public class AdminInfoAction extends ActionSupport{
 		Admin admin = (Admin) ServletActionContext.getContext().getSession().get("admin");
 		int state = -1;//原密码错误
 		//取出原密码进行比对
-		if(admin.getPwd().equals(oldPwd)){
+		if(admin.getPwd().equals(Md5Utils.md5(oldPwd))){
 			if(newPwd.equals(confirmPwd)){
 				state = 1;//修改成功
-				admin.setPwd(newPwd);
+				admin.setPwd(Md5Utils.md5(newPwd));
 				admin = adminService.updateAdminInfo(admin);
 				//重新存入session
 				ServletActionContext.getContext().getSession().put("admin", admin);

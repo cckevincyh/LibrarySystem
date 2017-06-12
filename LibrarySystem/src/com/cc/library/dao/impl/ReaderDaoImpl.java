@@ -226,6 +226,8 @@ public class ReaderDaoImpl extends HibernateDaoSupport implements ReaderDao{
 				this.getHibernateTemplate().flush();
 				success++;
 			}catch (Throwable e1) {
+				this.getHibernateTemplate().clear();
+				readers.get(i).setPaperNO(readers.get(i).getPaperNO() + "(可能已存在该读者)");
 				failReaders.add(readers.get(i));
 				continue ;
 				

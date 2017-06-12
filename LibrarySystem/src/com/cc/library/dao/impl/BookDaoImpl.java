@@ -215,6 +215,8 @@ public class BookDaoImpl extends HibernateDaoSupport implements BookDao{
 				this.getHibernateTemplate().flush();
 				success++;
 			}catch (Throwable e1) {
+				this.getHibernateTemplate().clear();
+				books.get(i).setISBN(books.get(i).getISBN() + "(可能已存在该图书)");
 				failBooks.add(books.get(i));
 				continue ;
 				

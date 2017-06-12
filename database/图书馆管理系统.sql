@@ -5,7 +5,7 @@ CREATE TABLE `admin` (
   `aid` int(11) NOT NULL,
   `username`  varchar(20) BINARY NOT NULL,
   `name` varchar(20) DEFAULT NULL,
-  `pwd` varchar(20) DEFAULT NULL,
+  `pwd` varchar(64) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
   `state` int(2) DEFAULT '1',
   PRIMARY KEY (`aid`)
@@ -44,7 +44,7 @@ CREATE TABLE `readertype` (
 
 CREATE TABLE `reader` (
   `readerId` varchar(255) NOT NULL,
-  `pwd` varchar(20) NOT NULL,
+  `pwd` varchar(64) NOT NULL,
   `name` varchar(20) NOT NULL,
   `paperNO` varchar(20) UNIQUE NOT NULL,
   `phone` varchar(20) DEFAULT NULL,
@@ -72,14 +72,14 @@ CREATE TABLE `booktype` (
 
 CREATE TABLE `book` (
   `bookId` int(11) NOT NULL,
-  `bookName` varchar(20) DEFAULT NULL,
-  `ISBN` varchar(20) DEFAULT NULL,
-  `autho` varchar(20) DEFAULT NULL,
-  `num` int(11) DEFAULT NULL,
-  `currentNum` int(5) DEFAULT NULL,
+  `bookName` varchar(20) NOT NULL,
+  `ISBN` varchar(20)  UNIQUE NOT NULL,
+  `autho` varchar(20) DEFAULT  NULL,
+  `num` int(11) NOT NULL,
+  `currentNum` int(5) NOT NULL,
   `press` varchar(20) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
-  `price` double DEFAULT NULL,
+  `price` double NOT NULL,
   `putdate` datetime DEFAULT NULL,
   `typeId` int(11) DEFAULT NULL,
   `aid` int(11) DEFAULT NULL,

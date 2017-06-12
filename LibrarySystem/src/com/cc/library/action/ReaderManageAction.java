@@ -313,7 +313,6 @@ public class ReaderManageAction extends ActionSupport{
 		response.setContentType("application/json;charset=utf-8");
 		Admin admin = (Admin) ServletActionContext.getContext().getSession().get("admin");
 		JSONObject batchAddReader = readerService.batchAddReader(fileName,admin);
-		System.out.println(batchAddReader);
 		try {
 			response.getWriter().print(batchAddReader);
 		} catch (IOException e) {

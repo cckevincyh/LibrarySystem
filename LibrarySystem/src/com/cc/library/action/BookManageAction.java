@@ -61,8 +61,18 @@ public class BookManageAction extends ActionSupport{
 	private String ISBN;
 	
 	
+	private String fileName;
+	
 	
 
+
+
+	/**
+	 * @param fileName the fileName to set
+	 */
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
 
 
 	public void setISBN(String iSBN) {
@@ -332,5 +342,16 @@ public class BookManageAction extends ActionSupport{
 		return null;
 	}
 	
-	
+	public String batchAddBook() {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("application/json;charset=utf-8");
+		Admin admin = (Admin) ServletActionContext.getContext().getSession().get("admin");
+		JSONObject batchAddBook = bookService.batchAddBook(fileName,admin);
+		try {
+			response.getWriter().print(batchAddBook);
+		} catch (IOException e) {
+			throw new RuntimeException(e.getMessage());
+		}
+		return null;
+	}
 }

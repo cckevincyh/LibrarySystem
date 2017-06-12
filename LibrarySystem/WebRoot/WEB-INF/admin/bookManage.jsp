@@ -34,8 +34,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <script src="${pageContext.request.contextPath}/js/deleteBook.js"></script>
                    <script src="${pageContext.request.contextPath}/js/getBookInfo.js"></script>
                    <script src="${pageContext.request.contextPath}/js/addBookNum.js"></script>
-            	      <script type="text/javascript" src="${pageContext.request.contextPath}/jQuery/ajaxfileupload.js"></script>
+        	      <script type="text/javascript" src="${pageContext.request.contextPath}/jQuery/ajaxfileupload.js"></script>
 				 <script src="${pageContext.request.contextPath}/js/ajax_upload.js"></script>
+				 <script src="${pageContext.request.contextPath}/js/batchAddBook.js"></script>
 </head>
 
 

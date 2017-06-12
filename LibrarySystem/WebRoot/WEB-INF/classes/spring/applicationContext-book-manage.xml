@@ -28,6 +28,9 @@
  		<property name="forfeitDao">
  			<ref bean="forfeitDao"/>
  		</property>
+ 		<property name="bookTypeDao">
+ 			<ref bean="bookTypeDao"/>
+ 		</property>
  	</bean>
  
  		

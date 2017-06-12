@@ -25,6 +25,8 @@ public interface BookDao {
 
 	public Book getBookByISBN(Book book);
 
+	public int batchAddBook(List<Book> books, List<Book> failBooks);
+
 
 
 }

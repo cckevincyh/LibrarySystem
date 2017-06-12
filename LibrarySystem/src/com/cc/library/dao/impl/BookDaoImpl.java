@@ -205,5 +205,24 @@ public class BookDaoImpl extends HibernateDaoSupport implements BookDao{
 
 
 
+	@Override
+	public int batchAddBook(List<Book> books,List<Book> failBooks) {
+		int success = 0;
+		for (int i = 0; i < books.size(); i++) {
+			try{
+				this.getHibernateTemplate().clear();
+				this.getHibernateTemplate().save(books.get(i));
+				this.getHibernateTemplate().flush();
+				success++;
+			}catch (Throwable e1) {
+				failBooks.add(books.get(i));
+				continue ;
+				
+			}
+		}
+		return success;
+	}
+
+
 
 }

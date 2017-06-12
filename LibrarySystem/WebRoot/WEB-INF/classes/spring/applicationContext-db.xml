@@ -31,7 +31,7 @@
  			<tx:method name="check*" read-only="false"/><!--事务方法 -->
  			<tx:method name="renewBook" read-only="false"/><!--事务方法 -->
  			<tx:method name="payForfeit" read-only="false"/><!--事务方法 -->
- 			<tx:method name="batchAddReader" read-only="false"/><!--事务方法 -->
+ 			<tx:method name="batchAdd*" read-only="false"/><!--事务方法 -->
  		</tx:attributes>
  	</tx:advice>
  	<aop:config>

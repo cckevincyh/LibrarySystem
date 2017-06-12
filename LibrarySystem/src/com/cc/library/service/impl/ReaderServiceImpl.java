@@ -20,6 +20,8 @@ import net.sf.json.JSONObject;
 
 import org.apache.struts2.ServletActionContext;
 
+import antlr.Utils;
+
 import com.cc.library.dao.ForfeitDao;
 import com.cc.library.dao.ReaderDao;
 import com.cc.library.dao.ReaderTypeDao;
@@ -30,6 +32,8 @@ import com.cc.library.domain.PageBean;
 import com.cc.library.domain.Reader;
 import com.cc.library.domain.ReaderType;
 import com.cc.library.service.ReaderService;
+import com.cc.library.util.CheckUtils;
+
 
 public class ReaderServiceImpl implements ReaderService{
 
@@ -174,6 +178,7 @@ public class ReaderServiceImpl implements ReaderService{
                     Cell cell = sheet.getCell(j,0);
                     if(!cell.getContents().equals(str[j])){
                     	JSONObject jsonObject = new JSONObject();
+                    	jsonObject.put("error","请下载模板,填入数据上传" );
                     	jsonObject.put("state","-1" );
                     	return jsonObject;
                     }
@@ -220,9 +225,31 @@ public class ReaderServiceImpl implements ReaderService{
                 if(typeByName==null){
                 	//找不到这个类型，就说明这条数据非法,跳出循环
                 	//保存这条非法数据
+                	readerType.setReaderTypeName(readerType.getReaderTypeName() + "(没有该类型)");
+                	reader.setReaderType(readerType);
             		failReaders.add(reader);
                 	continue;
                 }
+                
+                
+                //判断这个电话号码格式
+                if(!CheckUtils.checkMobileNumber(phone)){
+                	//不是电话格式
+                	reader.setPhone(reader.getPhone() + "(手机格式有误)");
+                	failReaders.add(reader);
+                	continue;
+                }
+                
+                
+                //判断这个邮箱的格式
+                if(!CheckUtils.checkEmail(email)){
+                	//不是邮箱格式
+                	reader.setEmail(reader.getEmail() + "(邮箱格式有误)");
+                	failReaders.add(reader);
+                	continue;
+                }
+                
+                
                 //有这个类型的读者,接下来就是封装数据，准备进行批量添加
                 reader.setPwd("123456");//默认密码123456
                 reader.setReaderType(typeByName);

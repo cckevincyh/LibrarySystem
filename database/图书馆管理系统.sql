@@ -140,6 +140,11 @@ CREATE TABLE `forfeitinfo` (
 
 
 
+INSERT INTO ADMIN (aid,username,name,pwd,state) VALUES(1,'admin','cairou','ISMvKXpXpadDiUoOSoAfww==','1');
+
+INSERT INTO authorization VALUES('1','1','1','1','1','1','1','1','1');
+
+
 
 
 

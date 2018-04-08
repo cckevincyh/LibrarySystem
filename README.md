@@ -188,3 +188,18 @@
 - 批量导入图书页面
 
 ![image](https://github.com/cckevincyh/LibrarySystem/blob/master/img/31.png)
+
+
+---
+## 项目说明：
+
+由于最近很多人问我关于项目导入和结构的问题，具体的解决方法看issues：[https://github.com/cckevincyh/LibrarySystem/issues/1](https://github.com/cckevincyh/LibrarySystem/issues/1)，还有管理员数据的问题，我已经在数据库文件中上传了添加超级管理员的sql语句 如下：
+
+	INSERT INTO ADMIN (aid,username,name,pwd,state) VALUES(1,'admin','cairou','ISMvKXpXpadDiUoOSoAfww==','1');
+	
+	INSERT INTO authorization VALUES('1','1','1','1','1','1','1','1','1');
+
+用户名和密码都是admin。
+
+
+
